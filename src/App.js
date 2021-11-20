@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+import * as authService from './services/authService';
+import Header from './components/Header/Header';
+import Dashboard from './components/Dashboard/Dashboard';
+import Login from './components/Login/Login';
+// import Logout from './components/Logout/Logout';
+import Register from './components/Register/Register';
+import MyColorPalettes from './components/MyColorPalettes/MyColorPalettes';
+import Create from './components/Create/Create';
+// import Details from './components/Details/Details';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [userInfo, setUserInfo] = useState({ isAuthenticated: false, username: '' });
+
+    useEffect(() => {
+        let user = authService.getUser();
+
+        setUserInfo({ isAuthenticated: Boolean(user), user });
+    }, []);
+
+    const onLogin = (username) => {
+        setUserInfo({ isAuthenticated: true, user: username });
+    };
+
+    return (
+        <div id="container">
+            <Header {...userInfo} />
+            {/* <Header {...userInfo} /> */}
+
+            <main id="site-content">
+                <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/login" element={<Login  onLogin={onLogin} />} />
+                    {/* <Route path="/logout" element={<Logout onLogout={onLogout} />} /> */}
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/my-color-palettes" element={<MyColorPalettes />} />
+                    <Route path="/create" element={<Create />} />
+                    {/* <Route path="/details/:petId" element={<Details />} /> */}
+                </Routes>
+            </main>
+
+            <footer id="site-footer">
+                <p>@ColorPalettes</p>
+            </footer>
+        </div>
+    );
 }
 
 export default App;
