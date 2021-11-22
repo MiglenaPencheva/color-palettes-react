@@ -1,10 +1,24 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import * as colorPaletteService from '../../services/colorPaletteService';
+
 const Details = () => {
+    const [colorPalette, setColorPalette] = useState({});
+    const { id } = useParams();
+
+    useEffect(() => {
+        colorPaletteService.getOne(id)
+            .then(result => {
+                setColorPalette(result);
+            });
+    });
+    
     return (
         <section id="details-page" className="details">
             <div className="pet-information">
-                <h3>Name: pet.name</h3>
-                <p className="type">Type: pet.type</p>
-                {/* <p className="img"><img src={pet.imageUrl} /></p> */}
+                <h3>{colorPalette.name}</h3>
+                <p className="type">Type: {colorPalette.type}</p>
+                <p className="img"><img src={colorPalette.imageUrl} alt="palette" /></p>
                 <div className="actions">
                     <a className="button" href="/">Edit</a>
                     <a className="button" href="/">Delete</a>
@@ -13,13 +27,13 @@ const Details = () => {
                     
                     <div className="likes">
 						<img className="hearts" src="/images/heart.png" alt="heart" />
-						<span id="total-likes">Likes: pet.likes</span>
+						<span id="total-likes">Likes: {colorPalette.likes}</span>
 					</div>
                 </div>
             </div>
             <div className="pet-description">
                 <h3>Description:</h3>
-                <p>pet.description</p>
+                <p>{colorPalette.description}</p>
             </div>
         </section>
     );
