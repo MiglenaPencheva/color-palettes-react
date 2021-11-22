@@ -5,15 +5,21 @@ const MyColorPalettes = () => {
             <h1>My Color Palettes</h1>
             <ul className="my-pets-list">
                 <li className="otherPet">
-                    <h3>Name: Milo</h3>
-                    <p>Type: dog</p>
-                    {/* <p className="img"><img src="/images/dog.png" /></p> */}
+                    <h3>Name: first color palette</h3>
+                    <p>Type: landscape</p>
+                    <p className="img"><img src="/images/_DSC0208_color palette.png" alt="_DSC0208" /></p>
                     <a className="button" href="/">Details</a>
                 </li>
                 <li className="otherPet">
-                    <h3>Name: Tom</h3>
-                    <p>Type: cat</p>
-                    {/* <p className="img"><img src="/images/cat1.png" /></p> */}
+                    <h3>Name: second color palette</h3>
+                    <p>Type: vertical</p>
+                    <p className="img"><img src="/images/_DSC1185_color palette.png" alt="_DSC1185" /></p>
+                    <a className="button" href="/">Details</a>
+                </li>
+                <li className="otherPet">
+                    <h3>Name: third color palette</h3>
+                    <p>Type: landscape</p>
+                    <p className="img"><img src="/images/DSC03202_color palette.png" alt="DSC03202" /></p>
                     <a className="button" href="/">Details</a>
                 </li>
             </ul>

@@ -32,7 +32,7 @@ const Create = () => {
                             </select>
                         </span>
                     </p>
-                    <input className="button submit" type="submit" value="Add Pet" />
+                    <input className="button submit" type="submit" value="Add Color Palette" />
                 </fieldset>
             </form>
         </section>

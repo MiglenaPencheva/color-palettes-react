@@ -14,8 +14,8 @@ const Header = ({
     let userNavigation = (
         <div id="user">
             <span>Welcome, {user}</span>
-            <Link className="button" to="/my-color-palettes">My Pets</Link>
-            <Link className="button" to="/create">Add Pet</Link>
+            <Link className="button" to="/my-color-palettes">My Color Palettes</Link>
+            <Link className="button" to="/create">Add Color Palette</Link>
             <Link className="button" to="/logout">Logout</Link>
         </div>
     );
