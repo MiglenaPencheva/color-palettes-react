@@ -1,23 +1,39 @@
+// import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as colorPaletteService from '../../services/colorPaletteService';
+import * as authService from '../../services/authService';
 
 const Create = () => {
     const navigate = useNavigate();
+    // const [types, setTypes] = useState([]);
+
+    // useEffect(() => {
+    //     fetch()
+    // });
 
     const onCreateSubmit = async (e) => {
         e.preventDefault();
 
-        let formData = new FormData(e.currentTarget);
+        try {
+            let formData = new FormData(e.currentTarget);
 
-        let colorPaletteData = {
-            name: formData.get('name'),
-            type: formData.get('type'),
-            imageUrl: formData.get('imageUrl'),
-        };
+            let name = formData.get('name');
+            let type = formData.get('type');
+            let imageUrl = formData.get('imageUrl');
 
-        await colorPaletteService.create(colorPaletteData);
+            let colorPaletteData = {
+                name,
+                type,
+                imageUrl
+            };
 
-        navigate('/dashboard');
+            await colorPaletteService.create(colorPaletteData);
+
+            navigate('/dashboard');
+
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
