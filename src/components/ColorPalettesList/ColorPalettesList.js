@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import ColorPaletteCard from './ColorPaletteCard';
+import ColorPaletteCard from './ColorPaletteCard/ColorPaletteCard';
 
 import * as colorPaletteService from '../../services/colorPaletteService';
 

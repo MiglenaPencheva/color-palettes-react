@@ -1,8 +1,11 @@
+import ColorPaletteList from '../ColorPalettesList/ColorPalettesList';
+
 const Dashboard = () => {
     return (
         <section id="dashboard-page" className="dashboard">
             <h1>Dashboard</h1>
 
+            <ColorPaletteList />
             {/* <nav>
                 <Link to="types">Types</Link>
             </nav> */}
