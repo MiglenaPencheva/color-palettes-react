@@ -1,13 +1,41 @@
-const Login = () => {
+import { useNavigate } from 'react-router';
+
+import * as authService from '../../services/authService';
+import { useAuthContext } from '../../contexts/AuthContext';
+
+
+const Register = () => {
+    const navigate = useNavigate();
+    const { login } = useAuthContext();
+
+    const registerSubmitHandler = async (e) => {
+        e.preventDefault();
+
+        try {
+            let formData = new FormData(e.currentTarget);
+
+            let username = formData.get('username');
+            let password = formData.get('password');
+
+            let authData = await authService.register(username, password);
+            login(authData);
+
+            navigate('/dashboard');
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <section id="register-page" className="register">
-            <form id="register-form" action="" method="">
+            <form id="register-form" action="" method="POST" onSubmit={registerSubmitHandler}>
                 <fieldset>
                     <legend>Register Form</legend>
                     <p className="field">
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="username">Username</label>
                         <span className="input">
-                            <input type="text" name="email" id="email" placeholder="Email" />
+                            <input type="text" name="username" id="username" placeholder="Email" />
                         </span>
                     </p>
                     <p className="field">
@@ -29,4 +57,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

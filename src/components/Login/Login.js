@@ -1,22 +1,30 @@
 import { useNavigate } from 'react-router-dom';
 
+import { useAuthContext } from '../../contexts/AuthContext';
+
 import * as authService from '../../services/authService';
 
-const Login = ({
-    onLogin
-}) => {
+const Login = () => {
+    const { login } = useAuthContext();
     const navigate = useNavigate();
     
-    const onLoginHandler = (e) => {
+    const onLoginHandler = async (e) => {
         e.preventDefault();
 
-        let formData = new FormData(e.currentTarget);
-
-        let email = formData.get('email');
-
-        authService.login(email);
-        onLogin(email);
-        navigate('/');
+        try {
+            let formData = new FormData(e.currentTarget);
+    
+            let username = formData.get('username');
+            let password = formData.get('password');
+    
+            let authData = await authService.login(username, password);
+            login(authData);
+            
+            navigate('/dashboard');
+            
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -25,9 +33,9 @@ const Login = ({
                 <fieldset>
                     <legend>Login Form</legend>
                     <p className="field">
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="username">Username</label>
                         <span className="input">
-                            <input type="text" name="email" id="email" placeholder="Email" />
+                            <input type="text" name="username" id="username" placeholder="Username" />
                         </span>
                     </p>
                     <p className="field">

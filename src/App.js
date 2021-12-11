@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
-import useLocalStorage from './hooks/useLocalStorage';
 import Header from './components/Header/Header';
 import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Login/Login';
@@ -10,12 +9,6 @@ import Register from './components/Register/Register';
 import MyColorPalettes from './components/MyColorPalettes/MyColorPalettes';
 import Create from './components/Create/Create';
 import Details from './components/Details/Details';
-
-const initialAuthState = {
-    _id: '',
-    username: '',
-    accessToken: ''
-};
 
 function App() {
     return (
@@ -31,7 +24,7 @@ function App() {
                         <Route path="/register" element={<Register />} />
                         <Route path="/my-color-palettes" element={<MyColorPalettes />} />
                         <Route path="/create" element={<Create />} />
-                        <Route path="/details/:petId" element={<Details />} />
+                        <Route path="/details/:colorPaletteId" element={<Details />} />
                     </Routes>
                 </main>
 
