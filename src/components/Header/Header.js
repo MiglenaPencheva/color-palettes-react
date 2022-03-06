@@ -4,7 +4,6 @@ import { useAuthContext } from '../../contexts/AuthContext';
 
 const Header = () => {
     const { user } = useAuthContext();
-    console.log(user);
 
     let guestNavigation = (
         <div id="guest">
@@ -15,7 +14,7 @@ const Header = () => {
 
     let userNavigation = (
         <div id="user">
-            <span>Welcome, </span>
+            <span>Welcome, {user.username}</span>
             <Link className="button" to="/my-color-palettes">My Color Palettes</Link>
             <Link className="button" to="/create">Add Color Palette</Link>
             <Link className="button" to="/logout">Logout</Link>
@@ -28,7 +27,7 @@ const Header = () => {
                 <section className="navbar-dashboard">
                     <Link to="/dashboard">Dashboard</Link>
 
-                    {user.username
+                    {user
                         ? userNavigation
                         : guestNavigation
                     }

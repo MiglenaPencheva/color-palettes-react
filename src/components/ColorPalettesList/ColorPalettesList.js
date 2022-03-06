@@ -21,6 +21,7 @@ const ColorPaletteList = ()=> {
                 ? (
                     <ul className="other-pets-list">
                         {colorPalettes.map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)}
+                        {/* {colorPalettes.filter().map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)} */}
                     </ul>
                 ) 
                 : <p className="no-pets">No Color Palettes in database!</p>

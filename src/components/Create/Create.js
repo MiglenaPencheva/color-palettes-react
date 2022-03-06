@@ -1,9 +1,11 @@
-// import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as colorPaletteService from '../../services/colorPaletteService';
-import * as authService from '../../services/authService';
+// import * as authService from '../../services/authService';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Create = () => {
+    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     // const [types, setTypes] = useState([]);
 
@@ -27,7 +29,7 @@ const Create = () => {
                 imageUrl
             };
 
-            await colorPaletteService.create(colorPaletteData);
+            await colorPaletteService.create(colorPaletteData, user);
 
             navigate('/dashboard');
 
