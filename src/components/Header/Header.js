@@ -27,7 +27,7 @@ const Header = () => {
                 <section className="navbar-dashboard">
                     <Link to="/dashboard">Dashboard</Link>
 
-                    {user
+                    {user.username
                         ? userNavigation
                         : guestNavigation
                     }
