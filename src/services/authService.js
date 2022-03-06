@@ -33,8 +33,10 @@ export const register = async (username, password) => {
 };
 
 export const logout = (token) => {
-    fetch(`${baseUrl}/auth/logout`, {
-        headers: { 'X-Authorization': token }
+    return fetch(`${baseUrl}/users/logout`, {
+        headers: {
+            'X-Authorization': token,
+        }
     });
 };
 
@@ -44,5 +46,5 @@ export const getUser = () => {
 };
 
 export const isAuthenticated = () => {
-    return Boolean(getUser);
+    return Boolean(getUser());
 };

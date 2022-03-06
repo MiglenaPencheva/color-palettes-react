@@ -16,6 +16,12 @@ const Register = () => {
 
             let username = formData.get('username');
             let password = formData.get('password');
+            let rePassword = formData.get('rePassword');
+
+            if (username.trim() === '') { throw new Error('Username required'); }
+            if (password.trim() === '') { throw new Error('Password required'); }
+            if (rePassword.trim() === '') { throw new Error('Password required'); }
+            if (password.trim() !== rePassword.trim()) { throw new Error('Password mismatch'); }
 
             let authData = await authService.register(username, password);
             login(authData);
@@ -35,7 +41,7 @@ const Register = () => {
                     <p className="field">
                         <label htmlFor="username">Username</label>
                         <span className="input">
-                            <input type="text" name="username" id="username" placeholder="Email" />
+                            <input type="text" name="username" id="username" placeholder="Username" />
                         </span>
                     </p>
                     <p className="field">
@@ -45,9 +51,9 @@ const Register = () => {
                         </span>
                     </p>
                     <p className="field">
-                        <label htmlFor="repeat-pass">Repeat Password</label>
+                        <label htmlFor="rePassword">Repeat Password</label>
                         <span className="input">
-                            <input type="password" name="confirm-pass" id="repeat-pass" placeholder="Repeat Password" />
+                            <input type="password" name="rePassword" id="rePassword" placeholder="Repeat Password" />
                         </span>
                     </p>
                     <input className="button submit" type="submit" value="Register" />

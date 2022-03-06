@@ -16,6 +16,9 @@ const Login = () => {
     
             let username = formData.get('username');
             let password = formData.get('password');
+
+            if (username.trim() === '') { throw new Error('Username required'); }
+            if (password.trim() === '') { throw new Error('Password required'); }
     
             let authData = await authService.login(username, password);
             login(authData);
