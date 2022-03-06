@@ -10,9 +10,9 @@ export const login = async (username, password) => {
     let resJson = await res.json();
 
     if (res.ok) {
-       return resJson; 
+        return resJson;
     } else {
-        throw resJson.message;
+        throw resJson;
     }
 };
 
@@ -26,10 +26,10 @@ export const register = async (username, password) => {
     let resJson = await res.json();
 
     if (res.ok) {
-        return resJson; 
-     } else {
-         throw resJson.message;
-     }
+        return resJson;
+    } else {
+        throw resJson;
+    }
 };
 
 export const logout = (token) => {

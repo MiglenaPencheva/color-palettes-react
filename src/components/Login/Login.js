@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '../../contexts/AuthContext';
-
 import * as authService from '../../services/authService';
+import { hideError, showError } from '../../helpers/notifications';
 
 const Login = () => {
-    const { login } = useAuthContext();
     const navigate = useNavigate();
-    
+    const { login } = useAuthContext();
+
     const onLoginHandler = async (e) => {
         e.preventDefault();
 
@@ -16,17 +16,16 @@ const Login = () => {
     
             let username = formData.get('username');
             let password = formData.get('password');
-
+            
             if (username.trim() === '') { throw new Error('Username required'); }
             if (password.trim() === '') { throw new Error('Password required'); }
-    
+
             let authData = await authService.login(username, password);
             login(authData);
-            
+            hideError();
             navigate('/dashboard');
-            
         } catch (error) {
-            console.log(error);
+            showError(error.message);
         }
     };
 

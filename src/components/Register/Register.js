@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router';
 
-import * as authService from '../../services/authService';
 import { useAuthContext } from '../../contexts/AuthContext';
-
+import * as authService from '../../services/authService';
+import { hideError, showError } from '../../helpers/notifications';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -25,11 +25,11 @@ const Register = () => {
 
             let authData = await authService.register(username, password);
             login(authData);
-
+            hideError();
             navigate('/dashboard');
 
         } catch (error) {
-            console.log(error);
+            showError(error.message);
         }
     };
 
