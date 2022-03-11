@@ -19,17 +19,18 @@ const Create = () => {
         try {
             let formData = new FormData(e.currentTarget);
 
-            let name = formData.get('name');
+            let title = formData.get('title');
             let type = formData.get('type');
             let imageUrl = formData.get('imageUrl');
 
             let colorPaletteData = {
-                name,
+                title,
                 type,
-                imageUrl
+                imageUrl,
+                creator: user._id
             };
 
-            await colorPaletteService.create(colorPaletteData, user);
+            await colorPaletteService.create(colorPaletteData, user.accessToken);
 
             navigate('/dashboard');
 
@@ -46,7 +47,7 @@ const Create = () => {
                     <p className="field">
                         <label htmlFor="name">Name</label>
                         <span className="input">
-                            <input type="text" name="name" id="name" placeholder="Name" />
+                            <input type="text" name="title" id="title" placeholder="Title" />
                         </span>
                     </p>
                     <p className="field">
