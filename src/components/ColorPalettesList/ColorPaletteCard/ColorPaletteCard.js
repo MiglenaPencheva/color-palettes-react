@@ -5,7 +5,7 @@ const ColorPaletteCard = ({
 }) => {
     return (
         <li className="otherPet">
-            <h3>{colorPalette.name}</h3>
+            <h3>{colorPalette.title}</h3>
             <p>Type: {colorPalette.type}</p>
             <p className="img"><img src={colorPalette.imageUrl} alt="color palette" /></p>
             <Link className="button" to={`/details/${colorPalette._id}`}>Details</Link>
