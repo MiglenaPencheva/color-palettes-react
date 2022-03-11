@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 
 import ColorPaletteList from '../ColorPalettesList/ColorPalettesList';
 
@@ -21,7 +21,7 @@ const Dashboard = () => {
             {/* <img src={logo} className="logo" title="asdasda" alt="asdasd" /> */}
             {/* <Logo className="logo" /> */}
         </section>
-        
+
     );
 };
 
