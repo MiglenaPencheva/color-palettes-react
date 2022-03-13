@@ -1,17 +1,10 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as colorPaletteService from '../../services/colorPaletteService';
-// import * as authService from '../../services/authService';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const Create = () => {
-    const { user } = useContext(AuthContext);
+    const { user } = useAuthContext();
     const navigate = useNavigate();
-    // const [types, setTypes] = useState([]);
-
-    // useEffect(() => {
-    //     fetch()
-    // });
 
     const onCreateSubmit = async (e) => {
         e.preventDefault();
@@ -45,7 +38,7 @@ const Create = () => {
                 <fieldset>
                     <legend>Add new color palette</legend>
                     <p className="field">
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="name">Title</label>
                         <span className="input">
                             <input type="text" name="title" id="title" placeholder="Title" />
                         </span>
