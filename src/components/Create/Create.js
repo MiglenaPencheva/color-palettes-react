@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import * as colorPaletteService from '../../services/colorPaletteService';
+
 import { useAuthContext } from '../../contexts/AuthContext';
+import * as colorPaletteService from '../../services/colorPaletteService';
+import { hideError, showError } from '../../helpers/notifications';
 
 const Create = () => {
-    const { user } = useAuthContext();
     const navigate = useNavigate();
+    const { user } = useAuthContext();
 
     const onCreateSubmit = async (e) => {
         e.preventDefault();
@@ -16,6 +18,12 @@ const Create = () => {
             let type = formData.get('type');
             let imageUrl = formData.get('imageUrl');
 
+            if (title.trim() === '') { throw new Error('Title required'); }
+            if (type.trim() === '') { throw new Error('Type required'); }
+            if (imageUrl.trim() === '') { throw new Error('Image required'); }
+            if (imageUrl.slice(0, 7) !== 'http://' && 
+                imageUrl.slice(0, 8) !== 'https://') { throw new Error('Invalid image URL'); }
+
             let colorPaletteData = {
                 title,
                 type,
@@ -23,12 +31,11 @@ const Create = () => {
                 creator: user._id
             };
 
-            await colorPaletteService.create(colorPaletteData, user.accessToken);
-
+            await colorPaletteService.create(colorPaletteData, user);
+            hideError();
             navigate('/dashboard');
-
         } catch (error) {
-            console.log(error);
+            showError(error.message);
         }
     };
 

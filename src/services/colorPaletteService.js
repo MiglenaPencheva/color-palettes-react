@@ -13,32 +13,39 @@ export const getAll = async () => {
 };
 
 export const create = async (data, token) => {
+
+    let response = await fetch(`${baseUrl}/color-palettes/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-authorization': token
+        },
+        body: JSON.stringify(data)
+    });
+
+    let result = await response.json();
+
+    if (response.ok) {
+        return result;
+    } else {
+        throw result;
+    }
+};
+
+export const getOne = async (id) => {
     try {
-        let response = await fetch(`${baseUrl}/color-palettes/`, {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'X-Authorization': token
-            },
-            body: JSON.stringify(data)
-        });
+        let response = await fetch(`${baseUrl}/color-palettes/${id}`);
         let result = await response.json();
+        console.log(result);
         return result;
     } catch (error) {
         return { msg: error };
     }
-
-};
-
-export const getOne = async (id) => {
-    let response = await fetch(`${baseUrl}/color-palettes/${id}`);
-    let result = await response.json();
-    return result;
 };
 
 export const remove = async (id, token) => {
     try {
-        let response = await fetch(`${baseUrl}/color-palettes/${id}`, {
+        let response = await fetch(`${baseUrl}/color-palettes/${id}/delete`, {
             method: 'DELETE',
             headers: { 'X-Authorization': token }
         });
