@@ -2,7 +2,7 @@ const baseUrl = 'http://localhost:5500';
 
 export const getAll = async () => {
     try {
-        let response = await fetch(`${baseUrl}/color-palettes/`);
+        let response = await fetch(`${baseUrl}/color-palettes`);
         let result = await response.json();
 
         let colorPalettes = Object.values(result);
@@ -14,7 +14,7 @@ export const getAll = async () => {
 
 export const create = async (data, token) => {
 
-    let response = await fetch(`${baseUrl}/color-palettes/`, {
+    let response = await fetch(`${baseUrl}/color-palettes`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -32,14 +32,14 @@ export const create = async (data, token) => {
     }
 };
 
-export const getOne = async (id) => {
-    try {
-        let response = await fetch(`${baseUrl}/color-palettes/${id}`);
-        let result = await response.json();
-        console.log(result);
+export const getOne = async (colorPaletteId) => {
+    let response = await fetch(`${baseUrl}/color-palettes/${colorPaletteId}`);
+    let result = await response.json();
+
+    if (response.ok) {
         return result;
-    } catch (error) {
-        return { msg: error };
+    } else {
+        throw result;
     }
 };
 

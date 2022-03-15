@@ -1,19 +1,17 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import * as colorPaletteService from '../../services/colorPaletteService';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const Details = () => {
     const navigate = useNavigate();
-    const { user } = useContext(AuthContext);
-    const [colorPalette, setColorPalette] = useState({});
+    const { user } = useAuthContext();
     const { colorPaletteId } = useParams();
-
+    const [colorPalette, setColorPalette] = useState({});
+    
     useEffect(() => {
         colorPaletteService.getOne(colorPaletteId)
-            .then(result => {
-                setColorPalette(result);
-            });
+            .then(res => { setColorPalette(res); });
     }, [colorPaletteId]);
 
     const deleteHandler = (e) => {
@@ -24,25 +22,29 @@ const Details = () => {
             .catch(err => console.log(err));
     };
 
+    const onLikeClick = () => {
+
+    };
+
     const ownerButtons = (
         <>
-            <Link className="button" to="edit">Edit</Link>
+            <Link className="button" to={`/edit/${colorPalette._id}`}>Edit</Link>
             <a className="button" href="/" onClick={deleteHandler}>Delete</a>
         </>
     );
 
-    const userButtons = <a className="button" href="/">Like</a>;
+    const userButtons = <button onClick={onLikeClick}>Like</button>;
 
     return (
         <section id="details-page" className="details">
             <div className="pet-information">
-                <h3>{colorPalette.name}</h3>
+                <h3>{colorPalette.title}</h3>
                 <p className="type">Type: {colorPalette.type}</p>
                 <p className="img"><img src={colorPalette.imageUrl} alt="palette" /></p>
                 
                 <div className="actions">
                     {user._id &&
-                        (user._id === colorPalette._ownerId
+                        (user._id === colorPalette.creator
                             ? ownerButtons
                             : userButtons
                         )}
@@ -55,7 +57,7 @@ const Details = () => {
             </div>
             <div className="pet-description">
                 <h3>Description:</h3>
-                <p>{colorPalette.description}</p>
+                <p>......</p>
             </div>
         </section>
     );
