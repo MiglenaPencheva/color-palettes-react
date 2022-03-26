@@ -15,18 +15,18 @@ const Create = () => {
             let formData = new FormData(e.currentTarget);
 
             let title = formData.get('title');
-            let type = formData.get('type');
+            let category = formData.get('category');
             let imageUrl = formData.get('imageUrl');
 
             if (title.trim() === '') { throw new Error('Title required'); }
-            if (type.trim() === '') { throw new Error('Type required'); }
+            if (category.trim() === '') { throw new Error('category required'); }
             if (imageUrl.trim() === '') { throw new Error('Image required'); }
             if (imageUrl.slice(0, 7) !== 'http://' && 
                 imageUrl.slice(0, 8) !== 'https://') { throw new Error('Invalid image URL'); }
 
             let colorPaletteData = {
                 title,
-                type,
+                category,
                 imageUrl,
                 creator: user._id
             };
@@ -51,12 +51,16 @@ const Create = () => {
                         </span>
                     </p>
                     <p className="field">
-                        <label htmlFor="type">Type</label>
+                        <label htmlFor="type">Category</label>
                         <span className="input">
-                            <select id="type" name="type">
+                            <select id="type" name="category">
                                 <option value="landscape">Landscape</option>
-                                <option value="portrait">Portrait</option>
-                                <option value="square">Square</option>
+                                <option value="sea">Sea</option>
+                                <option value="sky">Sky</option>
+                                <option value="plants">Plants</option>
+                                <option value="animals">Animals</option>
+                                <option value="foodAndDrinks">Food & Drinks</option>
+                                <option value="others">Others</option>
                             </select>
                         </span>
                     </p>
