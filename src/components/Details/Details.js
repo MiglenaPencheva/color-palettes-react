@@ -39,7 +39,7 @@ const Details = () => {
         <section id="details-page" className="details">
             <div className="pet-information">
                 <h3>{colorPalette.title}</h3>
-                <p className="type">Type: {colorPalette.type}</p>
+                <p className="type">Category: {colorPalette.category}</p>
                 <p className="img"><img src={colorPalette.imageUrl} alt="palette" /></p>
                 
                 <div className="actions">
