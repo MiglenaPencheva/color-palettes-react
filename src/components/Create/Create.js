@@ -47,7 +47,7 @@ const Create = () => {
                     <p className="field">
                         <label htmlFor="name">Title</label>
                         <span className="input">
-                            <input type="text" name="title" id="title" placeholder="Title" />
+                            <textarea maxLength="100" name="title" id="title" placeholder="Title should be less than 100 characters" />
                         </span>
                     </p>
                     <p className="field">
