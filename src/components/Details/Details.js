@@ -8,10 +8,14 @@ const Details = () => {
     const { user } = useAuthContext();
     const { colorPaletteId } = useParams();
     const [colorPalette, setColorPalette] = useState({});
+    const [colors, setColors] = useState('');
     
     useEffect(() => {
         colorPaletteService.getOne(colorPaletteId)
-            .then(res => { setColorPalette(res); });
+        .then(res => { 
+            setColorPalette(res);
+            setColors(res.colorGroup.join(', '));
+        });
     }, [colorPaletteId]);
 
     const deleteHandler = (e) => {
@@ -38,9 +42,11 @@ const Details = () => {
     return (
         <section id="details-page" className="details">
             <div className="pet-information">
+                <p className="img"><img src={colorPalette.imageUrl} alt="palette" /></p>
+                
                 <h3>{colorPalette.title}</h3>
                 <p className="type">Category: {colorPalette.category}</p>
-                <p className="img"><img src={colorPalette.imageUrl} alt="palette" /></p>
+                <p className="type">Colors: {colors}</p>
                 
                 <div className="actions">
                     {user._id &&
@@ -54,10 +60,6 @@ const Details = () => {
                         <span id="total-likes">Likes: {colorPalette.likes?.length}</span>
                     </div>
                 </div>
-            </div>
-            <div className="pet-description">
-                <h3>Description:</h3>
-                <p>......</p>
             </div>
         </section>
     );
