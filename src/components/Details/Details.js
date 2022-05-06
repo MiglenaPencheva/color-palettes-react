@@ -3,13 +3,15 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import * as colorPaletteService from '../../services/colorPaletteService';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { hideError, showError } from '../../helpers/notifications';
+import ConfirmDialog from '../ConfirmDialog/ConfirmDialog';
 
 const Details = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const { user } = useAuthContext();
     const { colorPaletteId } = useParams();
-    const [colorPalette, setColorPalette] = useState({colorPaletteId});
+    const [colorPalette, setColorPalette] = useState({ colorPaletteId });
     const [colors, setColors] = useState('');
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
     useEffect(() => {
         colorPaletteService.getOne(colorPaletteId)
@@ -19,24 +21,28 @@ const Details = () => {
             });
     }, [colorPaletteId]);
 
-    // const deleteHandler = (e) => {
-    //     e.preventDefault();
 
-    //     colorPaletteService.remove(colorPaletteId, user.accessToken)
-    //         .then(() => navigate('/dashboard'))
-    //         .catch(err => console.log(err));
-    // };
+    const deleteHandler = (e) => {
+        e.preventDefault();
+
+        colorPaletteService.remove(colorPaletteId, user.accessToken)
+            .then(() => navigate('/dashboard'))
+            .finally(() => {
+                setShowDeleteDialog(false);
+            });
+    };
+
+    const deleteClickHandler = (e) => {
+        e.preventDefault();
+        setShowDeleteDialog(true);
+    };
 
     const onLikeClick = async () => {
-        // e.preventDefault();
-
         try {
-            if (user._id === colorPalette._ownerId) { return; }
+            if (user._id === colorPalette.creator) { return; }
             if (colorPalette.likedBy.includes(user._id)) { return; }
-            
-            // let updated = await colorPaletteService.like(colorPaletteId, user._id);
 
-            // setColorPalette(updated);
+            await colorPaletteService.like(colorPaletteId, colorPalette, user._id);
 
             hideError();
         } catch (error) {
@@ -47,36 +53,39 @@ const Details = () => {
     const ownerButtons = (
         <>
             <Link className="button" to={`/edit/${colorPalette._id}`}>Edit</Link>
-            {/* <a className="button" href="/" onClick={deleteHandler}>Delete</a> */}
+            <a className="button" href="/" onClick={deleteClickHandler}>Delete</a>
         </>
     );
 
-    const userButtons = <button onClick={onLikeClick} 
+    const userButtons = <button onClick={onLikeClick}
         disabled={colorPalette.likedBy?.includes(user._id)}>Like</button>;
 
     return (
-        <section id="details-page" className="details">
-            <div className="pet-information">
-                <p className="img"><img src={colorPalette.imageUrl} alt="palette" /></p>
+        <>
+            <ConfirmDialog show={showDeleteDialog} onClose={() => setShowDeleteDialog(false)} onSave={deleteHandler} />
+            <section id="details-page" className="details">
+                <div className="pet-information">
+                    <p className="img"><img src={colorPalette.imageUrl} alt="palette" /></p>
 
-                <h3>{colorPalette.title}</h3>
-                <p className="type">Category: {colorPalette.category}</p>
-                <p className="type">Colors: {colors}</p>
+                    <h3>{colorPalette.title}</h3>
+                    <p className="type">Category: {colorPalette.category}</p>
+                    <p className="type">Colors: {colors}</p>
 
-                <div className="actions">
-                    {user._id &&
-                        (user._id === colorPalette._ownerId
-                            ? ownerButtons
-                            : userButtons
-                        )}
+                    <div className="actions">
+                        {user._id &&
+                            (user._id === colorPalette._ownerId
+                                ? ownerButtons
+                                : userButtons
+                            )}
 
-                    <div className="likes">
-                        <img className="hearts" src="/images/heart.png" alt="heart" />
-                        <span id="total-likes">Likes: {colorPalette.likes?.length || 0}</span>
+                        <div className="likes">
+                            <img className="hearts" src="/images/heart.png" alt="heart" />
+                            <span id="total-likes">Likes: {colorPalette.likes?.length || 0}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 };
 

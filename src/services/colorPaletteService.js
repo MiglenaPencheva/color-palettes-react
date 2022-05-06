@@ -3,17 +3,25 @@ const baseUrl = 'http://localhost:5500';
 export const getAll = async () => {
     try {
         let response = await fetch(`${baseUrl}/color-palettes`);
-        let result = await response.json();
+        return await response.json();
 
-        let colorPalettes = Object.values(result);
-        return colorPalettes;
     } catch (error) {
         return { msg: error };
     }
 };
 
-export const create = async (data, token) => {
+export const getMine = async (userId) => {
+    // try {
+    //     let query = encodeURIComponent(`creator="${userId}"`);
+    //     let response = await fetch(`${baseUrl}/color-palettes?where=${query}`);
+    //     // let response = await fetch(`${baseUrl}/color-palettes/my`);
+    //     return await response.json();
+    // } catch (error) {
+    //     return { msg: error };
+    // }
+};
 
+export const create = async (data, token) => {
     let response = await fetch(`${baseUrl}/color-palettes`, {
         method: 'POST',
         headers: {
@@ -43,9 +51,30 @@ export const getOne = async (colorPaletteId) => {
     }
 };
 
+export const like = async (colorPaletteId, likedColorPalette, token) => {
+    // let response = await fetch(`${baseUrl}/color-palettes/${colorPaletteId}`, {
+    //     method: 'PUT',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'x-authorization': token
+    //     },
+    //     body: JSON.stringify(likedColorPalette)
+    // });
+    // let result = await response.json();
+
+    // if (response.ok) {
+    //     console.log('ok');
+    //     return result;
+    // } else {
+    //     console.log('no');
+    //     throw result;
+    // }
+};
+
+
 export const remove = async (id, token) => {
     try {
-        let response = await fetch(`${baseUrl}/color-palettes/${id}/delete`, {
+        let response = await fetch(`${baseUrl}/color-palettes/${id}`, {
             method: 'DELETE',
             headers: { 'X-Authorization': token }
         });
