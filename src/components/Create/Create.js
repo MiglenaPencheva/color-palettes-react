@@ -8,6 +8,8 @@ const Create = () => {
     const navigate = useNavigate();
     const { user } = useAuthContext();
 
+    console.log(user);
+
     const onCreateSubmit = async (e) => {
         e.preventDefault();
 
@@ -16,11 +18,11 @@ const Create = () => {
 
             let title = formData.get('title');
             let category = formData.get('category');
-            let imageUrl = formData.get('imageUrl');
             let colorGroup = getColorGroup(formData);
+            let imageUrl = formData.get('imageUrl');
 
             if (title.trim() === '') { throw new Error('Title required'); }
-            if (category.trim() === '') { throw new Error('Category required'); }
+            if (category === 'Choose category') { throw new Error('Category required'); }
             if (colorGroup.length === 0) { throw new Error('Choose color group'); }
             if (imageUrl.trim() === '') { throw new Error('Image required'); }
             if (imageUrl.slice(0, 7) !== 'http://' &&
@@ -34,7 +36,7 @@ const Create = () => {
                 creator: user._id
             };
 
-            await colorPaletteService.create(colorPaletteData, user);
+            await colorPaletteService.create(colorPaletteData, user.accessToken);
             hideError();
             navigate('/dashboard');
         } catch (error) {
@@ -87,6 +89,7 @@ const Create = () => {
                         <label htmlFor="type">Category</label>
                         <span className="input">
                             <select id="type" name="category">
+                                <option value="Choose category">Choose category</option>
                                 <option value="landscape">Landscape</option>
                                 <option value="sea">Sea</option>
                                 <option value="sky">Sky</option>
@@ -100,27 +103,27 @@ const Create = () => {
                     <p>
                         Color group
                         <input type="checkbox" id="red" name="red" />
-                        <label for="red">red</label>
+                        <label htmlFor="red">red</label>
                         <input type="checkbox" id="green" name="green" />
-                        <label for="green">green</label>
+                        <label htmlFor="green">green</label>
                         <input type="checkbox" id="blue" name="blue" />
-                        <label for="blue">blue</label>
+                        <label htmlFor="blue">blue</label>
                         <input type="checkbox" id="yellow" name="yellow" />
-                        <label for="yellow">yellow</label>
+                        <label htmlFor="yellow">yellow</label>
                         <input type="checkbox" id="cyan" name="cyan" />
-                        <label for="cyan">cyan</label>
+                        <label htmlFor="cyan">cyan</label>
                         <input type="checkbox" id="purple" name="purple" />
-                        <label for="purple">purple</label>
+                        <label htmlFor="purple">purple</label>
                         <input type="checkbox" id="orange" name="orange" />
-                        <label for="orange">orange</label>
+                        <label htmlFor="orange">orange</label>
                         <input type="checkbox" id="brown" name="brown" />
-                        <label for="brown">brown</label>
+                        <label htmlFor="brown">brown</label>
                         <input type="checkbox" id="pink" name="pink" />
-                        <label for="pink">pink</label>
+                        <label htmlFor="pink">pink</label>
                         <input type="checkbox" id="grey" name="grey" />
-                        <label for="grey">grey</label>
+                        <label htmlFor="grey">grey</label>
                         <input type="checkbox" id="white" name="white" />
-                        <label for="white">white</label>
+                        <label htmlFor="white">white</label>
                     </p>
                     <p className="field">
                         <label htmlFor="image">Image</label>
