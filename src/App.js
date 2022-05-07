@@ -8,6 +8,7 @@ import Logout from './components/Logout/Logout';
 import Register from './components/Register/Register';
 import MyColorPalettes from './components/MyColorPalettes/MyColorPalettes';
 import Create from './components/Create/Create';
+import Edit from './components/Edit/Edit';
 import Details from './components/Details/Details';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
                         <Route path="/my-color-palettes" element={<MyColorPalettes />} />
                         <Route path="/create" element={<Create />} />
                         <Route path="/details/:colorPaletteId" element={<Details />} />
+                        <Route path="/edit/:colorPaletteId" element={<Edit />} />
                     </Routes>
                 </main>
 
