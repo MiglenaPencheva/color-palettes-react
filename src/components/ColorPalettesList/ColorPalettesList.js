@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import * as colorPaletteService from '../../services/colorPaletteService';
 import ColorPaletteCard from './ColorPaletteCard/ColorPaletteCard';
 
-import * as colorPaletteService from '../../services/colorPaletteService';
-
-
-const ColorPaletteList = ()=> {
+const ColorPaletteList = () => {
     const [colorPalettes, setColorPalettes] = useState([]);
     
     useEffect(() => {

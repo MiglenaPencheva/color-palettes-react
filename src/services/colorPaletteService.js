@@ -10,15 +10,20 @@ export const getAll = async () => {
     }
 };
 
-export const getMine = async (userId) => {
-    // try {
-    //     let query = encodeURIComponent(`creator="${userId}"`);
-    //     let response = await fetch(`${baseUrl}/color-palettes?where=${query}`);
-    //     // let response = await fetch(`${baseUrl}/color-palettes/my`);
-    //     return await response.json();
-    // } catch (error) {
-    //     return { msg: error };
-    // }
+export const getMine = async (token) => {
+    try {
+        // let query = encodeURIComponent(`creator="${userId}"`);
+        // let response = await fetch(`${baseUrl}/color-palettes?where=${query}`);
+        let response = await fetch(`${baseUrl}/color-palettes/my`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-authorization': token
+            }
+        });
+        return await response.json();
+    } catch (error) {
+        return { msg: error };
+    }
 };
 
 export const create = async (data, token) => {
