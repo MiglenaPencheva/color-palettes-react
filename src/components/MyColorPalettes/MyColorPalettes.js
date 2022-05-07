@@ -14,8 +14,6 @@ const MyColorPalettes = () => {
             });
     }, [user.accessToken]);
 
-    console.log(myColorPalettes);
-
     return (
         <section className="my-pets">
             <h1>My color palettes</h1>
