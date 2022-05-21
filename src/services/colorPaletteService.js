@@ -26,6 +26,20 @@ export const getMine = async (token) => {
     }
 };
 
+export const getFavorites = async (token) => {
+    try {
+        let response = await fetch(`${baseUrl}/color-palettes/favorites`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-authorization': token
+            }
+        });
+        return await response.json();
+    } catch (error) {
+        return { msg: error };
+    }
+};
+
 export const create = async (data, token) => {
     let response = await fetch(`${baseUrl}/color-palettes`, {
         method: 'POST',

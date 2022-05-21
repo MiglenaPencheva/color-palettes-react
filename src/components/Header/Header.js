@@ -15,7 +15,8 @@ const Header = () => {
     let userNavigation = (
         <div id="user">
             <span>Welcome, {user.username}</span>
-            <Link className="button" to="/my-color-palettes">My Color Palettes</Link>
+            <Link className="button" to="/my-color-palettes">My Palettes</Link>
+            <Link className="button" to="/my-favorites">My Favorites</Link>
             <Link className="button" to="/create">Add Color Palette</Link>
             <Link className="button" to="/logout">Logout</Link>
         </div>
