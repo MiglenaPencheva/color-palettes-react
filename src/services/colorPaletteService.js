@@ -75,26 +75,23 @@ export const getOne = async (colorPaletteId) => {
     }
 };
 
-export const like = async (colorPaletteId, likedColorPalette, token) => {
-    // let response = await fetch(`${baseUrl}/color-palettes/${colorPaletteId}`, {
-    //     method: 'PUT',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'x-authorization': token
-    //     },
-    //     body: JSON.stringify(likedColorPalette)
-    // });
-    // let result = await response.json();
+export const like = async (colorPaletteId, token) => {
+    let response = await fetch(`${baseUrl}/color-palettes/${colorPaletteId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-authorization': token
+        },
+        body: JSON.stringify()
+    });
+    let result = await response.json();
 
-    // if (response.ok) {
-    //     console.log('ok');
-    //     return result;
-    // } else {
-    //     console.log('no');
-    //     throw result;
-    // }
+    if (response.ok) {
+        return result;
+    } else {
+        throw result;
+    }
 };
-
 
 export const remove = async (id, token) => {
     try {

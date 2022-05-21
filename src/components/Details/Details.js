@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import * as colorPaletteService from '../../services/colorPaletteService';
 import { useAuthContext } from '../../contexts/AuthContext';
-import { hideError, showError } from '../../helpers/notifications';
+import { hideError, showError, showInfo } from '../../helpers/notifications';
 import ConfirmDialog from '../ConfirmDialog/ConfirmDialog';
 
 const Details = () => {
@@ -11,16 +11,17 @@ const Details = () => {
     const { colorPaletteId } = useParams();
     const [colorPalette, setColorPalette] = useState({ colorPaletteId });
     const [colors, setColors] = useState('');
+    const [likes, setLikes] = useState(0);
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
     useEffect(() => {
         colorPaletteService.getOne(colorPaletteId)
             .then(res => {
                 setColorPalette(res);
+                setLikes(res.likedBy.length);
                 setColors(res.colorGroup.join(', '));
             });
     }, [colorPaletteId]);
-
 
     const deleteHandler = (e) => {
         e.preventDefault();
@@ -42,9 +43,11 @@ const Details = () => {
             if (user._id === colorPalette.creator) { return; }
             if (colorPalette.likedBy.includes(user._id)) { return; }
 
-            await colorPaletteService.like(colorPaletteId, colorPalette, user._id);
+            await colorPaletteService.like(colorPaletteId, user.accessToken);
 
             hideError();
+            navigate('/dashboard');
+            showInfo('Successfully liked palette');
         } catch (error) {
             showError(error.message);
         }
@@ -80,7 +83,7 @@ const Details = () => {
 
                         <div className="likes">
                             <img className="hearts" src="/images/heart.png" alt="heart" />
-                            <span id="total-likes">Likes: {colorPalette.likes?.length || 0}</span>
+                            <span id="total-likes">Likes: {likes}</span>
                         </div>
                     </div>
                 </div>
