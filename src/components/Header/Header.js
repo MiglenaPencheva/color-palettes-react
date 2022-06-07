@@ -18,6 +18,7 @@ const Header = () => {
             <Link className="button" to="/my-color-palettes">My Palettes</Link>
             <Link className="button" to="/my-favorites">My Favorites</Link>
             <Link className="button" to="/create">Add Color Palette</Link>
+            <Link className="button" to="/color-picker">Color picker</Link>
             <Link className="button" to="/logout">Logout</Link>
         </div>
     );
@@ -32,6 +33,7 @@ const Header = () => {
                         ? userNavigation
                         : guestNavigation
                     }
+                    
                 </section>
             </nav>
         </header>

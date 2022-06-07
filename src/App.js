@@ -11,6 +11,7 @@ import MyFavorites from './components/MyFavorites/MyFavorites';
 import Create from './components/Create/Create';
 import Edit from './components/Edit/Edit';
 import Details from './components/Details/Details';
+import ColorPickerPage from './components/ColorPickerPage/ColorPickerPage';
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                         <Route path="/create" element={<Create />} />
                         <Route path="/details/:colorPaletteId" element={<Details />} />
                         <Route path="/edit/:colorPaletteId" element={<Edit />} />
+                        <Route path="/color-picker" element={<ColorPickerPage />} />
                     </Routes>
                 </main>
 
