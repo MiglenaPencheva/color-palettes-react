@@ -119,3 +119,4 @@ export const remove = async (id, token) => {
         console.log(error);
     }
 };
+

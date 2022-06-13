@@ -1,4 +1,11 @@
+
+
 const PickerSection = () => {
+
+    
+
+    
+
 
     return (
         <section id="samples">

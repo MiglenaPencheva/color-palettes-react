@@ -1,7 +1,7 @@
-const baseUrl = 'http://localhost:5500/color-picker';
+const baseUrl = 'http://localhost:5500';
 
 export const upload = async (image) => {
-    let response = await fetch(`${baseUrl}`, {
+    let response = await fetch(`${baseUrl}/color-picker`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
