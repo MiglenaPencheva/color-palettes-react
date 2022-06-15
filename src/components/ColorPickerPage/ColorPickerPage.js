@@ -6,24 +6,22 @@ import { hideError, showError } from '../../helpers/notifications';
 
 const ColorPickerPage = () => {
     // const { user } = useAuthContext();
-    
+    let pickedColor = '';
+
     const onFileUpload = async (e) => {
         try {
             const img = document.getElementById('image');
             img.style.display = 'none';
             let file = e.target.files[0];
             img.src = URL.createObjectURL(file);  // set src to blob url
-            
-            const imgObj = {
-                file,
-                src: img.src
-            };
-            const image = await pickerService.upload(imgObj);
-            
+
+            const imageObj = { file, src: img.src };
+            const image = await pickerService.upload(imageObj);
+
             const canvas = document.getElementById('myCanvas');
             const ctx = canvas.getContext('2d');
             canvas.width = 500;
-            const newImg = new Image();   // Create new img element
+            const newImg = new Image();
             newImg.src = image.src;
             const nw = newImg.naturalWidth;
             const nh = newImg.naturalHeight;
@@ -32,18 +30,41 @@ const ColorPickerPage = () => {
             ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             const data = imageData.data;
-            let pickedColor = '';
-            
+
+            canvas.addEventListener('mousemove', getPixel);
+            canvas.addEventListener('click', addColorInfo);
+
+            function getPixel(e) {
+                let { offsetX, offsetY } = e;
+                const c = getPixelColor(canvas.width, offsetY, offsetX);
+                pickedColor = `rgb(${c.red}, ${c.green}, ${c.blue})`;
+                document.getElementById('pixelColor').style.backgroundColor = pickedColor;
+            };
+
+            const getPixelColor = (cols, x, y) => {
+                let pixel = cols * x + y;
+                let arrayPos = pixel * 4;
+                return {
+                    red: data[arrayPos],
+                    green: data[arrayPos + 1],
+                    blue: data[arrayPos + 2],
+                    alpha: data[arrayPos + 3],
+                };
+            };
+
+            function addColorInfo(e) {
+                let color = document.createElement('li');
+                color.className = 'box';
+                color.setAttribute('data-color', pickedColor);
+                color.style.backgroundColor = pickedColor;
+                document.querySelector('.colors').appendChild(color);
+            };
+
             hideError();
         } catch (error) {
             showError(error.message);
         }
     };
-
-    
-    //     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    //     const data = imageData.data;
-
 
     return (
         <>
@@ -60,16 +81,17 @@ const ColorPickerPage = () => {
                     onChange={onFileUpload}
                     accept="image/jpeg, image/png, image/jpg"
                 />
-                <img id="image" alt="no file selected"/>
-                <canvas
-                    id="myCanvas" >
-                </canvas>
+                <img id="image" alt="no file selected" />
+                <br />
+
+                <canvas id="myCanvas"></canvas>
+
                 <span
                     className="box"
                     id="pixelColor"
                     data-label="Current Pixel">
                 </span>
-            </section>
+            </section >
 
             <section className="colors">
 

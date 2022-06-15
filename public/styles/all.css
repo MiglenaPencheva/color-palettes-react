@@ -190,3 +190,39 @@ textarea#description {
     padding: 10px;
     box-shadow: -8px -2px 28px -8px #000000;
 }
+
+
+canvas {
+    border: 1px solid rgb(0, 0, 0);
+    /* display: inline-block; */
+}
+
+.box {
+    width: 150px;
+    height: 150px;
+    border: 1px solid rgb(0, 0, 0);
+    display: inline-block;
+    /* background-color: attr('data-color'); */
+    position: relative;
+    margin: 5px;
+}
+
+.box::before {
+    color: #fff;
+    font-size: 0.8rem;
+    content: attr(data-label);
+    position: absolute;
+    width: 150px;
+    top: 5px;
+    left: 5px;
+}
+
+.box::after {
+    color: #fff;
+    font-size: 0.8rem;
+    content: attr(data-color);
+    position: absolute;
+    width: 150px;
+    bottom: 5px;
+    left: 5px;
+}
