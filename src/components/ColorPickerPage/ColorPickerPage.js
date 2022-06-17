@@ -52,13 +52,25 @@ const ColorPickerPage = () => {
                 };
             };
 
-            function addColorInfo(e) {
+            function addColorInfo() {
+                let colors = document.querySelector('.colors');
+
                 let color = document.createElement('li');
                 color.className = 'box';
                 color.setAttribute('data-color', pickedColor);
                 color.style.backgroundColor = pickedColor;
-                document.querySelector('.colors').appendChild(color);
+                
+                let closeBtn = document.createElement('button');
+                closeBtn.className = 'close-button';
+                
+                color.addEventListener('mouseover', () => {closeBtn.style.display = 'inline-block';});
+                color.addEventListener('mouseleave', () => {closeBtn.style.display = 'none';});
+                closeBtn.addEventListener('click', () => {colors.removeChild(color);});
+                
+                color.appendChild(closeBtn);
+                colors.appendChild(color);
             };
+
 
             hideError();
         } catch (error) {

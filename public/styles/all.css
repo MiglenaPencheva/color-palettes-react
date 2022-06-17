@@ -193,7 +193,7 @@ textarea#description {
 
 
 canvas {
-    border: 1px solid rgb(0, 0, 0);
+    /* border: 1px solid rgb(0, 0, 0); */
     /* display: inline-block; */
 }
 
@@ -225,4 +225,15 @@ canvas {
     width: 150px;
     bottom: 5px;
     left: 5px;
+}
+
+.close-button {
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgb(0, 0, 0);
+    margin: 5px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: none;
 }
