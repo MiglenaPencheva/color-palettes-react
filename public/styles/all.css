@@ -28,7 +28,8 @@ body {
 
 .login form,
 .register form,
-.create form, .edit form {
+.create form,
+.edit form {
     margin: 5rem auto;
 }
 
@@ -136,6 +137,7 @@ div.actions {
     display: flex;
     justify-content: center;
 }
+
 div.actions a {
     margin-right: 10px;
     height: 25px;
@@ -183,6 +185,7 @@ textarea#description {
     height: 100px;
     resize: none;
 }
+
 .otherPet {
     align-items: inherit;
     width: 24%;
@@ -191,20 +194,82 @@ textarea#description {
     box-shadow: -8px -2px 28px -8px #000000;
 }
 
+/******* color picker *******/
 
-canvas {
-    /* border: 1px solid rgb(0, 0, 0); */
-    /* display: inline-block; */
+h1 {
+    margin: 10 auto;
+    padding: 0;
+    text-align: center;
+}
+
+h6 {
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+}
+
+.file-input {
+    display: block;
+    margin: 20px auto;
+    z-index: 1;
+}
+
+.container {
+    width: 90vw;
+    height: fit-content;
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    align-items:center;
+}
+
+.canvas-section {}
+.image-canvas {}
+.final-colors-vertical {
+    /* height: fit-content; */
+    /* display: none; */
+}
+.final-colors-horizontal {
+    /* width: fit-content; */
+    /* display: none; */
+}
+
+.aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    gap: 0.2rem;
+    width: 25vw;
+}
+.instructions {
+    /* flex-wrap: wrap; */
+}
+.preview-box {
+    margin: auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    font-size: 0.5rem;
+}
+.save-color-palette {}
+.extract-color-card {}
+
+.colors {
+    width: 90vw;
+    margin: 5px auto;
 }
 
 .box {
-    width: 150px;
-    height: 150px;
-    border: 1px solid rgb(0, 0, 0);
-    display: inline-block;
-    /* background-color: attr('data-color'); */
-    position: relative;
     margin: 5px;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    position: relative;
+    border-radius: 12px;
+    font-size: 0.5rem;
+    /* background-color: attr('data-color'); */
 }
 
 .box::before {
@@ -228,12 +293,13 @@ canvas {
 }
 
 .close-button {
+    margin: 2px;
     width: 20px;
     height: 20px;
-    border: 1px solid rgb(0, 0, 0);
-    margin: 5px;
     position: absolute;
     top: 5px;
     right: 5px;
     display: none;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
 }

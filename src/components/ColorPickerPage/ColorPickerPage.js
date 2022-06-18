@@ -20,7 +20,7 @@ const ColorPickerPage = () => {
 
             const canvas = document.getElementById('myCanvas');
             const ctx = canvas.getContext('2d');
-            canvas.width = 500;
+            canvas.width = 700;
             const newImg = new Image();
             newImg.src = image.src;
             const nw = newImg.naturalWidth;
@@ -57,16 +57,26 @@ const ColorPickerPage = () => {
 
                 let color = document.createElement('li');
                 color.className = 'box';
+                colors.style.width = canvas.width;
                 color.setAttribute('data-color', pickedColor);
+                color.setAttribute('draggable', true);
                 color.style.backgroundColor = pickedColor;
-                
+                color.draggable = true;
+
                 let closeBtn = document.createElement('button');
                 closeBtn.className = 'close-button';
-                
-                color.addEventListener('mouseover', () => {closeBtn.style.display = 'inline-block';});
-                color.addEventListener('mouseleave', () => {closeBtn.style.display = 'none';});
-                closeBtn.addEventListener('click', () => {colors.removeChild(color);});
-                
+
+                colors.addEventListener('ondragover', () => { e.preventDefault(); });
+                colors.addEventListener('ondrop', (e) => {
+                    e.preventDefault();
+                    let data = e.dataTransfer.getData('li');
+                    e.target.appendChild(document.getElementById(data));
+                });
+                color.addEventListener('mouseover', () => { closeBtn.style.display = 'inline-block'; });
+                color.addEventListener('mouseleave', () => { closeBtn.style.display = 'none'; });
+                color.addEventListener('ondragstart', (e) => { e.dataTransfer.setData('li', e.target.id); });
+                closeBtn.addEventListener('click', () => { colors.removeChild(color); });
+
                 color.appendChild(closeBtn);
                 colors.appendChild(color);
             };
@@ -81,33 +91,45 @@ const ColorPickerPage = () => {
     return (
         <>
             <h1>Color picker</h1>
-            <p>Upload image file or link.
+            <h6>Upload image file or link.
                 Pick the colors you like.
-                Choose the best combination of colors
-                and create your unique color palette.</p>
-
-            <section>
-                <input
-                    type="file"
-                    name="myImage"
-                    onChange={onFileUpload}
-                    accept="image/jpeg, image/png, image/jpg"
-                />
-                <img id="image" alt="no file selected" />
                 <br />
+                Choose the best combination of colors
+                and create your unique color palette.</h6>
 
-                <canvas id="myCanvas"></canvas>
+            <input
+                className="file-input"
+                type="file"
+                name="myImage"
+                onChange={onFileUpload}
+                accept="image/jpeg, image/png, image/jpg"
+            />
+            <img id="image" alt="no file selected" />
 
-                <span
-                    className="box"
-                    id="pixelColor"
-                    data-label="Current Pixel">
-                </span>
-            </section >
+            <section className="container">
+                <section className="canvas-section">
+                    <canvas className="image-canvas" id="myCanvas"></canvas>
+                    <section className="final-colors-vertical"></section>
+                    <section className="final-colors-horizontal"></section>
+                </section>
 
-            <section className="colors">
-
+                <aside className="aside">
+                    <span className="instructions">
+                        Move the mouse over the image. Click to pick sample.
+                    </span>
+                    <span
+                        className="preview-box"
+                        id="pixelColor"
+                        data-label="Preview">
+                    </span>
+                    <div className="direction">Choose direction</div>
+                    <div className="count">Choose count</div>
+                    <button className="save-color-palette">Generate color palette</button>
+                    <button className="extract-color-card">Extract color card</button>
+                </aside>
             </section>
+            
+            <section className="colors"></section>
         </>
     );
 };
