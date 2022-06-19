@@ -221,18 +221,27 @@ h6 {
     display: flex;
     position: relative;
     justify-content: space-around;
-    align-items:center;
+    align-items: center;
 }
 
 .canvas-section {}
+
 .image-canvas {}
+
 .final-colors-vertical {
     /* height: fit-content; */
     /* display: none; */
+    width: 100px;
+    height: 500px;
+    border: 1px solid #aaaaaa;
 }
+
 .final-colors-horizontal {
     /* width: fit-content; */
     /* display: none; */
+    width: 700px;
+    height: 100px;
+    border: 1px solid #aaaaaa;
 }
 
 .aside {
@@ -243,9 +252,11 @@ h6 {
     gap: 0.2rem;
     width: 25vw;
 }
+
 .instructions {
     /* flex-wrap: wrap; */
 }
+
 .preview-box {
     margin: auto;
     width: 150px;
@@ -253,21 +264,31 @@ h6 {
     border-radius: 10px;
     font-size: 0.5rem;
 }
+
 .save-color-palette {}
+
 .extract-color-card {}
 
 .colors {
-    width: 90vw;
-    margin: 5px auto;
+    display: flex;
+    align-items: center;
+    max-width: 700px;
+}
+
+.draggable {
+    cursor: move;
+}
+
+.dragging {
+    opacity: .5;
 }
 
 .box {
-    margin: 5px;
+    margin: 2px;
     width: 100px;
     height: 100px;
-    display: inline-block;
     position: relative;
-    border-radius: 12px;
+    border-radius: 5px;
     font-size: 0.5rem;
     /* background-color: attr('data-color'); */
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 // import { useAuthContext } from '../../contexts/AuthContext';
 import * as pickerService from '../../services/pickerService';
+import { dragAndDrop } from './pickerHelpers';
 import { hideError, showError } from '../../helpers/notifications';
 
 const ColorPickerPage = () => {
@@ -52,33 +53,38 @@ const ColorPickerPage = () => {
                 };
             };
 
-            function addColorInfo() {
+            async function addColorInfo() {
                 let colors = document.querySelector('.colors');
 
                 let color = document.createElement('li');
                 color.className = 'box';
-                colors.style.width = canvas.width;
                 color.setAttribute('data-color', pickedColor);
                 color.setAttribute('draggable', true);
+                color.classList.add('draggable');
                 color.style.backgroundColor = pickedColor;
-                color.draggable = true;
 
                 let closeBtn = document.createElement('button');
                 closeBtn.className = 'close-button';
 
-                colors.addEventListener('ondragover', () => { e.preventDefault(); });
-                colors.addEventListener('ondrop', (e) => {
-                    e.preventDefault();
-                    let data = e.dataTransfer.getData('li');
-                    e.target.appendChild(document.getElementById(data));
-                });
-                color.addEventListener('mouseover', () => { closeBtn.style.display = 'inline-block'; });
-                color.addEventListener('mouseleave', () => { closeBtn.style.display = 'none'; });
-                color.addEventListener('ondragstart', (e) => { e.dataTransfer.setData('li', e.target.id); });
-                closeBtn.addEventListener('click', () => { colors.removeChild(color); });
-
                 color.appendChild(closeBtn);
                 colors.appendChild(color);
+
+                // hover and delete
+                color.addEventListener('mouseover', () => { closeBtn.style.display = 'inline-block'; });
+                color.addEventListener('mouseleave', () => { closeBtn.style.display = 'none'; });
+                closeBtn.addEventListener('click', () => { colors.removeChild(color); });
+
+                // drag and drop
+                const allDraggable = document.querySelectorAll('.draggable');
+                // const final = document.querySelector('.final-colors-vertical');
+                dragAndDrop(allDraggable, colors);
+                // color.addEventListener('ondragstart', (e) => { e.dataTransfer.setData('text', e.target.id); });
+                // final.addEventListener('ondrop', (e) => {
+                //     e.preventDefault();
+                //     let data = e.dataTransfer.getData('text');
+                //     e.target.appendChild(document.getElementById(data));
+                // });
+                // final.addEventListener('ondragover', (e) => { e.preventDefault(); });
             };
 
 
@@ -109,8 +115,9 @@ const ColorPickerPage = () => {
             <section className="container">
                 <section className="canvas-section">
                     <canvas className="image-canvas" id="myCanvas"></canvas>
-                    <section className="final-colors-vertical"></section>
-                    <section className="final-colors-horizontal"></section>
+                    <section className="colors"></section>
+                    {/* <section className="final-colors-vertical"></section> */}
+                    {/* <section className="final-colors-horizontal"></section> */}
                 </section>
 
                 <aside className="aside">
@@ -128,8 +135,8 @@ const ColorPickerPage = () => {
                     <button className="extract-color-card">Extract color card</button>
                 </aside>
             </section>
-            
-            <section className="colors"></section>
+
+            {/* <section className="colors"></section> */}
         </>
     );
 };
