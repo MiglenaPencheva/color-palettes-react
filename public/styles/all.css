@@ -214,65 +214,37 @@ h6 {
     z-index: 1;
 }
 
-.container {
-    width: 90vw;
-    height: fit-content;
+#image {
+    display: none;
+}
+
+#pickerContainer {
+    /* max-width: 90vw; */
+    /* max-height: 550px; */
     margin: 0 auto;
     display: flex;
-    position: relative;
-    justify-content: space-around;
-    align-items: center;
 }
 
-.canvas-section {}
-
-.image-canvas {}
-
-.final-colors-vertical {
-    /* height: fit-content; */
-    /* display: none; */
-    width: 100px;
-    height: 500px;
-    border: 1px solid #aaaaaa;
-}
-
-.final-colors-horizontal {
-    /* width: fit-content; */
-    /* display: none; */
-    width: 700px;
-    height: 100px;
-    border: 1px solid #aaaaaa;
-}
-
-.aside {
+#canvasSection {
+    max-width: 703px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    text-align: center;
-    gap: 0.2rem;
-    width: 25vw;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 3px;
+    align-items: flex-start;
 }
 
-.instructions {
-    /* flex-wrap: wrap; */
+#myCanvas {
+    /* border-radius: 5px; */
 }
 
-.preview-box {
-    margin: auto;
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
-    font-size: 0.5rem;
-}
-
-.save-color-palette {}
-
-.extract-color-card {}
-
-.colors {
+#colors {
+    margin: 0;
     display: flex;
-    align-items: center;
     max-width: 700px;
+    max-height: 600px;
+    gap: 3px;
+    /* box-sizing:content-box; */
 }
 
 .draggable {
@@ -284,37 +256,16 @@ h6 {
 }
 
 .box {
-    margin: 2px;
     width: 100px;
     height: 100px;
     position: relative;
-    border-radius: 5px;
+    
+    /* border-radius: 5px; */
     font-size: 0.5rem;
     /* background-color: attr('data-color'); */
 }
 
-.box::before {
-    color: #fff;
-    font-size: 0.8rem;
-    content: attr(data-label);
-    position: absolute;
-    width: 150px;
-    top: 5px;
-    left: 5px;
-}
-
-.box::after {
-    color: #fff;
-    font-size: 0.8rem;
-    content: attr(data-color);
-    position: absolute;
-    width: 150px;
-    bottom: 5px;
-    left: 5px;
-}
-
 .close-button {
-    margin: 2px;
     width: 20px;
     height: 20px;
     position: absolute;
@@ -324,3 +275,26 @@ h6 {
     border: 1px solid rgb(0, 0, 0);
     border-radius: 5px;
 }
+
+.aside {
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    gap: 0.2rem;
+}
+
+.instructions {
+    /* flex-wrap: wrap; */
+}
+
+.preview-box {
+    margin: 0 auto;
+    padding: 2px;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    font-size: 0.5rem;
+}
+

@@ -7,91 +7,94 @@ import { hideError, showError } from '../../helpers/notifications';
 
 const ColorPickerPage = () => {
     // const { user } = useAuthContext();
-    let pickedColor = '';
+    const [imageObj, setImageObj] = useState({});
+    const [src, setSrc] = useState('');
+    const [data, setData] = useState([]);
+    const [pickedColor, setPickedColor] = useState('rgb(0, 0, 0)');
+    const [direction, setDirection] = useState('horizontal');
 
-    const onFileUpload = async (e) => {
-        try {
-            const img = document.getElementById('image');
-            img.style.display = 'none';
-            let file = e.target.files[0];
-            img.src = URL.createObjectURL(file);  // set src to blob url
+    const onFileUpload = (e) => {
+        // alert -> Do you want to save your work?
+        //          New upload will delete any changes.
+        // save color palette / upload new file  
 
-            const imageObj = { file, src: img.src };
-            const image = await pickerService.upload(imageObj);
+        const file = e.target.files[0];
+        const src = URL.createObjectURL(file);  // set src to blob url
+        setSrc(src);
+        setImageObj({ src });
 
+        const img = document.getElementById('image');
+
+        img.onload = (e) => {
             const canvas = document.getElementById('myCanvas');
+            const colors = document.getElementById('colors');
+
+            let ratio = img.naturalWidth / img.naturalHeight;
+
+            if (ratio > 1) {
+                canvas.width = 700;
+                canvas.height = 700 / ratio;
+                colors.width = 700;
+                colors.height = 100;
+                colors.style['flex-direction'] = 'row';
+            } else {
+                canvas.width = 600 * ratio;
+                canvas.height = 600;
+                colors.width = 100;
+                colors.height = 600;
+                colors.style['flex-direction'] = 'column';
+            }
+
+            while (colors.hasChildNodes()) {
+                colors.removeChild(colors.firstChild);
+            }
+
             const ctx = canvas.getContext('2d');
-            canvas.width = 700;
-            const newImg = new Image();
-            newImg.src = image.src;
-            const nw = newImg.naturalWidth;
-            const nh = newImg.naturalHeight;
-            const aspect = nw / nh;
-            canvas.height = canvas.width / aspect;
-            ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
+            const canvasImage = document.getElementById('canvasImage');
+            ctx.drawImage(canvasImage, 0, 0, canvas.width, canvas.height);
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const data = imageData.data;
+            setData(imageData.data);
+        };
+    };
 
-            canvas.addEventListener('mousemove', getPixel);
-            canvas.addEventListener('click', addColorInfo);
+    const getPixel = (e) => {
+        let { offsetX, offsetY } = e.nativeEvent;
+        let pixel = e.target.width * offsetY + offsetX;
+        let arrayPos = pixel * 4;
+        const c = {
+            red: data[arrayPos],
+            green: data[arrayPos + 1],
+            blue: data[arrayPos + 2],
+            alpha: data[arrayPos + 3],
+        };
+        setPickedColor(`rgb(${c.red}, ${c.green}, ${c.blue})`);
+    };
 
-            function getPixel(e) {
-                let { offsetX, offsetY } = e;
-                const c = getPixelColor(canvas.width, offsetY, offsetX);
-                pickedColor = `rgb(${c.red}, ${c.green}, ${c.blue})`;
-                document.getElementById('pixelColor').style.backgroundColor = pickedColor;
-            };
+    const addColorBox = (e) => {
+        console.log(pickedColor);
+        let color = document.createElement('li');
+        color.className = 'box';
+        color.setAttribute('data-color', pickedColor);
+        color.style.backgroundColor = pickedColor;
 
-            const getPixelColor = (cols, x, y) => {
-                let pixel = cols * x + y;
-                let arrayPos = pixel * 4;
-                return {
-                    red: data[arrayPos],
-                    green: data[arrayPos + 1],
-                    blue: data[arrayPos + 2],
-                    alpha: data[arrayPos + 3],
-                };
-            };
+        let closeBtn = document.createElement('button');
+        closeBtn.className = 'close-button';
 
-            async function addColorInfo() {
-                let colors = document.querySelector('.colors');
+        // hover and delete
+        color.addEventListener('mouseover', () => { closeBtn.style.display = 'inline-block'; });
+        color.addEventListener('mouseleave', () => { closeBtn.style.display = 'none'; });
+        closeBtn.addEventListener('click', () => { colors.removeChild(color); });
 
-                let color = document.createElement('li');
-                color.className = 'box';
-                color.setAttribute('data-color', pickedColor);
-                color.setAttribute('draggable', true);
-                color.classList.add('draggable');
-                color.style.backgroundColor = pickedColor;
+        color.appendChild(closeBtn);
+        let colors = document.getElementById('colors');
+        colors.appendChild(color);
 
-                let closeBtn = document.createElement('button');
-                closeBtn.className = 'close-button';
+        // color.setAttribute('draggable', true);
+        // color.classList.add('draggable');
 
-                color.appendChild(closeBtn);
-                colors.appendChild(color);
-
-                // hover and delete
-                color.addEventListener('mouseover', () => { closeBtn.style.display = 'inline-block'; });
-                color.addEventListener('mouseleave', () => { closeBtn.style.display = 'none'; });
-                closeBtn.addEventListener('click', () => { colors.removeChild(color); });
-
-                // drag and drop
-                const allDraggable = document.querySelectorAll('.draggable');
-                // const final = document.querySelector('.final-colors-vertical');
-                dragAndDrop(allDraggable, colors);
-                // color.addEventListener('ondragstart', (e) => { e.dataTransfer.setData('text', e.target.id); });
-                // final.addEventListener('ondrop', (e) => {
-                //     e.preventDefault();
-                //     let data = e.dataTransfer.getData('text');
-                //     e.target.appendChild(document.getElementById(data));
-                // });
-                // final.addEventListener('ondragover', (e) => { e.preventDefault(); });
-            };
-
-
-            hideError();
-        } catch (error) {
-            showError(error.message);
-        }
+        // drag and drop
+        // const allDraggable = document.querySelectorAll('.draggable');
+        // dragAndDrop(allDraggable, colors);
     };
 
     return (
@@ -110,33 +113,48 @@ const ColorPickerPage = () => {
                 onChange={onFileUpload}
                 accept="image/jpeg, image/png, image/jpg"
             />
-            <img id="image" alt="no file selected" />
+            <img id="image" src={src} alt="" />
 
-            <section className="container">
-                <section className="canvas-section">
-                    <canvas className="image-canvas" id="myCanvas"></canvas>
-                    <section className="colors"></section>
-                    {/* <section className="final-colors-vertical"></section> */}
-                    {/* <section className="final-colors-horizontal"></section> */}
+            <section id="pickerContainer">
+
+                <section className="canvas-section" id="canvasSection">
+                    <canvas className="image-canvas" id="myCanvas"
+                        // width={canvasWidth} height={canvasHeight}>
+                        onMouseMove={getPixel}
+                        onClick={addColorBox}>
+                        <img id="canvasImage" src={src} alt="" />
+                    </canvas>
+                    <div className="colors" id="colors">
+                        {/* width={colorsWidth} height={colorsHeight} */}
+                    </div>
                 </section>
 
                 <aside className="aside">
                     <span className="instructions">
                         Move the mouse over the image. Click to pick sample.
                     </span>
-                    <span
-                        className="preview-box"
+                    <span className="preview-box"
                         id="pixelColor"
-                        data-label="Preview">
+                        style={{ backgroundColor: `${pickedColor}` }}>
                     </span>
-                    <div className="direction">Choose direction</div>
-                    <div className="count">Choose count</div>
+                    <section className="direction">
+                        Choose direction <br />
+                        <input type="radio"
+                            checked={direction === 'horizontal'}
+                            value="horizontal"
+                            onChange={(e) => { setDirection(e.target.value); }} />
+                        <label>horizontal</label>
+                        <input type="radio"
+                            checked={direction === 'vertical'}
+                            value="vertical"
+                            onChange={(e) => { setDirection(e.target.value); }} />
+                        <label>vertical</label>
+                    </section>
                     <button className="save-color-palette">Generate color palette</button>
                     <button className="extract-color-card">Extract color card</button>
                 </aside>
-            </section>
 
-            {/* <section className="colors"></section> */}
+            </section>
         </>
     );
 };
