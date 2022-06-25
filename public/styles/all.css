@@ -219,14 +219,12 @@ h6 {
 }
 
 #pickerContainer {
-    /* max-width: 90vw; */
-    /* max-height: 550px; */
     margin: 0 auto;
     display: flex;
 }
 
 #canvasSection {
-    max-width: 703px;
+    max-width: 803px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -241,8 +239,8 @@ h6 {
 #colors {
     margin: 0;
     display: flex;
-    max-width: 700px;
-    max-height: 600px;
+    max-width: 800px;
+    max-height: 650px;
     gap: 3px;
     /* box-sizing:content-box; */
 }
@@ -252,14 +250,13 @@ h6 {
 }
 
 .dragging {
-    opacity: .5;
+    opacity: .8;
 }
 
 .box {
     width: 100px;
     height: 100px;
     position: relative;
-    
     /* border-radius: 5px; */
     font-size: 0.5rem;
     /* background-color: attr('data-color'); */
@@ -272,8 +269,20 @@ h6 {
     top: 5px;
     right: 5px;
     display: none;
-    border: 1px solid rgb(0, 0, 0);
+    border: none;
     border-radius: 5px;
+    background-color:transparent;
+    text-align: center;
+    justify-content: center;
+    color:rgba(197, 197, 197, 0.2);
+    font-size: 0.8rem;
+    font-weight: bold;
+    font-family: 'Syncopate';
+    text-shadow: 1px 0px 1px rgb(44, 44, 44);
+}
+.close-button:hover {
+    cursor: pointer;
+    font-size: 1rem;
 }
 
 .aside {

@@ -13,10 +13,18 @@ export const dragAndDrop = (allDraggable, container) => {
         });
     });
 
-    // containers.forEach(container => {
     container.addEventListener('dragover', (e) => {
         e.preventDefault();
-        const afterElement = getDragAfterElement(container, e.clientY);
+
+        let ratio = e.target.parentElement.width / e.target.parentElement.height;
+        let afterElement;
+
+        if (ratio > 1) {
+            afterElement = getDragHorizontalElement(container, e.clientX);
+        } else {
+            afterElement = getDragVerticalElement(container, e.clientY);
+        }
+        
         const draggable = document.querySelector('.dragging');
 
         if (afterElement == null) {
@@ -25,21 +33,36 @@ export const dragAndDrop = (allDraggable, container) => {
             container.insertBefore(draggable, afterElement);
         }
     });
-    // });
 
-    function getDragAfterElement(container, y) {
+    function getDragVerticalElement(container, y) {
         const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
 
         return draggableElements.reduce((closest, child) => {
             const box = child.getBoundingClientRect();
-            const offset = y - box.top - box.height / 2;
+            const offsetY = y - box.top - box.height / 2;
 
-            if (offset < 0 && offset > closest.offset) {
-                return { offset: offset, element: child };
+            if (offsetY < 0 && offsetY > closest.offsetY) {
+                return { offset: offsetY, element: child };
             } else {
                 return closest;
             }
 
-        }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }, { offsetY: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    function getDragHorizontalElement(container, x) {
+        const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offsetX = x - box.left - box.width / 2;
+
+            if (offsetX < 0 && offsetX > closest.offsetX) {
+                return { offset: offsetX, element: child };
+            } else {
+                return closest;
+            }
+
+        }, { offsetX: Number.NEGATIVE_INFINITY }).element;
     }
 };

@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Syncopate&display=swap');
+
+
 html {
 	font: 12px/1.5 "PT Sans", "PT Serif Caption", "PT Serif";	
 }
+
 
 @media screen and (min-width: 500px) {
 	html { 

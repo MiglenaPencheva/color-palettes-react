@@ -32,16 +32,16 @@ const ColorPickerPage = () => {
             let ratio = img.naturalWidth / img.naturalHeight;
 
             if (ratio > 1) {
-                canvas.width = 700;
-                canvas.height = 700 / ratio;
-                colors.width = 700;
+                canvas.width = 800;
+                canvas.height = 800 / ratio;
+                colors.width = 800;
                 colors.height = 100;
                 colors.style['flex-direction'] = 'row';
             } else {
-                canvas.width = 600 * ratio;
-                canvas.height = 600;
+                canvas.width = 650 * ratio;
+                canvas.height = 650;
                 colors.width = 100;
-                colors.height = 600;
+                colors.height = 650;
                 colors.style['flex-direction'] = 'column';
             }
 
@@ -71,7 +71,6 @@ const ColorPickerPage = () => {
     };
 
     const addColorBox = (e) => {
-        console.log(pickedColor);
         let color = document.createElement('li');
         color.className = 'box';
         color.setAttribute('data-color', pickedColor);
@@ -79,6 +78,7 @@ const ColorPickerPage = () => {
 
         let closeBtn = document.createElement('button');
         closeBtn.className = 'close-button';
+        closeBtn.innerHTML = 'x';
 
         // hover and delete
         color.addEventListener('mouseover', () => { closeBtn.style.display = 'inline-block'; });
@@ -89,12 +89,11 @@ const ColorPickerPage = () => {
         let colors = document.getElementById('colors');
         colors.appendChild(color);
 
-        // color.setAttribute('draggable', true);
-        // color.classList.add('draggable');
-
         // drag and drop
-        // const allDraggable = document.querySelectorAll('.draggable');
-        // dragAndDrop(allDraggable, colors);
+        color.setAttribute('draggable', true);
+        color.classList.add('draggable');
+        const allDraggable = document.querySelectorAll('.draggable');
+        dragAndDrop(allDraggable, colors);
     };
 
     return (
