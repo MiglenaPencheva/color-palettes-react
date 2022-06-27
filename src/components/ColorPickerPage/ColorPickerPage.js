@@ -32,12 +32,15 @@ const ColorPickerPage = () => {
             let ratio = img.naturalWidth / img.naturalHeight;
 
             if (ratio > 1) {
+                setDirection('horizontal');
                 canvas.width = 800;
                 canvas.height = 800 / ratio;
                 colors.width = 800;
                 colors.height = 100;
                 colors.style['flex-direction'] = 'row';
+                colors.style['flex-grow'] = 1;
             } else {
+                setDirection('vertical');
                 canvas.width = 650 * ratio;
                 canvas.height = 650;
                 colors.width = 100;
@@ -71,29 +74,39 @@ const ColorPickerPage = () => {
     };
 
     const addColorBox = (e) => {
+        let colors = document.getElementById('colors');
+        
         let color = document.createElement('li');
-        color.className = 'box';
-        color.setAttribute('data-color', pickedColor);
+        color.id = 'colorBox';
         color.style.backgroundColor = pickedColor;
-
+        
         let closeBtn = document.createElement('button');
         closeBtn.className = 'close-button';
         closeBtn.innerHTML = 'x';
 
-        // hover and delete
-        color.addEventListener('mouseover', () => { closeBtn.style.display = 'inline-block'; });
-        color.addEventListener('mouseleave', () => { closeBtn.style.display = 'none'; });
-        closeBtn.addEventListener('click', () => { colors.removeChild(color); });
-
-        color.appendChild(closeBtn);
-        let colors = document.getElementById('colors');
-        colors.appendChild(color);
-
-        // drag and drop
         color.setAttribute('draggable', true);
         color.classList.add('draggable');
         const allDraggable = document.querySelectorAll('.draggable');
         dragAndDrop(allDraggable, colors);
+       
+        let info = document.createElement('a');
+        info.className = 'info';
+        info.textContent = 'info';
+        
+        // hover and delete
+        color.addEventListener('mouseover', () => { 
+            closeBtn.style.display = 'inline-block'; 
+            info.style.display = 'inline-block'; 
+        });
+        color.addEventListener('mouseleave', () => { 
+            closeBtn.style.display = 'none'; 
+            info.style.display = 'none'; 
+        });
+        closeBtn.addEventListener('click', () => { colors.removeChild(color); });
+        
+        color.appendChild(closeBtn);
+        color.appendChild(info);
+        colors.appendChild(color);
     };
 
     return (
@@ -123,9 +136,9 @@ const ColorPickerPage = () => {
                         onClick={addColorBox}>
                         <img id="canvasImage" src={src} alt="" />
                     </canvas>
-                    <div className="colors" id="colors">
+                    <ul className="colors" id="colors">
                         {/* width={colorsWidth} height={colorsHeight} */}
-                    </div>
+                    </ul>
                 </section>
 
                 <aside className="aside">
@@ -136,7 +149,12 @@ const ColorPickerPage = () => {
                         id="pixelColor"
                         style={{ backgroundColor: `${pickedColor}` }}>
                     </span>
-                    <section className="direction">
+
+                    {/* <div className="slidecontainer">
+                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange" />
+                    </div> */}
+
+                    {/* <section className="direction">
                         Choose direction <br />
                         <input type="radio"
                             checked={direction === 'horizontal'}
@@ -148,7 +166,7 @@ const ColorPickerPage = () => {
                             value="vertical"
                             onChange={(e) => { setDirection(e.target.value); }} />
                         <label>vertical</label>
-                    </section>
+                    </section> */}
                     <button className="save-color-palette">Generate color palette</button>
                     <button className="extract-color-card">Extract color card</button>
                 </aside>
