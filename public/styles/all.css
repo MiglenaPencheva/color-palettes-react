@@ -14,14 +14,20 @@ body {
 
 
 #container {
-    width: 100%;
     margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    padding: 0;
+    justify-items: center;
 }
 
+#site-content {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
 #site-content>section.basic {
     text-align: center;
 }

@@ -29,6 +29,8 @@ const ColorPickerPage = () => {
             const canvas = document.getElementById('myCanvas');
             const colors = document.getElementById('colors');
 
+            canvas.style.border = 'none';
+            canvas.style['border-radius'] = 0;
             let ratio = img.naturalWidth / img.naturalHeight;
 
             if (ratio > 1) {
@@ -75,11 +77,11 @@ const ColorPickerPage = () => {
 
     const addColorBox = (e) => {
         let colors = document.getElementById('colors');
-        
+
         let color = document.createElement('li');
         color.id = 'colorBox';
         color.style.backgroundColor = pickedColor;
-        
+
         let closeBtn = document.createElement('button');
         closeBtn.className = 'close-button';
         closeBtn.innerHTML = 'x';
@@ -88,22 +90,22 @@ const ColorPickerPage = () => {
         color.classList.add('draggable');
         const allDraggable = document.querySelectorAll('.draggable');
         dragAndDrop(allDraggable, colors);
-       
+
         let info = document.createElement('a');
         info.className = 'info';
         info.textContent = 'info';
-        
+
         // hover and delete
-        color.addEventListener('mouseover', () => { 
-            closeBtn.style.display = 'inline-block'; 
-            info.style.display = 'inline-block'; 
+        color.addEventListener('mouseover', () => {
+            closeBtn.style.display = 'inline-block';
+            info.style.display = 'inline-block';
         });
-        color.addEventListener('mouseleave', () => { 
-            closeBtn.style.display = 'none'; 
-            info.style.display = 'none'; 
+        color.addEventListener('mouseleave', () => {
+            closeBtn.style.display = 'none';
+            info.style.display = 'none';
         });
         closeBtn.addEventListener('click', () => { colors.removeChild(color); });
-        
+
         color.appendChild(closeBtn);
         color.appendChild(info);
         colors.appendChild(color);
@@ -118,13 +120,14 @@ const ColorPickerPage = () => {
                 Choose the best combination of colors
                 and create your unique color palette.</h6>
 
-            <input
-                className="file-input"
-                type="file"
-                name="myImage"
-                onChange={onFileUpload}
-                accept="image/jpeg, image/png, image/jpg"
-            />
+            <label className="button file-input">
+                <input
+                    type="file"
+                    onChange={onFileUpload}
+                    accept="image/jpeg, image/png, image/jpg"
+                />
+                Upload file
+            </label>
             <img id="image" src={src} alt="" />
 
             <section id="pickerContainer">
@@ -143,7 +146,9 @@ const ColorPickerPage = () => {
 
                 <aside className="aside">
                     <span className="instructions">
-                        Move the mouse over the image. Click to pick sample.
+                        Move the mouse 
+                        <br /> over the image. 
+                        <br /> Click to pick sample.
                     </span>
                     <span className="preview-box"
                         id="pixelColor"
@@ -167,8 +172,8 @@ const ColorPickerPage = () => {
                             onChange={(e) => { setDirection(e.target.value); }} />
                         <label>vertical</label>
                     </section> */}
-                    <button className="save-color-palette">Generate color palette</button>
-                    <button className="extract-color-card">Extract color card</button>
+                    <button className="button save-color-palette">Generate <br /> color palette</button>
+                    {/* <button className="button extract-color-card">Extract color card</button> */}
                 </aside>
 
             </section>
