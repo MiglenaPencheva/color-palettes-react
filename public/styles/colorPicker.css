@@ -114,13 +114,13 @@ input[type="file"] {
 
 .aside {
     padding: 5px 10px;
-    min-width: 200px;
+    min-width: 250px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 .instructions {
     width: 90%;
@@ -136,7 +136,12 @@ input[type="file"] {
     border-radius: 10px;
     font-size: 0.5rem;
 }
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
 .save-color-palette {
-    padding: 1rem 0;
-    width: 150px;
+    width: 200px;
+    font-size: 0.8rem;
 }

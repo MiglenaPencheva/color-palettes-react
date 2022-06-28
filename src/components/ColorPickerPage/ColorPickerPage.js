@@ -76,6 +76,10 @@ const ColorPickerPage = () => {
     };
 
     const addColorBox = (e) => {
+        if (e.target.childNodes[0].src === 'http://localhost:3000/color-picker') {
+            return;
+        }
+
         let colors = document.getElementById('colors');
 
         let color = document.createElement('li');
@@ -146,8 +150,8 @@ const ColorPickerPage = () => {
 
                 <aside className="aside">
                     <span className="instructions">
-                        Move the mouse 
-                        <br /> over the image. 
+                        Move the mouse
+                        <br /> over the image.
                         <br /> Click to pick sample.
                     </span>
                     <span className="preview-box"
@@ -172,7 +176,11 @@ const ColorPickerPage = () => {
                             onChange={(e) => { setDirection(e.target.value); }} />
                         <label>vertical</label>
                     </section> */}
-                    <button className="button save-color-palette">Generate <br /> color palette</button>
+                    <section className="buttons">
+                        <button className="button save-color-palette">Save</button>
+                        <button className="button save-color-palette">Download and save</button>
+                        <button className="button save-color-palette">Download without saving</button>
+                    </section>
                     {/* <button className="button extract-color-card">Extract color card</button> */}
                 </aside>
 
