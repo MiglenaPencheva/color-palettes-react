@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 // import { useAuthContext } from '../../contexts/AuthContext';
 import * as pickerService from '../../services/pickerService';
-import { dragAndDrop } from './pickerHelpers';
 import { hideError, showError } from '../../helpers/notifications';
 
 const ColorPickerPage = () => {
@@ -83,21 +82,23 @@ const ColorPickerPage = () => {
         let colors = document.getElementById('colors');
 
         let color = document.createElement('li');
-        color.id = 'colorBox';
+        color.id = 'asdf' + (Math.random() * 9999 | 0);
+        color.className = 'color-box';
         color.style.backgroundColor = pickedColor;
 
         let closeBtn = document.createElement('button');
         closeBtn.className = 'close-button';
         closeBtn.innerHTML = 'x';
 
-        color.setAttribute('draggable', true);
-        color.classList.add('draggable');
-        const allDraggable = document.querySelectorAll('.draggable');
-        dragAndDrop(allDraggable, colors);
-
         let info = document.createElement('a');
         info.className = 'info';
         info.textContent = 'info';
+
+        // drag and drop
+        color.setAttribute('draggable', true);
+        color.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/html', e.target.id);
+        });
 
         // hover and delete
         color.addEventListener('mouseover', () => {
@@ -105,16 +106,24 @@ const ColorPickerPage = () => {
             info.style.display = 'inline-block';
         });
         color.addEventListener('mouseleave', () => {
-            closeBtn.style.display = 'none';
+                closeBtn.style.display = 'none';
             info.style.display = 'none';
         });
-        closeBtn.addEventListener('click', () => { colors.removeChild(color); });
+        closeBtn.addEventListener('click', () => {colors.removeChild(color); });
 
         color.appendChild(closeBtn);
         color.appendChild(info);
         colors.appendChild(color);
     };
 
+    const dropHandler = (e) => {
+        e.preventDefault();
+        let data = e.dataTransfer.getData('text/html');
+        if (e.target.className === 'color-box') {
+            e.target.before(document.getElementById(data));
+        }
+    };
+    
     return (
         <>
             <h1>Color picker</h1>
@@ -138,32 +147,34 @@ const ColorPickerPage = () => {
 
                 <section className="canvas-section" id="canvasSection">
                     <canvas className="image-canvas" id="myCanvas"
-                        // width={canvasWidth} height={canvasHeight}>
                         onMouseMove={getPixel}
                         onClick={addColorBox}>
                         <img id="canvasImage" src={src} alt="" />
                     </canvas>
-                    <ul className="colors" id="colors">
-                        {/* width={colorsWidth} height={colorsHeight} */}
+                            
+                    <ul className="colors" id="colors"
+                        onDrop={dropHandler}
+                        onDragOver = {(e) => e.preventDefault()}>
                     </ul>
+            </section>
+
+            <aside className="aside">
+                <span className="instructions">
+                    Move the mouse
+                    <br /> over the image.
+                    <br /> Click to pick sample.
+                </span>
+                <span className="preview-box"
+                    id="pixelColor"
+                    style={{ backgroundColor: `${pickedColor}` }}>
+                </span>
+                <section className="buttons">
+                    <button className="button save-color-palette">Save</button>
+                    <button className="button save-color-palette">Download and save</button>
+                    <button className="button save-color-palette">Download without saving</button>
                 </section>
 
-                <aside className="aside">
-                    <span className="instructions">
-                        Move the mouse
-                        <br /> over the image.
-                        <br /> Click to pick sample.
-                    </span>
-                    <span className="preview-box"
-                        id="pixelColor"
-                        style={{ backgroundColor: `${pickedColor}` }}>
-                    </span>
-
-                    {/* <div className="slidecontainer">
-                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange" />
-                    </div> */}
-
-                    {/* <section className="direction">
+                {/* <section className="direction">
                         Choose direction <br />
                         <input type="radio"
                             checked={direction === 'horizontal'}
@@ -176,15 +187,9 @@ const ColorPickerPage = () => {
                             onChange={(e) => { setDirection(e.target.value); }} />
                         <label>vertical</label>
                     </section> */}
-                    <section className="buttons">
-                        <button className="button save-color-palette">Save</button>
-                        <button className="button save-color-palette">Download and save</button>
-                        <button className="button save-color-palette">Download without saving</button>
-                    </section>
-                    {/* <button className="button extract-color-card">Extract color card</button> */}
-                </aside>
+            </aside>
 
-            </section>
+        </section>
         </>
     );
 };
