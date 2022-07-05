@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import html2canvas from 'html2canvas';
 
 // import { useAuthContext } from '../../contexts/AuthContext';
 import * as pickerService from '../../services/pickerService';
@@ -106,10 +107,10 @@ const ColorPickerPage = () => {
             info.style.display = 'inline-block';
         });
         color.addEventListener('mouseleave', () => {
-                closeBtn.style.display = 'none';
+            closeBtn.style.display = 'none';
             info.style.display = 'none';
         });
-        closeBtn.addEventListener('click', () => {colors.removeChild(color); });
+        closeBtn.addEventListener('click', () => { colors.removeChild(color); });
 
         color.appendChild(closeBtn);
         color.appendChild(info);
@@ -123,7 +124,39 @@ const ColorPickerPage = () => {
             e.target.before(document.getElementById(data));
         }
     };
-    
+
+    const savePalette = (e) => {};
+
+    const saveAndDownloadPalette = () => {
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        const canvas = document.getElementById('myCanvas');
+        // png:  a.href = canvas.toDataURL(); a.download = 'canvas-image.png';
+        // jpeg:
+        a.href = canvas.toDataURL('image/jpeg', 1.0);
+        a.download = 'canvas-image.jpeg';
+        a.click();
+        document.body.removeChild(a);
+    };
+
+    const downloadOnly = async () => {
+        const el = document.getElementById('canvasSection');
+        const imageFileName = 'myNewColorPalette';
+        const canvas = await html2canvas(el);
+        const image = canvas.toDataURL('image/png', 1.0);
+        const downloadImage = (blob, fileName) => {
+            const fakeLink = document.createElement('a');
+            fakeLink.style = 'display: none';
+            fakeLink.download = fileName;
+            fakeLink.href = blob;
+            document.body.appendChild(fakeLink);
+            fakeLink.click();
+            document.body.removeChild(fakeLink);
+            fakeLink.remove();
+        };
+        downloadImage(image, imageFileName);
+    };
+
     return (
         <>
             <h1>Color picker</h1>
@@ -151,30 +184,30 @@ const ColorPickerPage = () => {
                         onClick={addColorBox}>
                         <img id="canvasImage" src={src} alt="" />
                     </canvas>
-                            
+
                     <ul className="colors" id="colors"
                         onDrop={dropHandler}
-                        onDragOver = {(e) => e.preventDefault()}>
+                        onDragOver={(e) => e.preventDefault()}>
                     </ul>
-            </section>
-
-            <aside className="aside">
-                <span className="instructions">
-                    Move the mouse
-                    <br /> over the image.
-                    <br /> Click to pick sample.
-                </span>
-                <span className="preview-box"
-                    id="pixelColor"
-                    style={{ backgroundColor: `${pickedColor}` }}>
-                </span>
-                <section className="buttons">
-                    <button className="button save-color-palette">Save</button>
-                    <button className="button save-color-palette">Download and save</button>
-                    <button className="button save-color-palette">Download without saving</button>
                 </section>
 
-                {/* <section className="direction">
+                <aside className="aside">
+                    <span className="instructions">
+                        Move the mouse
+                        <br /> over the image.
+                        <br /> Click to pick sample.
+                    </span>
+                    <span className="preview-box"
+                        id="pixelColor"
+                        style={{ backgroundColor: `${pickedColor}` }}>
+                    </span>
+                    <section className="buttons">
+                        <button className="button save-color-palette" onClick={savePalette}>Save</button>
+                        <button className="button save-color-palette" onClick={saveAndDownloadPalette}>Download and save</button>
+                        <button className="button save-color-palette" onClick={downloadOnly}>Download without saving</button>
+                    </section>
+
+                    {/* <section className="direction">
                         Choose direction <br />
                         <input type="radio"
                             checked={direction === 'horizontal'}
@@ -187,9 +220,9 @@ const ColorPickerPage = () => {
                             onChange={(e) => { setDirection(e.target.value); }} />
                         <label>vertical</label>
                     </section> */}
-            </aside>
+                </aside>
 
-        </section>
+            </section>
         </>
     );
 };
