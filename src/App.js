@@ -8,10 +8,11 @@ import Logout from './components/Logout/Logout';
 import Register from './components/Register/Register';
 import MyColorPalettes from './components/MyColorPalettes/MyColorPalettes';
 import MyFavorites from './components/MyFavorites/MyFavorites';
-import Create from './components/Create/Create';
+import UploadPalette from './components/UploadPalette/UploadPalette';
 import Edit from './components/Edit/Edit';
 import Details from './components/Details/Details';
 import ColorPickerPage from './components/ColorPickerPage/ColorPickerPage';
+import SavePalette from './components/SavePalette/SavePalette';
 
 function App() {
     return (
@@ -27,10 +28,11 @@ function App() {
                         <Route path="/register" element={<Register />} />
                         <Route path="/my-color-palettes" element={<MyColorPalettes />} />
                         <Route path="/my-favorites" element={<MyFavorites />} />
-                        <Route path="/create" element={<Create />} />
+                        <Route path="/upload" element={<UploadPalette />} />
                         <Route path="/details/:colorPaletteId" element={<Details />} />
                         <Route path="/edit/:colorPaletteId" element={<Edit />} />
                         <Route path="/color-picker" element={<ColorPickerPage />} />
+                        <Route path="/save" element={<SavePalette />} />
                     </Routes>
                 </main>
 
