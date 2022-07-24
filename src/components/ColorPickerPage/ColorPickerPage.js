@@ -125,7 +125,23 @@ const ColorPickerPage = () => {
         }
     };
 
-    const savePalette = (e) => {};
+    const exportScheme = async (e) => {
+        const el = document.getElementById('colors');
+        const imageFileName = 'myNewColorPalette';
+        const canvas = await html2canvas(el);
+        const image = canvas.toDataURL('image/png', 1.0);
+        const downloadImage = (blob, fileName) => {
+            const fakeLink = document.createElement('a');
+            fakeLink.style = 'display: none';
+            fakeLink.download = fileName;
+            fakeLink.href = blob;
+            document.body.appendChild(fakeLink);
+            fakeLink.click();
+            document.body.removeChild(fakeLink);
+            fakeLink.remove();
+        };
+        downloadImage(image, imageFileName);
+    };
 
     const saveAndDownloadPalette = () => {
         const a = document.createElement('a');
@@ -139,7 +155,7 @@ const ColorPickerPage = () => {
         document.body.removeChild(a);
     };
 
-    const downloadOnly = async () => {
+    const exportPalette = async () => {
         const el = document.getElementById('canvasSection');
         const imageFileName = 'myNewColorPalette';
         const canvas = await html2canvas(el);
@@ -155,6 +171,28 @@ const ColorPickerPage = () => {
             fakeLink.remove();
         };
         downloadImage(image, imageFileName);
+        console.log(image);
+    };
+
+    const saveAndUpload = async () => {
+        const el = document.getElementById('canvasSection');
+        const canvas = await html2canvas(el);
+        const urlToSave = canvas.toDataURL('image/png', 1.0);
+        console.log(urlToSave);
+        return urlToSave;
+        
+        // const downloadImage = (blob) => {
+        //     const fakeLink = document.createElement('a');
+        //     fakeLink.style = 'display: none';
+        //     // fakeLink.download = fileName;
+        //     fakeLink.href = blob;
+        //     document.body.appendChild(fakeLink);
+        //     console.log(fakeLink.href);
+        //     fakeLink.click();
+        //     document.body.removeChild(fakeLink);
+        //     fakeLink.remove();
+        // };
+        // downloadImage(image);
     };
 
     return (
@@ -202,24 +240,11 @@ const ColorPickerPage = () => {
                         style={{ backgroundColor: `${pickedColor}` }}>
                     </span>
                     <section className="buttons">
-                        <button className="button save-color-palette" onClick={savePalette}>Save</button>
+                        <button className="button save-color-palette" onClick={saveAndUpload}>Save palette</button>
+                        <button className="button save-color-palette" onClick={exportPalette}>Export palette</button>
                         <button className="button save-color-palette" onClick={saveAndDownloadPalette}>Download and save</button>
-                        <button className="button save-color-palette" onClick={downloadOnly}>Download without saving</button>
+                        <button className="button save-color-palette" onClick={exportScheme}>Export scheme</button>
                     </section>
-
-                    {/* <section className="direction">
-                        Choose direction <br />
-                        <input type="radio"
-                            checked={direction === 'horizontal'}
-                            value="horizontal"
-                            onChange={(e) => { setDirection(e.target.value); }} />
-                        <label>horizontal</label>
-                        <input type="radio"
-                            checked={direction === 'vertical'}
-                            value="vertical"
-                            onChange={(e) => { setDirection(e.target.value); }} />
-                        <label>vertical</label>
-                    </section> */}
                 </aside>
 
             </section>
