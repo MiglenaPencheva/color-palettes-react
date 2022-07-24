@@ -1,0 +1,8 @@
+.dashboard {
+    display: flex;
+
+}
+
+.dashboard .navbar {
+    justify-content: center;
+}

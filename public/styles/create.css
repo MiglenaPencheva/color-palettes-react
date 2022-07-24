@@ -1,0 +1,37 @@
+.miniImage {
+    margin: 0 auto;
+    margin-top: 0.5rem;
+    width: 10rem;
+    position: relative;
+}
+
+#title {
+    border-radius: 5px;
+}
+
+.select > option {
+    font-style:inherit;
+}
+
+.checkbox {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: left;
+    justify-content: left;
+}
+
+.checkbox label {
+    font-weight:300;
+}
+
+.checkbox input {
+    width: 60%;
+}
+
+.checkbox input:active {
+    background-color: blueviolet;
+}
+
+.button {
+    margin-top: 1rem;
+}

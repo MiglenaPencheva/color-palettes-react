@@ -97,6 +97,7 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 20px;
 }
 
 .detailsMyPet>p:nth-child(2),
@@ -107,18 +108,18 @@ img {
     font-weight: bold;
 }
 
-.dashboard>nav>ul {
+/* .dashboard>nav>ul {
     display: flex;
 
-}
+} */
 
-.dashboard>nav>ul li:not(:last-child) {
+/* .dashboard>nav>ul li:not(:last-child) {
     padding-right: 1rem;
 }
 
 .dashboard .navbar {
     justify-content: center;
-}
+} */
 
 .basic h1,
 .my-pets h1,
@@ -161,6 +162,7 @@ div.actions a {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    border-radius: 8px;
 }
 
 .detailsMyPet textarea,
