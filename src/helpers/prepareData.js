@@ -6,7 +6,7 @@ export function validate(title, category, colorGroup, imageUrl) {
     if (imageUrl.trim() === '') { throw new Error('Image required'); }
     if (imageUrl.slice(0, 7) !== 'http://' &&
         imageUrl.slice(0, 8) !== 'https://') { throw new Error('Invalid image URL'); }
-
+    
     const data = {
         title,
         category,
@@ -20,28 +20,24 @@ export function getColorGroup(formData) {
     let colorGroup = [];
 
     let red = formData.get('red');
-    let green = formData.get('green');
-    let blue = formData.get('blue');
     let yellow = formData.get('yellow');
-    let cyan = formData.get('cyan');
-    let purple = formData.get('purple');
+    let blue = formData.get('blue');
     let orange = formData.get('orange');
+    let green = formData.get('green');
+    let purple = formData.get('purple');
     let brown = formData.get('brown');
-    let pink = formData.get('pink');
     let grey = formData.get('grey');
-    let white = formData.get('white');
+    let pink = formData.get('pink');
 
     if (red) { colorGroup.push('red'); }
-    if (green) { colorGroup.push('green'); }
-    if (blue) { colorGroup.push('blue'); }
     if (yellow) { colorGroup.push('yellow'); }
-    if (cyan) { colorGroup.push('cyan'); }
-    if (purple) { colorGroup.push('purple'); }
+    if (blue) { colorGroup.push('blue'); }
     if (orange) { colorGroup.push('orange'); }
+    if (green) { colorGroup.push('green'); }
+    if (purple) { colorGroup.push('purple'); }
     if (brown) { colorGroup.push('brown'); }
-    if (pink) { colorGroup.push('pink'); }
     if (grey) { colorGroup.push('grey'); }
-    if (white) { colorGroup.push('white'); }
+    if (pink) { colorGroup.push('pink'); }
 
     return colorGroup;
 }
