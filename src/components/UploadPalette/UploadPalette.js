@@ -10,24 +10,32 @@ const UploadPalette = () => {
     const navigate = useNavigate();
     const { user } = useAuthContext();
 
-    const showImage = async (e) => {
-        let uploaded = document.getElementById('uploaded');
-        while (uploaded.firstChild) {
-            uploaded.removeChild(uploaded.firstChild);
-        }
+    const onFileUpload = (e) => {
+        const file = e.target.files[0];
+        const src = URL.createObjectURL(file);
+        showImagePreview(src);
+    };
 
+    const onLinkUpload = async (e) => {
         let imageUrl = e.target.value;
-
         fetch(imageUrl)
-            .then(res => res.blob()) 
+            .then(res => res.blob())
             .then(blob => {
                 let objectURL = URL.createObjectURL(blob);
-                let myImage = new Image();
-                myImage.src = objectURL;
-                myImage.className = 'miniImage';
-                uploaded.appendChild(myImage);
+                showImagePreview(objectURL);
             });
     };
+
+    function showImagePreview(src) {
+        let imagePreview = document.getElementById('imagePreview');
+        while (imagePreview.firstChild) {
+            imagePreview.removeChild(imagePreview.firstChild);
+        }
+        let myImage = new Image();
+        myImage.src = src;
+        myImage.className = 'image-preview';
+        imagePreview.appendChild(myImage);
+    }
 
     const onCreateSubmit = async (e) => {
         e.preventDefault();
@@ -43,7 +51,8 @@ const UploadPalette = () => {
             let data = validate(title, category, colorGroup, imageUrl);
             console.log(data);
 
-            // await colorPaletteService.create(data, user.accessToken);
+            await colorPaletteService.create(data, user.accessToken);
+
             hideError();
             navigate('/dashboard');
 
@@ -57,17 +66,34 @@ const UploadPalette = () => {
             <form id="create-form" onSubmit={onCreateSubmit} method="POST">
                 <fieldset>
                     <legend>Upload color palette</legend>
-                    <p className="field">
+
+
+                    <section className="field ">
                         <label htmlFor="image">Image</label>
-                        <span className="input link">
-                            <input type="text"
-                                name="imageUrl"
-                                id="imageUrl"
-                                placeholder="Image link"
-                                onChange={showImage} />
-                        </span>
-                        <span id="uploaded"></span>
-                    </p>
+
+                        <section className="upload-section">
+                            <label className="button upload-file-input">
+                                <input type="file"
+                                    onChange={onFileUpload}
+                                    accept="image/jpeg, image/png, image/jpg"
+                                />
+                                Upload file
+                            </label>
+
+                            <span className="input link">
+                                <input type="text"
+                                    name="imageUrl"
+                                    id="imageUrl"
+                                    placeholder="Enter file link"
+                                    onChange={onLinkUpload} />
+                            </span>
+
+                            <span id="imagePreview"></span>
+                        </section>
+
+
+                    </section>
+
                     <p className="field">
                         <label htmlFor="title">Title</label>
                         <span className="input">
