@@ -27,10 +27,11 @@ const Edit = () => {
 
             let title = formData.get('title');
             let category = formData.get('category');
-            let colorGroup = getColorGroup(formData);
-            let imageUrl = formData.get('imageUrl');
+            let colors = getColorGroup(formData).join(', ');
 
-            let data = validate(title, category, colorGroup, imageUrl);
+            console.log(title, category, colors);
+
+            let data = { title, category, colors };
 
             await colorPaletteService.update(colorPaletteId, data, user.accessToken);
             hideError();
@@ -45,17 +46,24 @@ const Edit = () => {
         <section id="edit-page" className="edit">
             <form id="edit-form" method="PUT" onSubmit={onUpdateSubmit}>
                 <fieldset>
-                    <legend>Update my color palette</legend>
+                    <legend>Update color palette</legend>
+                    <span id="imagePreview">
+                        <img src="" alt="..." />
+                    </span>
                     <p className="field">
                         <label htmlFor="title">Title</label>
                         <span className="input">
-                            <textarea maxLength="100" name="title" id="title" placeholder="Title should be less than 100 characters" defaultValue={colorPalette.title} />
+                            <textarea maxLength="100" 
+                                name="title" 
+                                id="title" 
+                                placeholder="Title should be less than 100 characters" 
+                                defaultValue={colorPalette.title} />
                         </span>
                     </p>
                     <p className="field">
                         <label htmlFor="category">Category</label>
                         <span className="input">
-                            <select id="type" name="category">
+                            <select id="type" name="category" className="select">
                                 <option value="Choose category">Choose category</option>
                                 <option value="landscape">Landscape</option>
                                 <option value="sea">Sea</option>
@@ -67,37 +75,41 @@ const Edit = () => {
                             </select>
                         </span>
                     </p>
-                    <p>
-                        Color group
-                        <input type="checkbox" id="red" name="red" />
-                        <label htmlFor="red">red</label>
-                        <input type="checkbox" id="green" name="green" />
-                        <label htmlFor="green">green</label>
-                        <input type="checkbox" id="blue" name="blue" />
-                        <label htmlFor="blue">blue</label>
-                        <input type="checkbox" id="yellow" name="yellow" />
-                        <label htmlFor="yellow">yellow</label>
-                        <input type="checkbox" id="cyan" name="cyan" />
-                        <label htmlFor="cyan">cyan</label>
-                        <input type="checkbox" id="purple" name="purple" />
-                        <label htmlFor="purple">purple</label>
-                        <input type="checkbox" id="orange" name="orange" />
-                        <label htmlFor="orange">orange</label>
-                        <input type="checkbox" id="brown" name="brown" />
-                        <label htmlFor="brown">brown</label>
-                        <input type="checkbox" id="pink" name="pink" />
-                        <label htmlFor="pink">pink</label>
-                        <input type="checkbox" id="grey" name="grey" />
-                        <label htmlFor="grey">grey</label>
-                        <input type="checkbox" id="white" name="white" />
-                        <label htmlFor="white">white</label>
-                    </p>
-                <p className="field">
-                    <label htmlFor="image">Image</label>
-                    <span className="input">
-                        <input type="text" name="imageUrl" id="image" defaultValue={colorPalette.imageUrl} />
-                    </span>
-                </p>
+                    <section className="field">
+                        <label htmlFor="colorGroup">Color group</label>
+                        <span className="checkbox">
+                            <span className="checkbox">
+                                <input type="checkbox" id="red" name="red" />
+                                <label htmlFor="red">red</label>
+                                <br />
+                                <input type="checkbox" id="yellow" name="yellow" />
+                                <label htmlFor="yellow">yellow</label>
+                                <br />
+                                <input type="checkbox" id="blue" name="blue" />
+                                <label htmlFor="blue">blue</label>
+                            </span>
+                            <span className="checkbox">
+                                <input type="checkbox" id="orange" name="orange" />
+                                <label htmlFor="orange">orange</label>
+                                <br />
+                                <input type="checkbox" id="green" name="green" />
+                                <label htmlFor="green">green</label>
+                                <br />
+                                <input type="checkbox" id="purple" name="purple" />
+                                <label htmlFor="purple">purple</label>
+                            </span>
+                            <span className="checkbox">
+                                <input type="checkbox" id="brown" name="brown" />
+                                <label htmlFor="brown">brown</label>
+                                <br />
+                                <input type="checkbox" id="grey" name="grey" />
+                                <label htmlFor="grey">grey</label>
+                                <br />
+                                <input type="checkbox" id="pink" name="pink" />
+                                <label htmlFor="pink">pink</label>
+                            </span>
+                        </span>
+                    </section>
                 <input className="button submit" type="submit" value="Save" />
             </fieldset>
         </form>
