@@ -41,13 +41,18 @@ export const getFavorites = async (token) => {
 };
 
 export const create = async (data, token) => {
+    for (const key of data.keys()) {
+        console.log(key, data.get(key));
+    }
     let response = await fetch(`${baseUrl}/color-palettes`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'x-authorization': token
+        // 'Content-Type': 'application/json',
+        // 'Content-Type': 'multipart/form-data',
+        'x-authorization': token
         },
-        body: JSON.stringify(data)
+        // body: JSON.stringify(data)
+        body: data
     });
 
     let result = await response.json();

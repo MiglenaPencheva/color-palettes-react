@@ -8,22 +8,20 @@ import { validate, getColorGroup } from '../../helpers/prepareData';
 
 const UploadPalette = () => {
     const navigate = useNavigate();
+    const [previewUrl, setPreviewUrl] = useState('');
+    // const [title, setTitle] = useState('');
+    // const [category, setCategory] = useState('');
+    // const [colorGroup, setColorGroup] = useState('');
+    const [imageFile, setImageFile] = useState({});
+    // const [data, setData] = useState({});
     const { user } = useAuthContext();
 
     const onFileUpload = (e) => {
         const file = e.target.files[0];
+        console.log(file);
+        setImageFile(file);
         const src = URL.createObjectURL(file);
         showImagePreview(src);
-    };
-
-    const onLinkUpload = async (e) => {
-        let imageUrl = e.target.value;
-        fetch(imageUrl)
-            .then(res => res.blob())
-            .then(blob => {
-                let objectURL = URL.createObjectURL(blob);
-                showImagePreview(objectURL);
-            });
     };
 
     function showImagePreview(src) {
@@ -35,23 +33,49 @@ const UploadPalette = () => {
         myImage.src = src;
         myImage.className = 'image-preview';
         imagePreview.appendChild(myImage);
+        setPreviewUrl(myImage.src);
     }
+
+    // const onLinkUpload = async (e) => {
+    //     let imageUrl = e.target.value;
+    //     fetch(imageUrl)
+    //         .then(res => res.blob())
+    //         .then(blob => {
+    //             let objectURL = URL.createObjectURL(blob);
+    //             showImagePreview(objectURL);
+    //         });
+    // };
 
     const onCreateSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            let formData = new FormData(e.currentTarget);
+            const formData = new FormData(e.currentTarget);
 
-            let title = formData.get('title');
-            let category = formData.get('category');
-            let colorGroup = getColorGroup(formData);
-            let imageUrl = formData.get('imageUrl');
+            // let title = formData.get('title');
+            // let category = formData.get('category');
+            // let colorGroup = getColorGroup(formData);
 
-            let data = validate(title, category, colorGroup, imageUrl);
-            console.log(data);
+            // const formData = new FormData();
+            // formData.append('title', title);
+            // formData.append('category', category);
+            // formData.append('imageFile', imageFile);
 
-            await colorPaletteService.create(data, user.accessToken);
+            let colors = getColorGroup(formData);
+            console.log(colors);
+            formData.append('colors', colors);
+
+            for (const key of formData.keys()) {
+                console.log(key, formData.get(key));
+            }
+
+            // let data = {};
+            // for (const key of formData.keys()) {
+            //     data[key] = formData.get(key);
+            // }
+            // let data = validate(title, category, colorGroup, imageFile);
+
+            await colorPaletteService.create(formData, user.accessToken);
 
             hideError();
             navigate('/dashboard');
@@ -63,7 +87,10 @@ const UploadPalette = () => {
 
     return (
         <section id="create-page" className="create">
-            <form id="create-form" onSubmit={onCreateSubmit} method="POST">
+            <form id="create-form" 
+                onSubmit={onCreateSubmit}
+                encType="multipart/form-data"
+                method="POST">
                 <fieldset>
                     <legend>Upload color palette</legend>
 
@@ -74,19 +101,21 @@ const UploadPalette = () => {
                         <section className="upload-section">
                             <label className="button upload-file-input">
                                 <input type="file"
+                                    name="imageFile"
+                                    id="fileInput"
                                     onChange={onFileUpload}
                                     accept="image/jpeg, image/png, image/jpg"
                                 />
                                 Upload file
                             </label>
 
-                            <span className="input link">
+                            {/* <span className="input link">
                                 <input type="text"
                                     name="imageUrl"
                                     id="imageUrl"
                                     placeholder="Enter file link"
                                     onChange={onLinkUpload} />
-                            </span>
+                            </span> */}
 
                             <span id="imagePreview"></span>
                         </section>
@@ -97,21 +126,28 @@ const UploadPalette = () => {
                     <p className="field">
                         <label htmlFor="title">Title</label>
                         <span className="input">
-                            <textarea maxLength="100" name="title" id="title" placeholder="Title should be less than 100 characters" />
+                            <textarea maxLength="100" 
+                                name="title" 
+                                id="title" 
+                                // onChange={e => setTitle(e.target.value)}
+                                placeholder="Title should be less than 100 characters" />
                         </span>
                     </p>
                     <p className="field">
                         <label htmlFor="type">Category</label>
-                        <span className="input">
-                            <select id="type" name="category" className="select">
-                                <option value="Choose category">Choose category</option>
-                                <option value="landscape">Landscape</option>
-                                <option value="sea">Sea</option>
-                                <option value="sky">Sky</option>
-                                <option value="plants">Plants</option>
-                                <option value="animals">Animals</option>
-                                <option value="foodAndDrinks">Food & Drinks</option>
-                                <option value="others">Others</option>
+                        <span className="input" >
+                            <select id="type"  
+                                name="category" 
+                                // onChange={e => setCategory(e.target.value)}
+                                className="select"> 
+                                    <option value="Choose category">Choose category</option>
+                                    <option value="landscape">Landscape</option>
+                                    <option value="sea">Sea</option>
+                                    <option value="sky">Sky</option>
+                                    <option value="plants">Plants</option>
+                                    <option value="animals">Animals</option>
+                                    <option value="foodAndDrinks">Food & Drinks</option>
+                                    <option value="others">Others</option>
                             </select>
                         </span>
                     </p>
@@ -150,7 +186,9 @@ const UploadPalette = () => {
                             </span>
                         </span>
                     </section>
-                    <input className="button submit" type="submit" value="Upload Color Palette" />
+                    <input className="button submit" 
+                        type="submit" 
+                        value="Upload Color Palette" />
                 </fieldset>
             </form>
         </section>
