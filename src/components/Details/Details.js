@@ -19,7 +19,7 @@ const Details = () => {
             .then(res => {
                 setColorPalette(res);
                 setLikes(res.likedBy.length);
-                setColors(res.colorGroup.join(', '));
+                setColors(res.colors.split(',').join(', '));
             });
     }, [colorPaletteId]);
 
@@ -68,7 +68,7 @@ const Details = () => {
             <ConfirmDialog show={showDeleteDialog} onClose={() => setShowDeleteDialog(false)} onSave={deleteHandler} />
             <section id="details-page" className="details">
                 <div className="pet-information">
-                    <p className="img"><img src={colorPalette.imageUrl} alt="palette" /></p>
+                    <p className="img"><img src={colorPalette.imageFile} alt="palette" /></p>
 
                     <h3>{colorPalette.title}</h3>
                     <p className="type">Category: {colorPalette.category}</p>
