@@ -27,7 +27,7 @@ const Details = () => {
         e.preventDefault();
 
         colorPaletteService.remove(colorPaletteId, user.accessToken)
-            .then(() => navigate('/dashboard'))
+            .then(() => navigate('/gallery'))
             .finally(() => {
                 setShowDeleteDialog(false);
             });
@@ -46,7 +46,7 @@ const Details = () => {
             await colorPaletteService.like(colorPaletteId, user.accessToken);
 
             hideError();
-            navigate('/dashboard');
+            navigate('/gallery');
             showInfo('Successfully liked palette');
         } catch (error) {
             showError(error.message);
@@ -55,8 +55,8 @@ const Details = () => {
 
     const ownerButtons = (
         <>
-            <Link className="button" to={`/edit/${colorPalette._id}`}>Edit</Link>
-            <a className="button" href="/" onClick={deleteClickHandler}>Delete</a>
+            <Link className="details__buttons" to={`/edit/${colorPalette._id}`}>Edit</Link>
+            <Link className="details__buttons" to="/" onClick={deleteClickHandler}>Delete</Link>
         </>
     );
 
@@ -66,23 +66,25 @@ const Details = () => {
     return (
         <>
             <ConfirmDialog show={showDeleteDialog} onClose={() => setShowDeleteDialog(false)} onSave={deleteHandler} />
-            <section id="details-page" className="details">
-                <div className="pet-information">
-                    <p className="img"><img src={colorPalette.imageFile} alt="palette" /></p>
+            <section id="details" className="details">
+                <span className="details__image">
+                    <img className="details__image--file" src={colorPalette.imageFile} alt="palette" />
+                </span>
 
-                    <h3>{colorPalette.title}</h3>
-                    <p className="type">Category: {colorPalette.category}</p>
-                    <p className="type">Colors: {colors}</p>
+                <div className="details__info">
+                    <h3 className="details__info--title">{colorPalette.title}</h3>
+                    <p className="details__info--category">Category: {colorPalette.category}</p>
+                    <p className="details__info--colors">Colors: {colors}</p>
 
-                    <div className="actions">
+                    <div className="details__info--buttons">
                         {user._id &&
                             (user._id === colorPalette._ownerId
                                 ? ownerButtons
                                 : userButtons
                             )}
 
-                        <div className="likes">
-                            <img className="hearts" src="/images/heart.png" alt="heart" />
+                        <div className="details__info--like">
+                            <img className="" src="/images/heart.png" alt="heart" />
                             <span id="total-likes">Likes: {likes}</span>
                         </div>
                     </div>

@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    background-color: white;
+    scroll-behavior: smooth;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: wrap;
+}
+
+.side-nav {
+    flex: 25%;
+    background-color: #f1f1f1;
+    padding: 20px;
+}
+
+main {
+    flex: 75%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+@media screen and (max-width: 700px) {
+    .side-nav, .main {
+        flex-direction: column;
+    }
+}

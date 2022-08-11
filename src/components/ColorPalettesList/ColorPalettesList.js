@@ -16,12 +16,12 @@ const ColorPaletteList = () => {
         <>
             {colorPalettes.length > 0
                 ? (
-                    <ul className="other-pets-list">
+                    <ul className="color-palette-list">
                         {colorPalettes.map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)}
                         {/* {colorPalettes.filter().map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)} */}
                     </ul>
                 ) 
-                : <p className="no-pets">No Color Palettes in database!</p>
+                : <p className="no-palettes">No Color Palettes in database!</p>
             }
         </>
     );

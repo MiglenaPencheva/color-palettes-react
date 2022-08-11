@@ -1,7 +1,25 @@
-@import 'typography.css';
-@import 'forms.css';
-@import 'navigation.css';
-@import 'notifications.css';
-@import 'all.css';
-@import 'colorPicker.css';
-@import 'create.css';
+@import './01-settings/settings-typography.css';
+@import './01-settings/settings-colors.css';
+
+@import './02-elements/elements-body.css';
+@import './02-elements/elements-button.css';
+@import './02-elements/elements-forms.css';
+@import './02-elements/elements-input.css';
+@import './02-elements/elements-li.css';
+@import './02-elements/elements-links.css';
+
+@import './03-components/header.css';
+@import './03-components/colorPicker.css';
+@import './03-components/create.css';
+@import './03-components/footer.css';
+@import './03-components/gallery.css';
+@import './03-components/details.css';
+@import './03-components/colorPaletteCard.css';
+/* @import './03-components/navigation.css'; */
+@import './03-components/notifications.css';
+
+
+
+
+/* @import 'forms.css'; */
+/* @import 'all.css'; */

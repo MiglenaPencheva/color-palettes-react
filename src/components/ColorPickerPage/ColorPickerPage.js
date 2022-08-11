@@ -10,7 +10,7 @@ const ColorPickerPage = () => {
     const [imageObj, setImageObj] = useState({});
     const [src, setSrc] = useState('');
     const [data, setData] = useState([]);
-    const [pickedColor, setPickedColor] = useState('rgb(0, 0, 0)');
+    const [pickedColor, setPickedColor] = useState('#608d9e');
     const [direction, setDirection] = useState('horizontal');
 
     const onFileUpload = (e) => {
@@ -178,7 +178,6 @@ const ColorPickerPage = () => {
         const el = document.getElementById('canvasSection');
         const canvas = await html2canvas(el);
         const urlToSave = canvas.toDataURL('image/png', 1.0);
-        console.log(urlToSave);
         return urlToSave;
         
         // const downloadImage = (blob) => {

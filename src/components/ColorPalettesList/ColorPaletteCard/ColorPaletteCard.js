@@ -4,12 +4,23 @@ const ColorPaletteCard = ({
     colorPalette
 }) => {
     return (
-        <li className="otherPet">
-            <h3>{colorPalette.title}</h3>
-            <p>Category: {colorPalette.category}</p>
-            <p className="img"><img src={colorPalette.imageFile} alt="color palette" /></p>
-            <Link className="button" to={`/details/${colorPalette._id}`}>Details</Link>
-        </li>
+        <li className="color-palette-card">
+
+            <Link className="color-palette-card__link" to={`/details/${colorPalette._id}`}></Link>
+            
+            <img className="color-palette-card__image"
+                src={colorPalette.imageFile}
+                alt="color palette" />
+            
+            <h3 className="color-palette-card__title">{colorPalette.title}</h3>
+
+            <p className="color-palette-card__category">
+                Category: <Link to={'/gallery/{category}'}>{colorPalette.category}</Link>
+            </p>
+
+            
+
+        </li >
     );
 };
 

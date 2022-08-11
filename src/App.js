@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
 import Header from './components/Header/Header';
-import Dashboard from './components/Dashboard/Dashboard';
+import Gallery from './components/Gallery/Gallery';
 import Login from './components/Login/Login';
 import Logout from './components/Logout/Logout';
 import Register from './components/Register/Register';
@@ -17,12 +17,14 @@ import SavePalette from './components/SavePalette/SavePalette';
 function App() {
     return (
         <AuthProvider >
-            <div id="container">
-                <Header />
+            <div id="app-container">
+                {/* <Header /> */}
+
+                <nav></nav>
 
                 <main id="site-content">
                     <Routes>
-                        <Route path="/dashboard/*" element={<Dashboard />} />
+                        <Route path="/gallery" element={<Gallery />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/logout" element={<Logout />} />
                         <Route path="/register" element={<Register />} />
@@ -36,9 +38,9 @@ function App() {
                     </Routes>
                 </main>
 
-                <footer id="site-footer">
+                {/* <footer id="site-footer">
                     <p>@ColorPalettes</p>
-                </footer>
+                </footer> */}
             </div>
         </AuthProvider>
     );

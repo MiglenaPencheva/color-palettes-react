@@ -29,6 +29,10 @@ input[type="file"] {
 
 #pickerContainer {
     margin: 0 auto;
+    position: static;
+    top: 0;
+    left: 24vh;
+    /* width: calc(80%); */
     display: flex;
     justify-content: center;
     width: 90vw;
@@ -44,7 +48,7 @@ input[type="file"] {
 
 #myCanvas {
     border-radius: 10px;
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid var(--teal-black);
 }
 
 #colors {
@@ -62,7 +66,7 @@ input[type="file"] {
 }
 .placeholder {
     background-color: #edf2f7;
-    border: 2px dashed #cbd5e0;
+    border: 2px dashed var(--teal-dark);
 }
 
 .color-box {
@@ -80,12 +84,10 @@ input[type="file"] {
     /* background-color: attr('data-color'); */
 }
 .over {
-    border: 3px dotted #666;
+    border: 3px dotted var(--teal-grey);
 }
 .close-button {
-    padding: 5px;
-    width: 20px;
-    height: 20px;
+    padding: 5px 10px;
     display: none;
     justify-self: end;
     align-self: flex-end;
@@ -94,15 +96,13 @@ input[type="file"] {
     background-color: transparent;
     text-align: center;
     justify-content: center;
-    color: rgb(0, 0, 0);
-    font-size: 0.8rem;
-    font-weight: bold;
-    font-family: 'Syncopate';
-    text-shadow: 1px 1px 1px rgb(255, 255, 255);
+    color: var(--yellow-white);
+    font-size: 1rem;
+    text-shadow: 1px 1px 1px var(--teal-black);
 }
 .close-button:hover {
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 .info {
@@ -110,11 +110,10 @@ input[type="file"] {
     padding: 5px;
     justify-self: start;
     align-self: flex-start;
-    color: rgb(0, 0, 0);
+    color: var(--yellow-white);
     font-size: 1rem;
-    font-weight: bold;
     font-style: italic;
-    text-shadow: 1px 1px 1px rgb(255, 255, 255);
+    text-shadow: 1px 1px 1px var(--teal-black);
 }
 .info:hover {
     cursor: pointer;
@@ -129,7 +128,7 @@ input[type="file"] {
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    gap: 0.5rem;
+    gap: 0.2rem;
 }
 .instructions {
     width: 90%;
@@ -146,6 +145,7 @@ input[type="file"] {
     font-size: 0.5rem;
 }
 .buttons {
+    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 0.3rem;

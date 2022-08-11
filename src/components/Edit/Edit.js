@@ -35,7 +35,7 @@ const Edit = () => {
 
             await colorPaletteService.update(colorPaletteId, data, user.accessToken);
             hideError();
-            navigate('/dashboard');
+            navigate('/gallery');
 
         } catch (error) {
             showError(error.message);
