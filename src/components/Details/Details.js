@@ -55,8 +55,8 @@ const Details = () => {
 
     const ownerButtons = (
         <>
-            <Link className="details__buttons" to={`/edit/${colorPalette._id}`}>Edit</Link>
-            <Link className="details__buttons" to="/" onClick={deleteClickHandler}>Delete</Link>
+            <Link className="button details__info--buttons-edit" to={`/edit/${colorPalette._id}`}>Edit  </Link>
+            <button className="button details__info--buttons-delete" onClick={deleteClickHandler}>Delete</button>
         </>
     );
 
@@ -66,15 +66,24 @@ const Details = () => {
     return (
         <>
             <ConfirmDialog show={showDeleteDialog} onClose={() => setShowDeleteDialog(false)} onSave={deleteHandler} />
+            
             <section id="details" className="details">
+                
                 <span className="details__image">
                     <img className="details__image--file" src={colorPalette.imageFile} alt="palette" />
                 </span>
 
                 <div className="details__info">
+
                     <h3 className="details__info--title">{colorPalette.title}</h3>
-                    <p className="details__info--category">Category: {colorPalette.category}</p>
-                    <p className="details__info--colors">Colors: {colors}</p>
+
+                    <p className="details__info--category">
+                        Category: <Link to={'/gallery/{category}'}>{colorPalette.category}</Link>
+                    </p>
+
+                    <p className="details__info--colors">
+                        Colors: {colors}
+                    </p>
 
                     <div className="details__info--buttons">
                         {user._id &&
@@ -84,9 +93,9 @@ const Details = () => {
                             )}
 
                         <div className="details__info--like">
-                            <img className="" src="/images/heart.png" alt="heart" />
                             <span id="total-likes">Likes: {likes}</span>
                         </div>
+
                     </div>
                 </div>
             </section>
