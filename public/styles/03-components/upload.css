@@ -98,6 +98,9 @@
     margin: 0 auto;
     width: fit-content;
 }
+.upload__submit-btn:hover {
+    border: none;
+}
 
 
 
