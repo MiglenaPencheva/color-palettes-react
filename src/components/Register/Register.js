@@ -26,7 +26,7 @@ const Register = () => {
             let authData = await authService.register(username, password);
             login(authData);
             hideError();
-            navigate('/dashboard');
+            navigate('/gallery');
 
         } catch (error) {
             showError(error.message);
@@ -34,29 +34,32 @@ const Register = () => {
     };
 
     return (
-        <section id="register-page" className="register">
+        <section id="register-page" className="register-page">
             <form id="register-form" action="" method="POST" onSubmit={registerSubmitHandler}>
-                <fieldset>
+                <fieldset className="register-fieldset">
                     <legend>Register Form</legend>
-                    <p className="field">
-                        <label htmlFor="username">Username</label>
-                        <span className="input">
-                            <input type="text" name="username" id="username" placeholder="Username" />
-                        </span>
-                    </p>
-                    <p className="field">
-                        <label htmlFor="password">Password</label>
-                        <span className="input">
-                            <input type="password" name="password" id="password" placeholder="Password" />
-                        </span>
-                    </p>
-                    <p className="field">
-                        <label htmlFor="rePassword">Repeat Password</label>
-                        <span className="input">
-                            <input type="password" name="rePassword" id="rePassword" placeholder="Repeat Password" />
-                        </span>
-                    </p>
-                    <input className="button submit" type="submit" value="Register" />
+
+                    <fieldset className="user__fieldset">
+                        <legend className="user__legend">Username</legend>
+                        <input type="text" name="username" id="username"
+                            className="user__input" />
+                    </fieldset>
+
+                    <fieldset className="user__fieldset">
+                        <legend className="user__legend">Password</legend>
+                        <input type="password" name="password" id="password"
+                            className="user__input" />
+                    </fieldset>
+
+                    <fieldset className="user__fieldset">
+                        <legend className="user__legend">Repeat Password</legend>
+                        <input type="password" name="rePassword" id="rePassword" 
+                            className="user__input" />
+                    </fieldset>
+
+                    <input className="button user__submit-btn" 
+                        type="submit" value="Register" />
+
                 </fieldset>
             </form>
         </section>
