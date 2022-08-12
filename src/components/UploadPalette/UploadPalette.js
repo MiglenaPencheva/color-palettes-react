@@ -91,7 +91,7 @@ const UploadPalette = () => {
                 onSubmit={onUploadSubmit}
                 encType="multipart/form-data"
                 method="POST">
-                <fieldset className="upload">
+                <fieldset className="upload-fieldset">
                     <legend>Upload color palette</legend>
 
                     <section className="upload__upload-file">

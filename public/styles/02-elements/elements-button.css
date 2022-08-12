@@ -19,5 +19,6 @@
     font-weight: bold;
     background: var(--vermilion-white);
     color: var(--teal-grey);
+    border: 2px solid var(--teal-grey);
 }
 
