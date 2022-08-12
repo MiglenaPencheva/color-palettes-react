@@ -28,6 +28,7 @@ export function getColorGroup(formData) {
     let green = formData.get('green');
     let purple = formData.get('purple');
     let brown = formData.get('brown');
+    let beige = formData.get('beige');
     let grey = formData.get('grey');
     let pink = formData.get('pink');
 
@@ -38,6 +39,7 @@ export function getColorGroup(formData) {
     if (green) { colorGroup.push('green'); }
     if (purple) { colorGroup.push('purple'); }
     if (brown) { colorGroup.push('brown'); }
+    if (beige) { colorGroup.push('beige'); }
     if (grey) { colorGroup.push('grey'); }
     if (pink) { colorGroup.push('pink'); }
 

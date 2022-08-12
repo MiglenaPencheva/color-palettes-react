@@ -31,7 +31,7 @@ const UploadPalette = () => {
         }
         let myImage = new Image();
         myImage.src = src;
-        myImage.className = 'image-preview';
+        myImage.className = 'upload__upload-file--image-preview';
         imagePreview.appendChild(myImage);
         setPreviewUrl(myImage.src);
     }
@@ -46,7 +46,7 @@ const UploadPalette = () => {
     //         });
     // };
 
-    const onCreateSubmit = async (e) => {
+    const onUploadSubmit = async (e) => {
         e.preventDefault();
 
         try {
@@ -86,77 +86,71 @@ const UploadPalette = () => {
     };
 
     return (
-        <section id="create-page" className="create">
-            <form id="create-form" 
-                onSubmit={onCreateSubmit}
+        <section id="upload-page" className="upload-page">
+            <form id="upload-form"
+                onSubmit={onUploadSubmit}
                 encType="multipart/form-data"
                 method="POST">
-                <fieldset>
+                <fieldset className="upload">
                     <legend>Upload color palette</legend>
 
+                    <section className="upload__upload-file">
+                        {/* <label htmlFor="image">Image</label> */}
+                        {/* <section className="upload-section"> */}
+                        <label className="button upload__upload-file--input">
+                            <input type="file"
+                                name="imageFile"
+                                id="fileInput"
+                                onChange={onFileUpload}
+                                accept="image/jpeg, image/png, image/jpg"
+                            />
+                            Upload file
+                        </label>
 
-                    <section className="field ">
-                        <label htmlFor="image">Image</label>
-
-                        <section className="upload-section">
-                            <label className="button upload-file-input">
-                                <input type="file"
-                                    name="imageFile"
-                                    id="fileInput"
-                                    onChange={onFileUpload}
-                                    accept="image/jpeg, image/png, image/jpg"
-                                />
-                                Upload file
-                            </label>
-
-                            {/* <span className="input link">
-                                <input type="text"
-                                    name="imageUrl"
-                                    id="imageUrl"
-                                    placeholder="Enter file link"
-                                    onChange={onLinkUpload} />
+                        {/* <span className="input link">
+                                <input type="text" name="imageUrl" id="imageUrl" 
+                                placeholder="Enter file link" onChange={onLinkUpload} />
                             </span> */}
 
-                            <span id="imagePreview"></span>
-                        </section>
-
-
+                        <span id="imagePreview" className="upload__upload-file--image-preview"></span>
+                        {/* </section> */}
                     </section>
 
-                    <p className="field">
-                        <label htmlFor="title">Title</label>
+                    <section className="upload__title">
+                        <label htmlFor="title" className="upload__title--label">Title</label>
                         <span className="input">
-                            <textarea maxLength="100" 
-                                name="title" 
-                                id="title" 
+                            <textarea className="upload__title--textarea"
+                                maxLength="100"
+                                name="title"
+                                id="title"
+                                cols="30"
                                 // onChange={e => setTitle(e.target.value)}
                                 placeholder="Title should be less than 100 characters" />
                         </span>
-                    </p>
-                    <p className="field">
+                    </section>
+
+                    <section className="upload__category">
                         <label htmlFor="type">Category</label>
-                        <span className="input" >
-                            <select id="type"  
-                                name="category" 
-                                // onChange={e => setCategory(e.target.value)}
-                                className="select"> 
-                                    <option value="Choose category">Choose category</option>
-                                    <option value="landscape">Landscape</option>
-                                    <option value="sea">Sea</option>
-                                    <option value="sky">Sky</option>
-                                    <option value="plants">Plants</option>
-                                    <option value="animals">Animals</option>
-                                    <option value="foodAndDrinks">Food & Drinks</option>
-                                    <option value="others">Others</option>
-                            </select>
-                        </span>
-                    </p>
-                    <section className="field">
-                        <label htmlFor="colorGroup">Color group</label>
-                        <span className="checkbox">
-                            <span className="checkbox">
+                        <select id="type" name="category"
+                            // onChange={e => setCategory(e.target.value)}
+                            className="upload__category--select">
+                            <option value="Choose category">Choose category</option>
+                            <option value="landscape">Landscape</option>
+                            <option value="sea">Sea</option>
+                            <option value="sky">Sky</option>
+                            <option value="plants">Plants</option>
+                            <option value="animals">Animals</option>
+                            <option value="foodAndDrinks">Food & Drinks</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </section>
+
+                    <section className="upload__colors">
+                        <label htmlFor="colorGroup">Colors</label>
+                        <span className="upload__colors--checkbox">
+                            <span>
                                 <input type="checkbox" id="red" name="red" />
-                                <label htmlFor="red">red</label>
+                                <label htmlFor="red" className="upload__colors--checkbox-label">red</label>
                                 <br />
                                 <input type="checkbox" id="yellow" name="yellow" />
                                 <label htmlFor="yellow">yellow</label>
@@ -164,7 +158,7 @@ const UploadPalette = () => {
                                 <input type="checkbox" id="blue" name="blue" />
                                 <label htmlFor="blue">blue</label>
                             </span>
-                            <span className="checkbox">
+                            <span>
                                 <input type="checkbox" id="orange" name="orange" />
                                 <label htmlFor="orange">orange</label>
                                 <br />
@@ -174,10 +168,14 @@ const UploadPalette = () => {
                                 <input type="checkbox" id="purple" name="purple" />
                                 <label htmlFor="purple">purple</label>
                             </span>
-                            <span className="checkbox">
+                            <span>
                                 <input type="checkbox" id="brown" name="brown" />
                                 <label htmlFor="brown">brown</label>
                                 <br />
+                                <input type="checkbox" id="beige" name="beige" />
+                                <label htmlFor="beige">beige</label>  
+                            </span>
+                            <span>
                                 <input type="checkbox" id="grey" name="grey" />
                                 <label htmlFor="grey">grey</label>
                                 <br />
@@ -186,8 +184,9 @@ const UploadPalette = () => {
                             </span>
                         </span>
                     </section>
-                    <input className="button submit" 
-                        type="submit" 
+
+                    <input className="button upload__submit-btn"
+                        type="submit"
                         value="Upload Color Palette" />
                 </fieldset>
             </form>

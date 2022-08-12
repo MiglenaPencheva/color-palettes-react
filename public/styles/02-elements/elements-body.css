@@ -15,19 +15,20 @@ body {
 }
 
 .side-nav {
-    flex: 25%;
+    /* flex: 25%; */
     background-color: #f1f1f1;
     padding: 20px;
 }
 
 main {
-    flex: 75%;
+    /* flex: 75%; */
     position: relative;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    justify-content: center;
+    align-content: center;
 }
 
 @media screen and (max-width: 700px) {

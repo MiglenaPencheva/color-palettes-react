@@ -4,20 +4,20 @@
     padding: 0.6rem 1rem;
     border-radius: 0.4rem;
     text-decoration: none;
-    font-weight: bold;
     background: var(--teal-grey);
     color: var(--vermilion-white);
     border: none;
     font-size: 1rem;
     cursor: pointer;
     text-align: center;
-    transition-duration: 0.3s;
+    transition-duration: 0.1s;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .button:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    background: var(--teal);
-    color: var(--vermilion-grey-white);
+    font-weight: bold;
+    background: var(--vermilion-white);
+    color: var(--teal-grey);
 }
 
