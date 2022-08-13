@@ -29,10 +29,7 @@ input[type="file"] {
 
 #pickerContainer {
     margin: 0 auto;
-    position: static;
-    top: 0;
-    left: 24vh;
-    /* width: calc(80%); */
+    position: relative;
     display: flex;
     justify-content: center;
     width: 90vw;
@@ -42,13 +39,15 @@ input[type="file"] {
     max-width: 800px;
     display: flex;
     flex-wrap: wrap;
-    /* flex-direction: row; */
     gap: 3px;
 }
 
 #myCanvas {
     border-radius: 10px;
     border: 1px solid var(--teal-black);
+}
+#canvasImage {
+    object-fit: cover;
 }
 
 #colors {

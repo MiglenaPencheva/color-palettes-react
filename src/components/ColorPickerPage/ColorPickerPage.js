@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 
 // import { useAuthContext } from '../../contexts/AuthContext';
@@ -7,11 +8,13 @@ import { hideError, showError } from '../../helpers/notifications';
 
 const ColorPickerPage = () => {
     // const { user } = useAuthContext();
-    const [imageObj, setImageObj] = useState({});
+    // const [imageObj, setImageObj] = useState({});
     const [src, setSrc] = useState('');
     const [data, setData] = useState([]);
     const [pickedColor, setPickedColor] = useState('#608d9e');
     const [direction, setDirection] = useState('horizontal');
+    const [urlToSave, setUrlToSave] = useState('');
+
 
     const onFileUpload = (e) => {
         // alert -> Do you want to save your work?
@@ -21,7 +24,6 @@ const ColorPickerPage = () => {
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);  // set src to blob url
         setSrc(src);
-        setImageObj({ src });
 
         const img = document.getElementById('image');
 
@@ -125,9 +127,49 @@ const ColorPickerPage = () => {
         }
     };
 
+    const exportPalette = async () => {
+        document.getElementById('canvasImage').style.display = 'none';
+        const el = document.getElementById('canvasSection');
+        const imageFileName = 'creation_' + (Math.random() * 9999 | 0);
+        const canvas = await html2canvas(el);
+        const imageSrc = canvas.toDataURL('image/png', 1.0);
+        
+        const downloadImage = (blob, fileName) => {
+            const fakeLink = document.createElement('a');
+            fakeLink.style = 'display: none';
+            fakeLink.download = fileName;
+            fakeLink.href = blob;
+            document.body.appendChild(fakeLink);
+            fakeLink.click();
+            document.body.removeChild(fakeLink);
+            fakeLink.remove();
+        };
+        downloadImage(imageSrc, imageFileName);
+    };
+
+    // const saveAndUpload = async () => {
+    //     const el = document.getElementById('canvasSection');
+    //     const imageFileName = 'creation_' + (Math.random() * 9999 | 0);
+    //     const canvas = await html2canvas(el);
+    //     const imageSrc = canvas.toDataURL('image/png', 1.0);
+    //     const downloadImage = (blob, fileName) => {
+    //         const fakeLink = document.createElement('a');
+    //         fakeLink.style = 'display: none';
+    //         fakeLink.download = fileName;
+    //         fakeLink.href = blob;
+    //         document.body.appendChild(fakeLink);
+    //         fakeLink.click();
+    //         document.body.removeChild(fakeLink);
+    //         fakeLink.remove();
+    //     };
+    //     downloadImage(imageSrc, imageFileName);
+    //     console.log(imageSrc);
+    //     // setUrlToSave(imageToSave);
+    // };
+
     const exportScheme = async (e) => {
         const el = document.getElementById('colors');
-        const imageFileName = 'myNewColorPalette';
+        const imageFileName = 'scheme_' + (Math.random() * 9999 | 0);
         const canvas = await html2canvas(el);
         const image = canvas.toDataURL('image/png', 1.0);
         const downloadImage = (blob, fileName) => {
@@ -143,56 +185,6 @@ const ColorPickerPage = () => {
         downloadImage(image, imageFileName);
     };
 
-    const saveAndDownloadPalette = () => {
-        const a = document.createElement('a');
-        document.body.appendChild(a);
-        const canvas = document.getElementById('myCanvas');
-        // png:  a.href = canvas.toDataURL(); a.download = 'canvas-image.png';
-        // jpeg:
-        a.href = canvas.toDataURL('image/jpeg', 1.0);
-        a.download = 'canvas-image.jpeg';
-        a.click();
-        document.body.removeChild(a);
-    };
-
-    const exportPalette = async () => {
-        const el = document.getElementById('canvasSection');
-        const imageFileName = 'myNewColorPalette';
-        const canvas = await html2canvas(el);
-        const image = canvas.toDataURL('image/png', 1.0);
-        const downloadImage = (blob, fileName) => {
-            const fakeLink = document.createElement('a');
-            fakeLink.style = 'display: none';
-            fakeLink.download = fileName;
-            fakeLink.href = blob;
-            document.body.appendChild(fakeLink);
-            fakeLink.click();
-            document.body.removeChild(fakeLink);
-            fakeLink.remove();
-        };
-        downloadImage(image, imageFileName);
-        console.log(image);
-    };
-
-    const saveAndUpload = async () => {
-        const el = document.getElementById('canvasSection');
-        const canvas = await html2canvas(el);
-        const urlToSave = canvas.toDataURL('image/png', 1.0);
-        return urlToSave;
-        
-        // const downloadImage = (blob) => {
-        //     const fakeLink = document.createElement('a');
-        //     fakeLink.style = 'display: none';
-        //     // fakeLink.download = fileName;
-        //     fakeLink.href = blob;
-        //     document.body.appendChild(fakeLink);
-        //     console.log(fakeLink.href);
-        //     fakeLink.click();
-        //     document.body.removeChild(fakeLink);
-        //     fakeLink.remove();
-        // };
-        // downloadImage(image);
-    };
 
     return (
         <>
@@ -239,9 +231,10 @@ const ColorPickerPage = () => {
                         style={{ backgroundColor: `${pickedColor}` }}>
                     </span>
                     <section className="buttons">
-                        <button className="button save-color-palette" onClick={saveAndUpload}>Save palette</button>
+                        <Link to={'/save'}>
+                            {/* <button className="button save-color-palette" onClick={saveAndUpload}>Save palette</button> */}
+                        </Link>
                         <button className="button save-color-palette" onClick={exportPalette}>Export palette</button>
-                        <button className="button save-color-palette" onClick={saveAndDownloadPalette}>Download and save</button>
                         <button className="button save-color-palette" onClick={exportScheme}>Export scheme</button>
                     </section>
                 </aside>
