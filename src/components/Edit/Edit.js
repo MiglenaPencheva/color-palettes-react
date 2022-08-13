@@ -11,11 +11,13 @@ const Edit = () => {
     const { colorPaletteId } = useParams();
     const { user } = useAuthContext();
     const [colorPalette, setColorPalette] = useState({});
+    const [src, setSrc] = useState('');
 
     useEffect(() => {
         colorPaletteService.getOne(colorPaletteId)
             .then(result => {
                 setColorPalette(result);
+                setSrc(result.imageFile);
             });
     }, [colorPaletteId]);
 
@@ -28,14 +30,13 @@ const Edit = () => {
             let title = formData.get('title');
             let category = formData.get('category');
             let colors = getColorGroup(formData).join(', ');
-
-            console.log(title, category, colors);
-
+ 
             let data = { title, category, colors };
 
             await colorPaletteService.update(colorPaletteId, data, user.accessToken);
+            
             hideError();
-            navigate('/gallery');
+            navigate(`/details/${colorPalette._id}`);
 
         } catch (error) {
             showError(error.message);
@@ -43,27 +44,35 @@ const Edit = () => {
     };
 
     return (
-        <section id="edit-page" className="edit">
-            <form id="edit-form" method="PUT" onSubmit={onUpdateSubmit}>
-                <fieldset>
+        <section id="edit-page" className="upload-page">
+            <form id="edit-form" 
+                onSubmit={onUpdateSubmit}
+                encType="multipart/form-data" 
+                method="PUT">
+                <fieldset className="upload-fieldset">
                     <legend>Update color palette</legend>
-                    <span id="imagePreview">
-                        <img src="" alt="..." />
-                    </span>
-                    <p className="field">
-                        <label htmlFor="title">Title</label>
-                        <span className="input">
-                            <textarea maxLength="100" 
-                                name="title" 
-                                id="title" 
-                                placeholder="Title should be less than 100 characters" 
-                                defaultValue={colorPalette.title} />
+                    
+                    <section className="upload__upload-file">
+                        <span id="imagePreview" className="upload__upload-file--image-preview">
+                            <img src={src} alt="preview of file" />
                         </span>
-                    </p>
-                    <p className="field">
-                        <label htmlFor="category">Category</label>
+                    </section>    
+
+                    <section className="upload__title">
+                        <label htmlFor="title" className="upload__title--label">Title</label>
                         <span className="input">
-                            <select id="type" name="category" className="select">
+                        <textarea className="upload__title--textarea"
+                            maxLength="100"
+                            name="title"
+                            id="title"
+                            cols="30" 
+                            defaultValue={colorPalette.title} />
+                        </span>
+                    </section>
+
+                    <section className="upload__category">
+                        <label htmlFor="type">Category</label>
+                            <select id="type" name="category" className="upload__category--select">
                                 <option value="Choose category">Choose category</option>
                                 <option value="landscape">Landscape</option>
                                 <option value="sea">Sea</option>
@@ -73,12 +82,12 @@ const Edit = () => {
                                 <option value="foodAndDrinks">Food & Drinks</option>
                                 <option value="others">Others</option>
                             </select>
-                        </span>
-                    </p>
-                    <section className="field">
+                    </section>
+
+                    <section className="upload__colors">
                         <label htmlFor="colorGroup">Color group</label>
-                        <span className="checkbox">
-                            <span className="checkbox">
+                        <span className="upload__colors--checkbox">
+                            <span>
                                 <input type="checkbox" id="red" name="red" />
                                 <label htmlFor="red">red</label>
                                 <br />
@@ -88,7 +97,7 @@ const Edit = () => {
                                 <input type="checkbox" id="blue" name="blue" />
                                 <label htmlFor="blue">blue</label>
                             </span>
-                            <span className="checkbox">
+                            <span>
                                 <input type="checkbox" id="orange" name="orange" />
                                 <label htmlFor="orange">orange</label>
                                 <br />
@@ -98,10 +107,14 @@ const Edit = () => {
                                 <input type="checkbox" id="purple" name="purple" />
                                 <label htmlFor="purple">purple</label>
                             </span>
-                            <span className="checkbox">
+                            <span>
                                 <input type="checkbox" id="brown" name="brown" />
                                 <label htmlFor="brown">brown</label>
                                 <br />
+                                <input type="checkbox" id="beige" name="beige" />
+                                <label htmlFor="beige">beige</label>  
+                            </span>
+                            <span>
                                 <input type="checkbox" id="grey" name="grey" />
                                 <label htmlFor="grey">grey</label>
                                 <br />
@@ -110,7 +123,9 @@ const Edit = () => {
                             </span>
                         </span>
                     </section>
-                <input className="button submit" type="submit" value="Save" />
+
+                <input className="button upload__submit-btn" 
+                    type="submit" value="Save" />
             </fieldset>
         </form>
         </section >
