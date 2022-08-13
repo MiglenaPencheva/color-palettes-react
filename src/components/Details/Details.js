@@ -55,8 +55,12 @@ const Details = () => {
 
     const ownerButtons = (
         <>
-            <Link className="button details__info--buttons-edit" to={`/edit/${colorPalette._id}`}>Edit</Link>
-            <button className="button details__info--buttons-delete" onClick={deleteClickHandler}>Delete</button>
+            <Link to={`/edit/${colorPalette._id}`}>
+                <button className="button details__info--buttons-edit">Edit</button>
+            </Link>
+            <button className="button details__info--buttons-delete" 
+                onClick={deleteClickHandler}>Delete
+            </button>
         </>
     );
 

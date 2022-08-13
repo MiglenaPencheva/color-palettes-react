@@ -6,3 +6,7 @@ a {
 a:hover {
     font-weight: 600;
 }
+
+a:visited {
+    color: var(--teal-grey);
+}
