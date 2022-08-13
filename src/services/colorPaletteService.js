@@ -46,12 +46,9 @@ export const create = async (data, token) => {
     }
     let response = await fetch(`${baseUrl}/color-palettes`, {
         method: 'POST',
-        headers: {
-        // 'Content-Type': 'application/json',
-        // 'Content-Type': 'multipart/form-data',
-        'x-authorization': token
+        headers: { 
+            'x-authorization': token
         },
-        // body: JSON.stringify(data)
         body: data
     });
 

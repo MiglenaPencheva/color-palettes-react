@@ -51,28 +51,14 @@ const UploadPalette = () => {
 
         try {
             const formData = new FormData(e.currentTarget);
-
-            // let title = formData.get('title');
-            // let category = formData.get('category');
-            // let colorGroup = getColorGroup(formData);
-
-            // const formData = new FormData();
-            // formData.append('title', title);
-            // formData.append('category', category);
-            // formData.append('imageFile', imageFile);
-
+            
             let colors = getColorGroup(formData);
-            console.log(colors);
             formData.append('colors', colors);
 
-            for (const key of formData.keys()) {
-                console.log(key, formData.get(key));
-            }
-
-            // let data = {};
             // for (const key of formData.keys()) {
-            //     data[key] = formData.get(key);
+            //     console.log(key, formData.get(key));
             // }
+            
             // let data = validate(title, category, colorGroup, imageFile);
 
             await colorPaletteService.create(formData, user.accessToken);
@@ -132,8 +118,8 @@ const UploadPalette = () => {
                     <section className="upload__category">
                         <label htmlFor="type">Category</label>
                         <select id="type" name="category"
-                            // onChange={e => setCategory(e.target.value)}
-                            className="upload__category--select">
+                                // onChange={e => setCategory(e.target.value)}
+                                className="upload__category--select">
                             <option value="Choose category">Choose category</option>
                             <option value="landscape">Landscape</option>
                             <option value="sea">Sea</option>
@@ -150,7 +136,7 @@ const UploadPalette = () => {
                         <span className="upload__colors--checkbox">
                             <span>
                                 <input type="checkbox" id="red" name="red" />
-                                <label htmlFor="red" className="upload__colors--checkbox-label">red</label>
+                                <label htmlFor="red">red</label>
                                 <br />
                                 <input type="checkbox" id="yellow" name="yellow" />
                                 <label htmlFor="yellow">yellow</label>
