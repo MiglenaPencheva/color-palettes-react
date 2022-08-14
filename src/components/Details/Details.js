@@ -79,7 +79,7 @@ const Details = () => {
 
                 <div className="details__info">
 
-                    <h3 className="details__info--title">{colorPalette.title}</h3>
+                    <h5 className="details__info--title">{colorPalette.title}</h5>
 
                     <p className="details__info--category">
                         Category: <Link to={'/gallery/{category}'}>{colorPalette.category}</Link>

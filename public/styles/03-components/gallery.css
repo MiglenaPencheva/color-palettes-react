@@ -48,6 +48,7 @@
 .color-palette-card__title {
     margin: 0;
     padding: 1rem 0;
+    font-weight: 500;
 }
 
 .color-palette-card__category {

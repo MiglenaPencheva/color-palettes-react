@@ -12,7 +12,7 @@ const ColorPaletteCard = ({
                 src={colorPalette.imageFile}
                 alt="color palette" />
             
-            <h3 className="color-palette-card__title">{colorPalette.title}</h3>
+            <p className="color-palette-card__title">{colorPalette.title}</p>
 
             <p className="color-palette-card__category">
                 Category: <Link to={'/gallery/{category}'}>{colorPalette.category}</Link>
