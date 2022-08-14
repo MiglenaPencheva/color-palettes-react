@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
 import Header from './components/Header/Header';
+import Home from './components/Home/Home';
 import Gallery from './components/Gallery/Gallery';
 import Login from './components/Login/Login';
 import Logout from './components/Logout/Logout';
@@ -24,6 +25,7 @@ function App() {
 
                 <main id="site-content">
                     <Routes>
+                        <Route path="/home" element={<Home />} />
                         <Route path="/gallery" element={<Gallery />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/logout" element={<Logout />} />

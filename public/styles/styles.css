@@ -7,20 +7,15 @@
 @import './02-elements/elements-li.css';
 @import './02-elements/elements-links.css';
 
+@import './03-components/home.css';
 @import './03-components/header.css';
-@import './03-components/colorPicker.css';
+/* @import './03-components/navigation.css'; */
+@import './03-components/gallery.css';
+@import './03-components/colorPaletteCard.css';
+@import './03-components/details.css';
 @import './03-components/upload.css';
 @import './03-components/login.css';
 @import './03-components/register.css';
+@import './03-components/colorPicker.css';
 @import './03-components/footer.css';
-@import './03-components/gallery.css';
-@import './03-components/details.css';
-@import './03-components/colorPaletteCard.css';
-/* @import './03-components/navigation.css'; */
 @import './03-components/notifications.css';
-
-
-
-
-/* @import 'forms.css'; */
-/* @import 'all.css'; */
