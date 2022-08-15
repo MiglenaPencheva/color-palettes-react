@@ -47,7 +47,6 @@ const Edit = () => {
         <section id="edit-page" className="upload-page">
             <form id="edit-form" 
                 onSubmit={onUpdateSubmit}
-                encType="multipart/form-data" 
                 method="PUT">
                 <fieldset className="upload-fieldset">
                     <legend>Update color palette</legend>

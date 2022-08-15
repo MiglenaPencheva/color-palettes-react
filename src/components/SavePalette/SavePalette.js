@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '../../contexts/AuthContext';
@@ -5,27 +6,32 @@ import * as colorPaletteService from '../../services/colorPaletteService';
 import { hideError, showError } from '../../helpers/notifications';
 import { validate, getColorGroup } from '../../helpers/prepareData';
 
-const SavePalette = () => {
+
+const SavePalette = ({
+    urlToSave
+}) => {
     const navigate = useNavigate();
     const { user } = useAuthContext();
+    // const [src, setSrc] = useState('');
+    // const [imageFile, setImageFile] = useState({});
+
+    // const file = {};
+    // const fileSrc = URL.createObjectURL(file);
+    // setSrc(fileSrc);
 
     const onSaveSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            let formData = new FormData(e.currentTarget);
+            const formData = new FormData(e.currentTarget);
 
-            let title = formData.get('title');
-            let category = formData.get('category');
-            let colorGroup = getColorGroup(formData);
-            let imageUrl = formData.get('imageUrl');
+            let colors = getColorGroup(formData);
+            formData.append('colors', colors);
 
-            let data = validate(title, category, colorGroup, imageUrl);
-            console.log(data);
+            await colorPaletteService.create(formData, user.accessToken);
 
-            // await colorPaletteService.create(data, user.accessToken);
             hideError();
-            navigate('/dashboard');
+            navigate('/gallery');
 
         } catch (error) {
             showError(error.message);
@@ -33,38 +39,55 @@ const SavePalette = () => {
     };
 
     return (
-        <section id="create-page" className="create">
-            <form id="create-form" onSubmit={onSaveSubmit} method="POST">
-                <fieldset>
+        <section id="save-page" className="upload-page">
+            <form id="save-form" 
+                onSubmit={onSaveSubmit}
+                encType="multipart/form-data"
+                method="POST">
+                <fieldset className="upload-fieldset">
                     <legend>Save color palette</legend>
-                    <img src="urlToSave" alt="imageToSave" />
-                    <p className="field">
-                        <label htmlFor="title">Title</label>
-                        <span className="input">
-                            <textarea maxLength="100" name="title" id="title" placeholder="Title should be less than 100 characters" />
+
+                    <section className="upload__upload-file">
+                        <span id="imagePreview" className="upload__upload-file--image-preview">
+                            <img src={urlToSave} alt="preview of file" />
                         </span>
-                    </p>
-                    <p className="field">
+                    </section>
+
+                    <section className="upload__title">
+                        <label htmlFor="title" className="upload__title--label">Title</label>
+                        <span className="input">
+                            <textarea className="upload__title--textarea"
+                                maxLength="100"
+                                name="title"
+                                id="title"
+                                cols="30"
+                                // onChange={e => setTitle(e.target.value)}
+                                placeholder="Title should be less than 100 characters" />
+                        </span>
+                    </section>
+
+                    <section className="upload__category">
                         <label htmlFor="type">Category</label>
-                        <span className="input">
-                            <select id="type" name="category" className="select">
-                                <option value="Choose category">Choose category</option>
-                                <option value="landscape">Landscape</option>
-                                <option value="sea">Sea</option>
-                                <option value="sky">Sky</option>
-                                <option value="plants">Plants</option>
-                                <option value="animals">Animals</option>
-                                <option value="foodAndDrinks">Food & Drinks</option>
-                                <option value="others">Others</option>
-                            </select>
-                        </span>
-                    </p>
-                    <section className="field">
-                        <label htmlFor="colorGroup">Color group</label>
-                        <span className="checkbox">
-                            <span className="checkbox">
+                        <select id="type" name="category"
+                            // onChange={e => setCategory(e.target.value)}
+                            className="upload__category--select">
+                            <option value="Choose category">Choose category</option>
+                            <option value="landscape">Landscape</option>
+                            <option value="sea">Sea</option>
+                            <option value="sky">Sky</option>
+                            <option value="plants">Plants</option>
+                            <option value="animals">Animals</option>
+                            <option value="foodAndDrinks">Food & Drinks</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </section>
+
+                    <section className="upload__colors">
+                        <label htmlFor="colorGroup">Colors</label>
+                        <span className="upload__colors--checkbox">
+                            <span>
                                 <input type="checkbox" id="red" name="red" />
-                                <label htmlFor="red">red</label>
+                                <label htmlFor="red" className="upload__colors--checkbox-label">red</label>
                                 <br />
                                 <input type="checkbox" id="yellow" name="yellow" />
                                 <label htmlFor="yellow">yellow</label>
@@ -72,7 +95,7 @@ const SavePalette = () => {
                                 <input type="checkbox" id="blue" name="blue" />
                                 <label htmlFor="blue">blue</label>
                             </span>
-                            <span className="checkbox">
+                            <span>
                                 <input type="checkbox" id="orange" name="orange" />
                                 <label htmlFor="orange">orange</label>
                                 <br />
@@ -82,10 +105,14 @@ const SavePalette = () => {
                                 <input type="checkbox" id="purple" name="purple" />
                                 <label htmlFor="purple">purple</label>
                             </span>
-                            <span className="checkbox">
+                            <span>
                                 <input type="checkbox" id="brown" name="brown" />
                                 <label htmlFor="brown">brown</label>
                                 <br />
+                                <input type="checkbox" id="beige" name="beige" />
+                                <label htmlFor="beige">beige</label>
+                            </span>
+                            <span>
                                 <input type="checkbox" id="grey" name="grey" />
                                 <label htmlFor="grey">grey</label>
                                 <br />
@@ -94,7 +121,10 @@ const SavePalette = () => {
                             </span>
                         </span>
                     </section>
-                    <input className="button submit" type="submit" value="Save Color Palette" />
+
+                    <input className="button upload__submit-btn"
+                        type="submit"
+                        value="Save Color Palette" />
                 </fieldset>
             </form>
         </section>

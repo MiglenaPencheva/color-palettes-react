@@ -29,10 +29,11 @@
     height: max-content;
 }
 
-.upload__upload-file--image-preview {
+.upload__upload-file--image-preview > img {
     margin-left: 0.2rem;
     max-height: 150px;
 }
+
 
 .upload__title {
     margin: 0 auto;

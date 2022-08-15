@@ -1,62 +1,62 @@
-body {
+/* body {
 	background: #FFF;
 	padding: 1rem;
-}
+} */
 
-form {
+/* form {
 	max-width: 30rem;
-}
+} */
 
-form, form fieldset, form legend, form label, form input, form textarea, form select {
+/* form, form fieldset, form legend, form label, form input, form textarea, form select {
 	display: block;
 	width: 100%;
 	border: none;
 	padding: 0.4rem;
-}
+} */
 
-form textarea {
+/* form textarea {
 	border: none;
 	background: transparent;
-}
+} */
 
-form fieldset, form legend {
+/* form fieldset, form legend {
 	border: 1px solid #666;
 	background: #F9F9F9;
 	border-radius: 0.3rem;
 	box-shadow: 0 0 1rem 0.1rem rgba(0, 0, 0, 0.1);
-}
+} */
 
-form fieldset {
+/* form fieldset {
 	padding: 1em 2em 2em 2em;
 	position: relative;
-}
+} */
 
-form legend {
+/* form legend {
 	width: 30%;
 	padding: 0.5rem 1rem;
 	left: -1px;
 	top: -1.4rem;
 	position: absolute;
-}
+} */
 
-form label {
+/* form label {
 	font-weight: bold;
-}
+} */
 
 
-.field .input {
+/* .field .input {
 	display: flex;
 	position: relative;
 	align-items: center;
 	border: 1px solid;
-}
+} */
 
-.field .input:after {
+/* .field .input:after {
 	display: block;
 	content: '';
-}
+} */
 
-.field .input input {
+/* .field .input input {
 	border: none;
 	flex: 1 1 auto;
 	padding: 0.4rem;
@@ -64,17 +64,17 @@ form label {
 	background: transparent;
 	z-index: 2;
 	order: 2;
-}
+} */
 
-.field .input .fas {
+/* .field .input .fas {
 	z-index: 2;
 	position: relative;
 	padding: 0 0 0 0.8rem;
 	font-size: 0.9em;
 	order: 1;
-}
+} */
 
-.field .input input+.actions {
+/* .field .input input+.actions {
 	display: block;
 	background: #FFF;
 	border: 1px solid #CCC;
@@ -85,9 +85,9 @@ form label {
 	right: 0;
 	bottom: 0;
 	z-index: 1;
-}
+} */
 
-.field .input input:focus {
+/* .field .input input:focus {
 	border-color: #090;
 }
 
@@ -103,9 +103,9 @@ form textarea {
 form textarea:focus {
 	outline: none;
 	border-color: #090;
-}
+} */
 
-.description {
+/* .description {
 	width: 17rem;
 	height: 10vh;
 	padding: 2rem;
@@ -131,4 +131,4 @@ form textarea:focus {
 .details span.likes {
 	display: flex;
     flex-direction: column;
-}
+} */

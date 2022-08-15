@@ -81,8 +81,6 @@ const UploadPalette = () => {
                     <legend>Upload color palette</legend>
 
                     <section className="upload__upload-file">
-                        {/* <label htmlFor="image">Image</label> */}
-                        {/* <section className="upload-section"> */}
                         <label className="button upload__upload-file--input">
                             <input type="file"
                                 name="imageFile"
@@ -99,7 +97,6 @@ const UploadPalette = () => {
                             </span> */}
 
                         <span id="imagePreview" className="upload__upload-file--image-preview"></span>
-                        {/* </section> */}
                     </section>
 
                     <section className="upload__title">
