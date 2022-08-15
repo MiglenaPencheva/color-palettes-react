@@ -6,18 +6,18 @@ const ConfirmDialog = ({
     onSave,
 }) => {
     return (
-        <Modal show={show} onHide={onClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Modal title</Modal.Title>
+        <Modal show={show} onHide={onClose} className="modal">
+            <Modal.Header>
+                <Modal.Title className="modal__title">Are you sure you want to delete this record?</Modal.Title>
             </Modal.Header>
 
-            <Modal.Body>
-                <p>Modal body text goes here.</p>
-            </Modal.Body>
+            {/* <Modal.Body>
+                <h6 className="modal__question">Delete this record?</h6>
+            </Modal.Body> */}
 
-            <Modal.Footer>
-                <Button variant="secondary" onClick={onClose}>Close</Button>
-                <Button variant="primary" onClick={onSave}>Save changes</Button>
+            <Modal.Footer className="modal__buttons">
+                <Button className="button" variant="secondary" onClick={onClose}>No, get back</Button>
+                <Button className="button" variant="primary" onClick={onSave}>Yes, delete it</Button>
             </Modal.Footer>
         </Modal>
     );
