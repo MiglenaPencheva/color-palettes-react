@@ -7,14 +7,12 @@ import * as pickerService from '../../services/pickerService';
 import { hideError, showError } from '../../helpers/notifications';
 
 const ColorPickerPage = () => {
+    const navigate = useNavigate();
     // const { user } = useAuthContext();
-    // const [imageObj, setImageObj] = useState({});
     const [src, setSrc] = useState('');
     const [data, setData] = useState([]);
     const [pickedColor, setPickedColor] = useState('#608d9e');
     const [direction, setDirection] = useState('horizontal');
-    const [urlToSave, setUrlToSave] = useState('');
-
 
     const onFileUpload = (e) => {
         // alert -> Do you want to save your work?
@@ -26,7 +24,6 @@ const ColorPickerPage = () => {
         setSrc(src);
 
         const img = document.getElementById('image');
-
         img.onload = (e) => {
             const canvas = document.getElementById('myCanvas');
             const colors = document.getElementById('colors');
@@ -127,13 +124,40 @@ const ColorPickerPage = () => {
         }
     };
 
+    const savePalette = async () => {
+        document.getElementById('canvasImage').style.display = 'none';
+
+        const el = document.getElementById('canvasSection');
+        const canvas = await html2canvas(el);
+        const png = canvas.toDataURL('image/png', 1.0);
+        console.log(png); // data:image/png;base64,iVBORw0KGgoAAA.....
+        
+        // let image = new Image();
+        // image.src = src;
+        // const imageFileName = 'creation_' + (Math.random() * 9999 | 0);
+        // image.download = imageFileName;
+        // const fakeLink = document.createElement('a');
+        // document.body.appendChild(fakeLink);
+
+        fetch(png)
+            .then(res => res.blob())
+            .then(blob => {
+                let src = URL.createObjectURL(blob);
+                console.log(src);
+                navigate('/save', { 
+                    replace: true,
+                    state: { src } 
+                });
+            });
+    };
+
     const exportPalette = async () => {
         document.getElementById('canvasImage').style.display = 'none';
         const el = document.getElementById('canvasSection');
         const imageFileName = 'creation_' + (Math.random() * 9999 | 0);
         const canvas = await html2canvas(el);
         const imageSrc = canvas.toDataURL('image/png', 1.0);
-        
+
         const downloadImage = (blob, fileName) => {
             const fakeLink = document.createElement('a');
             fakeLink.style = 'display: none';
@@ -146,26 +170,6 @@ const ColorPickerPage = () => {
         };
         downloadImage(imageSrc, imageFileName);
     };
-
-    // const saveAndUpload = async () => {
-    //     const el = document.getElementById('canvasSection');
-    //     const imageFileName = 'creation_' + (Math.random() * 9999 | 0);
-    //     const canvas = await html2canvas(el);
-    //     const imageSrc = canvas.toDataURL('image/png', 1.0);
-    //     const downloadImage = (blob, fileName) => {
-    //         const fakeLink = document.createElement('a');
-    //         fakeLink.style = 'display: none';
-    //         fakeLink.download = fileName;
-    //         fakeLink.href = blob;
-    //         document.body.appendChild(fakeLink);
-    //         fakeLink.click();
-    //         document.body.removeChild(fakeLink);
-    //         fakeLink.remove();
-    //     };
-    //     downloadImage(imageSrc, imageFileName);
-    //     console.log(imageSrc);
-    //     // setUrlToSave(imageToSave);
-    // };
 
     const exportScheme = async (e) => {
         const el = document.getElementById('colors');
@@ -184,7 +188,6 @@ const ColorPickerPage = () => {
         };
         downloadImage(image, imageFileName);
     };
-
 
     return (
         <>
@@ -231,10 +234,8 @@ const ColorPickerPage = () => {
                         style={{ backgroundColor: `${pickedColor}` }}>
                     </span>
                     <section className="buttons">
-                        <Link to={'/save'}>
-                            {/* <button className="button save-color-palette" onClick={saveAndUpload}>Save palette</button> */}
-                        </Link>
-                        <button className="button save-color-palette" onClick={exportPalette}>Export palette</button>
+                        <button className="button save-color-palette" onClick={savePalette}>Save palette to gallery</button>
+                        <button className="button save-color-palette" onClick={exportPalette}>Export without saving</button>
                         <button className="button save-color-palette" onClick={exportScheme}>Export scheme</button>
                     </section>
                 </aside>
@@ -245,3 +246,5 @@ const ColorPickerPage = () => {
 };
 
 export default ColorPickerPage;
+
+
