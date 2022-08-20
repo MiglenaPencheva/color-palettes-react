@@ -6,35 +6,30 @@ import * as colorPaletteService from '../../services/colorPaletteService';
 import { hideError, showError } from '../../helpers/notifications';
 import { validate, getColorGroup } from '../../helpers/prepareData';
 
+import UploadTitle from './common/UploadTitle';
+import UploadCategory from './common/UploadCategory';
+import UploadColors from './common/UploadColors';
+import UploadSubmitButton from './common/UploadSubmitButton';
+
 const UploadPalette = () => {
     const navigate = useNavigate();
-    const [previewUrl, setPreviewUrl] = useState('');
-    // const [title, setTitle] = useState('');
-    // const [category, setCategory] = useState('');
-    // const [colorGroup, setColorGroup] = useState('');
-    const [imageFile, setImageFile] = useState({});
-    // const [data, setData] = useState({});
     const { user } = useAuthContext();
 
     const onFileUpload = (e) => {
         const file = e.target.files[0];
-        console.log(file);
-        setImageFile(file);
         const src = URL.createObjectURL(file);
-        showImagePreview(src);
-    };
+        console.log(src);
 
-    function showImagePreview(src) {
         let imagePreview = document.getElementById('imagePreview');
         while (imagePreview.firstChild) {
             imagePreview.removeChild(imagePreview.firstChild);
         }
+
         let myImage = new Image();
         myImage.src = src;
         myImage.className = 'upload__upload-file--image-preview';
         imagePreview.appendChild(myImage);
-        setPreviewUrl(myImage.src);
-    }
+    };
 
     // const onLinkUpload = async (e) => {
     //     let imageUrl = e.target.value;
@@ -55,9 +50,9 @@ const UploadPalette = () => {
             let colors = getColorGroup(formData);
             formData.append('colors', colors);
 
-            // for (const key of formData.keys()) {
-            //     console.log(key, formData.get(key));
-            // }
+            for (const key of formData.keys()) {
+                console.log(key, formData.get(key));
+            }
             
             // let data = validate(title, category, colorGroup, imageFile);
 
@@ -99,78 +94,11 @@ const UploadPalette = () => {
                         <span id="imagePreview" className="upload__upload-file--image-preview"></span>
                     </section>
 
-                    <section className="upload__title">
-                        <label htmlFor="title" className="upload__title--label">Title</label>
-                        <span className="input">
-                            <textarea className="upload__title--textarea"
-                                maxLength="100"
-                                name="title"
-                                id="title"
-                                cols="30"
-                                // onChange={e => setTitle(e.target.value)}
-                                placeholder="Title should be less than 100 characters" />
-                        </span>
-                    </section>
+                    <UploadTitle />
+                    <UploadCategory />
+                    <UploadColors />
+                    <UploadSubmitButton />
 
-                    <section className="upload__category">
-                        <label htmlFor="type">Category</label>
-                        <select id="type" name="category"
-                                // onChange={e => setCategory(e.target.value)}
-                                className="upload__category--select">
-                            <option value="Choose category">Choose category</option>
-                            <option value="landscape">Landscape</option>
-                            <option value="sea">Sea</option>
-                            <option value="sky">Sky</option>
-                            <option value="plants">Plants</option>
-                            <option value="animals">Animals</option>
-                            <option value="foodAndDrinks">Food & Drinks</option>
-                            <option value="others">Others</option>
-                        </select>
-                    </section>
-
-                    <section className="upload__colors">
-                        <label htmlFor="colorGroup">Colors</label>
-                        <span className="upload__colors--checkbox">
-                            <span>
-                                <input type="checkbox" id="red" name="red" />
-                                <label htmlFor="red">red</label>
-                                <br />
-                                <input type="checkbox" id="yellow" name="yellow" />
-                                <label htmlFor="yellow">yellow</label>
-                                <br />
-                                <input type="checkbox" id="blue" name="blue" />
-                                <label htmlFor="blue">blue</label>
-                            </span>
-                            <span>
-                                <input type="checkbox" id="orange" name="orange" />
-                                <label htmlFor="orange">orange</label>
-                                <br />
-                                <input type="checkbox" id="green" name="green" />
-                                <label htmlFor="green">green</label>
-                                <br />
-                                <input type="checkbox" id="purple" name="purple" />
-                                <label htmlFor="purple">purple</label>
-                            </span>
-                            <span>
-                                <input type="checkbox" id="brown" name="brown" />
-                                <label htmlFor="brown">brown</label>
-                                <br />
-                                <input type="checkbox" id="beige" name="beige" />
-                                <label htmlFor="beige">beige</label>  
-                            </span>
-                            <span>
-                                <input type="checkbox" id="grey" name="grey" />
-                                <label htmlFor="grey">grey</label>
-                                <br />
-                                <input type="checkbox" id="pink" name="pink" />
-                                <label htmlFor="pink">pink</label>
-                            </span>
-                        </span>
-                    </section>
-
-                    <input className="button upload__submit-btn"
-                        type="submit"
-                        value="Upload Color Palette" />
                 </fieldset>
             </form>
         </section>
