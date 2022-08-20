@@ -10,10 +10,12 @@ import Register from './components/Register/Register';
 import MyColorPalettes from './components/MyColorPalettes/MyColorPalettes';
 import MyFavorites from './components/MyFavorites/MyFavorites';
 import UploadPalette from './components/UploadPalette/UploadPalette';
-import Edit from './components/Edit/Edit';
+import SavePalette from './components/UploadPalette/SavePalette';
 import Details from './components/Details/Details';
+import Edit from './components/Edit/Edit';
 import ColorPickerPage from './components/ColorPickerPage/ColorPickerPage';
-import SavePalette from './components/SavePalette/SavePalette';
+import CombinationsPage from './components/CombinationsPage/CombinationsPage';
+import ExploreColorPage from './components/ExploreColorPage/ExploreColorPage';
 
 function App() {
     return (
@@ -25,18 +27,24 @@ function App() {
 
                 <main id="site-content">
                     <Routes>
-                        <Route path="/home" element={<Home />} />
-                        <Route path="/gallery" element={<Gallery />} />
+                        <Route path="/" element={<Home />} />
+
                         <Route path="/login" element={<Login />} />
                         <Route path="/logout" element={<Logout />} />
                         <Route path="/register" element={<Register />} />
+
+                        <Route path="/gallery" element={<Gallery />} />
                         <Route path="/my-color-palettes" element={<MyColorPalettes />} />
                         <Route path="/my-favorites" element={<MyFavorites />} />
+                        {/* <Route path="/my-favorites" element={user ? <MyFavorites /> : navigate('/login')} /> */}
                         <Route path="/upload" element={<UploadPalette />} />
                         <Route path="/details/:colorPaletteId" element={<Details />} />
                         <Route path="/edit/:colorPaletteId" element={<Edit />} />
+
                         <Route path="/color-picker" element={<ColorPickerPage />} />
                         <Route path="/save" element={<SavePalette />} />
+                        <Route path="/color-wheel" element={<CombinationsPage />} />
+                        <Route path="/color-explore" element={<ExploreColorPage />} />
                     </Routes>
                 </main>
 
