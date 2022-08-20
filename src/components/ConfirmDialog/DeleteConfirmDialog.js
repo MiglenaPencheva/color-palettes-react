@@ -1,6 +1,6 @@
 import { Modal, Button } from 'react-bootstrap';
 
-const ConfirmDialog = ({
+const DeleteConfirmDialog = ({
     show,
     onClose,
     onSave,
@@ -23,4 +23,4 @@ const ConfirmDialog = ({
     );
 };
 
-export default ConfirmDialog;
+export default DeleteConfirmDialog;

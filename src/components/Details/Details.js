@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import * as colorPaletteService from '../../services/colorPaletteService';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { hideError, showError, showInfo } from '../../helpers/notifications';
-import ConfirmDialog from '../ConfirmDialog/ConfirmDialog';
+import DeleteConfirmDialog from '../ConfirmDialog/DeleteConfirmDialog';
 
 const Details = () => {
     const navigate = useNavigate();
@@ -69,7 +69,7 @@ const Details = () => {
 
     return (
         <>
-            <ConfirmDialog show={showDeleteDialog} onClose={() => setShowDeleteDialog(false)} onSave={deleteHandler} />
+            <DeleteConfirmDialog show={showDeleteDialog} onClose={() => setShowDeleteDialog(false)} onSave={deleteHandler} />
             
             <section id="details" className="details">
                 
