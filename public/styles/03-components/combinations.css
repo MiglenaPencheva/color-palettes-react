@@ -1,0 +1,79 @@
+.ryb {
+    margin: 0 auto;
+    max-width: 900px;
+}
+.ryb__header {
+    margin: 0 auto;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+}
+.strong:hover {
+    cursor: pointer;
+}
+
+.ryb__actions {
+    margin: 1rem 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.ryb__actions--wheel {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.ryb__actions--wheel:hover {
+    cursor: pointer;
+}
+.ryb__actions--wheel span {
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+#rybCanvas {
+    border:1px solid var(--teal-grey);
+    border-radius: 5px;
+}
+
+#rybImage {
+    margin: 0;
+    padding: 1rem;
+}
+
+.ryb__actions--settings {
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.ryb__actions--settings p {
+    padding: 0 0.5rem;
+}
+.ryb__actions--settings-sliders {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+.ryb__actions--settings-sliders label {
+    padding: 0.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-weight: 600;
+    border: 1px, solid, var(--teal-grey);
+
+}
+.ryb__actions--settings-sliders div {
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    font-size: 0.8rem;
+    font-style: italic;
+}
