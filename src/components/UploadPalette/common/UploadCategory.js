@@ -1,10 +1,9 @@
 const UploadCategory = () => {
     return (
-        <section className="upload__category">
+        <section className="select-container">
             <label htmlFor="type">Category</label>
             <select id="type" name="category"
-                // onChange={e => setCategory(e.target.value)}
-                className="upload__category--select">
+                className="select">
                 <option value="Choose category">Choose category</option>
                 <option value="landscape">Landscape</option>
                 <option value="sea">Sea</option>

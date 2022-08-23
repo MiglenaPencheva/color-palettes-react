@@ -4,14 +4,15 @@
 @import './02-elements/elements-body.css';
 @import './02-elements/elements-button.css';
 @import './02-elements/elements-input.css';
+@import './02-elements/elements-select.css';
 @import './02-elements/elements-li.css';
 @import './02-elements/elements-links.css';
+@import './02-elements/elements-slider.css';
 
 @import './03-components/home.css';
 @import './03-components/header.css';
 /* @import './03-components/navigation.css'; */
 @import './03-components/gallery.css';
-@import './03-components/colorPaletteCard.css';
 @import './03-components/details.css';
 @import './03-components/confirmDialog.css';
 @import './03-components/upload.css';

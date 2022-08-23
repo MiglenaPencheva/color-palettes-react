@@ -1,0 +1,20 @@
+.select-container {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+select {
+    padding: 0.4rem;
+    color: inherit;
+    background-color: white;
+    border: 1px solid var(--teal-grey);
+    border-radius: 4px;
+}
+
+select:hover {
+    border: 2px solid var(--teal-grey);
+}
+
