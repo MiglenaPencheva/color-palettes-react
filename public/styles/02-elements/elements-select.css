@@ -1,9 +1,11 @@
 .select-container {
-    margin: 0 auto;
-    width: 100%;
+    margin: 0;
+    padding: 0.5rem;
+    width: auto;
     display: flex;
     gap: 1rem;
     align-items: center;
+    justify-content: flex-start;
 }
 
 select {
@@ -15,6 +17,15 @@ select {
 }
 
 select:hover {
-    border: 2px solid var(--teal-grey);
+    cursor: pointer;
+    /* background-color: var(--vermilion-white); */
+}
+
+.select-container__label {
+    font-weight: 600;
+}
+
+.default-scheme {
+    color: gainsboro;
 }
 

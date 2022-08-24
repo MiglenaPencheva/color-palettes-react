@@ -28,9 +28,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 .ryb__actions--wheel:hover {
     cursor: pointer;
+}
+#whiteLayer {
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    z-index: 1;
+    background-color:rgba(255,255,255,0);
 }
 .ryb__actions--wheel span {
     font-size: 0.8rem;
@@ -45,8 +53,8 @@
 #rybImage {
     margin: 0;
     padding: 1rem;
+    z-index: -1;
 }
-
 .ryb__actions--settings {
     width: 49%;
     display: flex;
@@ -63,17 +71,10 @@
     flex-direction: column;
 
 }
-.ryb__actions--settings-sliders label {
-    padding: 0.5rem;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    font-weight: 600;
-    border: 1px, solid, var(--teal-grey);
-
-}
 .ryb__actions--settings-sliders div {
     padding: 0 0.5rem 0.5rem 0.5rem;
     font-size: 0.8rem;
     font-style: italic;
 }
+
+
