@@ -130,8 +130,10 @@ const ColorPickerPage = () => {
         const el = document.getElementById('canvasSection');
         const canvas = await html2canvas(el);
         const png = canvas.toDataURL('image/png', 1.0);
-        console.log(png); // data:image/png;base64,iVBORw0KGgoAAA.....
-        
+        // console.log(png); // data:image/png;base64,iVBORw0KGgoAAA.....
+
+        navigate('/save', { replace: true, state: { png } });
+
         // let image = new Image();
         // image.src = src;
         // const imageFileName = 'creation_' + (Math.random() * 9999 | 0);
@@ -139,16 +141,16 @@ const ColorPickerPage = () => {
         // const fakeLink = document.createElement('a');
         // document.body.appendChild(fakeLink);
 
-        fetch(png)
-            .then(res => res.blob())
-            .then(blob => {
-                let src = URL.createObjectURL(blob);
-                console.log(src);
-                navigate('/save', { 
-                    replace: true,
-                    state: { src } 
-                });
-            });
+        // fetch(png)
+        //     .then(res => res.blob())
+        //     .then(blob => {
+        //         let src = URL.createObjectURL(blob);
+        //         console.log(src);
+        //         navigate('/save', {
+        //             replace: true,
+        //             state: { src }
+        //         });
+        //     });
     };
 
     const exportPalette = async () => {
@@ -190,23 +192,27 @@ const ColorPickerPage = () => {
     };
 
     return (
-        <>
-            <h1>Color picker</h1>
-            <h6>Upload image file or link.
-                Pick the colors you like.
-                <br />
-                Choose the best combination of colors
-                and create your unique color palette.</h6>
+        <section className="picker">
+            <h2 className="picker__header">Color picker</h2>
+            <h6>Upload an image file. Pick the colors you like
+                and compose your desired combination.
+            </h6>
+            <h6 className="diffHeading">
+                Be the creator of your unique color palette.
+            </h6>
 
-            <label className="button file-input">
-                <input
-                    type="file"
-                    onChange={onFileUpload}
-                    accept="image/jpeg, image/png, image/jpg"
-                />
-                Upload file
-            </label>
-            <img id="image" src={src} alt="" />
+            <section className="picker__file-input">
+                <label className="button ">
+                    <input
+                        type="file"
+                        onChange={onFileUpload}
+                        accept="image/jpeg, image/png, image/jpg"
+                    />
+                    Upload file
+                </label>
+                <img id="image" src={src} alt="" />
+            </section>
+
 
             <section id="pickerContainer">
 
@@ -241,7 +247,7 @@ const ColorPickerPage = () => {
                 </aside>
 
             </section>
-        </>
+        </section>
     );
 };
 
