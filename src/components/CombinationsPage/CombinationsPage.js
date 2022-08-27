@@ -10,6 +10,19 @@ const Combinations = () => {
     const [blackValue, setBlackValue] = useState(0);
     const [greyValue, setGreyValue] = useState(0);
 
+    const show = (e) => {
+        const targetName = e.currentTarget.id;
+        const target = document.getElementById(`${targetName}Image`);
+        target.style.display = 'block';
+        target.style['z-index'] = 10;
+    };
+    const hide = (e) => {
+        const targetName = e.currentTarget.id;
+        const target = document.getElementById(`${targetName}Image`);
+        target.style.display = 'none';
+        target.style['z-index'] = -10;
+    };
+
     const makeRybCanvas = (e) => {
         const canvas = document.getElementById('rybCanvas');
         const ryb = document.getElementById('rybImage');
@@ -95,9 +108,12 @@ const Combinations = () => {
             <h6 className="diffHeading"> Be the designer of your colorful life.</h6>
 
             <p> The traditional color theory is based on subtractive primary colors and the RYB color model.</p>
-            <p> Red, Yellow and Blue are the<strong className="strong"> primary colors</strong>.
-                The <strong className="strong"> secondary colors</strong > Orange, Green and Purple are created by mixing primary colors.
-                Red-Orange, Yellow-Orange, Yellow-Green, Blue-Green, Blue-Purple, Red-Purple are the <strong className="strong"> tertiary colors</strong>.
+            <p> Red, Yellow and Blue are the
+                <strong id="primary" onMouseOver={show} onMouseLeave={hide} className="strong"> primary colors</strong>.
+                The <strong id="secondary" onMouseOver={show} onMouseLeave={hide} className="strong"> secondary colors</strong > 
+                Orange, Green and Purple are created by mixing primary colors.
+                Red-Orange, Yellow-Orange, Yellow-Green, Blue-Green, Blue-Purple, Red-Purple are the 
+                <strong id="tertiary" onMouseOver={show} onMouseLeave={hide} className="strong"> tertiary colors</strong>.
                 They are made by mixing two secondary colors.
             </p>
             <p>
@@ -110,6 +126,9 @@ const Combinations = () => {
 
                 <section className="ryb__actions--wheel">
                     <h6>RYB color wheel</h6>
+                    <img id="primaryImage" src="/images/primary.png" alt="primary" />
+                    <img id="secondaryImage" src="/images/secondary.png" alt="secondary" />
+                    <img id="tertiaryImage" src="/images/tertiary.png" alt="tertiary" />
                     <div className="white-layer" onClick={resetWhite} id="whiteLayer"></div>
                     <canvas id="rybCanvas" onClick={getPixel} width="300" height="300">
                         <img id="rybImage" src='/images/ryb.png' alt="ryb" onLoad={makeRybCanvas} />
@@ -168,7 +187,7 @@ const Combinations = () => {
                         <div>Add grey to desaturate the color.
                             <br />Tones are muted and more colorless.</div>
                     </section>
-                    
+
                     <button onClick={resetSettings} className="button">reset</button>
                 </section>
             </section>

@@ -8,6 +8,9 @@
     width: 100%;
     text-align: center;
 }
+.ryb p {
+    margin: 0.5rem;
+}
 .diffHeading {
     padding: 0.5rem;
     font-weight: 100;
@@ -17,7 +20,8 @@
     text-shadow: 2px 2px 2px var(--vermilion);
 }
 .strong:hover {
-    cursor: pointer;
+    font-style: italic;
+    cursor: default;
 }
 
 .ryb__actions {
@@ -48,6 +52,13 @@
     z-index: 1;
     background-color:rgba(255,255,255,0);
 }
+#primaryImage, #secondaryImage, #tertiaryImage {
+    display: none;
+    position: absolute;
+    top: 2rem;
+    width: 305px;
+    height: 305px;
+}
 
 .ryb__actions--wheel h6 {
     padding: 0.5rem;
@@ -59,9 +70,9 @@
 }
 #rybCanvas {
     position: relative;
+    cursor: pointer;
 }
 #rybImage {
-    cursor: pointer;
 }
 .ryb__actions--settings {
     width: 49%;
