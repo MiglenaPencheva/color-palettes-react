@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { getColorName } from './combinationsHelpers';
+import { calculateRotationDegrees, schemeForms } from './combinationsHelpers';
 
 const Combinations = () => {
 
     // const [src, setSrc] = useState('');
     const [data, setData] = useState([]);
-    const [pickedColor, setPickedColor] = useState('#608d9e');
     const [whiteValue, setWhiteValue] = useState(0);
     const [blackValue, setBlackValue] = useState(0);
     const [greyValue, setGreyValue] = useState(0);
@@ -34,8 +33,10 @@ const Combinations = () => {
     };
 
     const getPixel = (e) => {
-        resetSettings();
-
+        resetWhite();
+        resetBlack();
+        resetGrey();
+        
         let { offsetX, offsetY } = e.nativeEvent;
         let pixel = e.target.width * offsetY + offsetX;
         let arrayPos = pixel * 4;
@@ -46,11 +47,16 @@ const Combinations = () => {
             alpha: data[arrayPos + 3],
         };
         const picked = `rgb(${c.red}, ${c.green}, ${c.blue})`;
+        
+        const degrees = calculateRotationDegrees(picked);
+        
+        const wheel = e.currentTarget;
+        wheel.style.transform = `rotate(${degrees}deg)`;
+    };
 
-        const colorName = getColorName[picked];
-        console.log(colorName);
-
-        setPickedColor(picked);
+    const onSelectedScheme = (e) => {
+        console.log(e.target.value);
+        const schemeForm = schemeForms[e.target.value];
     };
 
     const onWhiteChange = (e) => {
@@ -95,6 +101,10 @@ const Combinations = () => {
         setGreyValue(0);
     };
     const resetSettings = (e) => {
+        const wheel = document.getElementById('rybCanvas');
+        wheel.style.transform = 'rotate(0deg)';
+        const scheme = document.getElementById('scheme');
+        scheme.value = 'Choose scheme';
         resetWhite();
         resetBlack();
         resetGrey();
@@ -142,7 +152,7 @@ const Combinations = () => {
                     <section className="select-container">
                         <label htmlFor="scheme" className="select-container__label">Color scheme</label>
                         <select id="scheme" name="scheme"
-                            // onChange={e => setScheme(e.target.value)}
+                            onChange={onSelectedScheme}
                             className="select">
                             <option value="Choose scheme" className="default-scheme">Choose scheme</option>
                             <option value="complementary">Complementary</option>

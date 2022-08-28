@@ -2,15 +2,18 @@
     margin: 0 auto;
     max-width: 900px;
 }
+
 .ryb__header {
     margin: 0 auto;
     padding: 1rem;
     width: 100%;
     text-align: center;
 }
+
 .ryb p {
     margin: 0.5rem;
 }
+
 .diffHeading {
     padding: 0.5rem;
     font-weight: 100;
@@ -19,6 +22,7 @@
     letter-spacing: 0.2rem;
     text-shadow: 2px 2px 2px var(--vermilion);
 }
+
 .strong:hover {
     font-style: italic;
     cursor: default;
@@ -43,6 +47,7 @@
     align-items: center;
     position: relative;
 }
+
 .white-layer {
     display: block;
     position: absolute;
@@ -50,9 +55,12 @@
     width: 300px;
     height: 303px;
     z-index: 1;
-    background-color:rgba(255,255,255,0);
+    background-color: rgba(255, 255, 255, 0);
 }
-#primaryImage, #secondaryImage, #tertiaryImage {
+
+#primaryImage,
+#secondaryImage,
+#tertiaryImage {
     display: none;
     position: absolute;
     top: 2rem;
@@ -63,17 +71,24 @@
 .ryb__actions--wheel h6 {
     padding: 0.5rem;
 }
+
 .ryb__actions--wheel span {
     padding: 0.5rem;
     font-size: 0.8rem;
     font-style: italic;
 }
+
 #rybCanvas {
     position: relative;
     cursor: pointer;
+    animation: animatedRotation 2s;
 }
-#rybImage {
+@keyframes animatedRotation {
+    100% {transform: rotate(360deg);}
 }
+
+#rybImage {}
+
 .ryb__actions--settings {
     width: 49%;
     display: flex;
@@ -81,27 +96,30 @@
     justify-content: space-around;
     align-items: center;
 }
+
 .ryb__actions--settings p {
     padding: 0 0.5rem;
     font-size: 0.8rem;
 }
+
 .ryb__actions--settings h6 {
     padding: 0.5rem;
 }
+
 .ryb__actions--settings-sliders {
     width: 100%;
     display: flex;
     flex-direction: column;
 
 }
+
 .ryb__actions--settings-sliders div {
     padding: 0 0.5rem 0.5rem 0.5rem;
     font-size: 0.8rem;
     font-style: italic;
 }
+
 .ryb__actions--settings-sliders button {
     width: fit-content;
     margin-top: 1rem;
 }
-
-
