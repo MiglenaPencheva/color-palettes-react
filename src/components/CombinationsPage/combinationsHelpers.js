@@ -1,6 +1,6 @@
 export const calculateRotationDegrees = (picked) => {
     const mainColor = getColorName[picked];
-    const degrees = 360 + getRotationDegrees[mainColor];
+    const degrees = getRotationDegrees[mainColor];
     return degrees;
 };
 

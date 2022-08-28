@@ -3,7 +3,6 @@ import { calculateRotationDegrees, schemeForms } from './combinationsHelpers';
 
 const Combinations = () => {
 
-    // const [src, setSrc] = useState('');
     const [data, setData] = useState([]);
     const [whiteValue, setWhiteValue] = useState(0);
     const [blackValue, setBlackValue] = useState(0);
@@ -32,24 +31,27 @@ const Combinations = () => {
         setData(imageData.data);
     };
 
-    const getPixel = (e) => {
+    const rotateWheel = (e) => {
         resetWhite();
         resetBlack();
         resetGrey();
-        
-        let { offsetX, offsetY } = e.nativeEvent;
-        let pixel = e.target.width * offsetY + offsetX;
-        let arrayPos = pixel * 4;
-        const c = {
-            red: data[arrayPos],
-            green: data[arrayPos + 1],
-            blue: data[arrayPos + 2],
-            alpha: data[arrayPos + 3],
+
+        const getPixel = (e) => {
+            let { offsetX, offsetY } = e.nativeEvent;
+            let pixel = e.target.width * offsetY + offsetX;
+            let arrayPos = pixel * 4;
+            const c = {
+                red: data[arrayPos],
+                green: data[arrayPos + 1],
+                blue: data[arrayPos + 2],
+                alpha: data[arrayPos + 3],
+            };
+            const picked = `rgb(${c.red}, ${c.green}, ${c.blue})`;
+            return picked;
         };
-        const picked = `rgb(${c.red}, ${c.green}, ${c.blue})`;
-        
+
+        const picked = getPixel(e);
         const degrees = calculateRotationDegrees(picked);
-        
         const wheel = e.currentTarget;
         wheel.style.transform = `rotate(${degrees}deg)`;
     };
@@ -120,9 +122,9 @@ const Combinations = () => {
             <p> The traditional color theory is based on subtractive primary colors and the RYB color model.</p>
             <p> Red, Yellow and Blue are the
                 <strong id="primary" onMouseOver={show} onMouseLeave={hide} className="strong"> primary colors</strong>.
-                The <strong id="secondary" onMouseOver={show} onMouseLeave={hide} className="strong"> secondary colors</strong > 
+                The <strong id="secondary" onMouseOver={show} onMouseLeave={hide} className="strong"> secondary colors</strong >
                 Orange, Green and Purple are created by mixing primary colors.
-                Red-Orange, Yellow-Orange, Yellow-Green, Blue-Green, Blue-Purple, Red-Purple are the 
+                Red-Orange, Yellow-Orange, Yellow-Green, Blue-Green, Blue-Purple, Red-Purple are the
                 <strong id="tertiary" onMouseOver={show} onMouseLeave={hide} className="strong"> tertiary colors</strong>.
                 They are made by mixing two secondary colors.
             </p>
@@ -140,7 +142,7 @@ const Combinations = () => {
                     <img id="secondaryImage" src="/images/secondary.png" alt="secondary" />
                     <img id="tertiaryImage" src="/images/tertiary.png" alt="tertiary" />
                     <div className="white-layer" onClick={resetWhite} id="whiteLayer"></div>
-                    <canvas id="rybCanvas" onClick={getPixel} width="300" height="300">
+                    <canvas id="rybCanvas" onClick={rotateWheel} width="300" height="300">
                         <img id="rybImage" src='/images/ryb.png' alt="ryb" onLoad={makeRybCanvas} />
                     </canvas>
                     <span>Pick a color from the wheel</span>
