@@ -63,9 +63,9 @@ const Combinations = () => {
 
     const onWhiteChange = (e) => {
         const whiteLayer = document.getElementById('whiteLayer');
+        whiteLayer.style.display = 'block';
         const w = Number(e.target.value) / 100;
         whiteLayer.style['background-color'] = `rgba(255,255,255,${w})`;
-        whiteLayer.style.display = 'block';
         resetBlack();
         resetGrey();
         setWhiteValue(e.target.value);
