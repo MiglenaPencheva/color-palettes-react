@@ -192,7 +192,7 @@ const ColorPickerPage = () => {
     };
 
     return (
-        <section className="picker">
+        <section className="picker-section">
             <h2 className="picker__header">Color picker</h2>
             <h6>Upload an image file. Pick the colors you like
                 and compose your desired combination.
