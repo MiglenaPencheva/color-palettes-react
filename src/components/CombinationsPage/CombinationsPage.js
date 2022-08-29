@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { calculateRotationDegrees, schemeForms } from './combinationsHelpers';
+import * as helpers from './combinationsHelpers';
 
 const Combinations = () => {
 
@@ -35,6 +35,9 @@ const Combinations = () => {
         resetWhite();
         resetBlack();
         resetGrey();
+        const scheme = document.getElementById('scheme');
+        scheme.value = 'Choose scheme';
+        helpers.clearScheme();
 
         const getPixel = (e) => {
             let { offsetX, offsetY } = e.nativeEvent;
@@ -51,14 +54,20 @@ const Combinations = () => {
         };
 
         const picked = getPixel(e);
-        const degrees = calculateRotationDegrees(picked);
+        const degrees = helpers.calculateRotationDegrees(picked);
         const wheel = e.currentTarget;
         wheel.style.transform = `rotate(${degrees}deg)`;
     };
 
     const onSelectedScheme = (e) => {
-        console.log(e.target.value);
-        const schemeForm = schemeForms[e.target.value];
+        const canvas = document.getElementById('rybCanvas');
+        const ryb = document.getElementById('rybImage');
+        const scheme = e.target.value;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(ryb, 0, 0, 300, 300);
+
+        helpers.schemeForms[scheme]();
     };
 
     const onWhiteChange = (e) => {
@@ -107,6 +116,7 @@ const Combinations = () => {
         wheel.style.transform = 'rotate(0deg)';
         const scheme = document.getElementById('scheme');
         scheme.value = 'Choose scheme';
+        helpers.clearScheme();
         resetWhite();
         resetBlack();
         resetGrey();
@@ -122,7 +132,7 @@ const Combinations = () => {
             <p> The traditional color theory is based on subtractive primary colors and the RYB color model.</p>
             <p> Red, Yellow and Blue are the
                 <strong id="primary" onMouseOver={show} onMouseLeave={hide} className="strong"> primary colors</strong>.
-                The <strong id="secondary" onMouseOver={show} onMouseLeave={hide} className="strong"> secondary colors</strong >
+                The <strong id="secondary" onMouseOver={show} onMouseLeave={hide} className="strong"> secondary colors </strong >
                 Orange, Green and Purple are created by mixing primary colors.
                 Red-Orange, Yellow-Orange, Yellow-Green, Blue-Green, Blue-Purple, Red-Purple are the
                 <strong id="tertiary" onMouseOver={show} onMouseLeave={hide} className="strong"> tertiary colors</strong>.
@@ -138,10 +148,22 @@ const Combinations = () => {
 
                 <section className="ryb__actions--wheel">
                     <h6>RYB color wheel</h6>
+
+                     {/* layers */}
                     <img id="primaryImage" src="/images/primary.png" alt="primary" />
                     <img id="secondaryImage" src="/images/secondary.png" alt="secondary" />
                     <img id="tertiaryImage" src="/images/tertiary.png" alt="tertiary" />
+                    
+                    <img id="complementary" src="/images/complementary.png" alt="complementary" />
+                    <img id="splitComplementary" src="/images/splitComplementary.png" alt="splitComplementary" />
+                    <img id="monochromatic" src="/images/monochromatic.png" alt="monochromatic" />
+                    <img id="analogous" src="/images/analogous.png" alt="analogous" />
+                    <img id="triadic" src="/images/triadic.png" alt="triadic" />
+                    <img id="tetradic" src="/images/tetradic.png" alt="tetradic" />
+                    <img id="square" src="/images/square.png" alt="square" />
+                    
                     <div className="white-layer" onClick={resetWhite} id="whiteLayer"></div>
+                    
                     <canvas id="rybCanvas" onClick={rotateWheel} width="300" height="300">
                         <img id="rybImage" src='/images/ryb.png' alt="ryb" onLoad={makeRybCanvas} />
                     </canvas>

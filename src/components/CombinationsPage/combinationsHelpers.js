@@ -35,12 +35,54 @@ const getRotationDegrees = {
 };
 
 export const schemeForms = {
-    'Choose scheme': null,
-    'complementary': null,
-    'splitComplementary': null,
-    'monochromatic': null,
-    'analogous': null,
-    'triadic': null,
-    'tetradic': null,
-    'square': null,
+    'Choose scheme': clearScheme,
+    'complementary': drawComplementary,
+    'splitComplementary': drawSplitComplementary,
+    'monochromatic': drawMonochromatic,
+    'analogous': drawAnalogous,
+    'triadic': drawTriadic,
+    'tetradic': drawTetradic,
+    'square': drawSquare,
 };
+
+export function clearScheme() {
+    const complementary = document.getElementById('complementary');
+    complementary.style.display = 'none';
+    const splitComplementary = document.getElementById('splitComplementary');
+    splitComplementary.style.display = 'none';
+    const monochromatic = document.getElementById('monochromatic');
+    monochromatic.style.display = 'none';
+    const analogous = document.getElementById('analogous');
+    analogous.style.display = 'none';
+    const triadic = document.getElementById('triadic');
+    triadic.style.display = 'none';
+    const tetradic = document.getElementById('tetradic');
+    tetradic.style.display = 'none';
+    const square = document.getElementById('square');
+    square.style.display = 'none';
+}
+
+export function drawComplementary() {
+    const complementary = document.getElementById('complementary');
+    complementary.style.display = 'block';
+    complementary.style['z-index'] = 100;
+}
+
+function drawSplitComplementary() {
+
+}
+function drawMonochromatic() {
+    
+}
+function drawAnalogous() {
+    
+}
+function drawTriadic() {
+    
+}
+function drawTetradic() {
+    
+}
+function drawSquare() {
+    
+}

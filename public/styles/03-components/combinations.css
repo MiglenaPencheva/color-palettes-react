@@ -68,6 +68,20 @@
     height: 305px;
 }
 
+#complementary,
+#splitComplementary,
+#monochromatic,
+#analogous,
+#triadic,
+#tetradic,
+#square {
+    display: none;
+    position: absolute;
+    top: 5rem;
+    /* width: 305px; */
+    height: 210px;
+}
+
 .ryb__actions--wheel h6 {
     padding: 0.5rem;
 }
@@ -87,7 +101,9 @@
     100% {transform: rotate(360deg);}
 }
 
-#rybImage {}
+#rybImage {
+    z-index: 1;
+}
 
 .ryb__actions--settings {
     width: 49%;
