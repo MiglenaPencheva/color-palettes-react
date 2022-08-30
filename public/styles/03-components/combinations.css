@@ -71,15 +71,19 @@
 #complementary,
 #splitComplementary,
 #monochromatic,
-#analogous,
-#triadic,
-#tetradic,
+#analogous3,
+#analogous5,
+#triadic {
+    display: none;
+    position: absolute;
+    top: 34%;
+}
+#tetradic1,
+#tetradic2,
 #square {
     display: none;
     position: absolute;
-    top: 5rem;
-    /* width: 305px; */
-    height: 210px;
+    top: 35%;
 }
 
 .ryb__actions--wheel h6 {

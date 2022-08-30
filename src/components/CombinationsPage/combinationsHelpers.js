@@ -39,9 +39,11 @@ export const schemeForms = {
     'complementary': drawComplementary,
     'splitComplementary': drawSplitComplementary,
     'monochromatic': drawMonochromatic,
-    'analogous': drawAnalogous,
+    'analogous3': drawAnalogous3,
+    'analogous5': drawAnalogous5,
     'triadic': drawTriadic,
-    'tetradic': drawTetradic,
+    'tetradic1': drawTetradic1,
+    'tetradic2': drawTetradic2,
     'square': drawSquare,
 };
 
@@ -52,12 +54,16 @@ export function clearScheme() {
     splitComplementary.style.display = 'none';
     const monochromatic = document.getElementById('monochromatic');
     monochromatic.style.display = 'none';
-    const analogous = document.getElementById('analogous');
-    analogous.style.display = 'none';
+    const analogous3 = document.getElementById('analogous3');
+    analogous3.style.display = 'none';
+    const analogous5 = document.getElementById('analogous5');
+    analogous5.style.display = 'none';
     const triadic = document.getElementById('triadic');
     triadic.style.display = 'none';
-    const tetradic = document.getElementById('tetradic');
-    tetradic.style.display = 'none';
+    const tetradic1 = document.getElementById('tetradic1');
+    tetradic1.style.display = 'none';
+    const tetradic2 = document.getElementById('tetradic2');
+    tetradic2.style.display = 'none';
     const square = document.getElementById('square');
     square.style.display = 'none';
 }
@@ -69,20 +75,34 @@ export function drawComplementary() {
 }
 
 function drawSplitComplementary() {
-
+    const splitComplementary = document.getElementById('splitComplementary');
+    splitComplementary.style.display = 'block';
 }
 function drawMonochromatic() {
-    
+    const monochromatic = document.getElementById('monochromatic');
+    monochromatic.style.display = 'block';
 }
-function drawAnalogous() {
-    
+function drawAnalogous3() {
+    const analogous3 = document.getElementById('analogous3');
+    analogous3.style.display = 'block';
+}
+function drawAnalogous5() {
+    const analogous5 = document.getElementById('analogous5');
+    analogous5.style.display = 'block';
 }
 function drawTriadic() {
-    
+    const triadic = document.getElementById('triadic');
+    triadic.style.display = 'block';
 }
-function drawTetradic() {
-    
+function drawTetradic1() {
+    const tetradic1 = document.getElementById('tetradic1');
+    tetradic1.style.display = 'block';
+}
+function drawTetradic2() {
+    const tetradic2 = document.getElementById('tetradic2');
+    tetradic2.style.display = 'block';
 }
 function drawSquare() {
-    
+    const square = document.getElementById('square');
+    square.style.display = 'block';
 }

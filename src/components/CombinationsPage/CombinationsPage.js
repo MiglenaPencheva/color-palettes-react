@@ -35,10 +35,6 @@ const Combinations = () => {
         resetWhite();
         resetBlack();
         resetGrey();
-        const scheme = document.getElementById('scheme');
-        scheme.value = 'Choose scheme';
-        helpers.clearScheme();
-
         const getPixel = (e) => {
             let { offsetX, offsetY } = e.nativeEvent;
             let pixel = e.target.width * offsetY + offsetX;
@@ -68,6 +64,7 @@ const Combinations = () => {
         const ctx = canvas.getContext('2d');
         ctx.drawImage(ryb, 0, 0, 300, 300);
 
+        helpers.clearScheme();
         helpers.schemeForms[scheme]();
     };
 
@@ -155,13 +152,15 @@ const Combinations = () => {
                     <img id="secondaryImage" src="/images/secondary.png" alt="secondary" />
                     <img id="tertiaryImage" src="/images/tertiary.png" alt="tertiary" />
 
-                    <img id="complementary" src="/images/complementary.png" alt="complementary" />
-                    <img id="splitComplementary" src="/images/splitComplementary.png" alt="splitComplementary" />
-                    <img id="monochromatic" src="/images/monochromatic.png" alt="monochromatic" />
-                    <img id="analogous" src="/images/analogous.png" alt="analogous" />
-                    <img id="triadic" src="/images/triadic.png" alt="triadic" />
-                    <img id="tetradic" src="/images/tetradic.png" alt="tetradic" />
-                    <img id="square" src="/images/square.png" alt="square" />
+                    <img id="complementary" src="/images/schemes/complementary.png" alt="complementary" />
+                    <img id="splitComplementary" src="/images/schemes/splitComplementary.png" alt="splitComplementary" />
+                    <img id="monochromatic" src="/images/schemes/monochromatic.png" alt="monochromatic" />
+                    <img id="analogous3" src="/images/schemes/analogous3.png" alt="analogous3" />
+                    <img id="analogous5" src="/images/schemes/analogous5.png" alt="analogous5" />
+                    <img id="triadic" src="/images/schemes/triadic.png" alt="triadic" />
+                    <img id="tetradic1" src="/images/schemes/tetradic1.png" alt="tetradic1" />
+                    <img id="tetradic2" src="/images/schemes/tetradic2.png" alt="tetradic2" />
+                    <img id="square" src="/images/schemes/square.png" alt="square" />
 
                     <div className="white-layer" onClick={resetWhite} id="whiteLayer"></div>
 
@@ -183,9 +182,11 @@ const Combinations = () => {
                             <option value="complementary">Complementary</option>
                             <option value="splitComplementary">Split-complementary</option>
                             <option value="monochromatic">Monochromatic</option>
-                            <option value="analogous">Analogous</option>
+                            <option value="analogous3">Analogous 3 colors</option>
+                            <option value="analogous5">Analogous 5 colors</option>
                             <option value="triadic">Triadic</option>
-                            <option value="tetradic">Tetradic</option>
+                            <option value="tetradic1">Tetradic 1 variant</option>
+                            <option value="tetradic2">Tetradic 2 variant</option>
                             <option value="square">Square</option>
                         </select>
                     </section>
