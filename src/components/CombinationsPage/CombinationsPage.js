@@ -57,6 +57,7 @@ const Combinations = () => {
         const degrees = helpers.calculateRotationDegrees(picked);
         const wheel = e.currentTarget;
         wheel.style.transform = `rotate(${degrees}deg)`;
+        wheel.style['transition-duration'] = '1s';
     };
 
     const onSelectedScheme = (e) => {
@@ -149,11 +150,11 @@ const Combinations = () => {
                 <section className="ryb__actions--wheel">
                     <h6>RYB color wheel</h6>
 
-                     {/* layers */}
+                    {/* layers */}
                     <img id="primaryImage" src="/images/primary.png" alt="primary" />
                     <img id="secondaryImage" src="/images/secondary.png" alt="secondary" />
                     <img id="tertiaryImage" src="/images/tertiary.png" alt="tertiary" />
-                    
+
                     <img id="complementary" src="/images/complementary.png" alt="complementary" />
                     <img id="splitComplementary" src="/images/splitComplementary.png" alt="splitComplementary" />
                     <img id="monochromatic" src="/images/monochromatic.png" alt="monochromatic" />
@@ -161,9 +162,9 @@ const Combinations = () => {
                     <img id="triadic" src="/images/triadic.png" alt="triadic" />
                     <img id="tetradic" src="/images/tetradic.png" alt="tetradic" />
                     <img id="square" src="/images/square.png" alt="square" />
-                    
+
                     <div className="white-layer" onClick={resetWhite} id="whiteLayer"></div>
-                    
+
                     <canvas id="rybCanvas" onClick={rotateWheel} width="300" height="300">
                         <img id="rybImage" src='/images/ryb.png' alt="ryb" onLoad={makeRybCanvas} />
                     </canvas>
