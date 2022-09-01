@@ -1,20 +1,23 @@
 import { useState, useEffect } from 'react';
+import { getPixel } from '../helpers';
 import * as helpers from './combinationsHelpers';
 
 const Combinations = () => {
 
     const [data, setData] = useState([]);
+    const [ctx, setCtx] = useState({});
+    const [mainColor, setMainColor] = useState('yellow');
     const [whiteValue, setWhiteValue] = useState(0);
     const [blackValue, setBlackValue] = useState(0);
     const [greyValue, setGreyValue] = useState(0);
 
-    const show = (e) => {
+    const showOnMouseOver = (e) => {
         const targetName = e.currentTarget.id;
         const target = document.getElementById(`${targetName}Image`);
         target.style.display = 'block';
         target.style['z-index'] = 10;
     };
-    const hide = (e) => {
+    const hideOnMouseLeave = (e) => {
         const targetName = e.currentTarget.id;
         const target = document.getElementById(`${targetName}Image`);
         target.style.display = 'none';
@@ -25,47 +28,34 @@ const Combinations = () => {
         const canvas = document.getElementById('rybCanvas');
         const ryb = document.getElementById('rybImage');
 
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(ryb, 0, 0, 300, 300);
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const canvasCtx = canvas.getContext('2d');
+        canvasCtx.drawImage(ryb, 0, 0, 300, 300);
+        const imageData = canvasCtx.getImageData(0, 0, canvas.width, canvas.height);
         setData(imageData.data);
+        setCtx(canvasCtx);
     };
 
     const rotateWheel = (e) => {
         resetWhite();
         resetBlack();
         resetGrey();
-        const getPixel = (e) => {
-            let { offsetX, offsetY } = e.nativeEvent;
-            let pixel = e.target.width * offsetY + offsetX;
-            let arrayPos = pixel * 4;
-            const c = {
-                red: data[arrayPos],
-                green: data[arrayPos + 1],
-                blue: data[arrayPos + 2],
-                alpha: data[arrayPos + 3],
-            };
-            const picked = `rgb(${c.red}, ${c.green}, ${c.blue})`;
-            return picked;
-        };
 
-        const picked = getPixel(e);
-        const degrees = helpers.calculateRotationDegrees(picked);
+        const picked = getPixel(e, data);
+        const pickedName = helpers.getColorName[picked];
+        const degrees = helpers.calculateRotationDegrees(pickedName);
         const wheel = e.currentTarget;
         wheel.style.transform = `rotate(${degrees}deg)`;
         wheel.style['transition-duration'] = '1s';
+
+        setMainColor(pickedName);
     };
 
     const onSelectedScheme = (e) => {
-        const canvas = document.getElementById('rybCanvas');
-        const ryb = document.getElementById('rybImage');
         const scheme = e.target.value;
-
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(ryb, 0, 0, 300, 300);
-
-        helpers.clearScheme();
-        helpers.schemeForms[scheme]();
+        const schemeCanvas = document.getElementById('schemeCanvas');
+        const schemeCanvasCtx = schemeCanvas.getContext('2d');
+        schemeCanvasCtx.clearRect(10, 10, 140, 140);
+        helpers.drawScheme[scheme](schemeCanvasCtx);
     };
 
     const onWhiteChange = (e) => {
@@ -109,12 +99,19 @@ const Combinations = () => {
         canvas.style.filter = 'grayscale(0)';
         setGreyValue(0);
     };
-    const resetSettings = (e) => {
+    const resetWheel = (e) => {
         const wheel = document.getElementById('rybCanvas');
         wheel.style.transform = 'rotate(0deg)';
-        const scheme = document.getElementById('scheme');
-        scheme.value = 'Choose scheme';
-        helpers.clearScheme();
+    };
+    const resetScheme = (e) => {
+        document.getElementById('scheme').value = 'Choose scheme';
+        const schemeCanvas = document.getElementById('schemeCanvas');
+        const schemeCanvasCtx = schemeCanvas.getContext('2d');
+        schemeCanvasCtx.clearRect(10, 10, 140, 140);
+    };
+    const resetSettings = (e) => {
+        resetWheel();
+        resetScheme();
         resetWhite();
         resetBlack();
         resetGrey();
@@ -129,17 +126,16 @@ const Combinations = () => {
 
             <p> The traditional color theory is based on subtractive primary colors and the RYB color model.</p>
             <p> Red, Yellow and Blue are the
-                <strong id="primary" onMouseOver={show} onMouseLeave={hide} className="strong"> primary colors</strong>.
-                The <strong id="secondary" onMouseOver={show} onMouseLeave={hide} className="strong"> secondary colors </strong >
+                <strong id="primary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> primary colors</strong>.
+                The <strong id="secondary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> secondary colors </strong >
                 Orange, Green and Purple are created by mixing primary colors.
                 Red-Orange, Yellow-Orange, Yellow-Green, Blue-Green, Blue-Purple, Red-Purple are the
-                <strong id="tertiary" onMouseOver={show} onMouseLeave={hide} className="strong"> tertiary colors</strong>.
+                <strong id="tertiary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> tertiary colors</strong>.
                 They are made by mixing two secondary colors.
             </p>
             <p>
                 RYB color model is used by artists, fashion stylists,
                 interior, graphic and web designers.
-
             </p>
 
             <section className="ryb__actions">
@@ -147,26 +143,18 @@ const Combinations = () => {
                 <section className="ryb__actions--wheel">
                     <h6>RYB color wheel</h6>
 
-                    {/* layers */}
                     <img id="primaryImage" src="/images/primary.png" alt="primary" />
                     <img id="secondaryImage" src="/images/secondary.png" alt="secondary" />
                     <img id="tertiaryImage" src="/images/tertiary.png" alt="tertiary" />
-
-                    <img id="complementary" src="/images/schemes/complementary.png" alt="complementary" />
-                    <img id="splitComplementary" src="/images/schemes/splitComplementary.png" alt="splitComplementary" />
-                    <img id="monochromatic" src="/images/schemes/monochromatic.png" alt="monochromatic" />
-                    <img id="analogous3" src="/images/schemes/analogous3.png" alt="analogous3" />
-                    <img id="analogous5" src="/images/schemes/analogous5.png" alt="analogous5" />
-                    <img id="triadic" src="/images/schemes/triadic.png" alt="triadic" />
-                    <img id="tetradic1" src="/images/schemes/tetradic1.png" alt="tetradic1" />
-                    <img id="tetradic2" src="/images/schemes/tetradic2.png" alt="tetradic2" />
-                    <img id="square" src="/images/schemes/square.png" alt="square" />
 
                     <div className="white-layer" onClick={resetWhite} id="whiteLayer"></div>
 
                     <canvas id="rybCanvas" onClick={rotateWheel} width="300" height="300">
                         <img id="rybImage" src='/images/ryb.png' alt="ryb" onLoad={makeRybCanvas} />
                     </canvas>
+
+                    <canvas id="schemeCanvas" width="160" height="160"></canvas>
+
                     <span>Pick a color from the wheel</span>
                 </section>
 
@@ -226,6 +214,13 @@ const Combinations = () => {
 
                     <button onClick={resetSettings} className="button">reset</button>
                 </section>
+
+            </section>
+
+            <section className="ryb__result">
+                <ul>
+
+                </ul>
             </section>
 
 

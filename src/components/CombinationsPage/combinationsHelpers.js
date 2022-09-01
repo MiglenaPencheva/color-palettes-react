@@ -1,10 +1,8 @@
-export const calculateRotationDegrees = (picked) => {
-    const mainColor = getColorName[picked];
-    const degrees = getRotationDegrees[mainColor];
+export const calculateRotationDegrees = (pickedName) => {
+    const degrees = getRotationDegrees[pickedName];
     return degrees;
 };
-
-const getColorName = {
+export const getColorName = {
     'rgb(254, 254, 51)': 'yellow',
     'rgb(252, 204, 26)': 'yellow-orange',
     'rgb(251, 153, 2)': 'orange',
@@ -18,9 +16,8 @@ const getColorName = {
     'rgb(102, 176, 50)': 'green',
     'rgb(178, 215, 50)': 'yellow-green',
 };
-
 const getRotationDegrees = {
-    'yellow': 0,
+    'yellow': 360,
     'yellow-orange': 330,
     'orange': 300,
     'red-orange': 270,
@@ -34,7 +31,7 @@ const getRotationDegrees = {
     'yellow-green': 30,
 };
 
-export const schemeForms = {
+export const drawScheme = {
     'Choose scheme': clearScheme,
     'complementary': drawComplementary,
     'splitComplementary': drawSplitComplementary,
@@ -46,63 +43,111 @@ export const schemeForms = {
     'tetradic2': drawTetradic2,
     'square': drawSquare,
 };
-
-export function clearScheme() {
-    const complementary = document.getElementById('complementary');
-    complementary.style.display = 'none';
-    const splitComplementary = document.getElementById('splitComplementary');
-    splitComplementary.style.display = 'none';
-    const monochromatic = document.getElementById('monochromatic');
-    monochromatic.style.display = 'none';
-    const analogous3 = document.getElementById('analogous3');
-    analogous3.style.display = 'none';
-    const analogous5 = document.getElementById('analogous5');
-    analogous5.style.display = 'none';
-    const triadic = document.getElementById('triadic');
-    triadic.style.display = 'none';
-    const tetradic1 = document.getElementById('tetradic1');
-    tetradic1.style.display = 'none';
-    const tetradic2 = document.getElementById('tetradic2');
-    tetradic2.style.display = 'none';
-    const square = document.getElementById('square');
-    square.style.display = 'none';
+export function clearScheme(ctx) {
+    ctx.clearRect(10, 10, 140, 140);
 }
-
-export function drawComplementary() {
-    const complementary = document.getElementById('complementary');
-    complementary.style.display = 'block';
-    complementary.style['z-index'] = 100;
+export function drawComplementary(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(82, 24);
+    ctx.lineTo(82, 140);
+    ctx.strokeStyle = '#608d9e';
+    ctx.lineWidth = 7;
+    ctx.lineCap = 'round';
+    ctx.stroke();
 }
-
-function drawSplitComplementary() {
-    const splitComplementary = document.getElementById('splitComplementary');
-    splitComplementary.style.display = 'block';
+export function drawSplitComplementary(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(82, 24);
+    ctx.lineTo(82, 80);
+    ctx.lineTo(54, 130);
+    ctx.moveTo(82, 80);
+    ctx.lineTo(110, 130);
+    ctx.strokeStyle = '#608d9e';
+    ctx.lineWidth = 7;
+    ctx.lineCap = 'round';
+    ctx.stroke();
 }
-function drawMonochromatic() {
-    const monochromatic = document.getElementById('monochromatic');
-    monochromatic.style.display = 'block';
+export function drawMonochromatic(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(82, 24);
+    ctx.lineTo(82, 80);
+    ctx.strokeStyle = '#608d9e';
+    ctx.lineWidth = 7;
+    ctx.lineCap = 'round';
+    ctx.stroke();
 }
-function drawAnalogous3() {
-    const analogous3 = document.getElementById('analogous3');
-    analogous3.style.display = 'block';
+export function drawAnalogous3(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(82, 24); // middle
+    ctx.lineTo(82, 80);
+    ctx.moveTo(54, 32); // left
+    ctx.lineTo(82, 80);
+    ctx.moveTo(110, 32); // right
+    ctx.lineTo(82, 80);
+    ctx.strokeStyle = '#608d9e';
+    ctx.lineWidth = 7;
+    ctx.lineCap = 'round';
+    ctx.stroke();
 }
-function drawAnalogous5() {
-    const analogous5 = document.getElementById('analogous5');
-    analogous5.style.display = 'block';
+export function drawAnalogous5(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(82, 24); // middle
+    ctx.lineTo(82, 80);
+    ctx.moveTo(54, 32); // left 1
+    ctx.lineTo(82, 80);
+    ctx.moveTo(35, 52); // left 2
+    ctx.lineTo(82, 80);
+    ctx.moveTo(110, 32);    // right 1
+    ctx.lineTo(82, 80);
+    ctx.moveTo(130, 52);    // right 2
+    ctx.lineTo(82, 80);
+    ctx.strokeStyle = '#608d9e';
+    ctx.lineWidth = 7;
+    ctx.lineCap = 'round';
+    ctx.stroke();
 }
-function drawTriadic() {
-    const triadic = document.getElementById('triadic');
-    triadic.style.display = 'block';
+export function drawTriadic(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(82, 24);     // middle
+    ctx.lineTo(82, 80);
+    ctx.lineTo(35, 110);    // left
+    ctx.moveTo(82, 80);     //right
+    ctx.lineTo(130, 110);
+    ctx.strokeStyle = '#608d9e';
+    ctx.lineWidth = 7;
+    ctx.lineCap = 'round';
+    ctx.stroke();
 }
-function drawTetradic1() {
-    const tetradic1 = document.getElementById('tetradic1');
-    tetradic1.style.display = 'block';
+export function drawTetradic1(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(82, 24);     // first
+    ctx.lineTo(82, 140);
+    ctx.moveTo(35, 52);
+    ctx.lineTo(130, 110);
+    ctx.strokeStyle = '#608d9e';
+    ctx.lineWidth = 7;
+    ctx.lineCap = 'round';
+    ctx.stroke();
 }
-function drawTetradic2() {
-    const tetradic2 = document.getElementById('tetradic2');
-    tetradic2.style.display = 'block';
+export function drawTetradic2(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(82, 24);     // first
+    ctx.lineTo(82, 140);
+    ctx.moveTo(130, 52);
+    ctx.lineTo(35, 110);
+    ctx.strokeStyle = '#608d9e';
+    ctx.lineWidth = 7;
+    ctx.lineCap = 'round';
+    ctx.stroke();
 }
-function drawSquare() {
-    const square = document.getElementById('square');
-    square.style.display = 'block';
+export function drawSquare(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(82, 24);
+    ctx.lineTo(82, 140);
+    ctx.moveTo(26, 82);
+    ctx.lineTo(138, 82);
+    ctx.strokeStyle = '#608d9e';
+    ctx.lineWidth = 7;
+    ctx.lineCap = 'round';
+    ctx.stroke();
 }

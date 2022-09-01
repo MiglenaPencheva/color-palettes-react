@@ -28,6 +28,7 @@
     cursor: default;
 }
 
+/* ----- actions ----- */
 .ryb__actions {
     margin: 1rem 0;
     width: 100%;
@@ -38,6 +39,7 @@
     align-items: center;
 }
 
+/* ----- canvas, wheel, layers ----- */
 .ryb__actions--wheel {
     width: 49%;
     position: relative;
@@ -52,8 +54,8 @@
     display: none;
     position: absolute;
     top: 2rem;
-    width: 300px;
-    height: 303px;
+    width: 302px;
+    height: 304px;
     z-index: 1;
     background-color: rgba(255, 255, 255, 0);
 }
@@ -66,24 +68,6 @@
     top: 2rem;
     width: 305px;
     height: 305px;
-}
-
-#complementary,
-#splitComplementary,
-#monochromatic,
-#analogous3,
-#analogous5,
-#triadic {
-    display: none;
-    position: absolute;
-    top: 34%;
-}
-#tetradic1,
-#tetradic2,
-#square {
-    display: none;
-    position: absolute;
-    top: 35%;
 }
 
 .ryb__actions--wheel h6 {
@@ -108,7 +92,14 @@
 #rybImage {
     z-index: 1;
 }
+#schemeCanvas {
+    position: absolute;
+    top: 105px;
+    left: 140px;
+    z-index: 1000;
+}
 
+/* ----- settings ----- */
 .ryb__actions--settings {
     width: 49%;
     display: flex;
@@ -142,4 +133,9 @@
 .ryb__actions--settings-sliders button {
     width: fit-content;
     margin-top: 1rem;
+}
+
+/* ----- result ----- */
+.ryb__result {
+    
 }
