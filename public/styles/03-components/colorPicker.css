@@ -160,8 +160,5 @@ input[type="file"] {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-}
-.save-color-palette {
-    width: 200px;
-    font-size: 0.8rem;
+    font:inherit;
 }

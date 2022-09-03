@@ -206,9 +206,9 @@ const ColorPickerPage = (e) => {
                         style={{ backgroundColor: `${pickedColor}` }}>
                     </span>
                     <section className="buttons">
-                        <button className="button save-color-palette" onClick={savePalette}>Save palette to gallery</button>
-                        <button className="button save-color-palette" onClick={exportPalette}>Export without saving</button>
-                        <button className="button save-color-palette" onClick={exportScheme}>Export scheme</button>
+                        <button className="button" onClick={exportPalette}>Export palette</button>
+                        <button className="button" onClick={exportScheme}>Export scheme</button>
+                        <button className="button" onClick={savePalette}>Save to gallery</button>
                     </section>
                 </aside>
 

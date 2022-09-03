@@ -6,7 +6,7 @@ html {
 	color: var(--teal-black);
 }
 
-body, table, th, td, form, input, textarea, option, select {
+body, table, th, td, button, form, input, textarea, option, select {
 	font: inherit;
 }
 
