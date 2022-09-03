@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import html2canvas from 'html2canvas';
+import { exportResult, getPixel } from '../helpers';
 
 // import { useAuthContext } from '../../contexts/AuthContext';
 import * as pickerService from '../../services/pickerService';
 import { hideError, showError } from '../../helpers/notifications';
 
-const ColorPickerPage = () => {
+const ColorPickerPage = (e) => {
     const navigate = useNavigate();
     // const { user } = useAuthContext();
     const [src, setSrc] = useState('');
@@ -34,17 +35,17 @@ const ColorPickerPage = () => {
 
             if (ratio > 1) {
                 setDirection('horizontal');
-                canvas.width = 800;
-                canvas.height = 800 / ratio;
-                colors.width = 800;
-                colors.height = 100;
+                canvas.width = 830;
+                canvas.height = 830 / ratio;
+                colors.width = 830;
+                colors.height = 130;
                 colors.style['flex-direction'] = 'row';
                 colors.style['flex-grow'] = 1;
             } else {
                 setDirection('vertical');
                 canvas.width = 650 * ratio;
                 canvas.height = 650;
-                colors.width = 100;
+                colors.width = 130;
                 colors.height = 650;
                 colors.style['flex-direction'] = 'column';
             }
@@ -60,18 +61,10 @@ const ColorPickerPage = () => {
             setData(imageData.data);
         };
     };
-
-    const getPixel = (e) => {
-        let { offsetX, offsetY } = e.nativeEvent;
-        let pixel = e.target.width * offsetY + offsetX;
-        let arrayPos = pixel * 4;
-        const c = {
-            red: data[arrayPos],
-            green: data[arrayPos + 1],
-            blue: data[arrayPos + 2],
-            alpha: data[arrayPos + 3],
-        };
-        setPickedColor(`rgb(${c.red}, ${c.green}, ${c.blue})`);
+    
+    const definePixel = (e) => {
+        const picked = getPixel(e, data);
+        setPickedColor(picked);
     };
 
     const addColorBox = (e) => {
@@ -155,40 +148,13 @@ const ColorPickerPage = () => {
 
     const exportPalette = async () => {
         document.getElementById('canvasImage').style.display = 'none';
-        const el = document.getElementById('canvasSection');
-        const imageFileName = 'creation_' + (Math.random() * 9999 | 0);
-        const canvas = await html2canvas(el);
-        const imageSrc = canvas.toDataURL('image/png', 1.0);
-
-        const downloadImage = (blob, fileName) => {
-            const fakeLink = document.createElement('a');
-            fakeLink.style = 'display: none';
-            fakeLink.download = fileName;
-            fakeLink.href = blob;
-            document.body.appendChild(fakeLink);
-            fakeLink.click();
-            document.body.removeChild(fakeLink);
-            fakeLink.remove();
-        };
-        downloadImage(imageSrc, imageFileName);
+        const element = document.getElementById('canvasSection');
+        exportResult(element);
     };
 
     const exportScheme = async (e) => {
-        const el = document.getElementById('colors');
-        const imageFileName = 'scheme_' + (Math.random() * 9999 | 0);
-        const canvas = await html2canvas(el);
-        const image = canvas.toDataURL('image/png', 1.0);
-        const downloadImage = (blob, fileName) => {
-            const fakeLink = document.createElement('a');
-            fakeLink.style = 'display: none';
-            fakeLink.download = fileName;
-            fakeLink.href = blob;
-            document.body.appendChild(fakeLink);
-            fakeLink.click();
-            document.body.removeChild(fakeLink);
-            fakeLink.remove();
-        };
-        downloadImage(image, imageFileName);
+        const element = document.getElementById('colors');
+        exportResult(element);
     };
 
     return (
@@ -218,7 +184,7 @@ const ColorPickerPage = () => {
 
                 <section className="canvas-section" id="canvasSection">
                     <canvas className="image-canvas" id="myCanvas"
-                        onMouseMove={getPixel}
+                        onMouseMove={definePixel}
                         onClick={addColorBox}>
                         <img id="canvasImage" src={src} alt="" />
                     </canvas>
