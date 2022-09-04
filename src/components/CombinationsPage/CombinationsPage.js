@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
-import { getPixel } from '../helpers';
+import { getPixel, exportResult } from '../helpers';
 import * as helpers from './combinationsHelpers';
 
 const Combinations = () => {
 
     const [data, setData] = useState([]);
-    const [ctx, setCtx] = useState({});
+    const [mainRgb, setMainRgb] = useState('rgb(254, 254, 51)');
     const [mainColor, setMainColor] = useState('yellow');
     const [whiteValue, setWhiteValue] = useState(0);
     const [blackValue, setBlackValue] = useState(0);
     const [greyValue, setGreyValue] = useState(0);
+    const [info, setInfo] = useState('');
 
     const showOnMouseOver = (e) => {
         const targetName = e.currentTarget.id;
@@ -32,30 +33,106 @@ const Combinations = () => {
         canvasCtx.drawImage(ryb, 0, 0, 300, 300);
         const imageData = canvasCtx.getImageData(0, 0, canvas.width, canvas.height);
         setData(imageData.data);
-        setCtx(canvasCtx);
     };
 
-    const rotateWheel = (e) => {
+    const rotateWheel = async (e) => {
+        // resetSettings();
         resetWhite();
         resetBlack();
         resetGrey();
+        resetScheme();
+        resetSettings();
 
-        const picked = getPixel(e, data);
-        const pickedName = helpers.getColorName[picked];
-        const degrees = helpers.calculateRotationDegrees(pickedName);
-        const wheel = e.currentTarget;
-        wheel.style.transform = `rotate(${degrees}deg)`;
-        wheel.style['transition-duration'] = '1s';
+        const rgb = getPixel(e, data);
+        console.log(rgb);
+        
+        if (rgb !== 'rgb(0, 0, 0)') {
+            const colorName = helpers.getColorNameFromRgb[rgb];
+            const degrees = helpers.getRotationDegrees[colorName];
 
-        setMainColor(pickedName);
+            const canvas = e.currentTarget;
+            canvas.style.transform = `rotate(${degrees}deg)`;
+            canvas.style['transition-duration'] = '1s';
+
+            setMainColor(colorName);
+        } else {
+            setMainColor('yellow');
+        }
+
+        // const rotated = e.currentTarget.firstChild;
+        // drawRotated(degrees);
+        // function drawRotated(degrees) {
+        //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+        //     ctx.save();
+        //     ctx.translate(canvas.width / 2, canvas.height / 2);
+        //     ctx.rotate(degrees * Math.PI / 180);
+        //     ctx.drawImage(rotated, -rotated.width / 2, -rotated.hight / 2);
+        //     ctx.restore();
+        // }
     };
 
     const onSelectedScheme = (e) => {
         const scheme = e.target.value;
         const schemeCanvas = document.getElementById('schemeCanvas');
-        const schemeCanvasCtx = schemeCanvas.getContext('2d');
-        schemeCanvasCtx.clearRect(10, 10, 140, 140);
-        helpers.drawScheme[scheme](schemeCanvasCtx);
+        document.getElementById('resultSection').style.display = 'flex';
+
+        let ul = document.getElementById('resultColors');
+        const colorObject = helpers.colorObjects[mainColor];
+        const colorsArr = colorObject[scheme];
+        
+        while (ul.hasChildNodes()) {
+            ul.removeChild(ul.firstChild);
+        }
+
+        if (colorsArr && colorsArr.length > 0) {
+            const schemeCanvasCtx = schemeCanvas.getContext('2d');
+            schemeCanvasCtx.clearRect(10, 10, 140, 140);
+            helpers.drawScheme[scheme](schemeCanvasCtx);
+
+            for (const color of colorsArr) {
+                let li = document.createElement('li');
+                li.className = 'ryb__result--li';
+
+                const rgb = helpers.getRgbFromColorName[color];
+                li.style.backgroundColor = rgb;
+
+                let info = document.createElement('a');
+                info.className = 'ryb__result--li-link';
+                info.style.whiteSpace = 'pre';
+                info.textContent = color + '\r\n' + rgb;
+
+                li.addEventListener('mouseover', () => { info.style.display = 'inline-block'; });
+                li.addEventListener('mouseleave', () => { info.style.display = 'none'; });
+
+                li.appendChild(info);
+                ul.appendChild(li);
+            }
+        }
+
+        //   show info
+        const text = helpers.getInfoCombinations[scheme];
+        setInfo(text);
+
+        // const imageData = ctx.getImageData(0, 0, 300, 300);
+        // const data = imageData.data;
+        // const rgba = helpers.getPixelColor(data);
+        // console.log(rgba);
+
+        // const xCoord = 150;
+        // const yCoord = 21;
+        // const canvasWidth = 300;
+        // const getColorIndicesForCoord = (x, y, width) => {
+        //     const red = y * (width * 4) + x * 4;
+        //     return [red, red + 1, red + 2, red + 3];
+        // };
+        // const colorIndices = getColorIndicesForCoord(xCoord, yCoord, canvasWidth);
+        // const [redIndex, greenIndex, blueIndex, alphaIndex] = colorIndices;
+        // const rgba = `rgba(${data[redIndex]}, ${data[greenIndex]}, ${data[blueIndex]}, ${data[alphaIndex] / 255})`;
+
+        // const pixel = ctx.getImageData(150, 275, 1, 1);
+        // const data = pixel.data;
+        // const rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
+        // console.log(rgba);
     };
 
     const onWhiteChange = (e) => {
@@ -109,34 +186,46 @@ const Combinations = () => {
         const schemeCanvasCtx = schemeCanvas.getContext('2d');
         schemeCanvasCtx.clearRect(10, 10, 140, 140);
     };
+    const resetResult = (e) => {
+        document.getElementById('resultSection').style.display = 'none';
+    };
     const resetSettings = (e) => {
         resetWheel();
         resetScheme();
         resetWhite();
         resetBlack();
         resetGrey();
+        resetResult();
+        setMainColor('yellow');
+    };
+
+    const exportScheme = async (e) => {
+        const element = document.getElementById('resultColors');
+        exportResult(element);
     };
 
     return (
         <section className="ryb" >
-            <h2 className="ryb__header">Color combinations</h2>
-            <h6> Find the colors that go well together.
-                Combine vibes in nice and accurate color schemes.</h6>
-            <h6 className="diffHeading"> Be the designer of your colorful life.</h6>
+            <section className="ryb__header-section">
+                <h2 className="ryb__header">Color combinations</h2>
+                <h6> Find the colors that go well together.
+                    Combine vibes in nice and accurate color schemes.</h6>
+                <h6 className="diffHeading"> Be the designer of your colorful life.</h6>
 
-            <p> The traditional color theory is based on subtractive primary colors and the RYB color model.</p>
-            <p> Red, Yellow and Blue are the
-                <strong id="primary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> primary colors</strong>.
-                The <strong id="secondary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> secondary colors </strong >
-                Orange, Green and Purple are created by mixing primary colors.
-                Red-Orange, Yellow-Orange, Yellow-Green, Blue-Green, Blue-Purple, Red-Purple are the
-                <strong id="tertiary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> tertiary colors</strong>.
-                They are made by mixing two secondary colors.
-            </p>
-            <p>
-                RYB color model is used by artists, fashion stylists,
-                interior, graphic and web designers.
-            </p>
+                <div> The traditional color theory is based on subtractive primary colors and the RYB color model.</div>
+                <p> Red, Yellow and Blue are the
+                    <strong id="primary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> primary colors</strong>.
+                    The <strong id="secondary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> secondary colors </strong >
+                    Orange, Green and Purple are created by mixing primary colors.
+                    Red-Orange, Yellow-Orange, Yellow-Green, Blue-Green, Blue-Purple, Red-Purple are the
+                    <strong id="tertiary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> tertiary colors</strong>.
+                    They are made by mixing two secondary colors.
+                </p>
+                <div>
+                    RYB color model is used by artists, fashion stylists,
+                    interior, graphic and web designers.
+                </div>
+            </section>
 
             <section className="ryb__actions">
 
@@ -179,7 +268,7 @@ const Combinations = () => {
                         </select>
                     </section>
 
-                    <section className="ryb__actions--settings-sliders">
+                    <section id="slidersSection" className="ryb__actions--settings-sliders">
                         <p>Set the quantity of white, black or grey to change
                             the lightness, darkness or saturation of pure colors</p>
 
@@ -217,12 +306,13 @@ const Combinations = () => {
 
             </section>
 
-            <section className="ryb__result">
-                <ul>
-
-                </ul>
+            <section id="resultSection" className="ryb__result">
+                <ul id="resultColors" className="ryb__result--ul"></ul>
+                <section className="ryb__result--info">
+                    <span>{info}</span>
+                    <button className="button" onClick={exportScheme}>Export scheme</button>
+                </section>
             </section>
-
 
         </section>
     );

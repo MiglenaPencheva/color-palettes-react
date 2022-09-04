@@ -1,31 +1,34 @@
 .ryb {
     margin: 0 auto;
+    padding: 0.8rem;
     max-width: 900px;
 }
 
+/*  ---- header ----  */
+.ryb__header-section {
+    /* padding: 0.8rem; */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
 .ryb__header {
-    margin: 0 auto;
-    padding: 1rem;
-    width: 100%;
+    margin: 0;
     text-align: center;
 }
-
-.ryb p {
-    margin: 0.5rem;
-}
-
 .diffHeading {
-    padding: 0.5rem;
+    padding: 0 0 0.5rem 0;
     font-weight: 100;
     font-style: italic;
-    font-size: 1.7rem;
+    font-size: 2rem;
     letter-spacing: 0.2rem;
     text-shadow: 2px 2px 2px var(--vermilion);
 }
-
 .strong:hover {
     font-style: italic;
     cursor: default;
+}
+.ryb__header-section > p {
+    margin: 0;
 }
 
 /* ----- actions ----- */
@@ -36,7 +39,7 @@
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
 }
 
 /* ----- canvas, wheel, layers ----- */
@@ -45,7 +48,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     position: relative;
 }
@@ -53,7 +56,7 @@
 .white-layer {
     display: none;
     position: absolute;
-    top: 2rem;
+    top: 3rem;
     width: 302px;
     height: 304px;
     z-index: 1;
@@ -65,7 +68,7 @@
 #tertiaryImage {
     display: none;
     position: absolute;
-    top: 2rem;
+    top: 3rem;
     width: 305px;
     height: 305px;
 }
@@ -85,17 +88,21 @@
     cursor: pointer;
     animation: animatedRotation 2s;
 }
+
 @keyframes animatedRotation {
-    100% {transform: rotate(360deg);}
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 #rybImage {
     z-index: 1;
 }
+
 #schemeCanvas {
     position: absolute;
-    top: 105px;
-    left: 140px;
+    top: 120px;
+    left: 133px;
     z-index: 1000;
 }
 
@@ -109,8 +116,9 @@
 }
 
 .ryb__actions--settings p {
-    padding: 0 0.5rem;
-    font-size: 0.8rem;
+    margin: 0;
+    padding: 0.5rem;
+    font-size: 0.9rem;
 }
 
 .ryb__actions--settings h6 {
@@ -136,6 +144,60 @@
 }
 
 /* ----- result ----- */
-.ryb__result {
-    
+#resultSection {
+    width: 100;
+    display: none;
+    flex-wrap: no-wrap;
+    justify-content: space-between;
+}
+.ryb__result--ul {
+    margin: 0;
+    padding: 0.5rem;
+    width: fit-content;
+    display: flex;
+    gap: 0.5rem;
+}
+.ryb__result--li {
+    margin: 0;
+    padding: 0;
+    width: 121px;
+    height: 121px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    font-size: 0.5rem;
+    border-radius: 5px;
+}
+
+.ryb__result--li-link {
+    display: none;
+    padding: 5px;
+    justify-self: flex-end;
+    color: var(--vermilion-white);
+    font-size: 0.7rem;
+    text-shadow: 1px 1px 1px var(--teal-black);
+}
+.ryb__result--li-link:hover {
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.ryb__result--info {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 49%;
+}
+
+.ryb__result--info span {
+    margin: 0;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+.ryb__result--info button {
+    width: fit-content;
+    margin-top: 1rem;
 }
