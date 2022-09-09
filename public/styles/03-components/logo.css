@@ -1,0 +1,28 @@
+.logo {
+    position: sticky;
+    top: 1rem;
+    left: 1rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 24%;
+    animation: rotation 1.5s;
+    opacity: 66%;
+    cursor: pointer;
+    z-index: 1000;
+}
+.logo:hover {
+    opacity: 100%;
+}
+
+@keyframes rotation {
+    25% {
+        border-radius: 50%;
+    }
+    50% {
+        border-radius: 40%;
+    }
+    100% {
+        border-radius: 24%;
+        transform: rotate(360deg);
+    }
+}

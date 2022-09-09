@@ -1,6 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
+import Logo from './components/Logo/Logo';
+
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import Gallery from './components/Gallery/Gallery';
@@ -24,6 +26,7 @@ function App() {
                 {/* <Header /> */}
 
                 <nav></nav>
+                <Logo />
 
                 <main id="site-content">
                     <Routes>

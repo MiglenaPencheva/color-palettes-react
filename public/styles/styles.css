@@ -9,6 +9,7 @@
 @import './02-elements/elements-links.css';
 @import './02-elements/elements-slider.css';
 
+@import './03-components/logo.css';
 @import './03-components/home.css';
 @import './03-components/header.css';
 /* @import './03-components/navigation.css'; */
