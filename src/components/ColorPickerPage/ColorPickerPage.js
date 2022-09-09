@@ -61,7 +61,7 @@ const ColorPickerPage = (e) => {
             setData(imageData.data);
         };
     };
-    
+
     const definePixel = (e) => {
         const picked = getPixel(e, data);
         setPickedColor(picked);
@@ -159,13 +159,14 @@ const ColorPickerPage = (e) => {
 
     return (
         <section className="picker-section">
-            <h2 className="picker__header">Color picker</h2>
-            <h6>Upload an image file. Pick the colors you like
-                and compose your desired combination.
-            </h6>
-            <h6 className="diffHeading">
-                Be the creator of your unique color palette.
-            </h6>
+            <section className="section-header">
+                <h2>Color picker</h2>
+                <h6>Upload an image file. Pick the colors you like
+                    and compose your desired combination.</h6>
+                <h6 className="diffHeading">
+                    Be the creator of your unique color palette.
+                </h6>
+            </section>
 
             <section className="picker__file-input">
                 <label className="button ">

@@ -1,26 +1,5 @@
 .picker-section {
     margin: 0 auto;
-    /* max-width: 1200px; */
-}
-.picker__header {
-    margin: 0 auto;
-    padding: 1rem;
-    text-align: center;
-}
-
-h6 {
-    margin: 0 auto;
-    padding: 0.5rem;
-    text-align: center;
-    font-size: 1rem;
-}
-.diffHeading {
-    padding: 0.5rem;
-    font-weight: 100;
-    font-style: italic;
-    font-size: 1.7rem;
-    letter-spacing: 0.2rem;
-    text-shadow: 2px 2px 2px var(--vermilion);
 }
 
 .picker__file-input {

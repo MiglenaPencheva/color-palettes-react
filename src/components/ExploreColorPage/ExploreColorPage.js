@@ -1,12 +1,17 @@
 const ExploreColor = () => {
 
-
     return (
         <section className="explore-page">
-            <h4>Explore color</h4>
-            <h5>RGB color wheel</h5>
+
+            <section className="section-header">
+                <h2 >Explore colors</h2>
+                <h6> Find the information you need.
+                    Convert between hex code, hsl, rgb and ryb value.</h6>
+                <h6 className="diffHeading">Go deep into the color details.</h6>
+            </section>
+
             <section >
-                <div className="explore__rgb-wheel"></div>
+                {/* <div className="explore__rgb-wheel"></div> */}
             </section>
         </section>
     );
