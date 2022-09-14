@@ -1,25 +1,66 @@
 import { useState, useEffect } from 'react';
 import * as helpers from './exploreHelpers';
+import { hideError, showError } from '../../helpers/notifications';
 
 const ExploreColor = () => {
-    const [color, setColor] = useState('207, 230, 239');
+    const [name, setName] = useState('no name');
     const [rgb, setRgb] = useState('');
     const [hex, setHex] = useState('');
     const [hsl, setHsl] = useState('');
     const [cmyk, setCmyk] = useState('');
+    const [color, setColor] = useState({});
 
     const submitColorHandler = (e) => {
         e.preventDefault();
 
         let formData = new FormData(e.currentTarget);
         let colorValue = formData.get('colorValue');
-        console.log(colorValue);
-
-        // validate input     
-
         preview(colorValue);
 
-        // setColor(colorValue);
+        let r, g, b;
+        const color = helpers.getColorObject(colorValue);
+
+        if (color.rgb) {
+            r = color.red;
+            g = color.green;
+            b = color.blue;
+        } else if (color.name) {
+            // color.hex = helpers.nameToHex(color.name);
+            // let rgbResult = helpers.hexToRgb(hex);
+            // color.rgb = rgbResult.rgb;
+            // color.red = rgbResult.red;
+            // color.green = rgbResult.green;
+            // color.blue = rgbResult.blue;
+        } else if (color.hex) {
+            // get r, g, b from hex
+        } else if (color.hsl) {
+            // hslToRgb
+        } else if (color.cmyk) {
+            // cmykToRgb
+        }
+
+        color.hex = helpers.rgbToHex(r, g, b);
+        color.name = helpers.rgbToName(r, g, b);
+        let hslResult = helpers.rgbToHsl(r, g, b);
+        color.hsl = hslResult.hslString;
+        color.hue = hslResult.hue;
+        color.saturation = hslResult.saturation;
+        color.lightness = hslResult.lightness;
+        let cmykResult = helpers.rgbToCmyk(color.red, color.green, color.blue);
+        color.cmyk = cmykResult.cmykString;
+        color.cyan = cmykResult.cyan;
+        color.magenta = cmykResult.magenta;
+        color.yellow = cmykResult.yellow;
+        color.black = cmykResult.black;
+
+        console.log(color);
+
+        setColor(color);
+        setName(color.name);
+        setRgb(color.rgb);
+        setHex(color.hex);
+        setHsl(color.hsl);
+        setCmyk(color.cmyk);
     };
 
     function preview(color) {
@@ -44,20 +85,17 @@ const ExploreColor = () => {
             <section className="section-header">
                 <h2 >Explore colors</h2>
                 <h6> Find the information you need.
-                    Convert between hex code, hsl, rgb and ryb value.</h6>
+                    Convert between hex code, hsl, rgb and cmyk values.</h6>
                 <h6 className="diffHeading">Go deep into the color details.</h6>
             </section>
 
             <form id="color-form" className="explore__input" onSubmit={submitColorHandler}>
                 <p className="explore__info">Type color value</p>
-                <p className="explore__input--info">Enter hex, rgb, hsl, cmyk or name</p>
+                <p className="explore__input--info">Enter hex, rgb, hsl or name</p>
                 <section className="explore__input--container">
-                    <input type="text" name="colorValue" id="colorValue"
-                        className="explore__input--input" placeholder="color value" />
-                    <input className="button explore__input--submit"
-                        type="submit" value="ok" />
+                    <input type="text" name="colorValue" id="colorValue" className="explore__input--input" placeholder="color value" />
+                    <input className="button explore__input--submit" type="submit" value="ok" />
                 </section>
-
             </form>
 
             <section className="explore__preview">
@@ -70,9 +108,11 @@ const ExploreColor = () => {
 
             <section className="explore__values">
                 <p className="explore__info">Color values</p>
+                <li>{name ? name : 'no name'}</li>
+                <span>Browsers support 140 color names.</span>
                 <li>rgb({rgb})</li>
                 <span>RGB value indicates how much of red, green and blue is included. Each component of the triplet can vary from 0 to 255.</span>
-                <li>hex #{hex}</li>
+                <li>#{hex}</li>
                 <span>A hex triplet is a six-digit, three-byte hexadecimal number, specifying the intensity of red, green and blue.</span>
                 <li>hsl({hsl})</li>
                 <span>HSL color value is specified with hue, saturation and lightness parameters. Hue is a degree on the color wheel from 0 to 360. Saturation and lightness are a percentage value from 0% to 100%.</span>

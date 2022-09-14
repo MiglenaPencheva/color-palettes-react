@@ -1,9 +1,103 @@
+export const getColorObject = (input) => {
+    input = input.trim();
+    let color = {};
+    const firstChar = input.split('')[0];
+    const isBracket = input.match(/[()]/g);
+    let prefix, rest;
+
+    let name = hasName(input);   // check for name
+    if (name) {
+        color.name = input.toLowerCase();
+    } else if (firstChar === '#') {    // check for hex 
+        let restChars = input.split('#')[1];
+        const isHexValues = restChars.match(/[0-9][a-z]/i) && restChars.length <= 6;
+        if (isHexValues) {
+            color.hex = restChars;
+        }
+    } else if (isBracket) {     // check for rgb and hsl
+        prefix = input.split('(')[0];
+        rest = input.split('(')[1].split(')')[0];
+
+        if (prefix === 'rgb') {
+            let rgbArr = rest.replace(' ', '').split(',');
+            for (let i = 0; i < rgbArr.length; i++) {        // rgb(0, 191, 255)
+                if (rgbArr[i] < 0) { rgbArr[i] = 0; }
+                if (rgbArr[i] > 255) { rgbArr[i] = 255; }
+            }
+            let r = rgbArr[0];
+            let g = rgbArr[1];
+            let b = rgbArr[2];
+            color.rgb = `${r}, ${g}, ${b}`;
+            color.red = Number(r);
+            color.green = Number(g);
+            color.blue = Number(b);
+        } else if (prefix === 'hsl') {
+            let hslArr = rest.replace(' ', '').replace('%', '').split(',');       // hsl(195, 100%, 50%)
+            let h = hslArr[0];
+            let s = hslArr[1];
+            let l = hslArr[2];
+            if (h < 0 || h > 359) { h = 0; }
+            if (s < 0) { s = 0; }
+            if (s > 100) { s = 100; }
+            if (l < 0) { l = 0; }
+            if (l > 100) { l = 100; }
+            color.hsl = `${h}, ${s}%, ${l}%`;
+            color.hue = h;
+            color.saturation = (s / 100);
+            color.lightness = (l / 100);
+            // } else if (prefix === 'cmyk') {
+            //     let cmykArr = rest.replaceAll(' ', '').replaceAll('%', '').split(',');
+            //     for (let i = 0; i < cmykArr.length; i++) {
+            //         if (cmykArr[i] < 0) { cmykArr[i] = 0; }
+            //         if (cmykArr[i] > 100) { cmykArr[i] = 100; }  // cmyk(100%, 25%, 0%, 0%)
+            //     }
+            //     let c = cmykArr[0];
+            //     let m = cmykArr[1];
+            //     let y = cmykArr[2];
+            //     let k = cmykArr[3];
+            //     color.cmyk = `${c}%, ${m}%, ${y}%, ${k}%`;
+            //     color.cyan = c / 100;
+            //     color.magenta = m / 100;
+            //     color.yellow = y / 100;
+            //     color.black = k / 100;
+            // }
+        }
+    }
+    return color;
+};
+
+export const hasName = (input) => {
+    const colorNamesArr = getColorArr('names').map(x => x.toLowerCase());
+    let name = colorNamesArr.includes(input.toLowerCase());
+    return name;
+};
+export const rgbToName = (red, green, blue) => {
+    let r, g, b;
+    let hexArr = getColorArr('hexs');
+    for (let i = 0; i < hexArr.length; i++) {
+        r = parseInt(hexArr[i].substr(0, 2), 16);
+        g = parseInt(hexArr[i].substr(2, 2), 16);
+        b = parseInt(hexArr[i].substr(4, 2), 16);
+        if (red === r && green === g && blue === b) {
+            return getColorArr('names')[i];
+        }
+    }
+};
+export const rgbToHex = (r, g, b) => {
+    function toHex(n) {
+        let hex = n.toString(16);
+        while (hex.length < 2) { hex = '0' + hex; }
+        return hex;
+    };
+    let redHex = toHex(r);
+    let greenHex = toHex(g);
+    let blueHex = toHex(b);
+    let hexValue = redHex + greenHex + blueHex;
+    return hexValue;
+};
 export const rgbToHsl = (r, g, b) => {
-    // const min, max, i, l, s, maxcolor, h, 
-    let h;
-    let l;
-    let s;
-    let maxcolor;
+    let h, l, s;
+    let maxColor;
     let rgb = [];
     rgb[0] = r / 255;
     rgb[1] = g / 255;
@@ -13,26 +107,21 @@ export const rgbToHsl = (r, g, b) => {
 
     for (let i = 0; i < rgb.length - 1; i++) {
         if (rgb[i + 1] <= min) { min = rgb[i + 1]; }
-        if (rgb[i + 1] >= max) { max = rgb[i + 1]; maxcolor = i + 1; }
+        if (rgb[i + 1] >= max) { max = rgb[i + 1]; maxColor = i + 1; }
     }
-
-    if (maxcolor === 0) {
+    if (maxColor === 0) {
         h = (rgb[1] - rgb[2]) / (max - min);
     }
-    if (maxcolor === 1) {
+    if (maxColor === 1) {
         h = 2 + (rgb[2] - rgb[0]) / (max - min);
     }
-    if (maxcolor === 2) {
+    if (maxColor === 2) {
         h = 4 + (rgb[0] - rgb[1]) / (max - min);
     }
-
     if (isNaN(h)) { h = 0; }
     h = h * 60;
-
     if (h < 0) { h = h + 360; }
-
     l = (min + max) / 2;
-
     if (min === max) {
         s = 0;
     } else {
@@ -42,10 +131,14 @@ export const rgbToHsl = (r, g, b) => {
             s = (max - min) / (2 - max - min);
         }
     }
-    // s = s;
-    return { h: h, s: s, l: l };
+    h = Number((h).toFixed(0));
+    return {
+        hue: h,
+        saturation: Math.round(s * 100),
+        lightness: Math.round(l * 100),
+        hslString: `${h}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%`,
+    };
 };
-
 export const rgbToCmyk = (r, g, b) => {
     let c, m, y, k;
     r = r / 255;
@@ -62,26 +155,28 @@ export const rgbToCmyk = (r, g, b) => {
         m = (1 - g - k) / (1 - k);
         y = (1 - b - k) / (1 - k);
     }
-    return { c: c, m: m, y: y, k: k };
+    c = Number((c * 100).toFixed(0));
+    m = Number((m * 100).toFixed(0));
+    y = Number((y * 100).toFixed(0));
+    k = Number((k * 100).toFixed(0));
+
+    return {
+        cyan: c,
+        magenta: m,
+        yellow: y,
+        black: k,
+        cmykString: `${c}%, ${m}%, ${y}%, ${k}%`,
+    };
 };
 
-export const cmykToRgb = (c, m, y, k) => {
-    let r, g, b;
-    r = 255 - ((Math.min(1, c * (1 - k) + k)) * 255);
-    g = 255 - ((Math.min(1, m * (1 - k) + k)) * 255);
-    b = 255 - ((Math.min(1, y * (1 - k) + k)) * 255);
-    return { r: r, g: g, b: b };
+export const hexToRgb = (hex) => {
+    const rgb = {
+        r: parseInt(hex.substr(0, 2), 16),
+        g: parseInt(hex.substr(2, 2), 16),
+        b: parseInt(hex.substr(4, 2), 16)
+    };
+    return rgb;
 };
-
-export const hueToRgb = (t1, t2, hue) => {
-    if (hue < 0) { hue += 6; }
-    if (hue >= 6) { hue -= 6; }
-    if (hue < 1) { return (t2 - t1) * hue + t1; }
-    else if (hue < 3) { return t2; }
-    else if (hue < 4) { return (t2 - t1) * (4 - hue) + t1; }
-    else { return t1; }
-};
-
 export const hslToRgb = (hue, sat, light) => {
     let t1, t2, r, g, b;
     hue = hue / 60;
@@ -94,7 +189,26 @@ export const hslToRgb = (hue, sat, light) => {
     r = hueToRgb(t1, t2, hue + 2) * 255;
     g = hueToRgb(t1, t2, hue) * 255;
     b = hueToRgb(t1, t2, hue - 2) * 255;
-    return { r: r, g: g, b: b };
+    return { r, g, b };
+};
+export const cmykToRgb = (c, m, y, k) => {
+    let r, g, b;
+    r = 255 - ((Math.min(1, c * (1 - k) + k)) * 255);
+    g = 255 - ((Math.min(1, m * (1 - k) + k)) * 255);
+    b = 255 - ((Math.min(1, y * (1 - k) + k)) * 255);
+    return { r, g, b };
+};
+
+
+
+
+export const hueToRgb = (t1, t2, hue) => {
+    if (hue < 0) { hue += 6; }
+    if (hue >= 6) { hue -= 6; }
+    if (hue < 1) { return (t2 - t1) * hue + t1; }
+    else if (hue < 3) { return t2; }
+    else if (hue < 4) { return (t2 - t1) * (4 - hue) + t1; }
+    else { return t1; }
 };
 
 export const getColorArr = (x) => {
@@ -145,17 +259,17 @@ export const emptyObject = () => {
     };
 };
 
-function roundDecimals(c) {
+export const roundDecimals = (c) => {
     c.red = Number(c.red.toFixed(0));
     c.green = Number(c.green.toFixed(0));
     c.blue = Number(c.blue.toFixed(0));
     c.hue = Number(c.hue.toFixed(0));
-    c.sat = Number(c.sat.toFixed(2));
+    c.saturation = Number(c.saturation.toFixed(2));
     c.lightness = Number(c.lightness.toFixed(2));
     c.cyan = Number(c.cyan.toFixed(2));
     c.magenta = Number(c.magenta.toFixed(2));
     c.yellow = Number(c.yellow.toFixed(2));
     c.black = Number(c.black.toFixed(2));
-    c.opacity = Number(c.opacity.toFixed(2));
+    // c.opacity = Number(c.opacity.toFixed(2));
     return c;
-}
+};

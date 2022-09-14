@@ -48,9 +48,8 @@
     flex-wrap: nowrap;
 }
 .explore__input--input {
-    padding: 0.5rem;
+    padding: 0.3rem 1rem;
     width: 200px;
-    /* font-size: 1rem; */
 }
 .explore__input--submit {
     margin-left: 0.5rem;
@@ -101,7 +100,7 @@
 .explore__values li {
     padding: 0.5rem;
     width: 200px;
-    border: 1px solid var(--teal-grey);
+    border: 1px solid var(--teal-extra-light);
     border-radius: 5px;
 }
 .explore__values span {
