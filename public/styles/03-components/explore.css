@@ -99,7 +99,7 @@
 }
 .explore__values li {
     padding: 0.5rem;
-    width: 200px;
+    width: 260px;
     border: 1px solid var(--teal-extra-light);
     border-radius: 5px;
 }

@@ -10,7 +10,7 @@ export const getColorObject = (input) => {
         color.name = input.toLowerCase();
     } else if (firstChar === '#') {    // check for hex 
         let restChars = input.split('#')[1];
-        const isHexValues = restChars.match(/[0-9][a-z]/i) && restChars.length <= 6;
+        const isHexValues = restChars.match(/[0-9a-z]/gi) && restChars.length <= 6;
         if (isHexValues) {
             color.hex = restChars;
         }
@@ -32,35 +32,34 @@ export const getColorObject = (input) => {
             color.green = Number(g);
             color.blue = Number(b);
         } else if (prefix === 'hsl') {
-            let hslArr = rest.replace(' ', '').replace('%', '').split(',');       // hsl(195, 100%, 50%)
-            let h = hslArr[0];
-            let s = hslArr[1];
-            let l = hslArr[2];
+            let hslArr = rest.replace(' ', '').replaceAll('%', '').split(',');       // hsl(195, 100%, 50%)
+            let h = Number(hslArr[0]);
+            let s = Number(hslArr[1]);
+            let l = Number(hslArr[2]);
             if (h < 0 || h > 359) { h = 0; }
             if (s < 0) { s = 0; }
             if (s > 100) { s = 100; }
             if (l < 0) { l = 0; }
             if (l > 100) { l = 100; }
             color.hsl = `${h}, ${s}%, ${l}%`;
-            color.hue = h;
-            color.saturation = (s / 100);
-            color.lightness = (l / 100);
-            // } else if (prefix === 'cmyk') {
-            //     let cmykArr = rest.replaceAll(' ', '').replaceAll('%', '').split(',');
-            //     for (let i = 0; i < cmykArr.length; i++) {
-            //         if (cmykArr[i] < 0) { cmykArr[i] = 0; }
-            //         if (cmykArr[i] > 100) { cmykArr[i] = 100; }  // cmyk(100%, 25%, 0%, 0%)
-            //     }
-            //     let c = cmykArr[0];
-            //     let m = cmykArr[1];
-            //     let y = cmykArr[2];
-            //     let k = cmykArr[3];
-            //     color.cmyk = `${c}%, ${m}%, ${y}%, ${k}%`;
-            //     color.cyan = c / 100;
-            //     color.magenta = m / 100;
-            //     color.yellow = y / 100;
-            //     color.black = k / 100;
-            // }
+            color.hue = Number(h.toFixed(0));
+            color.saturation = Number((s / 100).toFixed(2));
+            color.lightness = Number((l / 100).toFixed(2));
+        } else if (prefix === 'cmyk') {
+            let cmykArr = rest.replaceAll(' ', '').replaceAll('%', '').split(',');
+            for (let i = 0; i < cmykArr.length; i++) {
+                if (cmykArr[i] < 0) { cmykArr[i] = 0; }
+                if (cmykArr[i] > 100) { cmykArr[i] = 100; }  // cmyk(100%, 25%, 0%, 0%)
+            }
+            let c = cmykArr[0];
+            let m = cmykArr[1];
+            let y = cmykArr[2];
+            let k = cmykArr[3];
+            color.cmyk = `${c}%, ${m}%, ${y}%, ${k}%`;
+            color.cyan = c / 100;
+            color.magenta = m / 100;
+            color.yellow = y / 100;
+            color.black = k / 100;
         }
     }
     return color;
@@ -73,37 +72,34 @@ export const hasName = (input) => {
 };
 export const rgbToName = (red, green, blue) => {
     let r, g, b;
-    let hexArr = getColorArr('hexs');
-    for (let i = 0; i < hexArr.length; i++) {
-        r = parseInt(hexArr[i].substr(0, 2), 16);
-        g = parseInt(hexArr[i].substr(2, 2), 16);
-        b = parseInt(hexArr[i].substr(4, 2), 16);
+    let hexes = getColorArr('hexes');
+    for (let i = 0; i < hexes.length; i++) {
+        r = parseInt(hexes[i].substr(0, 2), 16);
+        g = parseInt(hexes[i].substr(2, 2), 16);
+        b = parseInt(hexes[i].substr(4, 2), 16);
         if (red === r && green === g && blue === b) {
             return getColorArr('names')[i];
         }
     }
 };
 export const rgbToHex = (r, g, b) => {
-    function toHex(n) {
-        let hex = n.toString(16);
-        while (hex.length < 2) { hex = '0' + hex; }
-        return hex;
-    };
-    let redHex = toHex(r);
-    let greenHex = toHex(g);
-    let blueHex = toHex(b);
-    let hexValue = redHex + greenHex + blueHex;
-    return hexValue;
+    let hexR = r.toString(16);
+    while (hexR.length < 2) { hexR = '0' + hexR; }
+    let hexG = g.toString(16);
+    while (hexG.length < 2) { hexG = '0' + hexG; }
+    let hexB = b.toString(16);
+    while (hexB.length < 2) { hexB = '0' + hexB; }
+    return (hexR + hexG + hexB);
 };
 export const rgbToHsl = (r, g, b) => {
     let h, l, s;
-    let maxColor;
     let rgb = [];
     rgb[0] = r / 255;
     rgb[1] = g / 255;
     rgb[2] = b / 255;
     let min = rgb[0];
     let max = rgb[0];
+    let maxColor = 0;
 
     for (let i = 0; i < rgb.length - 1; i++) {
         if (rgb[i + 1] <= min) { min = rgb[i + 1]; }
@@ -131,12 +127,14 @@ export const rgbToHsl = (r, g, b) => {
             s = (max - min) / (2 - max - min);
         }
     }
-    h = Number((h).toFixed(0));
+    h = Math.round(h);
+    s = Math.round(s * 100);
+    l = Math.round(l * 100);
     return {
         hue: h,
-        saturation: Math.round(s * 100),
-        lightness: Math.round(l * 100),
-        hslString: `${h}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%`,
+        saturation: s,
+        lightness: l,
+        hslString: `${h}, ${s}%, ${l}%`,
     };
 };
 export const rgbToCmyk = (r, g, b) => {
@@ -169,16 +167,30 @@ export const rgbToCmyk = (r, g, b) => {
     };
 };
 
-export const hexToRgb = (hex) => {
-    const rgb = {
-        r: parseInt(hex.substr(0, 2), 16),
-        g: parseInt(hex.substr(2, 2), 16),
-        b: parseInt(hex.substr(4, 2), 16)
-    };
-    return rgb;
+export const nameToRgb = (name) => {
+    let r, g, b, hex;
+    let names = getColorArr('names');
+    for (let i = 0; i < names.length; i++) {
+        if (name.toLowerCase() === names[i].toLowerCase()) {
+            let hexes = getColorArr('hexes');
+            r = parseInt(hexes[i].substr(0, 2), 16);
+            g = parseInt(hexes[i].substr(2, 2), 16);
+            b = parseInt(hexes[i].substr(4, 2), 16);
+            hex = hexes[i];
+            break;
+        }
+    }
+    return { r, g, b, hex };
 };
+export const hexToRgb = (hex) => {
+    let r = parseInt(hex.substr(0, 2), 16);
+    let g = parseInt(hex.substr(2, 2), 16);
+    let b = parseInt(hex.substr(4, 2), 16);
+    return { r, g, b };
+};
+
 export const hslToRgb = (hue, sat, light) => {
-    let t1, t2, r, g, b;
+    var t1, t2, r, g, b;
     hue = hue / 60;
     if (light <= 0.5) {
         t2 = light * (sat + 1);
@@ -186,90 +198,90 @@ export const hslToRgb = (hue, sat, light) => {
         t2 = light + sat - (light * sat);
     }
     t1 = light * 2 - t2;
-    r = hueToRgb(t1, t2, hue + 2) * 255;
-    g = hueToRgb(t1, t2, hue) * 255;
-    b = hueToRgb(t1, t2, hue - 2) * 255;
-    return { r, g, b };
+    r = Math.round(hueToRgb(t1, t2, hue + 2) * 255);
+    g = Math.round(hueToRgb(t1, t2, hue) * 255);
+    b = Math.round(hueToRgb(t1, t2, hue - 2) * 255);
+    return { r: r, g: g, b: b };
 };
-export const cmykToRgb = (c, m, y, k) => {
-    let r, g, b;
-    r = 255 - ((Math.min(1, c * (1 - k) + k)) * 255);
-    g = 255 - ((Math.min(1, m * (1 - k) + k)) * 255);
-    b = 255 - ((Math.min(1, y * (1 - k) + k)) * 255);
-    return { r, g, b };
-};
-
-
-
-
 export const hueToRgb = (t1, t2, hue) => {
     if (hue < 0) { hue += 6; }
     if (hue >= 6) { hue -= 6; }
-    if (hue < 1) { return (t2 - t1) * hue + t1; }
-    else if (hue < 3) { return t2; }
-    else if (hue < 4) { return (t2 - t1) * (4 - hue) + t1; }
-    else { return t1; }
+    if (hue < 1) {
+        return (t2 - t1) * hue + t1;
+    } else if (hue < 3) {
+        return t2;
+    } else if (hue < 4) {
+        return (t2 - t1) * (4 - hue) + t1;
+    } else { return t1; }
 };
+
+export const cmykToRgb = (c, m, y, k) => {
+    let r = Math.round(255 - ((Math.min(1, c * (1 - k) + k)) * 255));
+    let g = Math.round(255 - ((Math.min(1, m * (1 - k) + k)) * 255));
+    let b = Math.round(255 - ((Math.min(1, y * (1 - k) + k)) * 255));
+    return { r, g, b };
+};
+
 
 export const getColorArr = (x) => {
     if (x === 'names') { return ['AliceBlue', 'AntiqueWhite', 'Aqua', 'Aquamarine', 'Azure', 'Beige', 'Bisque', 'Black', 'BlanchedAlmond', 'Blue', 'BlueViolet', 'Brown', 'BurlyWood', 'CadetBlue', 'Chartreuse', 'Chocolate', 'Coral', 'CornflowerBlue', 'Cornsilk', 'Crimson', 'Cyan', 'DarkBlue', 'DarkCyan', 'DarkGoldenRod', 'DarkGray', 'DarkGrey', 'DarkGreen', 'DarkKhaki', 'DarkMagenta', 'DarkOliveGreen', 'DarkOrange', 'DarkOrchid', 'DarkRed', 'DarkSalmon', 'DarkSeaGreen', 'DarkSlateBlue', 'DarkSlateGray', 'DarkSlateGrey', 'DarkTurquoise', 'DarkViolet', 'DeepPink', 'DeepSkyBlue', 'DimGray', 'DimGrey', 'DodgerBlue', 'FireBrick', 'FloralWhite', 'ForestGreen', 'Fuchsia', 'Gainsboro', 'GhostWhite', 'Gold', 'GoldenRod', 'Gray', 'Grey', 'Green', 'GreenYellow', 'HoneyDew', 'HotPink', 'IndianRed', 'Indigo', 'Ivory', 'Khaki', 'Lavender', 'LavenderBlush', 'LawnGreen', 'LemonChiffon', 'LightBlue', 'LightCoral', 'LightCyan', 'LightGoldenRodYellow', 'LightGray', 'LightGrey', 'LightGreen', 'LightPink', 'LightSalmon', 'LightSeaGreen', 'LightSkyBlue', 'LightSlateGray', 'LightSlateGrey', 'LightSteelBlue', 'LightYellow', 'Lime', 'LimeGreen', 'Linen', 'Magenta', 'Maroon', 'MediumAquaMarine', 'MediumBlue', 'MediumOrchid', 'MediumPurple', 'MediumSeaGreen', 'MediumSlateBlue', 'MediumSpringGreen', 'MediumTurquoise', 'MediumVioletRed', 'MidnightBlue', 'MintCream', 'MistyRose', 'Moccasin', 'NavajoWhite', 'Navy', 'OldLace', 'Olive', 'OliveDrab', 'Orange', 'OrangeRed', 'Orchid', 'PaleGoldenRod', 'PaleGreen', 'PaleTurquoise', 'PaleVioletRed', 'PapayaWhip', 'PeachPuff', 'Peru', 'Pink', 'Plum', 'PowderBlue', 'Purple', 'RebeccaPurple', 'Red', 'RosyBrown', 'RoyalBlue', 'SaddleBrown', 'Salmon', 'SandyBrown', 'SeaGreen', 'SeaShell', 'Sienna', 'Silver', 'SkyBlue', 'SlateBlue', 'SlateGray', 'SlateGrey', 'Snow', 'SpringGreen', 'SteelBlue', 'Tan', 'Teal', 'Thistle', 'Tomato', 'Turquoise', 'Violet', 'Wheat', 'White', 'WhiteSmoke', 'Yellow', 'YellowGreen']; }
-    if (x === 'hexs') { return ['f0f8ff', 'faebd7', '00ffff', '7fffd4', 'f0ffff', 'f5f5dc', 'ffe4c4', '000000', 'ffebcd', '0000ff', '8a2be2', 'a52a2a', 'deb887', '5f9ea0', '7fff00', 'd2691e', 'ff7f50', '6495ed', 'fff8dc', 'dc143c', '00ffff', '00008b', '008b8b', 'b8860b', 'a9a9a9', 'a9a9a9', '006400', 'bdb76b', '8b008b', '556b2f', 'ff8c00', '9932cc', '8b0000', 'e9967a', '8fbc8f', '483d8b', '2f4f4f', '2f4f4f', '00ced1', '9400d3', 'ff1493', '00bfff', '696969', '696969', '1e90ff', 'b22222', 'fffaf0', '228b22', 'ff00ff', 'dcdcdc', 'f8f8ff', 'ffd700', 'daa520', '808080', '808080', '008000', 'adff2f', 'f0fff0', 'ff69b4', 'cd5c5c', '4b0082', 'fffff0', 'f0e68c', 'e6e6fa', 'fff0f5', '7cfc00', 'fffacd', 'add8e6', 'f08080', 'e0ffff', 'fafad2', 'd3d3d3', 'd3d3d3', '90ee90', 'ffb6c1', 'ffa07a', '20b2aa', '87cefa', '778899', '778899', 'b0c4de', 'ffffe0', '00ff00', '32cd32', 'faf0e6', 'ff00ff', '800000', '66cdaa', '0000cd', 'ba55d3', '9370db', '3cb371', '7b68ee', '00fa9a', '48d1cc', 'c71585', '191970', 'f5fffa', 'ffe4e1', 'ffe4b5', 'ffdead', '000080', 'fdf5e6', '808000', '6b8e23', 'ffa500', 'ff4500', 'da70d6', 'eee8aa', '98fb98', 'afeeee', 'db7093', 'ffefd5', 'ffdab9', 'cd853f', 'ffc0cb', 'dda0dd', 'b0e0e6', '800080', '663399', 'ff0000', 'bc8f8f', '4169e1', '8b4513', 'fa8072', 'f4a460', '2e8b57', 'fff5ee', 'a0522d', 'c0c0c0', '87ceeb', '6a5acd', '708090', '708090', 'fffafa', '00ff7f', '4682b4', 'd2b48c', '008080', 'd8bfd8', 'ff6347', '40e0d0', 'ee82ee', 'f5deb3', 'ffffff', 'f5f5f5', 'ffff00', '9acd32']; }
+    if (x === 'hexes') { return ['f0f8ff', 'faebd7', '00ffff', '7fffd4', 'f0ffff', 'f5f5dc', 'ffe4c4', '000000', 'ffebcd', '0000ff', '8a2be2', 'a52a2a', 'deb887', '5f9ea0', '7fff00', 'd2691e', 'ff7f50', '6495ed', 'fff8dc', 'dc143c', '00ffff', '00008b', '008b8b', 'b8860b', 'a9a9a9', 'a9a9a9', '006400', 'bdb76b', '8b008b', '556b2f', 'ff8c00', '9932cc', '8b0000', 'e9967a', '8fbc8f', '483d8b', '2f4f4f', '2f4f4f', '00ced1', '9400d3', 'ff1493', '00bfff', '696969', '696969', '1e90ff', 'b22222', 'fffaf0', '228b22', 'ff00ff', 'dcdcdc', 'f8f8ff', 'ffd700', 'daa520', '808080', '808080', '008000', 'adff2f', 'f0fff0', 'ff69b4', 'cd5c5c', '4b0082', 'fffff0', 'f0e68c', 'e6e6fa', 'fff0f5', '7cfc00', 'fffacd', 'add8e6', 'f08080', 'e0ffff', 'fafad2', 'd3d3d3', 'd3d3d3', '90ee90', 'ffb6c1', 'ffa07a', '20b2aa', '87cefa', '778899', '778899', 'b0c4de', 'ffffe0', '00ff00', '32cd32', 'faf0e6', 'ff00ff', '800000', '66cdaa', '0000cd', 'ba55d3', '9370db', '3cb371', '7b68ee', '00fa9a', '48d1cc', 'c71585', '191970', 'f5fffa', 'ffe4e1', 'ffe4b5', 'ffdead', '000080', 'fdf5e6', '808000', '6b8e23', 'ffa500', 'ff4500', 'da70d6', 'eee8aa', '98fb98', 'afeeee', 'db7093', 'ffefd5', 'ffdab9', 'cd853f', 'ffc0cb', 'dda0dd', 'b0e0e6', '800080', '663399', 'ff0000', 'bc8f8f', '4169e1', '8b4513', 'fa8072', 'f4a460', '2e8b57', 'fff5ee', 'a0522d', 'c0c0c0', '87ceeb', '6a5acd', '708090', '708090', 'fffafa', '00ff7f', '4682b4', 'd2b48c', '008080', 'd8bfd8', 'ff6347', '40e0d0', 'ee82ee', 'f5deb3', 'ffffff', 'f5f5f5', 'ffff00', '9acd32']; }
 };
 
-export const colorObject = (rgb, a, h, s) => {
-    let hsl, cmyk, color, hue, sat;
-    if (!rgb) { return emptyObject(); }
-    if (a === null) { a = 1; }
-    hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
-    cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
-    hue = (h || hsl.h);
-    sat = (s || hsl.s);
-    color = {
-        red: rgb.r,
-        green: rgb.g,
-        blue: rgb.b,
-        hue: hue,
-        sat: sat,
-        lightness: hsl.l,
-        cyan: cmyk.c,
-        magenta: cmyk.m,
-        yellow: cmyk.y,
-        black: cmyk.k,
-        opacity: a,
-        valid: true
-    };
-    color = roundDecimals(color);
-    return color;
-};
+// export const colorObject = (rgb, a, h, s) => {
+//     let hsl, cmyk, color, hue, sat;
+//     if (!rgb) { return emptyObject(); }
+//     if (a === null) { a = 1; }
+//     hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+//     cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
+//     hue = (h || hsl.h);
+//     sat = (s || hsl.s);
+//     color = {
+//         red: rgb.r,
+//         green: rgb.g,
+//         blue: rgb.b,
+//         hue: hue,
+//         sat: sat,
+//         lightness: hsl.l,
+//         cyan: cmyk.c,
+//         magenta: cmyk.m,
+//         yellow: cmyk.y,
+//         black: cmyk.k,
+//         opacity: a,
+//         valid: true
+//     };
+//     color = roundDecimals(color);
+//     return color;
+// };
 
-export const emptyObject = () => {
-    return {
-        red: 0,
-        green: 0,
-        blue: 0,
-        hue: 0,
-        sat: 0,
-        lightness: 0,
-        cyan: 0,
-        magenta: 0,
-        yellow: 0,
-        black: 0,
-        opacity: 1,
-        valid: false
-    };
-};
+// export const emptyObject = () => {
+//     return {
+//         red: 0,
+//         green: 0,
+//         blue: 0,
+//         hue: 0,
+//         sat: 0,
+//         lightness: 0,
+//         cyan: 0,
+//         magenta: 0,
+//         yellow: 0,
+//         black: 0,
+//         opacity: 1,
+//         valid: false
+//     };
+// };
 
-export const roundDecimals = (c) => {
-    c.red = Number(c.red.toFixed(0));
-    c.green = Number(c.green.toFixed(0));
-    c.blue = Number(c.blue.toFixed(0));
-    c.hue = Number(c.hue.toFixed(0));
-    c.saturation = Number(c.saturation.toFixed(2));
-    c.lightness = Number(c.lightness.toFixed(2));
-    c.cyan = Number(c.cyan.toFixed(2));
-    c.magenta = Number(c.magenta.toFixed(2));
-    c.yellow = Number(c.yellow.toFixed(2));
-    c.black = Number(c.black.toFixed(2));
-    // c.opacity = Number(c.opacity.toFixed(2));
-    return c;
-};
+// export const roundDecimals = (c) => {
+//     c.red = Number(c.red.toFixed(0));
+//     c.green = Number(c.green.toFixed(0));
+//     c.blue = Number(c.blue.toFixed(0));
+//     c.hue = Number(c.hue.toFixed(0));
+//     c.saturation = Number(c.saturation.toFixed(2));
+//     c.lightness = Number(c.lightness.toFixed(2));
+//     c.cyan = Number(c.cyan.toFixed(2));
+//     c.magenta = Number(c.magenta.toFixed(2));
+//     c.yellow = Number(c.yellow.toFixed(2));
+//     c.black = Number(c.black.toFixed(2));
+//     // c.opacity = Number(c.opacity.toFixed(2));
+//     return c;
+// };
