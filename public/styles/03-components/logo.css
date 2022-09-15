@@ -12,6 +12,7 @@
 }
 .logo:hover {
     opacity: 100%;
+    animation: rotate;
 }
 
 @keyframes rotation {
@@ -23,6 +24,7 @@
     }
     100% {
         border-radius: 24%;
-        transform: rotate(360deg);
+        rotate: 360deg;
+        
     }
 }

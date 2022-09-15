@@ -2,15 +2,13 @@ import { useState, useEffect } from 'react';
 import { getPixel, exportResult, getRgbColor } from '../helpers';
 import Logo from '../Logo/Logo';
 import * as helpers from './combinationsHelpers';
+import WhiteBlackGreySettings from './WhiteBlackGreySettings';
 
 const Combinations = () => {
 
     const [data, setData] = useState([]);
     const [mainRgb, setMainRgb] = useState('rgb(254, 254, 51)');
     const [mainColor, setMainColor] = useState('yellow');
-    const [whiteValue, setWhiteValue] = useState(0);
-    const [blackValue, setBlackValue] = useState(0);
-    const [greyValue, setGreyValue] = useState(0);
     const [info, setInfo] = useState('');
 
     // useEffect(() => {
@@ -42,14 +40,12 @@ const Combinations = () => {
     };
 
     const rotateWheel = async (e) => {
-        resetWhite();
-        resetBlack();
-        resetGrey();
+        // resetWhite();
+        // resetBlack();
+        // resetGrey();
         resetScheme();
-        resetSettings();
 
         const rgb = getPixel(e, data);
-        console.log(rgb);
 
         if (rgb !== 'rgb(0, 0, 0)') {
             const colorName = helpers.getColorNameFromRgb[rgb];
@@ -120,79 +116,23 @@ const Combinations = () => {
         p.style.display = 'none';
     };
 
-    const onWhiteChange = (e) => {
-        const whiteLayer = document.getElementById('whiteLayer');
-        whiteLayer.style.display = 'block';
-        const w = Number(e.target.value) / 100;
-        whiteLayer.style['background-color'] = `rgba(255,255,255,${w})`;
-        resetBlack();
-        resetGrey();
-        setWhiteValue(e.target.value);
-    };
-    const onBlackChange = (e) => {
-        const result = document.getElementById('resultColors');
-        const bl = 100 - (Number(e.target.value));
-        result.style.filter = `brightness(${bl}%)`;
-        resetWhite();
-        setGreyValue(0);
-        setBlackValue(e.target.value);
-    };
-    const onGreyChange = (e) => {
-        const result = document.getElementById('resultColorsContainer');
-        result.style.filter = `grayscale(${e.target.value}%)`;
-        resetWhite();
-        setBlackValue(0);
-        setGreyValue(e.target.value);
-    };
-
-    const resetWhite = (e) => {
-        const whiteLayer = document.getElementById('whiteLayer');
-        whiteLayer.style.display = 'none';
-        whiteLayer.style['background-color'] = 'rgba(255,255,255,0)';
-        setWhiteValue(0);
-    };
-    const resetBlack = (e) => {
-        // const canvas = document.getElementById('rybCanvas');
-        const result = document.getElementById('resultColors');
-        // canvas.style.filter = 'brightness(0)';
-        result.style.filter = 'brightness(100)';
-        setBlackValue(0);
-    };
-    const resetGrey = (e) => {
-        // const canvas = document.getElementById('rybCanvas');
-        const result = document.getElementById('resultColors');
-        // canvas.style.filter = 'grayscale(0)';
-        result.style.filter = 'grayscale(0)';
-        setGreyValue(0);
-    };
     const resetWheel = (e) => {
         const wheel = document.getElementById('rybCanvas');
         wheel.style.transform = 'rotate(0deg)';
+        setMainColor('yellow');
+        resetScheme();
     };
     const resetScheme = (e) => {
         document.getElementById('scheme').value = 'Choose scheme';
         const schemeCanvas = document.getElementById('schemeCanvas');
         const schemeCanvasCtx = schemeCanvas.getContext('2d');
         schemeCanvasCtx.clearRect(10, 10, 140, 140);
-    };
-    const resetResult = (e) => {
         document.getElementById('resultSection').style.display = 'none';
     };
-    const resetSettings = (e) => {
-        resetWheel();
-        resetScheme();
-        resetWhite();
-        resetBlack();
-        resetGrey();
-        resetResult();
-        setMainColor('yellow');
-    };
-
+    
     const exportScheme = async (e) => {
         const element = document.getElementById('resultColorsContainer');
         const rgb = await getRgbColor(element);
-        console.log(rgb);
-
         exportResult(element);
     };
 
@@ -232,7 +172,7 @@ const Combinations = () => {
                     <canvas id="schemeCanvas" width="160" height="160"></canvas>
 
                     <span>Pick a color from the wheel</span>
-                    <div onClick={resetWheel} className="reset">Reset</div>
+                    <div onClick={resetWheel} className="reset">Reset wheel</div>
                 </section>
 
 
@@ -263,54 +203,16 @@ const Combinations = () => {
                         <div id="resultColorsContainer" className="ryb__actions--result-colors">
                             <ul id="resultColors" className="ryb__actions--result-ul"></ul>
                             <div id="whiteLayer"></div>
+                            <div id="blackLayer"></div>
                         </div>
                         {/* <span className="ryb__actions--result-info">{info}</span> */}
                         <button className="button" onClick={exportScheme}>Export scheme</button>
+                        {/* <div onClick={resetScheme} className="reset">Reset scheme</div> */}
                         <link rel="stylesheet" href="" value="reed more..." />
                     </section>
 
+                    <WhiteBlackGreySettings />
 
-                    <section className="ryb__actions--settings">
-                        <h6>Modify scheme</h6>
-                        <section id="slidersSection" className="ryb__actions--settings-sliders">
-                            <p>Set the quantity of white, black or grey to change
-                                the lightness, darkness or saturation of pure colors</p>
-
-                            <section>
-                                <label htmlFor="whiteRange" className="slider-label">
-                                    White
-                                    <input type="range" className="slider" id="whiteRange" min="0" max="100"
-                                        onChange={onWhiteChange} value={whiteValue} />
-                                    <span>{whiteValue}%</span>
-                                </label>
-                                <div>Add white to lighten the color.
-                                    <br /> Tints are pastel, pale, cool versions of the hue.</div>
-                            </section>
-                            <section>
-                                <label htmlFor="blackRange" className="slider-label">
-                                    Black
-                                    {/* <span>{brightnessValue}%</span> */}
-                                    <input type="range" className="slider" id="blackRange" min="0" max="100"
-                                        onChange={onBlackChange} value={blackValue} />
-                                    <span>{blackValue}%</span>
-                                </label>
-                                <div>Add black to darken the color.
-                                    <br />Shades are deep, warm and more intensive.</div>
-                            </section>
-                            <section>
-                                <label htmlFor="greyRange" className="slider-label">
-                                    Grey
-                                    <input type="range" className="slider" id="greyRange" min="0" max="100"
-                                        onChange={onGreyChange} value={greyValue} />
-                                    <span>{greyValue}%</span>
-                                </label>
-                                <div>Add grey to desaturate the color.
-                                    <br />Tones are muted and more colorless.</div>
-                            </section>
-                        </section>
-
-                    </section>
-                    <button onClick={resetSettings} className="button">reset</button>
                 </section>
             </section>
         </section>

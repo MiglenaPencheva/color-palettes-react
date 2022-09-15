@@ -22,7 +22,7 @@
 
 /* ----- canvas, wheel, layers ----- */
 .ryb__actions--wheel {
-    width: 34%;
+    width: 38%;
     padding-top: 0.4rem;
     position: relative;
     display: flex;
@@ -51,7 +51,7 @@
 }
 .reset {
     padding: 0;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: var(--teal-light);
     cursor: pointer;
 }
@@ -76,7 +76,7 @@
 
 /* ----- scheme ----- */
 .ryb__actions--scheme {
-    width: 64%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -86,7 +86,7 @@
 #schemeCanvas {
     position: absolute;
     top: 118px;
-    left: 85px;
+    left: 105px;
     z-index: 1000;
 }
 section.ryb__actions--scheme section.select-container {
@@ -108,6 +108,8 @@ section.ryb__actions--scheme section.select-container {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    border-bottom: 1px solid var(--teal-grey);
+
 }
 .ryb__actions--result-colors {
     position: relative;
@@ -158,49 +160,6 @@ section.ryb__actions--scheme section.select-container {
     width: fit-content;
 }
 
-/* ----- settings ----- */
-.ryb__actions--settings {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    gap: 05.rem;
-    /* justify-content: space-around; */
-    align-items: center;
-    border-top: 1px solid var(--teal-grey);
-}
-.ryb__actions--settings p {
-    margin: 0 auto;
-    padding: 0.5rem;
-    width: 90%;
-    text-align: center;
-    font-size: 0.9rem;
-}
-.ryb__actions--settings h6 {
-    width: 90%;
-    padding-top: 1rem;
-}
-.ryb__actions--settings-sliders {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-
-}
-.ryb__actions--settings-sliders section {
-    width: 100%;
-    display: flex;
-    gap: 0.2rem;
-    justify-content: center;
-}
-.ryb__actions--settings-sliders div {
-    padding: 0.5rem;
-    width: 60%;
-    font-size: 0.7rem;
-    font-style: italic;
-}
-.ryb__actions--settings-sliders button {
-    width: fit-content;
-    margin-top: 1rem;
-}
 #whiteLayer {
     display: none;
     position: absolute;
