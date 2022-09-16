@@ -95,6 +95,7 @@ section.ryb__actions--scheme section.select-container {
 .ryb__actions--scheme-p {
     margin: 0;
     width: 80%;
+    text-align: center;
     font-style: italic;
     color: var(--teal-light);
     font-size: 0.8rem;

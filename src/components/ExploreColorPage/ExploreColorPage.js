@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import * as helpers from './exploreHelpers';
+import * as helpers from '../ExploreColorPage/exploreHelpers';
+import { getPixel } from '../../helpers/getPixel';
 import { hideError, showError } from '../../helpers/notifications';
+import WhiteBlackGreySettings from '../CombinationsPage/WhiteBlackGreySettings';
 
 const ExploreColor = () => {
     const [name, setName] = useState('no name');
@@ -9,6 +11,64 @@ const ExploreColor = () => {
     const [hsl, setHsl] = useState('');
     const [cmyk, setCmyk] = useState('');
     const [color, setColor] = useState({});
+
+
+    useEffect(() => {
+        let rgbCanvas = document.getElementById('rgbCanvas');
+        let rgbCanvasCtx = rgbCanvas.getContext('2d');
+        let rgbGradient = rgbCanvasCtx.createLinearGradient(0, 0, rgbCanvas.width, 0);
+        rgbGradient.addColorStop(0, 'red');
+        rgbGradient.addColorStop(.08, '#FF8000');
+        rgbGradient.addColorStop(.16, 'yellow');
+        rgbGradient.addColorStop(.24, '#80FF00');
+        rgbGradient.addColorStop(.32, '#00FF00');
+        rgbGradient.addColorStop(.40, '#00FF80');
+        rgbGradient.addColorStop(.48, 'cyan');
+        rgbGradient.addColorStop(.56, '#0080FF');
+        rgbGradient.addColorStop(.64, 'blue');
+        rgbGradient.addColorStop(.72, '#8000FF');
+        rgbGradient.addColorStop(.80, 'magenta');
+        rgbGradient.addColorStop(.88, '#FF0080');
+        rgbGradient.addColorStop(.96, 'red');
+        rgbCanvasCtx.fillStyle = rgbGradient;
+        rgbCanvasCtx.fillRect(0, 0, rgbCanvas.width, rgbCanvas.height);
+    }, []);
+
+    const selectColor = (e) => {
+        let rgbCanvas = e.target;
+        let rgbCanvasCtx = rgbCanvas.getContext('2d');
+        let imageData = rgbCanvasCtx.getImageData(0, 0, rgbCanvas.width, rgbCanvas.height);
+        let colorData = imageData.data;
+        let rgb = getPixel(e, colorData);
+
+        preview(rgb);
+
+        color.rgb = rgb.replace('rgb', '').replace('(', '').replace(')', '');
+        let arr = color.rgb.split(', ');
+        color.red = Number(arr[0]);
+        color.green = Number(arr[1]);
+        color.blue = Number(arr[2]);
+        color.hex = helpers.rgbToHex(color.red, color.green, color.blue);
+        color.name = helpers.rgbToName(color.red, color.green, color.blue);
+        let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
+        color.hsl = hslResult.hslString;
+        color.hue = hslResult.hue;
+        color.saturation = hslResult.saturation;
+        color.lightness = hslResult.lightness;
+        let cmykResult = helpers.rgbToCmyk(color.red, color.green, color.blue);
+        color.cmyk = cmykResult.cmykString;
+        color.cyan = cmykResult.cyan;
+        color.magenta = cmykResult.magenta;
+        color.yellow = cmykResult.yellow;
+        color.black = cmykResult.black;
+
+        setColor(color);
+        setName(color.name);
+        setRgb(color.rgb);
+        setHex(color.hex);
+        setHsl(color.hsl);
+        setCmyk(color.cmyk);
+    };
 
     const submitColorHandler = (e) => {
         e.preventDefault();
@@ -98,8 +158,6 @@ const ExploreColor = () => {
             color.lightness = hslResult.lightness;
         }
 
-        console.log(color);
-
         setColor(color);
         setName(color.name);
         setRgb(color.rgb);
@@ -123,10 +181,6 @@ const ExploreColor = () => {
     return (
         <section className="explore-page">
 
-            <section >
-                {/* <div className="explore__rgb-wheel"></div> */}
-            </section>
-
             <section className="section-header">
                 <h2 >Explore colors</h2>
                 <h6> Find the information you need.
@@ -134,14 +188,22 @@ const ExploreColor = () => {
                 <h6 className="diffHeading">Go deep into the color details.</h6>
             </section>
 
-            <form id="color-form" className="explore__input" onSubmit={submitColorHandler}>
-                <p className="explore__info">Type color value</p>
-                <p className="explore__input--info">Enter hex, rgb, hsl or name</p>
-                <section className="explore__input--container">
-                    <input type="text" name="colorValue" id="colorValue" className="explore__input--input" placeholder="color value" />
-                    <input className="button explore__input--submit" type="submit" value="ok" />
-                </section>
-            </form>
+            <section className="explore__rgb">
+                <form id="color-form" className="explore__input" onSubmit={submitColorHandler}>
+                    <p className="explore__info">Type color value</p>
+                    <p className="explore__input--info">Enter hex, rgb, hsl, cmyk or name</p>
+                    <section className="explore__input--container">
+                        <input type="text" name="colorValue" id="colorValue" className="explore__input--input" placeholder="color value" />
+                        <input className="button explore__input--submit" type="submit" value="ok" />
+                    </section>
+                </form>
+                <p className="explore__info">or pick a color</p>
+                <canvas id="rgbCanvas" height="40" 
+                    onClick={selectColor}
+                    className="explore__rgb-wheel">
+                </canvas>
+                <WhiteBlackGreySettings />
+            </section>
 
             <section className="explore__preview">
                 <p className="explore__info">Color preview</p>

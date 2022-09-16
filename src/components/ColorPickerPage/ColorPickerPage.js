@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import html2canvas from 'html2canvas';
-import { exportResult, getPixel } from '../helpers';
+import { exportResult } from '../../helpers/exportResult';
+import { getPixel } from '../../helpers/getPixel';
 
 // import { useAuthContext } from '../../contexts/AuthContext';
 import * as pickerService from '../../services/pickerService';

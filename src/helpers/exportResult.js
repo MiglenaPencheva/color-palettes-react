@@ -1,19 +1,5 @@
 import html2canvas from 'html2canvas';
 
-export const getPixel = (e, data) => {
-    let { offsetX, offsetY } = e.nativeEvent;
-    let pixel = e.target.width * offsetY + offsetX;
-    let arrayPos = pixel * 4;
-    const c = {
-        red: data[arrayPos],
-        green: data[arrayPos + 1],
-        blue: data[arrayPos + 2],
-        alpha: data[arrayPos + 3],
-    };
-    const picked = `rgb(${c.red}, ${c.green}, ${c.blue})`;
-    return picked;
-};
-
 export const exportResult = async (element) => {
     const imageFileName = 'scheme_' + (Math.random() * 9999 | 0);
     const canvas = await html2canvas(element);
@@ -29,4 +15,15 @@ export const exportResult = async (element) => {
         fakeLink.remove();
     };
     downloadImage(image, imageFileName);
+};
+
+export const getRgbColor = async (element) => {
+    const canvas = await html2canvas(element);
+    let x = 160;
+    let y = 50;
+    const ctx = canvas.getContext('2d');
+    const data = ctx.getImageData(x, y, 1, 1).data;
+    const rgb = `rgb(${data[0]}, ${data[1]}, ${data[2]})`;
+    // const hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+    return await rgb;
 };

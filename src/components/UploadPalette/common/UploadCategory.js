@@ -4,7 +4,7 @@ const UploadCategory = () => {
             <label htmlFor="type">Category</label>
             <select id="type" name="category"
                 className="select">
-                <option value="Choose category">Choose category</option>
+                <option value="Choose category" className="default-scheme">Choose category</option>
                 <option value="landscape">Landscape</option>
                 <option value="sea">Sea</option>
                 <option value="sky">Sky</option>

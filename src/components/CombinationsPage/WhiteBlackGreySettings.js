@@ -57,7 +57,7 @@ const WhiteBlackGreySettings = () => {
     return (
         <section className="ryb__actions--settings">
             <section id="slidersSection" className="ryb__actions--settings-sliders">
-                <p>Set the quantity of white, black or grey to change
+                <p>Adjust the quantity of white, black or grey to change
                     the lightness, darkness or saturation of pure colors</p>
 
                 <section>

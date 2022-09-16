@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getPixel, exportResult, getRgbColor } from '../helpers';
-import Logo from '../Logo/Logo';
+import { getPixel } from '../../helpers/getPixel';
+import { exportResult, getRgbColor } from '../../helpers/exportResult';
+// import Logo from '../Logo/Logo';
 import * as helpers from './combinationsHelpers';
 import WhiteBlackGreySettings from './WhiteBlackGreySettings';
 
@@ -10,11 +11,6 @@ const Combinations = () => {
     const [mainRgb, setMainRgb] = useState('rgb(254, 254, 51)');
     const [mainColor, setMainColor] = useState('yellow');
     const [info, setInfo] = useState('');
-
-    // useEffect(() => {
-    // change color of li in colors ul
-    // change rgb info on hover
-    // }, [whiteValue, blackValue, greyValue]);
 
     const showOnMouseOver = (e) => {
         const targetName = e.currentTarget.id;
@@ -40,9 +36,6 @@ const Combinations = () => {
     };
 
     const rotateWheel = async (e) => {
-        // resetWhite();
-        // resetBlack();
-        // resetGrey();
         resetScheme();
 
         const rgb = getPixel(e, data);
