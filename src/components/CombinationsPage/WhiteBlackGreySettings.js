@@ -4,7 +4,6 @@ const WhiteBlackGreySettings = () => {
     const [whiteValue, setWhiteValue] = useState(0);
     const [blackValue, setBlackValue] = useState(0);
     const [greyValue, setGreyValue] = useState(0);
-    const [resultBlack, setResultBlack] = useState(0);
 
     const onWhiteChange = (e) => {
         resetBlack();
@@ -68,7 +67,7 @@ const WhiteBlackGreySettings = () => {
                         <span>{whiteValue}%</span>
                     </label>
                     <div>Add white to lighten the color. Tints are pastel, pale, cool versions of the hue.</div>
-                {/* </section>
+                    {/* </section>
                 <section> */}
                     <label htmlFor="blackRange" className="slider-label">
                         Black
@@ -77,7 +76,7 @@ const WhiteBlackGreySettings = () => {
                         <span>{blackValue}%</span>
                     </label>
                     <div>Add black to darken the color. Shades are deep, warm and more intensive.</div>
-                {/* </section>
+                    {/* </section>
                 <section> */}
                     <label htmlFor="greyRange" className="slider-label">
                         Grey

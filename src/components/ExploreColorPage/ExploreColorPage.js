@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as helpers from '../ExploreColorPage/exploreHelpers';
 import { getPixel } from '../../helpers/getPixel';
-import { hideError, showError } from '../../helpers/notifications';
-import WhiteBlackGreySettings from '../CombinationsPage/WhiteBlackGreySettings';
 
 const ExploreColor = () => {
     const [name, setName] = useState('no name');
@@ -11,6 +9,8 @@ const ExploreColor = () => {
     const [hsl, setHsl] = useState('');
     const [cmyk, setCmyk] = useState('');
     const [color, setColor] = useState({});
+    const [selectedColor, setSelectedColor] = useState('#94c7db');
+    const [currentColor, setCurrentColor] = useState('#94c7db');
 
 
     useEffect(() => {
@@ -34,15 +34,32 @@ const ExploreColor = () => {
         rgbCanvasCtx.fillRect(0, 0, rgbCanvas.width, rgbCanvas.height);
     }, []);
 
-    const selectColor = (e) => {
+    useEffect(() => {
+        function makeGradient(el, result) {
+            let ctx = el.getContext('2d');
+            let grad = ctx.createLinearGradient(0, 0, el.width, 0);
+            grad.addColorStop(0, selectedColor);
+            grad.addColorStop(1, result);
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, el.width, el.height);
+        }
+        let whiteCanvas = document.getElementById('whiteCanvas');
+        makeGradient(whiteCanvas, 'white');
+        let blackCanvas = document.getElementById('blackCanvas');
+        makeGradient(blackCanvas, 'black');
+        let greyCanvas = document.getElementById('greyCanvas');
+        makeGradient(greyCanvas, 'grey');
+    }, [selectedColor]);
+
+    const getRgbFromSelectedColor = (e) => {
         let rgbCanvas = e.target;
         let rgbCanvasCtx = rgbCanvas.getContext('2d');
         let imageData = rgbCanvasCtx.getImageData(0, 0, rgbCanvas.width, rgbCanvas.height);
         let colorData = imageData.data;
         let rgb = getPixel(e, colorData);
-
-        preview(rgb);
-
+        return rgb;
+    };
+    const fillInfoFromRgb = (rgb) => {
         color.rgb = rgb.replace('rgb', '').replace('(', '').replace(')', '');
         let arr = color.rgb.split(', ');
         color.red = Number(arr[0]);
@@ -62,6 +79,7 @@ const ExploreColor = () => {
         color.yellow = cmykResult.yellow;
         color.black = cmykResult.black;
 
+        preview(rgb);
         setColor(color);
         setName(color.name);
         setRgb(color.rgb);
@@ -70,12 +88,26 @@ const ExploreColor = () => {
         setCmyk(color.cmyk);
     };
 
+    const selectColor = (e) => {
+        document.getElementById('colorValue').value = '';
+
+        let rgb = getRgbFromSelectedColor(e);
+        fillInfoFromRgb(rgb);
+        setSelectedColor(rgb);
+    };
+    const modifyColor = (e) => {
+        let rgb = getRgbFromSelectedColor(e);
+        fillInfoFromRgb(rgb);
+        setCurrentColor(rgb);
+    };
+
     const submitColorHandler = (e) => {
         e.preventDefault();
 
         let formData = new FormData(e.currentTarget);
         let colorValue = formData.get('colorValue');
         preview(colorValue);
+        setSelectedColor(colorValue);
 
         const color = helpers.getColorObject(colorValue);
 
@@ -198,11 +230,18 @@ const ExploreColor = () => {
                     </section>
                 </form>
                 <p className="explore__info">or pick a color</p>
-                <canvas id="rgbCanvas" height="40" 
-                    onClick={selectColor}
-                    className="explore__rgb-wheel">
-                </canvas>
-                <WhiteBlackGreySettings />
+                <canvas id="rgbCanvas" height="40" onClick={selectColor}></canvas>
+
+                <section className="explore__modify--container">
+                    <div>Quantity of white, black or grey changes
+                        the lightness, darkness or saturation of pure colors</div>
+                    <canvas id="whiteCanvas" height="40" onClick={modifyColor}></canvas>
+                    <div>White lightens the color. Tints are pastel, pale, cool versions of the hue.</div>
+                    <canvas id="blackCanvas" height="40" onClick={modifyColor}></canvas>
+                    <div>Black darkens the color. Shades are deep, warm and more intensive.</div>
+                    <canvas id="greyCanvas" height="40" onClick={modifyColor}></canvas>
+                    <div>Grey desaturates the color. Tones are muted and more colorless.</div>
+                </section>
             </section>
 
             <section className="explore__preview">
