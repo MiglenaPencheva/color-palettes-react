@@ -44,3 +44,24 @@ h6 {
     letter-spacing: 0.2rem;
     text-shadow: 2px 2px 2px var(--vermilion);
 }
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.8rem;
+    }
+    .diffHeading {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h2 {
+        font-size: 1.6rem;
+    }
+    h6 {
+        font-size: 0.9rem;
+    }
+    .diffHeading {
+        font-size: 1.6rem;
+    }
+}
