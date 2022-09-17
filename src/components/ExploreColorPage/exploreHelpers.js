@@ -45,24 +45,29 @@ export const getColorObject = (input) => {
             color.hue = Number(h.toFixed(0));
             color.saturation = Number((s / 100).toFixed(2));
             color.lightness = Number((l / 100).toFixed(2));
-        } else if (prefix === 'cmyk') {
-            let cmykArr = rest.replaceAll(' ', '').replaceAll('%', '').split(',');
-            for (let i = 0; i < cmykArr.length; i++) {
-                if (cmykArr[i] < 0) { cmykArr[i] = 0; }
-                if (cmykArr[i] > 100) { cmykArr[i] = 100; }  // cmyk(100%, 25%, 0%, 0%)
-            }
-            let c = cmykArr[0];
-            let m = cmykArr[1];
-            let y = cmykArr[2];
-            let k = cmykArr[3];
-            color.cmyk = `${c}%, ${m}%, ${y}%, ${k}%`;
-            color.cyan = c / 100;
-            color.magenta = m / 100;
-            color.yellow = y / 100;
-            color.black = k / 100;
-        }
+        } 
+    } else {
+        return defaultColorObject;
     }
     return color;
+};
+
+export const defaultColorObject = {
+    rgb: '',
+    red: 0,
+    green: 0,
+    blue: 0,
+    hex: '',
+    name: '',
+    hsl: '',
+    hue: 0,
+    saturation: 0,
+    lightness: 0,
+    cmyk: '',
+    cyan: 0,
+    magenta: 0,
+    yellow: 0,
+    black: 0,
 };
 
 export const hasName = (input) => {

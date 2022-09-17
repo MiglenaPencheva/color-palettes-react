@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as helpers from '../ExploreColorPage/exploreHelpers';
 import { getPixel } from '../../helpers/getPixel';
+import { hideError, showError } from '../../helpers/notifications';
 
 const ExploreColor = () => {
     const [name, setName] = useState('no name');
@@ -59,7 +60,7 @@ const ExploreColor = () => {
         let rgb = getPixel(e, colorData);
         return rgb;
     };
-    const fillInfoFromRgb = (rgb) => {
+    const fillColorObject = (rgb) => {
         color.rgb = rgb.replace('rgb', '').replace('(', '').replace(')', '');
         let arr = color.rgb.split(', ');
         color.red = Number(arr[0]);
@@ -92,12 +93,12 @@ const ExploreColor = () => {
         document.getElementById('colorValue').value = '';
 
         let rgb = getRgbFromSelectedColor(e);
-        fillInfoFromRgb(rgb);
+        fillColorObject(rgb);
         setSelectedColor(rgb);
     };
     const modifyColor = (e) => {
         let rgb = getRgbFromSelectedColor(e);
-        fillInfoFromRgb(rgb);
+        fillColorObject(rgb);
         setCurrentColor(rgb);
     };
 
@@ -106,96 +107,91 @@ const ExploreColor = () => {
 
         let formData = new FormData(e.currentTarget);
         let colorValue = formData.get('colorValue');
-        preview(colorValue);
-        setSelectedColor(colorValue);
 
         const color = helpers.getColorObject(colorValue);
 
-        if (color.rgb) {
-            color.hex = helpers.rgbToHex(color.red, color.green, color.blue);
-            color.name = helpers.rgbToName(color.red, color.green, color.blue);
-            let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
-            color.hsl = hslResult.hslString;
-            color.hue = hslResult.hue;
-            color.saturation = hslResult.saturation;
-            color.lightness = hslResult.lightness;
-            let cmykResult = helpers.rgbToCmyk(color.red, color.green, color.blue);
-            color.cmyk = cmykResult.cmykString;
-            color.cyan = cmykResult.cyan;
-            color.magenta = cmykResult.magenta;
-            color.yellow = cmykResult.yellow;
-            color.black = cmykResult.black;
-        } else if (color.name) {
-            let result = helpers.nameToRgb(color.name);
-            color.red = result.r;
-            color.green = result.g;
-            color.blue = result.b;
-            color.rgb = `${color.red}, ${color.green}, ${color.blue}`;
-            color.hex = result.hex;
-            let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
-            color.hsl = hslResult.hslString;
-            color.hue = hslResult.hue;
-            color.saturation = hslResult.saturation;
-            color.lightness = hslResult.lightness;
-            let cmykResult = helpers.rgbToCmyk(color.red, color.green, color.blue);
-            color.cmyk = cmykResult.cmykString;
-            color.cyan = cmykResult.cyan;
-            color.magenta = cmykResult.magenta;
-            color.yellow = cmykResult.yellow;
-            color.black = cmykResult.black;
-        } else if (color.hex) {
-            let result = helpers.hexToRgb(color.hex);
-            color.red = result.r;
-            color.green = result.g;
-            color.blue = result.b;
-            color.rgb = `${color.red}, ${color.green}, ${color.blue}`;
-            color.name = helpers.rgbToName(color.red, color.green, color.blue);
-            let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
-            color.hsl = hslResult.hslString;
-            color.hue = hslResult.hue;
-            color.saturation = hslResult.saturation;
-            color.lightness = hslResult.lightness;
-            let cmykResult = helpers.rgbToCmyk(color.red, color.green, color.blue);
-            color.cmyk = cmykResult.cmykString;
-            color.cyan = cmykResult.cyan;
-            color.magenta = cmykResult.magenta;
-            color.yellow = cmykResult.yellow;
-            color.black = cmykResult.black;
-        } else if (color.hsl) {
-            let result = helpers.hslToRgb(color.hue, color.saturation, color.lightness);
-            color.red = result.r;
-            color.green = result.g;
-            color.blue = result.b;
-            color.rgb = `${color.red}, ${color.green}, ${color.blue}`;
-            color.hex = helpers.rgbToHex(color.red, color.green, color.blue);
-            color.name = helpers.rgbToName(color.red, color.green, color.blue);
-            let cmykResult = helpers.rgbToCmyk(color.red, color.green, color.blue);
-            color.cmyk = cmykResult.cmykString;
-            color.cyan = cmykResult.cyan;
-            color.magenta = cmykResult.magenta;
-            color.yellow = cmykResult.yellow;
-            color.black = cmykResult.black;
-        } else if (color.cmyk) {
-            let result = helpers.cmykToRgb(color.cyan, color.magenta, color.yellow, color.black);
-            color.red = result.r;
-            color.green = result.g;
-            color.blue = result.b;
-            color.rgb = `${color.red}, ${color.green}, ${color.blue}`;
-            color.hex = helpers.rgbToHex(color.red, color.green, color.blue);
-            color.name = helpers.rgbToName(color.red, color.green, color.blue);
-            let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
-            color.hsl = hslResult.hslString;
-            color.hue = hslResult.hue;
-            color.saturation = hslResult.saturation;
-            color.lightness = hslResult.lightness;
-        }
+        if (colorValue === '') {
+            return;
+        } else if (color.name || color.rgb || color.hex || color.hsl) {
+            preview(colorValue);
+            setSelectedColor(colorValue);
+            if (color.rgb) {
+                color.hex = helpers.rgbToHex(color.red, color.green, color.blue);
+                color.name = helpers.rgbToName(color.red, color.green, color.blue);
+                let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
+                color.hsl = hslResult.hslString;
+                color.hue = hslResult.hue;
+                color.saturation = hslResult.saturation;
+                color.lightness = hslResult.lightness;
+                let cmykResult = helpers.rgbToCmyk(color.red, color.green, color.blue);
+                color.cmyk = cmykResult.cmykString;
+                color.cyan = cmykResult.cyan;
+                color.magenta = cmykResult.magenta;
+                color.yellow = cmykResult.yellow;
+                color.black = cmykResult.black;
+            } else if (color.name) {
+                let result = helpers.nameToRgb(color.name);
+                color.red = result.r;
+                color.green = result.g;
+                color.blue = result.b;
+                color.rgb = `${color.red}, ${color.green}, ${color.blue}`;
+                color.hex = result.hex;
+                let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
+                color.hsl = hslResult.hslString;
+                color.hue = hslResult.hue;
+                color.saturation = hslResult.saturation;
+                color.lightness = hslResult.lightness;
+                let cmykResult = helpers.rgbToCmyk(color.red, color.green, color.blue);
+                color.cmyk = cmykResult.cmykString;
+                color.cyan = cmykResult.cyan;
+                color.magenta = cmykResult.magenta;
+                color.yellow = cmykResult.yellow;
+                color.black = cmykResult.black;
+            } else if (color.hex) {
+                let result = helpers.hexToRgb(color.hex);
+                color.red = result.r;
+                color.green = result.g;
+                color.blue = result.b;
+                color.rgb = `${color.red}, ${color.green}, ${color.blue}`;
+                color.name = helpers.rgbToName(color.red, color.green, color.blue);
+                let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
+                color.hsl = hslResult.hslString;
+                color.hue = hslResult.hue;
+                color.saturation = hslResult.saturation;
+                color.lightness = hslResult.lightness;
+                let cmykResult = helpers.rgbToCmyk(color.red, color.green, color.blue);
+                color.cmyk = cmykResult.cmykString;
+                color.cyan = cmykResult.cyan;
+                color.magenta = cmykResult.magenta;
+                color.yellow = cmykResult.yellow;
+                color.black = cmykResult.black;
+            } else if (color.hsl) {
+                let result = helpers.hslToRgb(color.hue, color.saturation, color.lightness);
+                color.red = result.r;
+                color.green = result.g;
+                color.blue = result.b;
+                color.rgb = `${color.red}, ${color.green}, ${color.blue}`;
+                color.hex = helpers.rgbToHex(color.red, color.green, color.blue);
+                color.name = helpers.rgbToName(color.red, color.green, color.blue);
+                let cmykResult = helpers.rgbToCmyk(color.red, color.green, color.blue);
+                color.cmyk = cmykResult.cmykString;
+                color.cyan = cmykResult.cyan;
+                color.magenta = cmykResult.magenta;
+                color.yellow = cmykResult.yellow;
+                color.black = cmykResult.black;
+            }
 
-        setColor(color);
-        setName(color.name);
-        setRgb(color.rgb);
-        setHex(color.hex);
-        setHsl(color.hsl);
-        setCmyk(color.cmyk);
+            setColor(color);
+            setName(color.name);
+            setRgb(color.rgb);
+            setHex(color.hex);
+            setHsl(color.hsl);
+            setCmyk(color.cmyk);
+
+            hideError();
+        } else {
+            showError('Invalid color value');
+        }
     };
 
     function preview(color) {
@@ -223,7 +219,7 @@ const ExploreColor = () => {
             <section className="explore__rgb">
                 <form id="color-form" className="explore__input" onSubmit={submitColorHandler}>
                     <p className="explore__info">Type color value</p>
-                    <p className="explore__input--info">Enter hex, rgb, hsl, cmyk or name</p>
+                    <p className="explore__input--info">Enter name, rgb, hex or hsl value</p>
                     <section className="explore__input--container">
                         <input type="text" name="colorValue" id="colorValue" className="explore__input--input" placeholder="color value" />
                         <input className="button explore__input--submit" type="submit" value="ok" />
