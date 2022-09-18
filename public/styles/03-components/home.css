@@ -1,5 +1,6 @@
 .home__section {
-    position: relative;
+    position: fixed;
+    top: 0;
     margin: 0;
     width: 100vw;
     height: 100vh;
@@ -65,7 +66,7 @@
         align-self:flex-end;
     }
     .picker {
-        align-self:flex-end;
+        align-self:flex-start;
     }
     .wheel {
         align-self:flex-start;

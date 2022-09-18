@@ -3,6 +3,10 @@ import * as helpers from '../ExploreColorPage/exploreHelpers';
 import { getPixel } from '../../helpers/getPixel';
 import { hideError, showError } from '../../helpers/notifications';
 
+import HueResult from './HueResult';
+import SaturationResult from './SaturationResult';
+import LightnessResult from './LightnessResult';
+
 const ExploreColor = () => {
     const [name, setName] = useState('no name');
     const [rgb, setRgb] = useState('');
@@ -225,17 +229,15 @@ const ExploreColor = () => {
                         <input className="button explore__input--submit" type="submit" value="ok" />
                     </section>
                 </form>
-                <p className="explore__info">or pick a color</p>
-                <canvas id="rgbCanvas" height="40" onClick={selectColor}></canvas>
-
-                <section className="explore__modify--container">
-                    <div>Quantity of white, black or grey changes
-                        the lightness, darkness or saturation of pure colors</div>
-                    <canvas id="whiteCanvas" height="40" onClick={modifyColor}></canvas>
+                <section className="explore__pick-color">
+                    <p className="explore__info">or pick a color</p>
+                    <canvas id="rgbCanvas" width="270" height="40" onClick={selectColor}></canvas>
+                    <div>Quantity of white, black or grey changes the lightness, darkness or saturation of pure colors</div>
+                    <canvas id="whiteCanvas" width="270" height="40" onClick={modifyColor}></canvas>
                     <div>White lightens the color. Tints are pastel, pale, cool versions of the hue.</div>
-                    <canvas id="blackCanvas" height="40" onClick={modifyColor}></canvas>
+                    <canvas id="blackCanvas" width="270" height="40" onClick={modifyColor}></canvas>
                     <div>Black darkens the color. Shades are deep, warm and more intensive.</div>
-                    <canvas id="greyCanvas" height="40" onClick={modifyColor}></canvas>
+                    <canvas id="greyCanvas" width="270" height="40" onClick={modifyColor}></canvas>
                     <div>Grey desaturates the color. Tones are muted and more colorless.</div>
                 </section>
             </section>
@@ -253,14 +255,20 @@ const ExploreColor = () => {
                 <li>{name ? name : 'no name'}</li>
                 <span>Browsers support 140 color names.</span>
                 <li>rgb({rgb})</li>
-                <span>RGB value indicates how much of red, green and blue is included. Each component of the triplet can vary from 0 to 255.</span>
+                <span>RGB value indicates how much of red, green and blue is included. 
+                    <br /> Each component of the triplet can vary from 0 to 255.</span>
                 <li>#{hex}</li>
                 <span>A hex triplet is a six-digit, three-byte hexadecimal number, specifying the intensity of red, green and blue.</span>
                 <li>hsl({hsl})</li>
-                <span>HSL color value is specified with hue, saturation and lightness parameters. Hue is a degree on the color wheel from 0 to 360. Saturation and lightness are a percentage value from 0% to 100%.</span>
+                <span>HSL color value is specified with hue, saturation and lightness parameters. 
+                    <br /> Hue is a degree on the color wheel from 0 to 360. Saturation and lightness are a percentage value from 0% to 100%.</span>
                 <li>cmyk({cmyk})</li>
                 <span>CMYK refers to the four ink plates used in some color printing: cyan, magenta, yellow, and key (black).</span>
             </section>
+
+            {/* <HueResult color={color} />
+            <SaturationResult color={color} />
+            <LightnessResult color={color} /> */}
 
         </section>
     );

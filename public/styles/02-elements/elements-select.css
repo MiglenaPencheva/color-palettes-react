@@ -3,9 +3,10 @@
     padding: 0.5rem;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 select {
@@ -29,3 +30,13 @@ select:hover {
     color: gainsboro;
 }
 
+@media (max-width: 768px) {
+   
+}
+@media screen and (max-width: 480px) {
+    .select-container {
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--teal-grey);
+    }
+}
