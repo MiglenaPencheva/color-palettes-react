@@ -84,7 +84,7 @@ const WhiteBlackGreySettings = () => {
                             onChange={onGreyChange} value={greyValue} />
                         <span>{greyValue}%</span>
                     </label>
-                    <div>Add grey to desaturate the color. Tones are muted and more colorless.</div>
+                    <div>Add grey to unsaturate the color. Tones are muted and more colorless.</div>
                 </section>
             </section>
 

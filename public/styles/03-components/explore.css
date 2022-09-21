@@ -108,7 +108,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    width: 260px;
+    width: 270px;
     align-items: flex-start;
     justify-content: flex-start;
 }
@@ -125,6 +125,79 @@
     font-size: 0.8rem;
 }
 
+/* ----- rgbMixer ----- */
+.explore__rgb-mixer {
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; 
+}
+.explore__rgb-mixer p {
+    margin: 0;
+}
+.explore__rgb-mixer--info {
+    padding: 0.5rem;
+}
+.explore__red-blue-green {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around;
+    align-items: center;
+}
+.explore__rgb-mixer span {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#red, #green, #blue, #hue, #saturation, #lightness {
+    width: 30%;
+    /* height: 60px; */
+    padding: 0.5rem;
+    text-align: center;
+    color: var(--vermilion-white);
+    border-radius: 5px;
+}
+#red {
+    background-color: red;
+}
+#green {
+    background-color: green;
+}
+#blue {
+    background-color: blue;
+}
+#rgbMix {
+    width: 98%;
+    height: 120px;
+    align-self: center;
+    border-radius: 5px;
+    color: var(--vermilion-white);
+    text-shadow: 2px 2px 4px var(--teal-grey);
+}
+#hue {
+    /* background-color:  blue; */
+    background-image: linear-gradient(to right, red, #FF8000, yellow, #80FF00, #00FF00, #00FF80, cyan, #0080FF, blue, #8000FF, magenta, #FF0080);
+}
+#saturation {
+    background-image: linear-gradient(to right, grey, red);
+}
+#lightness {
+    background-image: linear-gradient(to right, black , white);
+}
+#hslMix {
+    width: 98%;
+    height: 120px;
+    align-self: center;
+    border-radius: 5px;
+    color: var(--vermilion-white);
+    text-shadow: 2px 2px 4px var(--teal-grey);
+}
+
+
 /* ----- hueResult ----- */
 /* .explore__chart {
     display: flex;
@@ -140,7 +213,21 @@
     .explore__preview {
         width: 270px;
     }
+    #red, #green, #blue, #hue, #saturation, #lightness, 
+    #rgbMix, #hslMix  {
+        width: 50%;
+    }
 }
 @media screen and (max-width: 480px) {
-    
+    .explore__rgb-mixer {
+        width: 270px;
+    }
+    .explore__rgb-mixer--info {
+        padding: 0;
+        font-size: 0.9rem;
+    }
+    #red, #green, #blue, #hue, #saturation, #lightness,
+    #rgbMix, #hslMix {
+        width: 100%;
+    }
 }

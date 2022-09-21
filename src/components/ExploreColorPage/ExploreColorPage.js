@@ -3,9 +3,11 @@ import * as helpers from '../ExploreColorPage/exploreHelpers';
 import { getPixel } from '../../helpers/getPixel';
 import { hideError, showError } from '../../helpers/notifications';
 
-import HueResult from './HueResult';
-import SaturationResult from './SaturationResult';
-import LightnessResult from './LightnessResult';
+// import HueResult from './HueResult';
+// import SaturationResult from './SaturationResult';
+// import LightnessResult from './LightnessResult';
+import RgbMixer from './RgbMixer';
+import HslMixer from './HslMixer';
 
 const ExploreColor = () => {
     const [name, setName] = useState('no name');
@@ -16,6 +18,12 @@ const ExploreColor = () => {
     const [color, setColor] = useState({});
     const [selectedColor, setSelectedColor] = useState('#94c7db');
     const [currentColor, setCurrentColor] = useState('#94c7db');
+    const [r, setR] = useState(148);
+    const [g, setG] = useState(199);
+    const [b, setB] = useState(219);
+    const [h, setH] = useState(197);
+    const [s, setS] = useState(50);
+    const [l, setL] = useState(72);
 
 
     useEffect(() => {
@@ -91,6 +99,12 @@ const ExploreColor = () => {
         setHex(color.hex);
         setHsl(color.hsl);
         setCmyk(color.cmyk);
+        setR(Number(arr[0]));
+        setG(Number(arr[1]));
+        setB(Number(arr[2]));
+        setH(hslResult.hue);
+        setS(hslResult.saturation);
+        setL(hslResult.lightness);
     };
 
     const selectColor = (e) => {
@@ -192,6 +206,13 @@ const ExploreColor = () => {
             setHsl(color.hsl);
             setCmyk(color.cmyk);
 
+            setR(color.red);
+            setG(color.green);
+            setB(color.blue);
+            setH(color.hue);
+            setS(color.saturation);
+            setL(color.lightness);
+
             hideError();
         } else {
             showError('Invalid color value');
@@ -261,10 +282,14 @@ const ExploreColor = () => {
                 <span>A hex triplet is a six-digit, three-byte hexadecimal number, specifying the intensity of red, green and blue.</span>
                 <li>hsl({hsl})</li>
                 <span>HSL color value is specified with hue, saturation and lightness parameters. 
-                    <br /> Hue is a degree on the color wheel from 0 to 360. Saturation and lightness are a percentage value from 0% to 100%.</span>
+                    {/* <br />Saturation and lightness are a percentage value from 0% to 100%. */}
+                </span>
                 <li>cmyk({cmyk})</li>
-                <span>CMYK refers to the four ink plates used in some color printing: cyan, magenta, yellow, and key (black).</span>
+                <span>CMYK refers to the four ink plates used in color printing: cyan, magenta, yellow, and key (black).</span>
             </section>
+
+            <RgbMixer r={r} g={g} b={b} />
+            <HslMixer h={h} s={s} l={l} />
 
             {/* <HueResult color={color} />
             <SaturationResult color={color} />
