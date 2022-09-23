@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
 import Logo from './components/Logo/Logo';
+import GoToTop from './components/GoToTop/GoToTop';
 
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
@@ -27,6 +28,7 @@ function App() {
 
                 <nav></nav>
                 <Logo />
+                <GoToTop />
 
                 <main id="site-content">
                     <Routes>

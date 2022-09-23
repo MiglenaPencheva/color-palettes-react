@@ -1,0 +1,27 @@
+#topArrow {
+    display: none;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 20px;
+    height: 20px;
+    rotate: 225deg;
+    opacity: 44%;
+    border: 3px solid var(--teal-grey);
+    border-width: 0 5px 5px 0;
+    border-radius: 3px;
+    cursor: pointer;
+    z-index: 1001;
+    animation: rotationArrow 1s;
+}
+
+#topArrow:hover {
+    opacity: 1;
+    animation: rotate;
+}
+
+@keyframes rotationArrow {
+    100% {
+        rotate: -135deg;  
+    }
+}

@@ -13,7 +13,7 @@ const Header = () => {
                     <Link className="home__navbar--link" to="/gallery">Gallery</Link>
                     <Link className="home__navbar--link picker" to="/color-picker">Palette-maker</Link>
                     <Link className="home__navbar--link wheel" to="/color-wheel">Combinations</Link>
-                    <Link className="home__navbar--link explore" to="/color-explore">Explore-color</Link>
+                    <Link className="home__navbar--link explore" to="/color-explore">Explore color</Link>
                 </nav>
 
                 {/* {user.username

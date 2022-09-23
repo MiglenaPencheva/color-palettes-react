@@ -8,9 +8,9 @@ input {
 }
 
 input:hover {
-    border: 2px solid var(--teal-grey);
+    /* border: 2px solid var(--teal-grey); */
 }
 
 input:focus {
-    border: 2px solid var(--teal-grey);
+    /* border: 2px solid var(--teal-grey); */
 }
