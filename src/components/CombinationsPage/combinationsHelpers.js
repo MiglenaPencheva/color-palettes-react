@@ -391,12 +391,13 @@ export const getInfoCombinations = {
     'Choose scheme': '',
     'complementary': 'this is complementary scheme',
     'splitComplementary': 'this is split complementary scheme',
-    'monochromatic': 'this is monochromatic scheme',
+    'monochromatic': 'The monochromatic scheme uses a single base color and various tints, tones and shades of the same hue, that are derived by adding white, grey or black. It is easy to create and easy to apply and perceive. This color scheme gives a soft and pleasant feeling. The lack of contrast makes more subtle and peaceful vision. Dynamic can be achieved combining dark shades and light tints or even black and white. Using one base color with its variations gives bold and dramatic effect, as well as stylish and elegant look',
     'analogous3': 'this is analogous scheme',
-    'analogous5': 'this is analogous scheme',
+    'analogous5': 'this is analogous scheme', 
     'triadic': 'this is triadic scheme',
     'tetradic1': 'this is tetradic1 scheme',
     'tetradic2': 'this is tetradic2 scheme',
     'square': 'this is square scheme',
 };
 
+// const monochromatic = 'The monochromatic scheme uses a single base color and various tints, tones and shades of the same hue, that are derived by adding white, grey or black. It is easy to create and easy to apply and perceive. This color scheme gives a soft and pleasant feeling. The lack of contrast makes more subtle and peaceful vision. Dynamic can be achieved combining dark shades and light tints or even black and white. Using one base color with its variations gives bold and dramatic effect, as well as stylish and elegant look';

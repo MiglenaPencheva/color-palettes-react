@@ -65,10 +65,16 @@ const Combinations = () => {
         // }
     };
 
+    const showSchemesInfo = (e) => {
+        let infoSection = document.getElementById('infoSection');
+    };
+
     const onSelectedScheme = (e) => {
         const scheme = e.target.value;
         const schemeCanvas = document.getElementById('schemeCanvas');
         document.getElementById('resultSection').style.display = 'flex';
+        const advantagesSection = document.getElementById('advantagesSection');
+        advantagesSection.style.display = 'block';
 
         let ul = document.getElementById('resultColors');
         const colorObject = helpers.colorObjects[mainColor];
@@ -185,7 +191,11 @@ const Combinations = () => {
                         <option value="square">Square</option>
                     </select>
                 </section>
-                <p id="pScheme" className="ryb__scheme-p"> Colors that create an aesthetic feeling when used together will commonly accompany each other in color schemes.</p>
+                <p id="pScheme" className="ryb__scheme-p">
+                    When arranged in appropriate schemes,
+                    colors look appealing together, create stylish and aesthetic feeling.
+                    <span onClick={showSchemesInfo}> Reed more...</span>
+                </p>
 
                 <section id="resultSection" className="ryb__result">
                     <div id="resultColorsContainer" className="ryb__result--colors">
@@ -202,9 +212,10 @@ const Combinations = () => {
 
             </section>
 
-            {/* <span className="ryb__actions--result-info">{info}</span> */}
-            {/* In color theory, a color scheme is the choice of colors used in various artistic and design contexts. 
-                    Color schemes are used to create style and appeal. */}
+            <section id="advantagesSection" className="ryb__advantages">
+                <h6>Scheme advantages</h6>
+                {info}
+            </section>
 
         </section>
     );
