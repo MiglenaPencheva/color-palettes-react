@@ -73,8 +73,8 @@ const Combinations = () => {
         const scheme = e.target.value;
         const schemeCanvas = document.getElementById('schemeCanvas');
         document.getElementById('resultSection').style.display = 'flex';
-        const advantagesSection = document.getElementById('advantagesSection');
-        advantagesSection.style.display = 'block';
+        // const advantagesSection = document.getElementById('advantagesSection');
+        // advantagesSection.style.display = 'block';
 
         let ul = document.getElementById('resultColors');
         const colorObject = helpers.colorObjects[mainColor];
@@ -109,6 +109,8 @@ const Combinations = () => {
         }
 
         //   show info
+        const advantagesSection = document.getElementById('advantagesSection');
+        advantagesSection.style.display = 'block';
         const text = helpers.getInfoCombinations[scheme];
         setInfo(text);
         const p = document.getElementById('pScheme');
@@ -120,6 +122,8 @@ const Combinations = () => {
         wheel.style.transform = 'rotate(0deg)';
         setMainColor('yellow');
         resetScheme();
+        const advantagesSection = document.getElementById('advantagesSection');
+        advantagesSection.style.display = 'none';
     };
     const resetScheme = (e) => {
         document.getElementById('scheme').value = 'Choose scheme';
