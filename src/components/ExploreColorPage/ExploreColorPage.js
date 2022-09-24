@@ -243,7 +243,7 @@ const ExploreColor = () => {
 
             <section className="explore__rgb">
                 <form id="color-form" className="explore__input" onSubmit={submitColorHandler}>
-                    <p className="explore__info">Type color value</p>
+                    <h5 className="explore__info">Type color value</h5>
                     <p className="explore__input--info">Enter name, rgb, hex or hsl value</p>
                     <section className="explore__input--container">
                         <input type="text" name="colorValue" id="colorValue" className="explore__input--input" placeholder="color value" />
@@ -251,7 +251,7 @@ const ExploreColor = () => {
                     </section>
                 </form>
                 <section className="explore__pick-color">
-                    <p className="explore__info">or pick a color</p>
+                    <h5 className="explore__info">or pick a color</h5>
                     <canvas id="rgbCanvas" width="270" height="40" onClick={selectColor}></canvas>
                     <div>Quantity of white, black or grey changes the lightness, darkness or saturation of pure colors</div>
                     <canvas id="whiteCanvas" width="270" height="40" onClick={modifyColor}></canvas>
@@ -264,7 +264,7 @@ const ExploreColor = () => {
             </section>
 
             <section className="explore__preview">
-                <p className="explore__info">Color preview</p>
+                <h5 className="explore__info">Color preview</h5>
                 <div id="previewWitheText">White text</div>
                 <div id="previewTextOnWithe">White background</div>
                 <div id="previewBlackText">Black text</div>
@@ -272,7 +272,7 @@ const ExploreColor = () => {
             </section>
 
             <section className="explore__values">
-                <p className="explore__info">Color values</p>
+                <h5 className="explore__info">Color values</h5>
                 <li>{name ? name : 'no name'}</li>
                 <span>Browsers support 140 color names.</span>
                 <li>rgb({rgb})</li>

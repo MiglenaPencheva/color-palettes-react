@@ -18,7 +18,7 @@ const RgbMixer = ({ r, g, b }) => {
 
     return (
         <section className="explore__rgb-mixer">
-            <p className="explore__info">RGB mixer</p>
+            <h5 className="explore__info">RGB mixer</h5>
             <p className="explore__rgb-mixer--info">The RGB color model is an additive color model in which the red, green, and blue are the primary colors of light. 
                 When added together in different amounts, they reproduce a wide range of colors.
                 The main purpose of the RGB color model is for representation and display of images in digital and electronic systems.</p>

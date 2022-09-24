@@ -67,6 +67,12 @@ const Combinations = () => {
 
     const showSchemesInfo = (e) => {
         let infoSection = document.getElementById('infoSection');
+        infoSection.style.display = 'block';
+        infoSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest'
+        });
     };
 
     const onSelectedScheme = (e) => {
@@ -115,6 +121,15 @@ const Combinations = () => {
         setInfo(text);
         const p = document.getElementById('pScheme');
         p.style.display = 'none';
+        let infoSection = document.getElementById('infoSection');
+        infoSection.style.display = 'none';
+
+        const rybSchemeSection = document.getElementById('rybSchemeSection');
+        rybSchemeSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest'
+        });
     };
 
     const resetWheel = (e) => {
@@ -177,7 +192,7 @@ const Combinations = () => {
                 <div onClick={resetWheel} className="reset">Reset wheel</div>
             </section>
 
-            <section className="ryb__scheme">
+            <section className="ryb__scheme" id="rybSchemeSection">
                 <section className="select-container">
                     <label htmlFor="scheme" className="select-container__label">Color scheme</label>
                     <select id="scheme" name="scheme"
@@ -219,6 +234,21 @@ const Combinations = () => {
             <section id="advantagesSection" className="ryb__advantages">
                 <h6>Scheme advantages</h6>
                 {info}
+            </section>
+
+            <section id="infoSection" className="ryb__scheme-info-section">
+                <h6>Color schemes details</h6>
+                <p>Common words for wheel and schemes</p>
+                {/* <div>Complementary scheme</div> */}
+                <p><b><i>Complementary scheme</i></b> takes colors from opposite side of the color wheel. This is the most contrasting of all color schemes. It attracts the most attention. One of the hues is the dominant color of the pair. The other one enhances or emphasizes the primary one and is used for accents. Both warm and cold colors take part in this most dynamic harmony. The design looks warm or cold according to the chosen dominant color. Attractive and hard for balancing, complementary scheme gives sharp contrast, brighter and prominent vision.</p>
+                {/* <div>SplitComplementary</div> */}
+                <p><b><i>Split-complementary scheme</i></b> ....</p>
+                {/* <div>Monochromatic scheme</div> */}
+                <p><b><i>Monochromatic scheme</i></b> uses a single base color and various tints, tones and shades of the same hue, that are derived by adding white, grey or black. It is easy to create and easy to apply and perceive. This color scheme gives a soft and pleasant feeling. The lack of contrast makes more subtle and peaceful vision. Dynamics can be achieved combining dark shades and light tints or even black and white. Using one base color with its variations gives bold and dramatic effect, as well as stylish and elegant look.</p>
+                <p><b><i>Analogous scheme</i></b> uses colors that are next to each other on the color wheel. It is easy to create and gives a pleasant and elegant appearance. One dominant color and the others as supporting or accents make this blend harmonious and calming. The lack of contrast keeps it less vibrant. This kind of combination occurs in nature and colors never clash one another. Neighboring hues fits better if they are either in the warm or the cold gamma.</p>
+                <p><b><i>Triadic scheme</i></b> ...</p>
+                <p><b><i>Tetradic scheme</i></b> ...</p>
+                <p><b><i>Square scheme</i></b> ...</p>
             </section>
 
         </section>
