@@ -184,10 +184,17 @@
 .ryb__advantages h6 {
     font-size: 1rem;
 }
+#reedMore {
+    font-style: italic;
+    font-weight: 600;
+    cursor: pointer;
+}
 .ryb__scheme-info-section {
     display: none;
     padding: 0.5rem;
     border-top: 1px solid var(--teal-grey);
+    flex-direction: column;
+    gap: 1rem;
 }
 
 @media (max-width: 768px) {}
@@ -214,6 +221,9 @@
         max-height: 60px;
     }
     .ryb__advantages {
+        font-size: 0.9rem;
+    }
+    #reedMore {
         font-size: 0.9rem;
     }
     .ryb__scheme-info-section {

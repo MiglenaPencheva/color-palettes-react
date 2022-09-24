@@ -67,12 +67,15 @@ const Combinations = () => {
 
     const showSchemesInfo = (e) => {
         let infoSection = document.getElementById('infoSection');
-        infoSection.style.display = 'block';
+        infoSection.style.display = 'flex';
         infoSection.scrollIntoView({
             behavior: 'smooth',
             block: 'start',
             inline: 'nearest'
         });
+
+        let reedMore = document.getElementById('reedMore');
+        reedMore.style.display = 'none';
     };
 
     const onSelectedScheme = (e) => {
@@ -130,6 +133,9 @@ const Combinations = () => {
             block: 'start',
             inline: 'nearest'
         });
+
+        let reedMore = document.getElementById('reedMore');
+        reedMore.style.display = 'block';
     };
 
     const resetWheel = (e) => {
@@ -235,20 +241,23 @@ const Combinations = () => {
                 <h6>Scheme advantages</h6>
                 {info}
             </section>
-
+ 
+            <div id="reedMore" onClick={showSchemesInfo}>Reed more about color schemes...</div>
+            
             <section id="infoSection" className="ryb__scheme-info-section">
                 <h6>Color schemes details</h6>
-                <p>Common words for wheel and schemes</p>
-                {/* <div>Complementary scheme</div> */}
-                <p><b><i>Complementary scheme</i></b> takes colors from opposite side of the color wheel. This is the most contrasting of all color schemes. It attracts the most attention. One of the hues is the dominant color of the pair. The other one enhances or emphasizes the primary one and is used for accents. Both warm and cold colors take part in this most dynamic harmony. The design looks warm or cold according to the chosen dominant color. Attractive and hard for balancing, complementary scheme gives sharp contrast, brighter and prominent vision.</p>
-                {/* <div>SplitComplementary</div> */}
-                <p><b><i>Split-complementary scheme</i></b> ....</p>
-                {/* <div>Monochromatic scheme</div> */}
-                <p><b><i>Monochromatic scheme</i></b> uses a single base color and various tints, tones and shades of the same hue, that are derived by adding white, grey or black. It is easy to create and easy to apply and perceive. This color scheme gives a soft and pleasant feeling. The lack of contrast makes more subtle and peaceful vision. Dynamics can be achieved combining dark shades and light tints or even black and white. Using one base color with its variations gives bold and dramatic effect, as well as stylish and elegant look.</p>
-                <p><b><i>Analogous scheme</i></b> uses colors that are next to each other on the color wheel. It is easy to create and gives a pleasant and elegant appearance. One dominant color and the others as supporting or accents make this blend harmonious and calming. The lack of contrast keeps it less vibrant. This kind of combination occurs in nature and colors never clash one another. Neighboring hues fits better if they are either in the warm or the cold gamma.</p>
-                <p><b><i>Triadic scheme</i></b> ...</p>
-                <p><b><i>Tetradic scheme</i></b> ...</p>
-                <p><b><i>Square scheme</i></b> ...</p>
+                <article><b><i>Color wheel</i></b>...</article>
+                <article><b><i>Color schemes</i></b>...</article>
+                <article><b><i>Complementary scheme</i></b> takes colors from opposite side of the color wheel. This is the most contrasting of all color schemes. It attracts the most attention. One of the hues is the dominant color of the pair. The other one enhances or emphasizes the primary one and is used for accents. Both warm and cold colors take part in this most dynamic harmony. The design looks warm or cold according to the chosen dominant color. Attractive and hard for balancing, complementary scheme gives sharp contrast, brighter and prominent vision.</article>
+                <article><b><i>Split-complementary scheme</i></b> is a variation of complementary scheme. Takes a base color and the two colors on both sides of the opposite one on the color wheel. It has the same sharp visual contrast and still gives the balance between warm or cold color temperatures. Cold base color should stand opposite of two variations of warm hues, for example. 3-color harmony offers less pressure, less tension and is not so vibrant. It is hard to harmonize and difficult for balancing. But still gives the best contrast, beautiful nuances and a pleasant feeling.</article>
+                <article><b><i>Monochromatic scheme</i></b> uses a single base color and various tints, tones and shades of the same hue, that are derived by adding white, grey or black. It is easy to create and easy to apply and perceive. This color scheme gives a soft and pleasant feeling. The lack of contrast makes more subtle and peaceful vision. Dynamics can be achieved combining dark shades and light tints or even black and white. Using one base color with its variations gives bold and dramatic effect, as well as stylish and elegant look.</article>
+                <article><b><i>Analogous scheme</i></b> uses colors that are next to each other on the color wheel. It is easy to create and gives a pleasant and elegant appearance. One dominant color and the others as supporting or accents make this blend harmonious and calming. The lack of contrast keeps it less vibrant. This kind of combination occurs in nature and colors never clash one another. Neighboring hues fits better if they are either in the warm or the cold gamma.</article>
+                <article><b><i>Triadic scheme</i></b> ...</article>
+                <article><b><i>Tetradic scheme</i></b> ...</article>
+                <article><b><i>Square scheme</i></b> ...</article>
+                <article><b><i>Other schemes</i></b> are used in maps, charts, data visualization and data science. The color is used as a graphical tool due to its aesthetic appeal and intuitive contrast. The richness and variety of meaning can represent quantitative variation and different kinds of ranges. 
+                    <br /><b><i>Sequential schemes</i></b> are use to order data from low to high. Commonly its a monochrome scheme and the darkest shade intuitively represents the largest value. 
+                    <br /><b><i>Divergent (diverging) schemes</i></b> uses two sequential schemes and share a common (usually the lightest) color in the center as the darkest stands at both of the ends. This combination emphasizes the extreme values at the ends and the mid-range critical values. Usually this schemes are asymetrical when there is a middle value.</article>
             </section>
 
         </section>

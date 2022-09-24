@@ -390,7 +390,7 @@ export const colorObjects = {
 export const getInfoCombinations = {
     'Choose scheme': '',
     'complementary': 'Complementary scheme takes colors from opposite side of the color wheel. This is the most contrasting of all color schemes. It attracts the most attention. One of the hues is the dominant color of the pair. The other one enhances or emphasizes the primary one and is used for accents. Both warm and cold colors take part in this most dynamic harmony. The design looks warm or cold according to the chosen dominant color. Attractive and hard for balancing, complementary scheme gives sharp contrast, brighter and prominent vision.',
-    'splitComplementary': 'this is split complementary scheme',
+    'splitComplementary': 'Split-complementary scheme is a variation of complementary scheme. Takes a base color and the two colors on both sides of the opposite one on the color wheel. It has the same sharp visual contrast and still gives the balance between warm or cold color temperatures. Cold base color should stand opposite of two variations of warm hues, for example. 3-color harmony offers less pressure, less tension and is not so vibrant. It is hard to harmonize and difficult for balancing. But still gives the best contrast, beautiful nuances and a pleasant feeling.',
     'monochromatic': 'Monochromatic scheme uses a single base color and various tints, tones and shades of the same hue, that are derived by adding white, grey or black. It is easy to create and easy to apply and perceive. This color scheme gives a soft and pleasant feeling. The lack of contrast makes more subtle and peaceful vision. Dynamics can be achieved combining dark shades and light tints or even black and white. Using one base color with its variations gives bold and dramatic effect, as well as stylish and elegant look.',
     'analogous3': 'Analogous scheme uses colors that are next to each other on the color wheel. It is easy to create and gives a pleasant and elegant appearance. One dominant color and the others as supporting or accents make this blend harmonious and calming. The lack of contrast keeps it less vibrant. This kind of combination occurs in nature and colors never clash one another. Neighboring hues fits better if they are either in the warm or the cold gamma.',
     'analogous5': 'Analogous scheme uses colors that are next to each other on the color wheel. It is easy to create and gives a pleasant and elegant appearance. One dominant color and the others as supporting or accents make this blend harmonious and calming. The lack of contrast keeps it less vibrant. This kind of combination occurs in nature and colors never clash one another. Neighboring hues fits better if they are either in the warm or the cold gamma.', 
@@ -423,5 +423,11 @@ export const getInfoCombinations = {
 // The design looks warm or cold according to the chosen dominant color.
 // Attractive and hard for balancing, complementary scheme gives sharp contrast, brighter and prominent vision.
 
-
+// Split-complementary scheme is a variation of complementary scheme.
+// Takes a base color and the two colors on both sides of the opposite one on the color wheel.
+// Has the same sharp visual contrast and still gives the balance between warm or cold color temperatures.
+// Cold base color should stand opposite of two variations of warm hues, for example.
+// 3-color harmony offers less pressure, less tension and is not so vibrant.
+// It is hard to harmonize and difficult for balancing.
+// But still gives the best contrast, beautiful nuances and a pleasant feeling.
 
