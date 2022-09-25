@@ -394,7 +394,7 @@ export const getInfoCombinations = {
     'monochromatic': 'Monochromatic scheme uses a single base color and various tints, tones and shades of the same hue, that are derived by adding white, grey or black. It is easy to create and easy to apply and perceive. This color scheme gives a soft and pleasant feeling. The lack of contrast makes more subtle and peaceful vision. Dynamics can be achieved combining dark shades and light tints or even black and white. Using one base color with its variations gives bold and dramatic effect, as well as stylish and elegant look.',
     'analogous3': 'Analogous scheme uses colors that are next to each other on the color wheel. It is easy to create and gives a pleasant and elegant appearance. One dominant color and the others as supporting or accents make this blend harmonious and calming. The lack of contrast keeps it less vibrant. This kind of combination occurs in nature and colors never clash one another. Neighboring hues fits better if they are either in the warm or the cold gamma.',
     'analogous5': 'Analogous scheme uses colors that are next to each other on the color wheel. It is easy to create and gives a pleasant and elegant appearance. One dominant color and the others as supporting or accents make this blend harmonious and calming. The lack of contrast keeps it less vibrant. This kind of combination occurs in nature and colors never clash one another. Neighboring hues fits better if they are either in the warm or the cold gamma.', 
-    'triadic': 'this is triadic scheme',
+    'triadic': 'Triadic scheme is made up of three hues equally spaced around the wheel. One base color is balanced with two evenly spaced colors - accents. This combination offers high visual contrast and a harmony at the same time. The vibrance remains even if pale or unsaturated variations of hues are used. The triadic scheme is easier to accomplish and provides dynamics and richness of the colors.',
     'tetradic1': 'this is tetradic1 scheme',
     'tetradic2': 'this is tetradic2 scheme',
     'square': 'this is square scheme',
@@ -430,4 +430,10 @@ export const getInfoCombinations = {
 // 3-color harmony offers less pressure, less tension and is not so vibrant.
 // It is hard to harmonize and difficult for balancing.
 // But still gives the best contrast, beautiful nuances and a pleasant feeling.
+
+// Triadic scheme is made up of three hues equally spaced around the wheel.
+// One base color is balanced with two evenly spaced colors - accents.
+// This combination offers high visual contrast and a harmony at the same time.
+// The vibrance remains, even if pale or unsaturated variations of hues are used.
+// The triadic scheme is easier to accomplish and provides dynamics and richness of the colors.
 
