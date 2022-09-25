@@ -97,9 +97,6 @@
     color: var(--teal-light);
     cursor: pointer;
 }
-#infoSection {
-
-}
 
 /* ----- result ----- */
 .ryb__result {
@@ -176,6 +173,7 @@
     background-color: rgba(255, 255, 255, 0);
 }
 
+/* ---- scheme advantages ---- */
 .ryb__advantages {
     display: none;
     padding: 0.5rem;
@@ -191,7 +189,8 @@
     cursor: pointer;
     border-top: 1px solid var(--teal-grey);
 }
-.ryb__scheme-info-section {
+
+.ryb__details {
     display: none;
     padding: 0.5rem;
     border-top: 1px solid var(--teal-grey);
