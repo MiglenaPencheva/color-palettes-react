@@ -185,9 +185,11 @@
     font-size: 1rem;
 }
 #reedMore {
+    padding-top: 1rem;
     font-style: italic;
     font-weight: 600;
     cursor: pointer;
+    border-top: 1px solid var(--teal-grey);
 }
 .ryb__scheme-info-section {
     display: none;
