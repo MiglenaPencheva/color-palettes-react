@@ -58,8 +58,8 @@ export function clearScheme(ctx) {
 }
 export function drawComplementary(ctx) {
     ctx.beginPath();
-    ctx.moveTo(82, 24);
-    ctx.lineTo(82, 140);
+    ctx.moveTo(81, 30);
+    ctx.lineTo(81, 130);
     ctx.strokeStyle = '#608d9e';
     ctx.lineWidth = 7;
     ctx.lineCap = 'round';
@@ -67,11 +67,11 @@ export function drawComplementary(ctx) {
 }
 export function drawSplitComplementary(ctx) {
     ctx.beginPath();
-    ctx.moveTo(82, 24);
-    ctx.lineTo(82, 80);
-    ctx.lineTo(54, 130);
-    ctx.moveTo(82, 80);
-    ctx.lineTo(110, 130);
+    ctx.moveTo(81, 30);
+    ctx.lineTo(81, 80);
+    ctx.lineTo(55, 125);
+    ctx.moveTo(81, 80);
+    ctx.lineTo(106, 125);
     ctx.strokeStyle = '#608d9e';
     ctx.lineWidth = 7;
     ctx.lineCap = 'round';
@@ -79,8 +79,8 @@ export function drawSplitComplementary(ctx) {
 }
 export function drawMonochromatic(ctx) {
     ctx.beginPath();
-    ctx.moveTo(82, 24);
-    ctx.lineTo(82, 80);
+    ctx.moveTo(81, 30);
+    ctx.lineTo(81, 80);
     ctx.strokeStyle = '#608d9e';
     ctx.lineWidth = 7;
     ctx.lineCap = 'round';
@@ -88,12 +88,12 @@ export function drawMonochromatic(ctx) {
 }
 export function drawAnalogous3(ctx) {
     ctx.beginPath();
-    ctx.moveTo(82, 24); // middle
-    ctx.lineTo(82, 80);
-    ctx.moveTo(54, 32); // left
-    ctx.lineTo(82, 80);
-    ctx.moveTo(110, 32); // right
-    ctx.lineTo(82, 80);
+    ctx.moveTo(81, 30); // middle
+    ctx.lineTo(81, 80);
+    ctx.moveTo(55, 37); // left
+    ctx.lineTo(81, 80);
+    ctx.moveTo(107, 37); // right
+    ctx.lineTo(81, 80);
     ctx.strokeStyle = '#608d9e';
     ctx.lineWidth = 7;
     ctx.lineCap = 'round';
@@ -101,16 +101,16 @@ export function drawAnalogous3(ctx) {
 }
 export function drawAnalogous5(ctx) {
     ctx.beginPath();
-    ctx.moveTo(82, 24); // middle
-    ctx.lineTo(82, 80);
-    ctx.moveTo(54, 32); // left 1
-    ctx.lineTo(82, 80);
-    ctx.moveTo(35, 52); // left 2
-    ctx.lineTo(82, 80);
-    ctx.moveTo(110, 32);    // right 1
-    ctx.lineTo(82, 80);
-    ctx.moveTo(130, 52);    // right 2
-    ctx.lineTo(82, 80);
+    ctx.moveTo(81, 30); // middle
+    ctx.lineTo(81, 80);
+    ctx.moveTo(55, 37); // left 1
+    ctx.lineTo(81, 80);
+    ctx.moveTo(38, 56); // left 2
+    ctx.lineTo(81, 81);
+    ctx.moveTo(107, 37); // right 1
+    ctx.lineTo(81, 80);
+    ctx.moveTo(125, 56);    // right 2
+    ctx.lineTo(81, 81);
     ctx.strokeStyle = '#608d9e';
     ctx.lineWidth = 7;
     ctx.lineCap = 'round';
@@ -118,11 +118,11 @@ export function drawAnalogous5(ctx) {
 }
 export function drawTriadic(ctx) {
     ctx.beginPath();
-    ctx.moveTo(82, 24);     // middle
-    ctx.lineTo(82, 80);
-    ctx.lineTo(35, 110);    // left
-    ctx.moveTo(82, 80);     //right
-    ctx.lineTo(130, 110);
+    ctx.moveTo(81, 30);     // middle
+    ctx.lineTo(81, 80);
+    ctx.lineTo(38, 105);    // left
+    ctx.moveTo(81, 80);     //right
+    ctx.lineTo(125, 105);
     ctx.strokeStyle = '#608d9e';
     ctx.lineWidth = 7;
     ctx.lineCap = 'round';
@@ -130,10 +130,10 @@ export function drawTriadic(ctx) {
 }
 export function drawTetradic1(ctx) {
     ctx.beginPath();
-    ctx.moveTo(82, 24);     // first
-    ctx.lineTo(82, 140);
-    ctx.moveTo(35, 52);
-    ctx.lineTo(130, 110);
+    ctx.moveTo(81, 30);     // first
+    ctx.lineTo(81, 130);
+    ctx.moveTo(38, 55);
+    ctx.lineTo(125, 105);
     ctx.strokeStyle = '#608d9e';
     ctx.lineWidth = 7;
     ctx.lineCap = 'round';
@@ -141,10 +141,10 @@ export function drawTetradic1(ctx) {
 }
 export function drawTetradic2(ctx) {
     ctx.beginPath();
-    ctx.moveTo(82, 24);     // first
-    ctx.lineTo(82, 140);
-    ctx.moveTo(130, 52);
-    ctx.lineTo(35, 110);
+    ctx.moveTo(81, 30);     // first
+    ctx.lineTo(81, 130);
+    ctx.moveTo(125, 55);
+    ctx.lineTo(36, 105);
     ctx.strokeStyle = '#608d9e';
     ctx.lineWidth = 7;
     ctx.lineCap = 'round';
@@ -152,10 +152,10 @@ export function drawTetradic2(ctx) {
 }
 export function drawSquare(ctx) {
     ctx.beginPath();
-    ctx.moveTo(82, 24);
-    ctx.lineTo(82, 140);
-    ctx.moveTo(26, 82);
-    ctx.lineTo(138, 82);
+    ctx.moveTo(81, 30);
+    ctx.lineTo(81, 130);
+    ctx.moveTo(30, 81);
+    ctx.lineTo(130, 81);
     ctx.strokeStyle = '#608d9e';
     ctx.lineWidth = 7;
     ctx.lineCap = 'round';
