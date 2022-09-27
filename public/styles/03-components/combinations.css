@@ -183,7 +183,7 @@
     font-size: 1rem;
 }
 #reedMore {
-    padding-top: 1rem;
+    padding: 1rem 0;
     font-style: italic;
     font-weight: 600;
     cursor: pointer;
@@ -221,6 +221,7 @@
     width: 80%;
 }
 .ryb__details--img {
+    margin: 0 1rem;
     width: 120px;
     height: 120px;
 }
@@ -235,7 +236,7 @@
 }
 
 @media (max-width: 830px) {
-    .ryb__details img {
+    .ryb__details--img {
         margin: 0 auto;
     }
     .ryb__details--text-with-img {
@@ -272,6 +273,12 @@
     }
     #reedMore {
         font-size: 0.9rem;
+    }
+    .ryb__details {
+        font-size: 0.9rem;
+    }
+    .ryb__details--wheel-img {
+        width: 160px;
     }
     .ryb__scheme-info-section {
         font-size: 0.9rem;

@@ -35,19 +35,16 @@ const SchemesDetails = () => {
                 <article className="ryb__details--text-with-img"><b><i>Tetradic scheme</i></b> is also called a double complementary scheme. The four colors arranged in two complementary pairs make it difficult to harmonize. One of the colors should be dominant, the others may be pastels or unsaturated variants of the hues. The pairs form a <b><i>rectangle scheme</i></b> or a <b><i>square scheme</i></b> if the selected colors stands on equal space one from another. The tetradic scheme is the richest of all combinations and give the opportunity to choose many color variations.</article>
             </div>
 
-            <article className="ryb__details--text-only"><b><i>Other schemes</i></b> are used in maps, charts, data visualization and data science. The color is used as a graphical tool due to its aesthetic appeal and intuitive contrast. The richness and variety of meaning can represent quantitative variation and different kinds of ranges.
-                
+            <article className="ryb__details--text-only">
+                <b><i>Other schemes</i></b> are used in maps, charts, data visualization and data science. The color is used as a graphical tool due to its aesthetic appeal and intuitive contrast. The richness and variety of meaning can represent quantitative variation and different kinds of ranges.
             </article>
-                <div className="ryb__details--others">
-                    <img src="/images/schemes/sequential.jpg" alt="sequential" className="ryb__details--others-img" />
-                </div>
-                <article className="ryb__details--text-only"><b><i> Sequential schemes</i></b> are use to order data from low to high. Commonly its a monochrome scheme and the darkest shade intuitively represents the largest value.
-                </article>
-
-                <div className="ryb__details--others">
-                    <img src="/images/schemes/divergent.jpg" alt="divergent" className="ryb__details--others-img" />
-                </div>
-                <article className="ryb__details--text-only"><b><i> Divergent (diverging) schemes</i></b> uses two sequential schemes and share a common (usually the lightest) color in the center as the darkest stands at both of the ends. This combination emphasizes the extreme values at the ends and the mid-range critical values. Usually this schemes are asymmetrical when there is a middle value.
+            <div className="ryb__details--others">
+                <img src="/images/schemes/sequential.jpg" alt="sequential" className="ryb__details--others-img" />
+                <img src="/images/schemes/divergent.jpg" alt="divergent" className="ryb__details--others-img" />
+            </div>
+            <article className="ryb__details--text-only">
+                <b><i> Sequential schemes</i></b> are use to order data from low to high. Commonly its a monochrome scheme and the darkest shade intuitively represents the largest value.
+                <b><i> Divergent (diverging) schemes</i></b> uses two sequential schemes and share a common (usually the lightest) color in the center as the darkest stands at both of the ends. This combination emphasizes the extreme values at the ends and the mid-range critical values. Usually this schemes are asymmetrical when there is a middle value.
             </article>
         </section>
     );
