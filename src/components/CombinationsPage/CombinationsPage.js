@@ -5,10 +5,12 @@ import { exportResult, getRgbColor } from '../../helpers/exportResult';
 import * as helpers from './combinationsHelpers';
 import WhiteBlackGreySettings from './WhiteBlackGreySettings';
 import SchemesDetails from './SchemesDetails';
+import ModifiedResult from './ModifiedResult';
 
 const Combinations = () => {
 
     const [data, setData] = useState([]);
+    const [selectedScheme, setSelectedScheme] = useState('complementary');
     const [mainRgb, setMainRgb] = useState('rgb(254, 254, 51)');
     const [mainColor, setMainColor] = useState('yellow');
     const [info, setInfo] = useState('');
@@ -81,42 +83,73 @@ const Combinations = () => {
 
     const onSelectedScheme = (e) => {
         const scheme = e.target.value;
-        const schemeCanvas = document.getElementById('schemeCanvas');
-        document.getElementById('resultSection').style.display = 'flex';
-        // const advantagesSection = document.getElementById('advantagesSection');
-        // advantagesSection.style.display = 'block';
+        setSelectedScheme(scheme);
 
-        let ul = document.getElementById('resultColors');
+        document.getElementById('resultSection').style.display = 'flex';
+
+        let resultCanvas = document.getElementById('resultCanvas');
+        let resultCanvasCtx = resultCanvas.getContext('2d');
+
         const colorObject = helpers.colorObjects[mainColor];
         const colorsArr = colorObject[scheme];
 
-        while (ul.hasChildNodes()) {
-            ul.removeChild(ul.firstChild);
-        }
+        let w = (colorsArr.length * 100);
+        let h = 100;
+        if (window.innerWidth < 560) { w = colorsArr.length * 80; h = 80; }
+        if (window.innerWidth < 480) { w = colorsArr.length * 50; h = 50; }
+        resultCanvas.width = w;
+        resultCanvas.height = h;
+
+        resultCanvasCtx.clearRect(0, 0, w, h);
 
         if (colorsArr && colorsArr.length > 0) {
-            // draw scheme in schemeCanvas
+            // draw scheme
+            const schemeCanvas = document.getElementById('schemeCanvas');
             const schemeCanvasCtx = schemeCanvas.getContext('2d');
             schemeCanvasCtx.clearRect(10, 10, 140, 140);
             helpers.drawScheme[scheme](schemeCanvasCtx);
-            // show li in colors ul
-            for (let color of colorsArr) {
-                let li = document.createElement('li');
-                li.className = 'ryb__result--li';
-                const rgb = helpers.getRgbFromColorName[color];
-                li.style.backgroundColor = rgb;
-                // let info = document.createElement('a');
-                // info.className = 'ryb__actions--result-li-link';
-                // info.style.whiteSpace = 'pre';
-                // info.textContent = color + '\r\n' + rgb;
-
-                // li.addEventListener('mouseover', { showRgb });
-                // li.addEventListener('mouseleave', () => { info.style.display = 'none'; });
-
-                // li.appendChild(info);
-                ul.appendChild(li);
+            
+            // draw colors
+            let rgbArr = [];
+            for (let i = 0; i < colorsArr.length; i++) {
+                let color = colorsArr[i];
+                let rgb = helpers.getRgbFromColorName[color];
+                rgbArr.push(rgb);
             }
+            helpers.drawColorsInResultCanvas(rgbArr);
         }
+
+        // let ul = document.getElementById('resultColors');
+        // const colorObject = helpers.colorObjects[mainColor];
+        // const colorsArr = colorObject[scheme];
+
+        // while (ul.hasChildNodes()) {
+        //     ul.removeChild(ul.firstChild);
+        // }
+
+        // if (colorsArr && colorsArr.length > 0) {
+        //     // draw scheme in schemeCanvas
+        //     const schemeCanvasCtx = schemeCanvas.getContext('2d');
+        //     schemeCanvasCtx.clearRect(10, 10, 140, 140);
+        //     helpers.drawScheme[scheme](schemeCanvasCtx);
+        //     // show li in colors ul
+        //     for (let color of colorsArr) {
+        //         let li = document.createElement('li');
+        //         li.className = 'ryb__result--li';
+        //         const rgb = helpers.getRgbFromColorName[color];
+        //         li.style.backgroundColor = rgb;
+        //         // let info = document.createElement('a');
+        //         // info.className = 'ryb__actions--result-li-link';
+        //         // info.style.whiteSpace = 'pre';
+        //         // info.textContent = color + '\r\n' + rgb;
+
+        //         // li.addEventListener('mouseover', { showRgb });
+        //         // li.addEventListener('mouseleave', () => { info.style.display = 'none'; });
+
+        //         // li.appendChild(info);
+        //         ul.appendChild(li);
+        //     }
+        // }
 
         //   show info
         const advantagesSection = document.getElementById('advantagesSection');
@@ -156,12 +189,14 @@ const Combinations = () => {
         schemeCanvasCtx.clearRect(10, 10, 140, 140);
         document.getElementById('resultSection').style.display = 'none';
         document.getElementById('pScheme').style.display = 'block';
+        const advantagesSection = document.getElementById('advantagesSection');
+        advantagesSection.style.display = 'none';
 
     };
 
     const exportScheme = async (e) => {
-        const element = document.getElementById('resultColors');
-        const rgb = await getRgbColor(element);
+        const element = document.getElementById('resultCanvas');
+        // const rgb = await getRgbColor(element);
         exportResult(element);
     };
 
@@ -226,21 +261,27 @@ const Combinations = () => {
                 </p>
 
                 <section id="resultSection" className="ryb__result">
-                    <div id="resultColorsContainer" className="ryb__result--colors">
+                    {/* <ModifiedResult color={mainColor} scheme={selectedScheme} /> */}
+
+                    <canvas id="resultCanvas"></canvas>
+                    <div id="whiteLayer"></div>
+
+
+                    {/* <div id="resultColorsContainer" className="ryb__result--colors">
                         <ul id="resultColors" className="ryb__result--ul">
                         </ul>
                         <div id="whiteLayer"></div>
-                    </div>
+                    </div> */}
                     <button className="button" onClick={exportScheme}>Export scheme</button>
                     {/* <div onClick={resetScheme} className="reset">Reset scheme</div> */}
                     <link rel="stylesheet" href="" value="reed more..." />
                 </section>
 
-                <WhiteBlackGreySettings />
+                <WhiteBlackGreySettings scheme={selectedScheme} />
 
             </section>
 
-            <section id="advantagesSection" className="ryb__advantages">
+            <section className="ryb__advantages" id="advantagesSection">
                 <h6>Scheme advantages</h6>
                 {info}
             </section>
@@ -250,7 +291,6 @@ const Combinations = () => {
 
         </section>
     );
-
 };
 
 export default Combinations;

@@ -210,7 +210,7 @@ export function drawSquare(ctx) {
 //     const [redIndex, greenIndex, blueIndex, alphaIndex] = colorIndices;
 //     console.log(redIndex, greenIndex, blueIndex, alphaIndex);
 
-    
+
 //     const c = {
 //         red: data[redIndex],
 //         green: data[greenIndex],
@@ -393,9 +393,74 @@ export const getInfoCombinations = {
     'splitComplementary': 'Split-complementary scheme is a variation of complementary scheme. Takes a base color and the two colors on both sides of the opposite one on the color wheel. It has the same sharp visual contrast and still gives the balance between warm or cold color temperatures. Cold base color should stand opposite of two variations of warm hues, for example. 3-color harmony offers less pressure, less tension and is not so vibrant. It is hard to harmonize and difficult for balancing. But still gives the best contrast, beautiful nuances and a pleasant feeling.',
     'monochromatic': 'Monochromatic scheme uses a single base color and various tints, tones and shades of the same hue, that are derived by adding white, grey or black. It is easy to create and easy to apply and perceive. This color scheme gives a soft and pleasant feeling. The lack of contrast makes more subtle and peaceful vision. Dynamics can be achieved combining dark shades and light tints or even black and white. Using one base color with its variations gives bold and dramatic effect, as well as stylish and elegant look.',
     'analogous3': 'Analogous scheme uses colors that are next to each other on the color wheel. It is easy to create and gives a pleasant and elegant appearance. One dominant color and the others as supporting or accents make this blend harmonious and calming. The lack of contrast keeps it less vibrant. This kind of combination occurs in nature and colors never clash one another. Neighboring hues fits better if they are either in the warm or the cold gamma.',
-    'analogous5': 'Analogous scheme uses colors that are next to each other on the color wheel. It is easy to create and gives a pleasant and elegant appearance. One dominant color and the others as supporting or accents make this blend harmonious and calming. The lack of contrast keeps it less vibrant. This kind of combination occurs in nature and colors never clash one another. Neighboring hues fits better if they are either in the warm or the cold gamma.', 
+    'analogous5': 'Analogous scheme uses colors that are next to each other on the color wheel. It is easy to create and gives a pleasant and elegant appearance. One dominant color and the others as supporting or accents make this blend harmonious and calming. The lack of contrast keeps it less vibrant. This kind of combination occurs in nature and colors never clash one another. Neighboring hues fits better if they are either in the warm or the cold gamma.',
     'triadic': 'Triadic scheme is made up of three hues equally spaced around the wheel. One base color is balanced with two evenly spaced colors - accents. This combination offers high visual contrast and a harmony at the same time. The vibrance remains even if pale or unsaturated variations of hues are used. The triadic scheme is easier to accomplish and provides dynamics and richness of the colors.',
     'tetradic1': 'Tetradic scheme is also called a double complementary scheme. The four colors arranged in two complementary pairs make it difficult to harmonize. One of the colors should be dominant, the others may be pastels or unsaturated variants of the hues. The pairs form a rectangle or a square if the chosen colors stands on equal space one from another. The tetradic scheme is the richest of all combinations and give the opportunity to use many color variations.',
     'tetradic2': 'Tetradic scheme is also called a double complementary scheme. The four colors arranged in two complementary pairs make it difficult to harmonize. One of the colors should be dominant, the others may be pastels or unsaturated variants of the hues. The pairs form a rectangle or a square if the chosen colors stands on equal space one from another. The tetradic scheme is the richest of all combinations and give the opportunity to use many color variations.',
     'square': 'Tetradic scheme is also called a double complementary scheme. The four colors arranged in two complementary pairs make it difficult to harmonize. One of the colors should be dominant, the others may be pastels or unsaturated variants of the hues. The pairs form a rectangle or a square if the selected colors stands on equal space one from another. The tetradic scheme is the richest of all combinations and give the opportunity to choose many color variations.',
+};
+
+
+
+export const getResultRgb = (scheme) => {
+    const countOfScheme = {
+        'complementary': 2,
+        'splitComplementary': 3,
+        'monochromatic': 1,
+        'analogous3': 3,
+        'analogous5': 5,
+        'triadic': 3,
+        'tetradic1': 4,
+        'tetradic2': 4,
+        'square': 4,
+    };
+
+    let resultCanvas = document.getElementById('resultCanvas');
+    let resultCtx = resultCanvas.getContext('2d');
+    let count = countOfScheme[scheme];
+    const w = Number(resultCanvas.width / count);
+    let dataFirst = resultCtx.getImageData(20, 20, resultCanvas.height, resultCanvas.height).data;
+    let dataSecond = resultCtx.getImageData(w + 20, 20, resultCanvas.height, resultCanvas.height).data;
+    let dataThird = resultCtx.getImageData(2 * w + 20, 20, resultCanvas.height, resultCanvas.height).data;
+    let dataFourth = resultCtx.getImageData(3 * w + 20, 20, resultCanvas.height, resultCanvas.height).data;
+    let dataFifth = resultCtx.getImageData(4 * w + 20, 20, resultCanvas.height, resultCanvas.height).data;
+
+    const rgbFirst = `rgb(${dataFirst[0]}, ${dataFirst[1]}, ${dataFirst[2]})`;
+    const rgbSecond = `rgb(${dataSecond[0]}, ${dataSecond[1]}, ${dataSecond[2]})`;
+    const rgbThird = `rgb(${dataThird[0]}, ${dataThird[1]}, ${dataThird[2]})`;
+    const rgbFourth = `rgb(${dataFourth[0]}, ${dataFourth[1]}, ${dataFourth[2]})`;
+    const rgbFifth = `rgb(${dataFifth[0]}, ${dataFifth[1]}, ${dataFifth[2]})`;
+
+    return { rgbFirst, rgbSecond, rgbThird, rgbFourth, rgbFifth };
+};
+
+export const getRgbValueFromRgbString = (rgbString) => {
+    let rgbArr = rgbString.split('(')[1].replace(')', '').replaceAll(' ', '').split(',');
+    for (let i = 0; i < rgbArr.length; i++) {
+        if (rgbArr[i] < 0) { rgbArr[i] = 0; }
+        if (rgbArr[i] > 255) { rgbArr[i] = 255; }
+    }
+    let r = Number(rgbArr[0]);
+    let g = Number(rgbArr[1]);
+    let b = Number(rgbArr[2]);
+
+    return { r, g, b };
+};
+
+export const drawColorsInResultCanvas = (arr) => {
+    let resultCanvas = document.getElementById('resultCanvas');
+    let resultCanvasCtx = resultCanvas.getContext('2d');
+
+    for (let i = 0; i < arr.length; i++) {
+        let color = arr[i];
+        resultCanvasCtx.fillStyle = color;
+
+        let start = (i * 100);
+        let w = 100;
+        let h = 100;
+        if (window.innerWidth < 560) { start = i * 80; w = 80; h = 80; }
+        if (window.innerWidth < 480) { start = i * 50; w = 50; h = 50; }
+
+        resultCanvasCtx.fillRect(start, 0, w, h);
+    }
 };
