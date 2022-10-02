@@ -46,7 +46,7 @@ const HslMixer = ({ h, s, l }) => {
                     </label>
                 </span>
             </section>
-            <span id="hslMix">{`hsl(${hue}, ${saturation}, ${lightness})`}</span>
+            <span id="hslMix">{`hsl(${hue}, ${saturation}%, ${lightness}%)`}</span>
         </section>
     );
 };

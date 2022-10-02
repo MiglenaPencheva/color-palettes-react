@@ -195,7 +195,7 @@ export const hexToRgb = (hex) => {
 };
 
 export const hslToRgb = (hue, sat, light) => {
-    var t1, t2, r, g, b;
+    let t1, t2, r, g, b;
     hue = hue / 60;
     if (light <= 0.5) {
         t2 = light * (sat + 1);
