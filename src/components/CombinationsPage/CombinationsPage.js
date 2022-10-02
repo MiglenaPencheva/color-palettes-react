@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react';
 import { getPixel } from '../../helpers/getPixel';
-import { exportResult, getRgbColor } from '../../helpers/exportResult';
+import { exportResult } from '../../helpers/exportResult';
 // import Logo from '../Logo/Logo';
 import * as helpers from './combinationsHelpers';
 import WhiteBlackGreySettings from './WhiteBlackGreySettings';
 import SchemesDetails from './SchemesDetails';
-import ModifiedResult from './ModifiedResult';
 
 const Combinations = () => {
 
     const [data, setData] = useState([]);
     const [selectedScheme, setSelectedScheme] = useState('complementary');
-    const [mainRgb, setMainRgb] = useState('rgb(254, 254, 51)');
     const [mainColor, setMainColor] = useState('yellow');
     const [info, setInfo] = useState('');
 
@@ -261,19 +259,9 @@ const Combinations = () => {
                 </p>
 
                 <section id="resultSection" className="ryb__result">
-                    {/* <ModifiedResult color={mainColor} scheme={selectedScheme} /> */}
-
                     <canvas id="resultCanvas"></canvas>
                     <div id="whiteLayer"></div>
-
-
-                    {/* <div id="resultColorsContainer" className="ryb__result--colors">
-                        <ul id="resultColors" className="ryb__result--ul">
-                        </ul>
-                        <div id="whiteLayer"></div>
-                    </div> */}
                     <button className="button" onClick={exportScheme}>Export scheme</button>
-                    {/* <div onClick={resetScheme} className="reset">Reset scheme</div> */}
                     <link rel="stylesheet" href="" value="reed more..." />
                 </section>
 
