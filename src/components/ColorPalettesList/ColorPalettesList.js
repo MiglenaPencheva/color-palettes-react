@@ -4,7 +4,7 @@ import ColorPaletteCard from './ColorPaletteCard/ColorPaletteCard';
 
 const ColorPaletteList = () => {
     const [colorPalettes, setColorPalettes] = useState([]);
-    
+
     useEffect(() => {
         colorPaletteService.getAll()
             .then(result => {
@@ -20,8 +20,10 @@ const ColorPaletteList = () => {
                         {colorPalettes.map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)}
                         {/* {colorPalettes.filter().map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)} */}
                     </ul>
-                ) 
-                : <p className="no-palettes">No Color Palettes in database!</p>
+                )
+                : <p className="no-palettes"><b> No color palettes to show!</b>
+                    <br /> Or no connection to database. 
+                    </p>
             }
         </>
     );
