@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import * as helpers from '../ExploreColorPage/exploreHelpers';
 import { getPixel } from '../../helpers/getPixel';
 import { hideError, showError } from '../../helpers/notifications';
@@ -10,6 +12,8 @@ import RgbMixer from './RgbMixer';
 import HslMixer from './HslMixer';
 
 const ExploreColor = () => {
+    const location = useLocation();
+
     const [name, setName] = useState('no name');
     const [rgb, setRgb] = useState('');
     const [hex, setHex] = useState('');
@@ -24,7 +28,6 @@ const ExploreColor = () => {
     const [h, setH] = useState(197);
     const [s, setS] = useState(50);
     const [l, setL] = useState(72);
-
 
     useEffect(() => {
         let rgbCanvas = document.getElementById('rgbCanvas');
@@ -46,6 +49,30 @@ const ExploreColor = () => {
         rgbCanvasCtx.fillStyle = rgbGradient;
         rgbCanvasCtx.fillRect(0, 0, rgbCanvas.width, rgbCanvas.height);
     }, []);
+
+    useEffect(() => {
+        if (location.state !== null) {
+            let rgbResult = location.state;
+            setSelectedColor(rgbResult.rgb);
+            setCurrentColor(rgbResult.rgb);
+            preview(rgbResult.rgb);
+            let color = helpers.fillColorObject(rgbResult.rgb);
+            setName(color.name);
+            setRgb(color.rgb);
+            setHex(color.hex);
+            setHsl(color.hsl);
+            setCmyk(color.cmyk);
+            color.rgb = rgbResult.rgb.replace('rgb', '').replace('(', '').replace(')', '');
+            let arr = color.rgb.split(', ');
+            setR(Number(arr[0]));
+            setG(Number(arr[1]));
+            setB(Number(arr[2]));
+            let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
+            setH(hslResult.hue);
+            setS(hslResult.saturation);
+            setL(hslResult.lightness);
+        }
+    }, [location.state]);
 
     useEffect(() => {
         function makeGradient(el, result) {
@@ -72,26 +99,9 @@ const ExploreColor = () => {
         let rgb = getPixel(e, colorData);
         return rgb;
     };
-    const fillColorObject = (rgb) => {
-        color.rgb = rgb.replace('rgb', '').replace('(', '').replace(')', '');
-        let arr = color.rgb.split(', ');
-        color.red = Number(arr[0]);
-        color.green = Number(arr[1]);
-        color.blue = Number(arr[2]);
-        color.hex = helpers.rgbToHex(color.red, color.green, color.blue);
-        color.name = helpers.rgbToName(color.red, color.green, color.blue);
-        let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
-        color.hsl = hslResult.hslString;
-        color.hue = hslResult.hue;
-        color.saturation = hslResult.saturation;
-        color.lightness = hslResult.lightness;
-        let cmykResult = helpers.rgbToCmyk(color.red, color.green, color.blue);
-        color.cmyk = cmykResult.cmykString;
-        color.cyan = cmykResult.cyan;
-        color.magenta = cmykResult.magenta;
-        color.yellow = cmykResult.yellow;
-        color.black = cmykResult.black;
 
+    const fillColorValues = (rgb) => {
+        let color = helpers.fillColorObject(rgb);
         preview(rgb);
         setColor(color);
         setName(color.name);
@@ -99,9 +109,12 @@ const ExploreColor = () => {
         setHex(color.hex);
         setHsl(color.hsl);
         setCmyk(color.cmyk);
+        color.rgb = rgb.replace('rgb', '').replace('(', '').replace(')', '');
+        let arr = color.rgb.split(', ');
         setR(Number(arr[0]));
         setG(Number(arr[1]));
         setB(Number(arr[2]));
+        let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
         setH(hslResult.hue);
         setS(hslResult.saturation);
         setL(hslResult.lightness);
@@ -111,12 +124,12 @@ const ExploreColor = () => {
         document.getElementById('colorValue').value = '';
 
         let rgb = getRgbFromSelectedColor(e);
-        fillColorObject(rgb);
+        fillColorValues(rgb);
         setSelectedColor(rgb);
     };
     const modifyColor = (e) => {
         let rgb = getRgbFromSelectedColor(e);
-        fillColorObject(rgb);
+        fillColorValues(rgb);
         setCurrentColor(rgb);
     };
 
@@ -276,12 +289,12 @@ const ExploreColor = () => {
                 <li>{name ? name : 'no name'}</li>
                 <span>Browsers support 140 color names.</span>
                 <li>rgb({rgb})</li>
-                <span>RGB value indicates how much of red, green and blue is included. 
+                <span>RGB value indicates how much of red, green and blue is included.
                     <br /> Each component of the triplet can vary from 0 to 255.</span>
                 <li>#{hex}</li>
                 <span>A hex triplet is a six-digit, three-byte hexadecimal number, specifying the intensity of red, green and blue.</span>
                 <li>hsl({hsl})</li>
-                <span>HSL color value is specified with hue, saturation and lightness parameters. 
+                <span>HSL color value is specified with hue, saturation and lightness parameters.
                     {/* <br />Saturation and lightness are a percentage value from 0% to 100%. */}
                 </span>
                 <li>cmyk({cmyk})</li>

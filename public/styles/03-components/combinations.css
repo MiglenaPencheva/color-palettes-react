@@ -110,7 +110,27 @@
     align-items: center;
     border-bottom: 1px solid var(--teal-grey);
 }
+#resultCanvas {
+    position: relative;
+    cursor: pointer;
+}
+#resultHex {
+    display: none;
+    position: fixed;
+    padding: 0.5rem;
+    color: var(--teal-grey);
+    background-color: var(--vermilion-white);
+    border-radius: 5px;
+}
 
+/* #hexCodes {
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+};
+.ryb__result--li {
+    width: 100px;
+} */
 
 /* .ryb__result--colors {
     position: relative;
@@ -162,16 +182,6 @@
 
 .ryb__result button {
     width: fit-content;
-}
-
-#whiteLayer {
-    display: none;
-    position: absolute;
-    top: 0rem;
-    width: 500px;
-    height: 100px;
-    z-index: 1;
-    background-color: rgba(255, 255, 255, 0);
 }
 
 /* ---- scheme advantages ---- */

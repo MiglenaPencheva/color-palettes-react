@@ -454,13 +454,30 @@ export const drawColorsInResultCanvas = (arr) => {
     for (let i = 0; i < arr.length; i++) {
         let color = arr[i];
         resultCanvasCtx.fillStyle = color;
-
+        
         let start = (i * 100);
         let w = 100;
         let h = 100;
         if (window.innerWidth < 560) { start = i * 80; w = 80; h = 80; }
         if (window.innerWidth < 480) { start = i * 50; w = 50; h = 50; }
-
+        
         resultCanvasCtx.fillRect(start, 0, w, h);
     }
 };
+
+// export const drawHexInResult = (arr) => {
+//     const hexCodes = document.getElementById('hexCodes');
+    
+//     while (hexCodes.hasChildNodes()) {
+//         hexCodes.removeChild(hexCodes.firstChild);
+//     }
+//     for (const hex of arr) {
+//         let span = document.createElement('span');
+//         span.textContent = '#' + hex;
+//         // span.className = 'ryb__result--li';
+//         span.width = '100px';
+//         // if (window.innerWidth < 560) { li.width = 80; }
+//         // if (window.innerWidth < 480) { li.width = 50; }
+//         hexCodes.appendChild(span);
+//     }
+// };

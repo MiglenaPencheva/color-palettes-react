@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import { getPixel } from '../../helpers/getPixel';
 import { exportResult } from '../../helpers/exportResult';
 // import Logo from '../Logo/Logo';
 import * as helpers from './combinationsHelpers';
+import { rgbToHex } from '../ExploreColorPage/exploreHelpers';
 import WhiteBlackGreySettings from './WhiteBlackGreySettings';
 import SchemesDetails from './SchemesDetails';
 
 const Combinations = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const [selectedScheme, setSelectedScheme] = useState('complementary');
@@ -106,16 +111,42 @@ const Combinations = () => {
             const schemeCanvasCtx = schemeCanvas.getContext('2d');
             schemeCanvasCtx.clearRect(10, 10, 140, 140);
             helpers.drawScheme[scheme](schemeCanvasCtx);
-            
+
             // draw colors
             let rgbArr = [];
+            let hexValues = [];
             for (let i = 0; i < colorsArr.length; i++) {
                 let color = colorsArr[i];
                 let rgb = helpers.getRgbFromColorName[color];
                 rgbArr.push(rgb);
+
+                let rgbValues = helpers.getRgbValueFromRgbString(rgb);
+                let hex = rgbToHex(rgbValues.r, rgbValues.g, rgbValues.b);
+                hexValues.push(hex);
+                // if (i === colorsArr.length - 1) {
+                //     hexValues += `#${hex}`;
+                // } else {
+                //     hexValues += `#${hex}   `;
+                // }
             }
             helpers.drawColorsInResultCanvas(rgbArr);
+
+            // const hexCodes = document.getElementById('hexCodes');
+            // while (hexCodes.hasChildNodes()) {
+            //     hexCodes.removeChild(hexCodes.firstChild);
+            // }
+            // for (const hex of hexValues) {
+            //     let span = document.createElement('span');
+            //     span.textContent = '#' + hex;
+            //     // span.className = 'ryb__result--li';
+            //     span.width = '100px';
+            //     // if (window.innerWidth < 560) { li.width = 80; }
+            //     // if (window.innerWidth < 480) { li.width = 50; }
+            //     hexCodes.appendChild(span);
+            // }
+            // hexCodes.textContent = hexValues;
         }
+
 
         // let ul = document.getElementById('resultColors');
         // const colorObject = helpers.colorObjects[mainColor];
@@ -169,6 +200,35 @@ const Combinations = () => {
         let reedMore = document.getElementById('reedMore');
         reedMore.style.display = 'block';
     };
+
+    const showHexValueResult = (e) => {
+        let { hex } = getRgbAndHex(e);
+        let resultHex = document.getElementById('resultHex');
+        resultHex.style.display = 'block';
+        resultHex.textContent = `#${hex}`;
+        resultHex.style.top = Number(e.clientY) + 'px';
+        resultHex.style.left = Number(e.clientX) + 'px';
+    };
+    const hideHexValueResult = (e) => {
+        let resultHex = document.getElementById('resultHex');
+        resultHex.style.display = 'none';
+    };
+    const sendResultToExplore = (e) => {
+        let resultValues = getRgbAndHex(e);
+        navigate('/color-explore', { replace: true, state: resultValues });
+    };
+    function getRgbAndHex(e) {
+        let canvas = e.currentTarget;
+        let ctx = canvas.getContext('2d');
+        let colData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+
+        let rgb = getPixel(e, colData);
+        let rgbValues = helpers.getRgbValueFromRgbString(rgb);
+        let hex = rgbToHex(rgbValues.r, rgbValues.g, rgbValues.b);
+        let resultValues = { rgb, hex };
+        return resultValues;
+    }
+
 
     const resetWheel = (e) => {
         const wheel = document.getElementById('rybCanvas');
@@ -259,8 +319,13 @@ const Combinations = () => {
                 </p>
 
                 <section id="resultSection" className="ryb__result">
-                    <canvas id="resultCanvas"></canvas>
-                    <div id="whiteLayer"></div>
+                    <canvas id="resultCanvas"
+                        onMouseMove={showHexValueResult}
+                        onClick={sendResultToExplore}
+                        onMouseLeave={hideHexValueResult}>
+                    </canvas>
+                    <span id="resultHex"></span>
+                    {/* <div id="hexCodes"></div> */}
                     <button className="button" onClick={exportScheme}>Export scheme</button>
                     <link rel="stylesheet" href="" value="reed more..." />
                 </section>
