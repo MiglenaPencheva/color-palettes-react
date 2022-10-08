@@ -17,6 +17,7 @@ const Combinations = () => {
     const [selectedScheme, setSelectedScheme] = useState('complementary');
     const [mainColor, setMainColor] = useState('yellow');
     const [info, setInfo] = useState('');
+    const [hex, setHex] = useState('');
 
     const showOnMouseOver = (e) => {
         const targetName = e.currentTarget.id;
@@ -114,71 +115,13 @@ const Combinations = () => {
 
             // draw colors
             let rgbArr = [];
-            let hexValues = [];
             for (let i = 0; i < colorsArr.length; i++) {
                 let color = colorsArr[i];
                 let rgb = helpers.getRgbFromColorName[color];
                 rgbArr.push(rgb);
-
-                let rgbValues = helpers.getRgbValueFromRgbString(rgb);
-                let hex = rgbToHex(rgbValues.r, rgbValues.g, rgbValues.b);
-                hexValues.push(hex);
-                // if (i === colorsArr.length - 1) {
-                //     hexValues += `#${hex}`;
-                // } else {
-                //     hexValues += `#${hex}   `;
-                // }
             }
             helpers.drawColorsInResultCanvas(rgbArr);
-
-            // const hexCodes = document.getElementById('hexCodes');
-            // while (hexCodes.hasChildNodes()) {
-            //     hexCodes.removeChild(hexCodes.firstChild);
-            // }
-            // for (const hex of hexValues) {
-            //     let span = document.createElement('span');
-            //     span.textContent = '#' + hex;
-            //     // span.className = 'ryb__result--li';
-            //     span.width = '100px';
-            //     // if (window.innerWidth < 560) { li.width = 80; }
-            //     // if (window.innerWidth < 480) { li.width = 50; }
-            //     hexCodes.appendChild(span);
-            // }
-            // hexCodes.textContent = hexValues;
         }
-
-
-        // let ul = document.getElementById('resultColors');
-        // const colorObject = helpers.colorObjects[mainColor];
-        // const colorsArr = colorObject[scheme];
-
-        // while (ul.hasChildNodes()) {
-        //     ul.removeChild(ul.firstChild);
-        // }
-
-        // if (colorsArr && colorsArr.length > 0) {
-        //     // draw scheme in schemeCanvas
-        //     const schemeCanvasCtx = schemeCanvas.getContext('2d');
-        //     schemeCanvasCtx.clearRect(10, 10, 140, 140);
-        //     helpers.drawScheme[scheme](schemeCanvasCtx);
-        //     // show li in colors ul
-        //     for (let color of colorsArr) {
-        //         let li = document.createElement('li');
-        //         li.className = 'ryb__result--li';
-        //         const rgb = helpers.getRgbFromColorName[color];
-        //         li.style.backgroundColor = rgb;
-        //         // let info = document.createElement('a');
-        //         // info.className = 'ryb__actions--result-li-link';
-        //         // info.style.whiteSpace = 'pre';
-        //         // info.textContent = color + '\r\n' + rgb;
-
-        //         // li.addEventListener('mouseover', { showRgb });
-        //         // li.addEventListener('mouseleave', () => { info.style.display = 'none'; });
-
-        //         // li.appendChild(info);
-        //         ul.appendChild(li);
-        //     }
-        // }
 
         //   show info
         const advantagesSection = document.getElementById('advantagesSection');
@@ -205,8 +148,8 @@ const Combinations = () => {
         let { hex } = getRgbAndHex(e);
         let resultHex = document.getElementById('resultHex');
         resultHex.style.display = 'block';
-        resultHex.textContent = `#${hex}`;
-        resultHex.style.top = Number(e.clientY) + 'px';
+        setHex(hex);
+        resultHex.style.top = Number(e.clientY + 10) + 'px';
         resultHex.style.left = Number(e.clientX) + 'px';
     };
     const hideHexValueResult = (e) => {
@@ -228,7 +171,6 @@ const Combinations = () => {
         let resultValues = { rgb, hex };
         return resultValues;
     }
-
 
     const resetWheel = (e) => {
         const wheel = document.getElementById('rybCanvas');
@@ -324,8 +266,7 @@ const Combinations = () => {
                         onClick={sendResultToExplore}
                         onMouseLeave={hideHexValueResult}>
                     </canvas>
-                    <span id="resultHex"></span>
-                    {/* <div id="hexCodes"></div> */}
+                    <span id="resultHex"> #{hex} <br /><i>Explore color details...</i></span>
                     <button className="button" onClick={exportScheme}>Export scheme</button>
                     <link rel="stylesheet" href="" value="reed more..." />
                 </section>
