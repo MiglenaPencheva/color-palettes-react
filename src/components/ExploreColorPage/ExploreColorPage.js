@@ -1,34 +1,41 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 import * as helpers from '../ExploreColorPage/exploreHelpers';
 import { getPixel } from '../../helpers/getPixel';
 import { hideError, showError } from '../../helpers/notifications';
 
+import RgbMixer from './RgbMixer';
+import HslMixer from './HslMixer';
 // import HueResult from './HueResult';
 // import SaturationResult from './SaturationResult';
 // import LightnessResult from './LightnessResult';
-import RgbMixer from './RgbMixer';
-import HslMixer from './HslMixer';
+
+const initialHexState = {
+    hex: '#94c7db',
+    rgb: 'rgb(148, 199, 219)',
+};
 
 const ExploreColor = () => {
-    const location = useLocation();
 
+    const [selectedColor, setSelectedColor] = useState('#94c7db');
+    const [currentColor, setCurrentColor] = useState('#94c7db');
+    const [color, setColor] = useState({});
     const [name, setName] = useState('no name');
     const [rgb, setRgb] = useState('');
     const [hex, setHex] = useState('');
     const [hsl, setHsl] = useState('');
     const [cmyk, setCmyk] = useState('');
-    const [color, setColor] = useState({});
-    const [selectedColor, setSelectedColor] = useState('#94c7db');
-    const [currentColor, setCurrentColor] = useState('#94c7db');
     const [r, setR] = useState(148);
     const [g, setG] = useState(199);
     const [b, setB] = useState(219);
     const [h, setH] = useState(197);
     const [s, setS] = useState(50);
     const [l, setL] = useState(72);
+    const [hexToExplore, setHexToExplore] = useLocalStorage('hex', initialHexState);
 
+
+    // Load gradient rgb canvas
     useEffect(() => {
         let rgbCanvas = document.getElementById('rgbCanvas');
         let rgbCanvasCtx = rgbCanvas.getContext('2d');
@@ -50,30 +57,7 @@ const ExploreColor = () => {
         rgbCanvasCtx.fillRect(0, 0, rgbCanvas.width, rgbCanvas.height);
     }, []);
 
-    useEffect(() => {
-        if (location.state !== null) {
-            let rgbResult = location.state;
-            setSelectedColor(rgbResult.rgb);
-            setCurrentColor(rgbResult.rgb);
-            preview(rgbResult.rgb);
-            let color = helpers.fillColorObject(rgbResult.rgb);
-            setName(color.name);
-            setRgb(color.rgb);
-            setHex(color.hex);
-            setHsl(color.hsl);
-            setCmyk(color.cmyk);
-            color.rgb = rgbResult.rgb.replace('rgb', '').replace('(', '').replace(')', '');
-            let arr = color.rgb.split(', ');
-            setR(Number(arr[0]));
-            setG(Number(arr[1]));
-            setB(Number(arr[2]));
-            let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
-            setH(hslResult.hue);
-            setS(hslResult.saturation);
-            setL(hslResult.lightness);
-        }
-    }, [location.state]);
-
+    // Load white, black and grey canvases
     useEffect(() => {
         function makeGradient(el, result) {
             let ctx = el.getContext('2d');
@@ -91,48 +75,7 @@ const ExploreColor = () => {
         makeGradient(greyCanvas, 'grey');
     }, [selectedColor]);
 
-    const getRgbFromSelectedColor = (e) => {
-        let rgbCanvas = e.target;
-        let rgbCanvasCtx = rgbCanvas.getContext('2d');
-        let imageData = rgbCanvasCtx.getImageData(0, 0, rgbCanvas.width, rgbCanvas.height);
-        let colorData = imageData.data;
-        let rgb = getPixel(e, colorData);
-        return rgb;
-    };
-
-    const fillColorValues = (rgb) => {
-        let color = helpers.fillColorObject(rgb);
-        preview(rgb);
-        setColor(color);
-        setName(color.name);
-        setRgb(color.rgb);
-        setHex(color.hex);
-        setHsl(color.hsl);
-        setCmyk(color.cmyk);
-        color.rgb = rgb.replace('rgb', '').replace('(', '').replace(')', '');
-        let arr = color.rgb.split(', ');
-        setR(Number(arr[0]));
-        setG(Number(arr[1]));
-        setB(Number(arr[2]));
-        let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
-        setH(hslResult.hue);
-        setS(hslResult.saturation);
-        setL(hslResult.lightness);
-    };
-
-    const selectColor = (e) => {
-        document.getElementById('colorValue').value = '';
-
-        let rgb = getRgbFromSelectedColor(e);
-        fillColorValues(rgb);
-        setSelectedColor(rgb);
-    };
-    const modifyColor = (e) => {
-        let rgb = getRgbFromSelectedColor(e);
-        fillColorValues(rgb);
-        setCurrentColor(rgb);
-    };
-
+    // Load color from input value
     const submitColorHandler = (e) => {
         e.preventDefault();
 
@@ -144,8 +87,8 @@ const ExploreColor = () => {
         if (colorValue === '') {
             return;
         } else if (color.name || color.rgb || color.hex || color.hsl) {
-            preview(colorValue);
             setSelectedColor(colorValue);
+            preview(colorValue);
             if (color.rgb) {
                 color.hex = helpers.rgbToHex(color.red, color.green, color.blue);
                 color.name = helpers.rgbToName(color.red, color.green, color.blue);
@@ -218,7 +161,6 @@ const ExploreColor = () => {
             setHex(color.hex);
             setHsl(color.hsl);
             setCmyk(color.cmyk);
-
             setR(color.red);
             setG(color.green);
             setB(color.blue);
@@ -231,6 +173,62 @@ const ExploreColor = () => {
             showError('Invalid color value');
         }
     };
+
+    // Load color, picked from gradient rgb canvas
+    const getRgbFromSelectedColor = (e) => {
+        let rgbCanvas = e.target;
+        let rgbCanvasCtx = rgbCanvas.getContext('2d');
+        let imageData = rgbCanvasCtx.getImageData(0, 0, rgbCanvas.width, rgbCanvas.height);
+        let colorData = imageData.data;
+        let rgb = getPixel(e, colorData);
+        return rgb;
+    };
+    const fillColorValues = (rgb) => {
+        let color = helpers.fillColorObject(rgb);
+        setColor(color);
+        setName(color.name);
+        setRgb(color.rgb);
+        setHex(color.hex);
+        setHsl(color.hsl);
+        setCmyk(color.cmyk);
+        setR(color.red);
+        setG(color.green);
+        setB(color.blue);
+        setH(color.hue);
+        setS(color.saturation);
+        setL(color.lightness);
+        preview(rgb);
+    };
+    const selectColor = (e) => {
+        document.getElementById('colorValue').value = '';
+        let rgb = getRgbFromSelectedColor(e);
+        setSelectedColor(rgb);
+        fillColorValues(rgb);
+    };
+    const modifyColor = (e) => {
+        let rgb = getRgbFromSelectedColor(e);
+        setCurrentColor(rgb);
+        fillColorValues(rgb);
+    };
+
+    // Load color if hexToExplore from Combinations page
+    useEffect(() => {
+        setSelectedColor(hexToExplore.rgb);
+        setCurrentColor(hexToExplore.rgb);
+        let color = helpers.fillColorObject(hexToExplore.rgb);
+        setName(color.name);
+        setRgb(color.rgb);
+        setHex(color.hex);
+        setHsl(color.hsl);
+        setCmyk(color.cmyk);
+        setR(color.red);
+        setG(color.green);
+        setB(color.blue);
+        setH(color.hue);
+        setS(color.saturation);
+        setL(color.lightness);
+        preview(hexToExplore.rgb);
+    }, [hexToExplore]);
 
     function preview(color) {
         let previewWitheText = document.getElementById('previewWitheText');
@@ -272,7 +270,7 @@ const ExploreColor = () => {
                     <canvas id="blackCanvas" width="270" height="40" onClick={modifyColor}></canvas>
                     <div>Black darkens the color. Shades are deep, warm and more intensive.</div>
                     <canvas id="greyCanvas" width="270" height="40" onClick={modifyColor}></canvas>
-                    <div>Grey desaturates the color. Tones are muted and more colorless.</div>
+                    <div>Grey unsaturates the color. Tones are muted and more colorless.</div>
                 </section>
             </section>
 

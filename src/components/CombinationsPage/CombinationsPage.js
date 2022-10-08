@@ -1,24 +1,30 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 import { getPixel } from '../../helpers/getPixel';
 import { exportResult } from '../../helpers/exportResult';
-// import Logo from '../Logo/Logo';
 import * as helpers from './combinationsHelpers';
 import { rgbToHex } from '../ExploreColorPage/exploreHelpers';
 import WhiteBlackGreySettings from './WhiteBlackGreySettings';
 import SchemesDetails from './SchemesDetails';
 
+const initialHexState = {
+    hex: '#94c7db',
+    rgb: 'rgb(148, 199, 219)',
+};
+
 const Combinations = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const [selectedScheme, setSelectedScheme] = useState('complementary');
     const [mainColor, setMainColor] = useState('yellow');
     const [info, setInfo] = useState('');
     const [hex, setHex] = useState('');
+    const [hexToExplore, setHexToExplore] = useLocalStorage('hex', initialHexState);
 
+    
     const showOnMouseOver = (e) => {
         const targetName = e.currentTarget.id;
         const target = document.getElementById(`${targetName}Image`);
@@ -156,9 +162,11 @@ const Combinations = () => {
         let resultHex = document.getElementById('resultHex');
         resultHex.style.display = 'none';
     };
-    const sendResultToExplore = (e) => {
+    const openResultInExplorePage = (e) => {
         let resultValues = getRgbAndHex(e);
-        navigate('/color-explore', { replace: true, state: resultValues });
+        setHexToExplore(resultValues);
+        window.open('/color-explore', '_blank');
+        // navigate('/color-explore', { replace: false, state: resultValues });
     };
     function getRgbAndHex(e) {
         let canvas = e.currentTarget;
@@ -263,7 +271,7 @@ const Combinations = () => {
                 <section id="resultSection" className="ryb__result">
                     <canvas id="resultCanvas"
                         onMouseMove={showHexValueResult}
-                        onClick={sendResultToExplore}
+                        onClick={openResultInExplorePage}
                         onMouseLeave={hideHexValueResult}>
                     </canvas>
                     <span id="resultHex"> #{hex} <br /><i>Explore color details...</i></span>
