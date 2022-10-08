@@ -3,10 +3,17 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import { exportResult } from '../../helpers/exportResult';
 import { getPixel } from '../../helpers/getPixel';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 // import { useAuthContext } from '../../contexts/AuthContext';
 import * as pickerService from '../../services/pickerService';
 import { hideError, showError } from '../../helpers/notifications';
+import { getRgbFromString, rgbToHex } from '../ExploreColorPage/exploreHelpers';
+
+const initialHexState = {
+    hex: '#94c7db',
+    rgb: 'rgb(148, 199, 219)',
+};
 
 const ColorPickerPage = (e) => {
     const navigate = useNavigate();
@@ -14,7 +21,9 @@ const ColorPickerPage = (e) => {
     const [src, setSrc] = useState('');
     const [data, setData] = useState([]);
     const [pickedColor, setPickedColor] = useState('#608d9e');
+    const [hex, setHex] = useState('#608d9e');
     const [direction, setDirection] = useState('horizontal');
+    const [hexToExplore, setHexToExplore] = useLocalStorage('hex', initialHexState);
 
     const onFileUpload = (e) => {
         // alert -> Do you want to save your work?
@@ -66,6 +75,9 @@ const ColorPickerPage = (e) => {
     const definePixel = (e) => {
         const picked = getPixel(e, data);
         setPickedColor(picked);
+        let rbgValues = getRgbFromString(picked);
+        const hexValues = rgbToHex(rbgValues.r, rbgValues.g, rbgValues.b);
+        setHex(hexValues);
     };
 
     const addColorBox = (e) => {
@@ -84,9 +96,14 @@ const ColorPickerPage = (e) => {
         closeBtn.className = 'close-button';
         closeBtn.innerHTML = 'x';
 
-        let info = document.createElement('a');
+        let info = document.createElement('span');
         info.className = 'info';
-        info.textContent = 'info';
+        info.textContent = `#${hex}`;
+        let valuesToExplore = { hex, rgb: pickedColor };
+        info.addEventListener('click', () => { 
+            setHexToExplore(valuesToExplore);
+            window.open('/color-explore', '_blank'); 
+        });
 
         // drag and drop
         color.setAttribute('draggable', true);
