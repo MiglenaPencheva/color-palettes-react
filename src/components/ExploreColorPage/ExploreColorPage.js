@@ -7,9 +7,6 @@ import { hideError, showError } from '../../helpers/notifications';
 
 import RgbMixer from './RgbMixer';
 import HslMixer from './HslMixer';
-// import HueResult from './HueResult';
-// import SaturationResult from './SaturationResult';
-// import LightnessResult from './LightnessResult';
 
 const initialHexState = {
     hex: '#94c7db',
@@ -33,7 +30,6 @@ const ExploreColor = () => {
     const [s, setS] = useState(50);
     const [l, setL] = useState(72);
     const [hexToExplore, setHexToExplore] = useLocalStorage('hex', initialHexState);
-
 
     // Load gradient rgb canvas
     useEffect(() => {
@@ -75,6 +71,25 @@ const ExploreColor = () => {
         makeGradient(greyCanvas, 'grey');
     }, [selectedColor]);
 
+    // Load color if hexToExplore from Combinations page or Color-picker page
+    useEffect(() => {
+        setSelectedColor(hexToExplore.rgb);
+        setCurrentColor(hexToExplore.rgb);
+        let color = helpers.fillColorObject(hexToExplore.rgb);
+        setName(color.name);
+        setRgb(color.rgb);
+        setHex(color.hex);
+        setHsl(color.hsl);
+        setCmyk(color.cmyk);
+        setR(color.red);
+        setG(color.green);
+        setB(color.blue);
+        setH(color.hue);
+        setS(color.saturation);
+        setL(color.lightness);
+        preview(hexToExplore.rgb);
+    }, [hexToExplore]);
+
     // Load color from input value
     const submitColorHandler = (e) => {
         e.preventDefault();
@@ -108,7 +123,7 @@ const ExploreColor = () => {
                 color.red = result.r;
                 color.green = result.g;
                 color.blue = result.b;
-                color.rgb = `${color.red}, ${color.green}, ${color.blue}`;
+                color.rgb = `rgb(${color.red}, ${color.green}, ${color.blue})`;
                 color.hex = result.hex;
                 let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
                 color.hsl = hslResult.hslString;
@@ -126,7 +141,7 @@ const ExploreColor = () => {
                 color.red = result.r;
                 color.green = result.g;
                 color.blue = result.b;
-                color.rgb = `${color.red}, ${color.green}, ${color.blue}`;
+                color.rgb = `rgb(${color.red}, ${color.green}, ${color.blue})`;
                 color.name = helpers.rgbToName(color.red, color.green, color.blue);
                 let hslResult = helpers.rgbToHsl(color.red, color.green, color.blue);
                 color.hsl = hslResult.hslString;
@@ -144,7 +159,7 @@ const ExploreColor = () => {
                 color.red = result.r;
                 color.green = result.g;
                 color.blue = result.b;
-                color.rgb = `${color.red}, ${color.green}, ${color.blue}`;
+                color.rgb = `rgb(${color.red}, ${color.green}, ${color.blue})`;
                 color.hex = helpers.rgbToHex(color.red, color.green, color.blue);
                 color.name = helpers.rgbToName(color.red, color.green, color.blue);
                 let cmykResult = helpers.rgbToCmyk(color.red, color.green, color.blue);
@@ -153,6 +168,8 @@ const ExploreColor = () => {
                 color.magenta = cmykResult.magenta;
                 color.yellow = cmykResult.yellow;
                 color.black = cmykResult.black;
+                color.saturation *= 100;
+                color.lightness *= 100;
             }
 
             setColor(color);
@@ -211,25 +228,7 @@ const ExploreColor = () => {
         fillColorValues(rgb);
     };
 
-    // Load color if hexToExplore from Combinations page
-    useEffect(() => {
-        setSelectedColor(hexToExplore.rgb);
-        setCurrentColor(hexToExplore.rgb);
-        let color = helpers.fillColorObject(hexToExplore.rgb);
-        setName(color.name);
-        setRgb(color.rgb);
-        setHex(color.hex);
-        setHsl(color.hsl);
-        setCmyk(color.cmyk);
-        setR(color.red);
-        setG(color.green);
-        setB(color.blue);
-        setH(color.hue);
-        setS(color.saturation);
-        setL(color.lightness);
-        preview(hexToExplore.rgb);
-    }, [hexToExplore]);
-
+    
     function preview(color) {
         let previewWitheText = document.getElementById('previewWitheText');
         let previewTextOnWithe = document.getElementById('previewTextOnWithe');
@@ -286,7 +285,7 @@ const ExploreColor = () => {
                 <h5 className="explore__info">Color values</h5>
                 <li>{name ? name : 'no name'}</li>
                 <span>Browsers support 140 color names.</span>
-                <li>rgb({rgb})</li>
+                <li>{rgb}</li>
                 <span>RGB value indicates how much of red, green and blue is included.
                     <br /> Each component of the triplet can vary from 0 to 255.</span>
                 <li>#{hex}</li>
