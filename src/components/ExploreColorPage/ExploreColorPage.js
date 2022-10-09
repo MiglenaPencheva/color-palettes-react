@@ -245,7 +245,7 @@ const ExploreColor = () => {
         <section className="explore-page">
 
             <section className="section-header">
-                <h2 >Explore colors</h2>
+                <h2 >Explore color</h2>
                 <h6> Find the information you need.
                     Convert between hex code, hsl, rgb and cmyk values.</h6>
                 <h6 className="diffHeading">Go deep into the color details.</h6>

@@ -102,6 +102,7 @@ const Combinations = () => {
 
         const colorObject = helpers.colorObjects[mainColor];
         const colorsArr = colorObject[scheme];
+        if (colorsArr === undefined) { return; }
 
         let w = (colorsArr.length * 100);
         let h = 100;
@@ -247,10 +248,10 @@ const Combinations = () => {
             <section className="ryb__scheme" id="rybSchemeSection">
                 <section className="select-container">
                     <label htmlFor="scheme" className="select-container__label">Color scheme</label>
-                    <select id="scheme" name="scheme"
+                    <select id="scheme" name="scheme" defaultValue=""
                         onChange={onSelectedScheme}
                         className="select">
-                        <option value="Choose scheme" className="default-scheme">Choose scheme</option>
+                        <option value="" disabled className="disabled-option">Choose scheme</option>
                         <option value="complementary">Complementary</option>
                         <option value="splitComplementary">Split-complementary</option>
                         <option value="monochromatic">Monochromatic</option>

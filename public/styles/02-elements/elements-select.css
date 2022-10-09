@@ -26,8 +26,8 @@ select:hover {
     font-weight: 600;
 }
 
-.default-scheme {
-    color: gainsboro;
+.disabled-option {
+    color: var(--teal-extra-light);
 }
 
 @media (max-width: 768px) {
