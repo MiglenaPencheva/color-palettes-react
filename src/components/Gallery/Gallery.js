@@ -8,7 +8,9 @@ const Gallery = () => {
         <section id="gallery" className="gallery-page">
 
             <section className="section-header">
-                <h2> Color palettes gallery </h2>
+                <h2  className="heading-on-two-lines">Color</h2>
+                <h2  className="heading-on-two-lines"> palettes</h2>
+                <h2  className="heading-on-two-lines"> gallery </h2>
                 <h6> World is full of examples. The magic of light is all around. </h6>
                 <h6 className="diffHeading"> Enjoy the variety of color combinations. </h6>
             </section>

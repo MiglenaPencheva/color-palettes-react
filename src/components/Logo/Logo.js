@@ -12,7 +12,7 @@ const Logo = () => {
     const [hexToExplore, setHexToExplore] = useLocalStorage('hex', initialHexState);
 
 
-    const showMenu = (e) => {
+    const goHome = (e) => {
         e.target.style.transform = 'rotate(360deg)';
         e.target.style['transition-duration'] = '1.5s';
         setHexToExplore(initialHexState);
@@ -21,7 +21,7 @@ const Logo = () => {
 
     return (
         <img src="/images/logo.png" alt="logo" 
-            onClick={showMenu}
+            onClick={goHome}
             className="logo" />
     );
 };

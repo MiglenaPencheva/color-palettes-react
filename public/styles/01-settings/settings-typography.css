@@ -72,6 +72,10 @@ h6 {
     border-bottom: 1px solid var(--teal-grey);
 }
 
+.heading-on-two-lines {
+    display: inline;
+}
+
 .diffHeading {
     padding: 0 0 0.8rem 0;
     font-weight: 100;
@@ -99,6 +103,11 @@ h6 {
     h6 {
         font-size: 0.9rem;
     }
+
+    .heading-on-two-lines {
+        display: block;
+    }
+
 
     .diffHeading {
         font-size: 1.6rem;
