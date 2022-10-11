@@ -5,7 +5,6 @@ import Logo from './components/Logo/Logo';
 import Menu from './components/Menu/Menu';
 import GoToTop from './components/GoToTop/GoToTop';
 
-import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import Gallery from './components/Gallery/Gallery';
 import Login from './components/Login/Login';
@@ -25,9 +24,7 @@ function App() {
     return (
         <AuthProvider >
             <div id="app-container">
-                {/* <Header /> */}
 
-                <nav></nav>
                 <Logo />
                 <Menu />
                 <GoToTop />

@@ -10,33 +10,43 @@
     opacity: 44%;
     cursor: pointer;
     z-index: 1001;
+    transition-duration: 0.5s;
 }
-#menuButton__top, 
-#menuButton__middle, 
+
+#menuButton__top,
+#menuButton__middle,
 #menuButton__bottom,
-#menuButton__left, 
-#menuButton__right  {
+#menuButton__left,
+#menuButton__right {
     height: 5px;
     background-color: var(--teal-grey);
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
 }
-#menuButton__top, #menuButton__middle, #menuButton__bottom {
+
+#menuButton__top,
+#menuButton__middle,
+#menuButton__bottom {
     width: 30px;
-} 
-#menuButton__left, #menuButton__right {
+}
+
+#menuButton__left,
+#menuButton__right {
     width: 33px;
     position: fixed;
     display: none;
     top: 30px;
     right: 1rem;
 }
+
 #menuButton__left {
     rotate: 40deg;
 }
+
 #menuButton__right {
     rotate: 140deg;
 }
+
 #menuButton:hover {
     opacity: 1;
 }
@@ -62,12 +72,23 @@
 }
 
 @keyframes showDropDown {
-    0% { width: 0; }
-    100% { width: 240px; }
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 240px;
+    }
 }
+
 @keyframes hideDropDown {
-    0% { width: 240px; }
-    100% { width: 0; }
+    0% {
+        width: 240px;
+    }
+
+    100% {
+        width: 0;
+    }
 }
 
 .menu__main {
@@ -77,6 +98,7 @@
     font-size: 1.3rem;
     border-bottom: 1px solid var(--teal-grey);
 }
+
 .menu__sub {
     padding-left: 1.5rem;
     width: 100%;
@@ -89,9 +111,8 @@
         padding: 1rem 0 0.3rem 0;
         font-size: 1rem;
     }
+
     .menu__sub {
         font-size: 0.9rem;
     }
 }
-
-
