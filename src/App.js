@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
 import Logo from './components/Logo/Logo';
+import Menu from './components/Menu/Menu';
 import GoToTop from './components/GoToTop/GoToTop';
 
 import Header from './components/Header/Header';
@@ -28,6 +29,7 @@ function App() {
 
                 <nav></nav>
                 <Logo />
+                <Menu />
                 <GoToTop />
 
                 <main id="site-content">
