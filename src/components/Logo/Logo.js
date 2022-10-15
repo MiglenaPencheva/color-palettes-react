@@ -13,8 +13,6 @@ const Logo = () => {
 
 
     const goHome = (e) => {
-        e.target.style.transform = 'rotate(360deg)';
-        e.target.style['transition-duration'] = '1.5s';
         setHexToExplore(initialHexState);
         navigate('/');
     };

@@ -1,27 +1,30 @@
 .notification {
-    position: fixed;
-    /* z-index: 10; */
-    top: 5rem;
-    right:50%;
-    margin: auto;
-    text-align: center;
+    display: none;
+    position: absolute;
+    margin: 0 auto;
     padding: 0.5rem;
-    border-radius: 0.5rem;
-    color: rgb(255, 255, 255);
+    top: 18%;
+    left: 24%;
+    text-align: center;
+    color: var(--teal-grey);
     font-style: italic;
     text-decoration: underline;
+    border-radius: 0.5rem;
     box-shadow: 0 5px 10px rgb(204, 204, 204);
-    display: none;
 }
 
 .loadingBox {
-    background: #7CB3E9;
+    background: var(--teal-extra-light);
 }
 
 .infoBox {
-    background: #393;
+    background: var(--vermilion-white);
 }
 
 .errorBox {
-    background: rgba(255, 30, 1, 0.616);
+    background: var(--vermilion-extra-light);
+}
+
+@media (max-width: 768px) {
+    
 }

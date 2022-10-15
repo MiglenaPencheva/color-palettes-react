@@ -22,6 +22,6 @@
 
 @keyframes rotationArrow {
     100% {
-        rotate: -135deg;  
+        transform: rotate(-360deg);  
     }
 }

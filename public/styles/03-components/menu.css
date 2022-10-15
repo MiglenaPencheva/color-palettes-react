@@ -10,7 +10,17 @@
     opacity: 44%;
     cursor: pointer;
     z-index: 1001;
-    transition-duration: 0.5s;
+    transition: all 0,5s ease-in-out;
+    animation: rotationMenu 1.5s;
+}
+#menuButton:hover {
+    opacity: 1;
+    animation: rotate;
+}
+@keyframes rotationMenu {
+    100% {
+        transform: rotate(-360deg);  
+    }
 }
 
 #menuButton__top,
@@ -21,7 +31,7 @@
     height: 5px;
     background-color: var(--teal-grey);
     border-radius: 10px;
-    transition: all 0.3s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
 }
 
 #menuButton__top,
@@ -34,7 +44,7 @@
 #menuButton__right {
     width: 33px;
     position: fixed;
-    display: none;
+    opacity: 0;
     top: 30px;
     right: 1rem;
 }
@@ -47,9 +57,7 @@
     rotate: 140deg;
 }
 
-#menuButton:hover {
-    opacity: 1;
-}
+
 
 #dropdownContent {
     display: none;
@@ -66,16 +74,17 @@
     background-color: var(--vermilion-white);
     border-radius: 12px;
     z-index: 999;
-    transition: all 0.4s ease;
+    transition: display 0.4s ease;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     animation: showDropDown 0.5s ease-out;
     /* animation: hideDropDown 0.5s ease-out; */
+    animation-fill-mode: forwards;
 }
 
 @keyframes showDropDown {
     0% {
         width: 0;
     }
-
     100% {
         width: 240px;
     }
@@ -85,7 +94,6 @@
     0% {
         width: 240px;
     }
-
     100% {
         width: 0;
     }

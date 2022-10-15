@@ -24,12 +24,9 @@
     }
     100% {
         border-radius: 24%;
-        rotate: 360deg;
-        
+        transform: rotate(360deg);
     }
 }
-
-
 
 @media (max-width: 768px) {
     .logo {
