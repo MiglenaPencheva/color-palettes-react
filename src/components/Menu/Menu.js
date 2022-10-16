@@ -3,56 +3,60 @@ import { Link } from 'react-router-dom';
 
 const Menu = () => {
 
-    const [openMenu, setOpenMenu] = useState(false);
-    const [animation, setAnimation] = useState('showDropDown 0.5s ease-out');
+    // const [openMenu, setOpenMenu] = useState(false);
 
-    useEffect(() => {
-        let dropdownContent = document.getElementById('dropdownContent');
-        let top = document.getElementById('menuButton__top');
-        let middle = document.getElementById('menuButton__middle');
-        let bottom = document.getElementById('menuButton__bottom');
-        let left = document.getElementById('menuButton__left');
-        let right = document.getElementById('menuButton__right');
-        let menuButton = document.getElementById('menuButton');
+    // useEffect(() => {
+    //     let dropdownContent = document.getElementById('dropdownContent');
+        // let top = document.getElementById('menuButton__top');
+        // let middle = document.getElementById('menuButton__middle');
+        // let bottom = document.getElementById('menuButton__bottom');
+        // let left = document.getElementById('menuButton__left');
+        // let right = document.getElementById('menuButton__right');
+        // let menuButton = document.getElementById('menuButton');
 
-        if (openMenu) {
-            dropdownContent.style.display = 'flex';
-            top.style.opacity = 0;
-            middle.style.opacity = 0;
-            bottom.style.opacity = 0;
-            left.style.opacity = 1;
-            right.style.opacity = 1;
-            menuButton.style.animation = 'rotation';
-        } else {
-            dropdownContent.style.display = 'none';
-            top.style.opacity = 1;
-            middle.style.opacity = 1;
-            bottom.style.opacity = 1;
-            left.style.opacity = 0;
-            right.style.opacity = 0;
-            menuButton.style.animation = '';
+        // if (openMenu) {
+        //     dropdownContent.style.width = '240px';
+            // dropdownContent.style.display = 'flex';
+            // top.style.opacity = 0;
+            // middle.style.opacity = 0;
+            // bottom.style.opacity = 0;
+            // left.style.opacity = 1;
+            // right.style.opacity = 1;
+            // menuButton.style.animation = 'rotation';
+        // } else {
+        //     dropdownContent.style.width = 0;
 
-            setAnimation('hideDropDown 0.5s ease-out');
-        }
-    }, [openMenu]);
+            // dropdownContent.style.display = 'none';
+            // top.style.opacity = 1;
+            // middle.style.opacity = 1;
+            // bottom.style.opacity = 1;
+            // left.style.opacity = 0;
+            // right.style.opacity = 0;
+            // menuButton.style.animation = '';
+        // }
+    // }, [openMenu]);
 
-    useEffect(() => {
-        let dropdownContent = document.getElementById('dropdownContent');
-        dropdownContent.style.animation = animation;
-    }, [animation]);
+    const openMenu = (e) => {
+        document.getElementById('dropdownContent').style.width = '240px';
+    };
+    const closeMenu = (e) => {
+        document.getElementById('dropdownContent').style.width = 0;
+    };
 
     return (
         <section>
 
-            <div id="menuButton" onClick={() => [setOpenMenu(!openMenu), setAnimation('showDropDown 0.5s ease-out')]}>
+            <div id="menuButton" onClick={openMenu}>
                 <span id="menuButton__top"></span>
                 <span id="menuButton__middle"></span>
                 <span id="menuButton__bottom"></span>
-                <span id="menuButton__left"></span>
-                <span id="menuButton__right"></span>
             </div>
 
-            <div id="dropdownContent" onClick={() => [setOpenMenu(!openMenu), setAnimation('hideDropDown 0.5s ease-out')]}>
+            <div id="dropdownContent" onClick={closeMenu}>
+                <div id="closeButton" onClick={closeMenu}>
+                    <span id="closeButton__left"></span>
+                    <span id="closeButton__right"></span>
+                </div>
                 <Link className="menu__main" to="/">Home</Link>
                 <Link className="menu__main" to="/gallery">Gallery</Link>
                 <Link className="menu__sub" to="/gallery">Color palettes</Link>

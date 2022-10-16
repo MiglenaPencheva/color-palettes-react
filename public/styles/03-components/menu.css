@@ -10,7 +10,6 @@
     opacity: 44%;
     cursor: pointer;
     z-index: 1001;
-    transition: all 0,5s ease-in-out;
     animation: rotationMenu 1.5s;
 }
 #menuButton:hover {
@@ -22,12 +21,9 @@
         transform: rotate(-360deg);  
     }
 }
-
 #menuButton__top,
 #menuButton__middle,
-#menuButton__bottom,
-#menuButton__left,
-#menuButton__right {
+#menuButton__bottom {
     height: 5px;
     background-color: var(--teal-grey);
     border-radius: 10px;
@@ -40,67 +36,60 @@
     width: 30px;
 }
 
-#menuButton__left,
-#menuButton__right {
-    width: 33px;
-    position: fixed;
-    opacity: 0;
-    top: 30px;
-    right: 1rem;
+#closeButton {
+    position: relative;
+    margin: 0.5rem;
+    width: 30px;
+    height: 24px;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 44%;
+    cursor: pointer;
 }
-
-#menuButton__left {
+#closeButton:hover {
+    opacity: 1;
+    animation: rotate;
+}
+#closeButton__left,
+#closeButton__right {
+    position: absolute;
+    top: 1.2rem;
+    right: 0.5rem;
+    width: 33px;
+    height: 5px;
+    background-color: var(--teal-grey);
+    border-radius: 10px;
+}
+#closeButton__left {
     rotate: 40deg;
 }
-
-#menuButton__right {
+#closeButton__right {
     rotate: 140deg;
 }
 
 
-
 #dropdownContent {
-    display: none;
-    padding: 1.5rem;
     position: fixed;
-    top: 0.5rem;
-    right: 0.5rem;
-    width: 240px;
-    height: 97.5vh;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    gap: 0.5rem;
     background-color: var(--vermilion-white);
-    border-radius: 12px;
-    z-index: 999;
-    transition: display 0.4s ease;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    animation: showDropDown 0.5s ease-out;
-    /* animation: hideDropDown 0.5s ease-out; */
-    animation-fill-mode: forwards;
-}
-
-@keyframes showDropDown {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 240px;
-    }
-}
-
-@keyframes hideDropDown {
-    0% {
-        width: 240px;
-    }
-    100% {
-        width: 0;
-    }
+    z-index: 1002;
+    transition: 0.8s;
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .menu__main {
-    padding: 1.2rem 0 0.5rem 0;
+    margin: 0 1.5rem 0.2rem 1.5rem;
+    padding: 1rem 0 0.5rem 0;
     width: 100%;
     align-self: start;
     font-size: 1.3rem;
@@ -108,7 +97,9 @@
 }
 
 .menu__sub {
-    padding-left: 1.5rem;
+    margin-left: 2.5rem;
+    padding: 0.3rem 0;
+
     width: 100%;
     align-self: start;
 }
