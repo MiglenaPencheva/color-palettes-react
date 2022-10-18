@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as colorPaletteService from '../../services/colorPaletteService';
-import ColorPaletteCard from './ColorPaletteCard/ColorPaletteCard';
+import ColorPaletteCard from './ColorPaletteCard';
+import Pagination from './Pagination';
 
 const ColorPaletteList = () => {
     const [colorPalettes, setColorPalettes] = useState([]);
@@ -13,7 +14,13 @@ const ColorPaletteList = () => {
     }, []);
 
     return (
-        <>
+        <section>
+            <section className="gallery__info">
+                <span>Gallery {'>'} All color palettes</span>
+                <span>{colorPalettes.length} color palettes</span>
+                <Pagination />
+            </section>
+
             {colorPalettes.length > 0
                 ? (
                     <ul className="color-palette-list">
@@ -25,7 +32,7 @@ const ColorPaletteList = () => {
                     <br /> Or no connection to database. 
                     </p>
             }
-        </>
+        </section>
     );
 };
 

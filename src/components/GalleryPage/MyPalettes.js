@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as colorPaletteService from '../../services/colorPaletteService';
-import ColorPaletteCard from '../ColorPalettesList/ColorPaletteCard/ColorPaletteCard';
+import ColorPaletteCard from './ColorPaletteCard';
+import Pagination from './Pagination';
 import { useAuthContext } from '../../contexts/AuthContext';
 
 const MyColorPalettes = () => {
@@ -15,16 +16,23 @@ const MyColorPalettes = () => {
     }, [user.accessToken]);
 
     return (
-        <section className="my-pets">
-            <h1>My color palettes</h1>
+        <section>
+
+            <section className="gallery__info">
+                <span>Gallery {'>'} My color palettes</span>
+                <span>{myColorPalettes.length} color palettes uploaded by {user.username}</span>
+                <Pagination />
+            </section>
 
             {myColorPalettes.length > 0
                 ? (
-                    <ul className="other-pets-list">
+                    <ul className="color-palette-list">
                         {myColorPalettes.map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)}
                     </ul>
-                ) 
-                : <p className="no-pets">No Color Palettes in database!</p>
+                )
+                : <p className="no-palettes"><b> No color palettes to show!</b>
+                    <br /> Or no connection to database.
+                </p>
             }
         </section>
     );

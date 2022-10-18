@@ -6,12 +6,10 @@ import Menu from './components/Menu/Menu';
 import GoToTop from './components/GoToTop/GoToTop';
 
 import Home from './components/Home/Home';
-import Gallery from './components/Gallery/Gallery';
+import Gallery from './components/GalleryPage/GalleryPage';
 import Login from './components/Login/Login';
 import Logout from './components/Logout/Logout';
 import Register from './components/Register/Register';
-import MyColorPalettes from './components/MyColorPalettes/MyColorPalettes';
-import MyFavorites from './components/MyFavorites/MyFavorites';
 import UploadPalette from './components/UploadPalette/UploadPalette';
 import SavePalette from './components/UploadPalette/SavePalette';
 import Details from './components/Details/Details';
@@ -38,8 +36,6 @@ function App() {
                         <Route path="/register" element={<Register />} />
 
                         <Route path="/gallery" element={<Gallery />} />
-                        <Route path="/my-color-palettes" element={<MyColorPalettes />} />
-                        <Route path="/my-favorites" element={<MyFavorites />} />
                         {/* <Route path="/my-favorites" element={user ? <MyFavorites /> : navigate('/login')} /> */}
                         <Route path="/upload" element={<UploadPalette />} />
                         <Route path="/details/:colorPaletteId" element={<Details />} />
