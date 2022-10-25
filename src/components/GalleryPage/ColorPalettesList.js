@@ -3,7 +3,9 @@ import * as colorPaletteService from '../../services/colorPaletteService';
 import ColorPaletteCard from './ColorPaletteCard';
 import Pagination from './Pagination';
 
-const ColorPaletteList = () => {
+const ColorPaletteList = ({filter}) => {
+    console.log(filter);
+
     const [colorPalettes, setColorPalettes] = useState([]);
 
     useEffect(() => {
@@ -24,8 +26,11 @@ const ColorPaletteList = () => {
             {colorPalettes.length > 0
                 ? (
                     <ul className="color-palette-list">
-                        {colorPalettes.map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)}
-                        {/* {colorPalettes.filter().map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)} */}
+                        {
+                            filter 
+                            ? colorPalettes.filter(x => x.filter).map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
+                            : colorPalettes.map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
+                        }
                     </ul>
                 )
                 : <p className="no-palettes"><b> No color palettes to show!</b>

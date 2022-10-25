@@ -4,21 +4,30 @@ import { AuthProvider } from './contexts/AuthContext';
 import Logo from './components/Logo/Logo';
 import Menu from './components/Menu/Menu';
 import GoToTop from './components/GoToTop/GoToTop';
-
 import Home from './components/Home/Home';
-import Gallery from './components/GalleryPage/GalleryPage';
+
 import Login from './components/Login/Login';
 import Logout from './components/Logout/Logout';
 import Register from './components/Register/Register';
-import UploadPalette from './components/UploadPalette/UploadPalette';
-import SavePalette from './components/UploadPalette/SavePalette';
+
+import Gallery from './components/GalleryPage/GalleryPage';
+import ColorPaletteList from './components/GalleryPage/ColorPalettesList';
 import Details from './components/Details/Details';
+import SavePalette from './components/UploadPalette/SavePalette';
+import UploadPalette from './components/UploadPalette/UploadPalette';
 import Edit from './components/Edit/Edit';
+
+import Categories from './components/GalleryPage/Categories';
+import ColorGroups from './components/GalleryPage/ColorGroups';
+import MyFavorites from './components/GalleryPage/MyFavorites';
+import MyPalettes from './components/GalleryPage/MyPalettes';
+
 import ColorPickerPage from './components/ColorPickerPage/ColorPickerPage';
 import CombinationsPage from './components/CombinationsPage/CombinationsPage';
 import ExploreColorPage from './components/ExploreColorPage/ExploreColorPage';
 
 function App() {
+
     return (
         <AuthProvider >
             <div id="app-container">
@@ -35,9 +44,15 @@ function App() {
                         <Route path="/logout" element={<Logout />} />
                         <Route path="/register" element={<Register />} />
 
-                        <Route path="/gallery" element={<Gallery />} />
-                        {/* <Route path="/my-favorites" element={user ? <MyFavorites /> : navigate('/login')} /> */}
-                        <Route path="/upload" element={<UploadPalette />} />
+                        <Route path="/gallery" element={<Gallery />} >
+                            <Route path="all" element={<ColorPaletteList />} />
+                            <Route path="categories" element={<Categories />} />
+                            <Route path="groups" element={<ColorGroups />} />
+                            <Route path="favorites" element={<MyFavorites />} />
+                            <Route path="mine" element={<MyPalettes />} />
+                            <Route path="upload" element={<UploadPalette />} />
+                        </Route>
+
                         <Route path="/details/:colorPaletteId" element={<Details />} />
                         <Route path="/edit/:colorPaletteId" element={<Edit />} />
 

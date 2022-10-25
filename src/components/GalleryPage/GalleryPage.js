@@ -1,19 +1,16 @@
-import { useState } from 'react';
-// import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 import ColorPaletteList from './ColorPalettesList';
 import Categories from './Categories';
 import ColorGroups from './ColorGroups';
 import MyFavorites from './MyFavorites';
 import MyPalettes from './MyPalettes';
+import UploadPalette from '../UploadPalette/UploadPalette';
 
 const Gallery = () => {
-
-    const [all, setAll] = useState(true);
-    const [categories, setCategories] = useState(false);
-    const [groups, setGroups] = useState(false);
-    const [favorites, setFavorites] = useState(false);
-    const [mine, setMine] = useState(false);
+    const navigate = useNavigate();
+    const { user } = useAuthContext();
 
     return (
 
@@ -47,25 +44,25 @@ const Gallery = () => {
 
             <section className="gallery__filters">
                 <div className="gallery__filters-left">
-                    <input type="submit" value="All images" onClick={() => [setAll(true), setCategories(false), setGroups(false), setFavorites(false), setMine(false)]}/>
-                    <input type="submit" value="Categories" onClick={() => [setCategories(true), setAll(false), setGroups(false), setFavorites(false), setMine(false)]}/>
-                    <input type="submit" value="Color groups" onClick={() => [setGroups(true), setAll(false), setCategories(false), setFavorites(false), setMine(false)]}/>
+                    <Link to="">All images</Link>
+                    <Link to="categories">Categories</Link>
+                    <Link to="groups">Color groups</Link>
                 </div>
                 <div className="gallery__filters-right" >
-                    <input type="submit" value="My favorites" onClick={() => [setFavorites(true), setAll(false), setCategories(false), setGroups(false), setMine(false)]}/>
-                    <input type="submit" value="My palettes" onClick={() => [setMine(true), setFavorites(false), setAll(false), setCategories(false), setGroups(false)]}/>
+                    <Link to="favorites">My favorites</Link>
+                    <Link to="mine">My palettes</Link>
+                    <Link to="upload">Upload</Link>
                 </div>
             </section>
 
-            {all && <ColorPaletteList />}
-            {categories && <Categories />}
-            {groups && <ColorGroups />}
-            {favorites && <MyFavorites />}
-            {mine && <MyPalettes />}
-
-            {/* <Routes> */}
-                {/* <Route path="/gallery" element={<ColorPaletteList />} /> */}
-            {/* </Routes> */}
+            <Routes>
+                <Route path="" element={<ColorPaletteList />} />
+                <Route path="categories" element={<Categories />} />
+                <Route path="groups" element={<ColorGroups />} />
+                <Route path="favorites" element={user ? <MyFavorites /> : navigate('/login')} />
+                <Route path="mine" element={user ? <MyPalettes /> : navigate('/login')} />
+                <Route path="upload" element={user ? <UploadPalette /> : navigate('/login')} />
+            </Routes>
         </section>
 
     );
