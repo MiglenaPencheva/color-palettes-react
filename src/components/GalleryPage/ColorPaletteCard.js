@@ -14,11 +14,7 @@ const ColorPaletteCard = ({
             
             <p className="color-palette-card__title">{colorPalette.title}</p>
 
-            <p className="color-palette-card__category">
-                Category: <Link to={'/gallery/{category}'}>{colorPalette.category}</Link>
-            </p>
-
-            
+            <p className="color-palette-card__category">Category: {colorPalette.category}</p>
 
         </li >
     );

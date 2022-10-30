@@ -12,16 +12,29 @@ const Details = () => {
     const [colorPalette, setColorPalette] = useState({ colorPaletteId });
     const [colors, setColors] = useState('');
     const [likes, setLikes] = useState(0);
+    const [category, setCategory] = useState(0);
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
     useEffect(() => {
         colorPaletteService.getOne(colorPaletteId)
             .then(res => {
                 setColorPalette(res);
+                setCategory(res.category);
                 setLikes(res.likedBy.length);
                 setColors(res.colors.split(',').join(', '));
             });
     }, [colorPaletteId]);
+
+    const onCategoryClick = async (e) => {
+        try {
+            let res = await colorPaletteService.getAll();
+            let filtered = await res.filter(x => x.category === e.target.textContent);
+            hideError();
+            navigate('/gallery/category', {colorPalettes: filtered});
+        } catch (error) {
+            showError(error.message);
+        }
+    };
 
     const deleteHandler = (e) => {
         e.preventDefault();
@@ -81,13 +94,9 @@ const Details = () => {
 
                     <h5 className="details__info--title">{colorPalette.title}</h5>
 
-                    <p className="details__info--category">
-                        Category: <Link to={'/gallery/{category}'}>{colorPalette.category}</Link>
-                    </p>
+                    <Link to={'/gallery/categories'} className="details__info--category">Category: {colorPalette.category}</Link>
 
-                    <p className="details__info--colors">
-                        Colors: {colors}
-                    </p>
+                    <Link to={'/gallery/groups'} className="details__info--colors">Colors: {colors}</Link>
 
                     <div className="details__info--buttons">
                         {user._id &&
