@@ -130,7 +130,6 @@
 
 /* ---- scheme advantages ---- */
 .ryb__advantages {
-    display: none;
     padding: 0.5rem;
     border-top: 1px solid var(--teal-grey);
 }
@@ -146,7 +145,7 @@
 }
 
 .ryb__details {
-    display: none;
+    display: flex;
     padding: 0.5rem;
     border-top: 1px solid var(--teal-grey);
     flex-direction: column;

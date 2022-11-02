@@ -1,7 +1,7 @@
 const SchemesDetails = () => {
 
     return (
-        <section id="infoSection" className="ryb__details">
+        <section id="schemeDetailsSection" className="ryb__details">
             <h6>Color schemes details</h6>
             <article><b><i>Color wheel</i></b> is an abstract illustration of color hues around a circle, which shows the relationship between colors. Most of the color wheels are based on three primary colors, three secondary colors and six tertiary colors, made by mixing a primary with a secondary one. </article>
             <article > According to the additive color mixing the <b><i>RGB color wheel</i></b> uses red, green and blue as primary colors, and yellow, cyan and magenta as secondary. In the absence of light of any color, the result is black, mixing all three primaries will result in white. RGB system is used in digital and electronic systems. </article>

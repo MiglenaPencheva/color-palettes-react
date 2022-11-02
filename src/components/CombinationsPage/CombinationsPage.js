@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 import { getPixel } from '../../helpers/getPixel';
@@ -15,7 +14,6 @@ const initialHexState = {
 };
 
 const Combinations = () => {
-    // const navigate = useNavigate();
 
     const [data, setData] = useState([]);
     const [selectedScheme, setSelectedScheme] = useState('complementary');
@@ -23,8 +21,17 @@ const Combinations = () => {
     const [info, setInfo] = useState('');
     const [hex, setHex] = useState('');
     const [hexToExplore, setHexToExplore] = useLocalStorage('hex', initialHexState);
+    const [advantages, setAdvantages] = useState(false);
+    const [schemesDetails, setSchemesDetails] = useState(false);
+    const [reedMoreP, setReedMoreP] = useState(true);
+    const [reedMoreH, setReedMoreH] = useState(true);
 
-    
+    useEffect(() => {
+        if (schemesDetails) {
+            document.getElementById('schemeDetailsSection').scrollIntoView();
+        }
+    }, [schemesDetails]);
+
     const showOnMouseOver = (e) => {
         const targetName = e.currentTarget.id;
         const target = document.getElementById(`${targetName}Image`);
@@ -49,7 +56,7 @@ const Combinations = () => {
     };
 
     const rotateWheel = async (e) => {
-        resetScheme();
+        resetWheel();
 
         const rgb = getPixel(e, data);
 
@@ -65,30 +72,12 @@ const Combinations = () => {
         } else {
             setMainColor('yellow');
         }
-
-        // const rotated = e.currentTarget.firstChild;
-        // drawRotated(degrees);
-        // function drawRotated(degrees) {
-        //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-        //     ctx.save();
-        //     ctx.translate(canvas.width / 2, canvas.height / 2);
-        //     ctx.rotate(degrees * Math.PI / 180);
-        //     ctx.drawImage(rotated, -rotated.width / 2, -rotated.hight / 2);
-        //     ctx.restore();
-        // }
     };
 
-    const showSchemesInfo = (e) => {
-        let infoSection = document.getElementById('infoSection');
-        infoSection.style.display = 'flex';
-        infoSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-            inline: 'nearest'
-        });
-
-        let reedMore = document.getElementById('reedMore');
-        reedMore.style.display = 'none';
+    const showSchemeDetails = () => {
+        setReedMoreP(false);
+        setReedMoreH(false);
+        setSchemesDetails(true);
     };
 
     const onSelectedScheme = (e) => {
@@ -130,25 +119,18 @@ const Combinations = () => {
             helpers.drawColorsInResultCanvas(rgbArr);
         }
 
-        //   show info
-        const advantagesSection = document.getElementById('advantagesSection');
-        advantagesSection.style.display = 'block';
+        setAdvantages(true);
         const text = helpers.getInfoCombinations[scheme];
         setInfo(text);
-        const p = document.getElementById('pScheme');
-        p.style.display = 'none';
-        let infoSection = document.getElementById('infoSection');
-        infoSection.style.display = 'none';
+        setReedMoreP(false);
+        setReedMoreH(true);
+        setSchemesDetails(false);
 
-        const rybSchemeSection = document.getElementById('rybSchemeSection');
-        rybSchemeSection.scrollIntoView({
+        document.getElementById('rybSchemeSection').scrollIntoView({
             behavior: 'smooth',
             block: 'start',
             inline: 'nearest'
         });
-
-        let reedMore = document.getElementById('reedMore');
-        reedMore.style.display = 'block';
     };
 
     const showHexValueResult = (e) => {
@@ -167,7 +149,6 @@ const Combinations = () => {
         let resultValues = getRgbAndHex(e);
         setHexToExplore(resultValues);
         window.open('/color-explore', '_blank');
-        // navigate('/color-explore', { replace: false, state: resultValues });
     };
     function getRgbAndHex(e) {
         let canvas = e.currentTarget;
@@ -185,27 +166,21 @@ const Combinations = () => {
         const wheel = document.getElementById('rybCanvas');
         wheel.style.transform = 'rotate(0deg)';
         setMainColor('yellow');
-        resetScheme();
-        const advantagesSection = document.getElementById('advantagesSection');
-        advantagesSection.style.display = 'none';
-        const infoSection = document.getElementById('infoSection');
-        infoSection.style.display = 'none';
-    };
-    const resetScheme = (e) => {
         document.getElementById('scheme').value = 'Choose scheme';
         const schemeCanvas = document.getElementById('schemeCanvas');
         const schemeCanvasCtx = schemeCanvas.getContext('2d');
         schemeCanvasCtx.clearRect(10, 10, 140, 140);
         document.getElementById('resultSection').style.display = 'none';
-        document.getElementById('pScheme').style.display = 'block';
-        const advantagesSection = document.getElementById('advantagesSection');
-        advantagesSection.style.display = 'none';
-
+        setAdvantages(false);
+        setSchemesDetails(false);
+        setAdvantages(false);
+        setReedMoreP(true);
+        setReedMoreH(true);
+        setSchemesDetails(false);
     };
 
     const exportScheme = async (e) => {
         const element = document.getElementById('resultCanvas');
-        // const rgb = await getRgbColor(element);
         exportResult(element);
     };
 
@@ -263,11 +238,13 @@ const Combinations = () => {
                         <option value="square">Square</option>
                     </select>
                 </section>
-                <p id="pScheme" className="ryb__scheme-p">
-                    When arranged in appropriate schemes,
-                    colors look appealing together, create stylish and aesthetic feeling.
-                    <span onClick={showSchemesInfo}> Reed more...</span>
-                </p>
+                {reedMoreP &&
+                    <p id="pScheme" className="ryb__scheme-p">
+                        When arranged in appropriate schemes,
+                        colors look appealing together, create stylish and aesthetic feeling.
+                        <span onClick={showSchemeDetails}> Reed more...</span>
+                    </p>
+                }
 
                 <section id="resultSection" className="ryb__result">
                     <canvas id="resultCanvas"
@@ -284,13 +261,18 @@ const Combinations = () => {
 
             </section>
 
-            <section className="ryb__advantages" id="advantagesSection">
-                <h6>Scheme advantages</h6>
-                {info}
-            </section>
+            {advantages &&
+                <section className="ryb__advantages" id="advantagesSection">
+                    <h6>Scheme advantages</h6>
+                    {info}
+                </section>
+            }
 
-            <div id="reedMore" onClick={showSchemesInfo}>Reed more about color schemes...</div>
-            <SchemesDetails />
+            {reedMoreH
+                ? <div id="reedMore" onClick={showSchemeDetails}>Reed more about color schemes...</div>
+                : ''
+            }
+            {schemesDetails ? <SchemesDetails /> : ''}
 
         </section>
     );
