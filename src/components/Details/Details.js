@@ -96,9 +96,15 @@ const Details = () => {
 
                     <h5 className="details__info--title">{colorPalette.title}</h5>
 
-                    <Link to={'/gallery/categories'} className="details__info--category">Category: {colorPalette.category}</Link>
+                    <span>
+                        <Link to={'/gallery/categories'} className="details__info--category">Category:</Link>
+                        <span><i> {colorPalette.category}</i></span>
+                    </span>
 
-                    <Link to={'gallery/groups'} className="details__info--colors">Colors: {colors}</Link>
+                    <span>
+                        <Link to={'/gallery/groups'} className="details__info--colors">Colors:</Link>
+                        <span><i> {colors}</i> </span>
+                    </span>
 
                     <div className="details__info--buttons">
                         {user._id &&

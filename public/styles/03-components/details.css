@@ -65,7 +65,7 @@
     border-top: 1px solid var(--teal);
 }
 .details__info--category {
-    margin: 1rem 0 0 0;
+    margin: 1rem 0 0.2rem 0;
 }
 .details__info--colors {
     margin: 1rem 0 0 0;

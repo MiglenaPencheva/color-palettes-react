@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Routes, Route, NavLink, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 import * as colorPaletteService from '../../services/colorPaletteService';
 
@@ -52,20 +52,21 @@ const Gallery = () => {
             </section>
 
             <section className="gallery__filters">
-                <div className="gallery__filters-left">
-                    <Link to="" >All images</Link>
-                    <Link to="categories">Categories</Link>
-                    <Link to="groups">Color groups</Link>
-                </div>
-                <div className="gallery__filters-right" >
-                    <Link to="favorites">My favorites</Link>
-                    <Link to="mine">My palettes</Link>
-                    <Link to="upload">Upload</Link>
-                </div>
+                <nav className="gallery__filters-left">
+                    <NavLink to="all" className={({ isActive }) => isActive ? 'active' : ''}>All images</NavLink>
+                    <NavLink to="categories" className={({ isActive }) => isActive ? 'active' : ''}>Categories</NavLink>
+                    <NavLink to="groups" className={({ isActive }) => isActive ? 'active' : ''}>Color groups</NavLink>
+                </nav>
+                <nav className="gallery__filters-right" >
+                    <NavLink to="favorites" className={({ isActive }) => isActive ? 'active' : ''}>My favorites</NavLink>
+                    <NavLink to="mine" className={({ isActive }) => isActive ? 'active' : ''}>My palettes</NavLink>
+                    <NavLink to="upload" className={({ isActive }) => isActive ? 'active' : ''}>Upload</NavLink>
+                </nav>
             </section>
 
             <Routes>
                 <Route path="" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'}/>} />
+                <Route path="all" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'}/>} />
                 <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'}/>} />
                 <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Color groups'}/>} />
                 <Route path="favorites" element={user ? <ColorPaletteList colorPalettes={colorPalettes.filter(x => x.likedBy.includes(user._id))} title={'My favorites'}/> : navigate('/login')} />

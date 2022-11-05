@@ -105,6 +105,10 @@
     cursor: pointer;
     border: none;
 }
+.gallery__filters a:hover {
+    font-weight: 400;
+    opacity: 0.6;
+}
 .gallery__filters-left {
     display: flex;
     justify-content: flex-start;
@@ -113,8 +117,9 @@
 .gallery__filters-right {
     display: flex;
     justify-content: flex-end;
+    flex-wrap: wrap;
 }
-.gallery__filters a:focus {
+.active {
     font-weight: 600;
     border-bottom: 2px solid var(--teal-grey);
     border-radius: 0;
@@ -132,14 +137,14 @@
     padding: 1rem;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     justify-content: center;
     align-items: center;
     gap: 1rem;
 }
 .gallery__categories div {
-    width: 270px;
-    height: 300px;
+    width: 210px;
+    height: 210px;
     display: flex;
     flex-direction: column;
     justify-content: center;
