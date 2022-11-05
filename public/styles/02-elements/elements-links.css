@@ -1,4 +1,5 @@
 a {
+    color: var(--teal-grey);
     text-decoration: none;
     display: inline-block;
 }

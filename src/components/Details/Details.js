@@ -30,7 +30,7 @@ const Details = () => {
             let res = await colorPaletteService.getAll();
             let filtered = await res.filter(x => x.category === e.target.textContent);
             hideError();
-            navigate('/gallery/category', {colorPalettes: filtered});
+            navigate('/gallery/category', { colorPalettes: filtered });
         } catch (error) {
             showError(error.message);
         }
@@ -71,7 +71,7 @@ const Details = () => {
             <Link to={`/edit/${colorPalette._id}`}>
                 <button className="button details__info--buttons-edit">Edit</button>
             </Link>
-            <button className="button details__info--buttons-delete" 
+            <button className="button details__info--buttons-delete"
                 onClick={deleteClickHandler}>Delete
             </button>
         </>
@@ -83,20 +83,22 @@ const Details = () => {
     return (
         <>
             <DeleteConfirmDialog show={showDeleteDialog} onClose={() => setShowDeleteDialog(false)} onSave={deleteHandler} />
-            
+
             <section id="details" className="details">
-                
+
                 <span className="details__image">
                     <img className="details__image--file" src={colorPalette.imageFile} alt="palette" />
                 </span>
 
                 <div className="details__info">
 
+                    <Link to={'/gallery'} className="details__info--back"></Link>
+
                     <h5 className="details__info--title">{colorPalette.title}</h5>
 
                     <Link to={'/gallery/categories'} className="details__info--category">Category: {colorPalette.category}</Link>
 
-                    <Link to={'/gallery/groups'} className="details__info--colors">Colors: {colors}</Link>
+                    <Link to={'gallery/groups'} className="details__info--colors">Colors: {colors}</Link>
 
                     <div className="details__info--buttons">
                         {user._id &&
@@ -108,8 +110,8 @@ const Details = () => {
                         <div className="details__info--like">
                             <span id="total-likes">Likes: {likes}</span>
                         </div>
-
                     </div>
+
                 </div>
             </section>
         </>

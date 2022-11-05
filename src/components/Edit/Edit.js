@@ -73,7 +73,7 @@ const Edit = () => {
                         <label htmlFor="type">Category</label>
                             <select id="type" name="category" className="upload__category--select">
                                 <option value="Choose category">Choose category</option>
-                                <option value="landscape">Landscape</option>
+                                <option value="landscapes">Landscapes</option>
                                 <option value="sea">Sea</option>
                                 <option value="sky">Sky</option>
                                 <option value="plants">Plants</option>

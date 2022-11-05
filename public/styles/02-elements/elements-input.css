@@ -1,7 +1,6 @@
 input {
     border: 1px solid var(--teal-grey);
-    color: inherit;
-    background-color: white;
+    accent-color: var(--teal-grey);
     border-radius: 4px;
     padding: 0.4rem 1rem;
     outline: none;

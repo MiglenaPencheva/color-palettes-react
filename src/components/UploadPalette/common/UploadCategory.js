@@ -5,7 +5,7 @@ const UploadCategory = () => {
             <select id="type" name="category"
                 className="select">
                 <option value="Choose category" className="default-scheme">Choose category</option>
-                <option value="landscape">Landscape</option>
+                <option value="landscapes">Landscapes</option>
                 <option value="sea">Sea</option>
                 <option value="sky">Sky</option>
                 <option value="plants">Plants</option>
