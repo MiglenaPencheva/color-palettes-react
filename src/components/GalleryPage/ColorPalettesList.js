@@ -11,7 +11,7 @@ const ColorPaletteList = ({
             <section className="gallery__info" >
                 <span>Gallery {'>'} {title}</span>
                 {colorPalettes.length > 0 && <span>{colorPalettes.length} color palettes</span>}
-                {colorPalettes.length > 0 && <Pagination />}
+                {/* {colorPalettes.length > 0 && <Pagination />} */}
             </section>
 
             {colorPalettes.length > 0

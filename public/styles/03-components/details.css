@@ -128,7 +128,7 @@
     .details__info--back {
         margin: 0.5rem;
         position: fixed;
-        top: 1rem;
-        left: 45%;
+        bottom: 1rem;
+        left: 1rem;
     }
 }

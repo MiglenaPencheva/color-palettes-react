@@ -14,8 +14,9 @@ const ColorGroups = ({ colorPalettes }) => {
 
         let filtered = [];
         for (const x of colorPalettes) {
-            let arr = x.colors.split(', ');
-            if (arr.includes(group)) { filtered.push(x); }
+            let arr = x.colors.split(',');
+            let trimmed = arr.map(x => x.trim());
+            if (trimmed.includes(group)) { filtered.push(x); }
         };
         setFilteredPalettes(filtered);
 
