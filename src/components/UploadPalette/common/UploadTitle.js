@@ -1,4 +1,5 @@
-const UploadTitle = () => {
+const UploadTitle = ({colorPalette}) => {
+
     return (
         <section className="upload__title">
             <label htmlFor="title" className="upload__title--label">Title</label>
@@ -9,6 +10,7 @@ const UploadTitle = () => {
                     id="title"
                     cols="30"
                     // onChange={e => setTitle(e.target.value)}
+                    defaultValue={colorPalette ? colorPalette.title : ''}
                     placeholder="Title should be less than 100 characters" />
             </span>
         </section>

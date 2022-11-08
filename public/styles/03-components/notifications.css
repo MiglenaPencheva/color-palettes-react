@@ -1,10 +1,10 @@
 .notification {
     display: none;
-    position: absolute;
-    margin: 0 auto;
-    padding: 0.5rem;
-    top: 18%;
-    left: 24%;
+    padding: 1rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
     color: var(--teal-grey);
     font-style: italic;
@@ -25,6 +25,4 @@
     background: var(--vermilion-extra-light);
 }
 
-@media (max-width: 768px) {
-    
-}
+@media (max-width: 768px) {}

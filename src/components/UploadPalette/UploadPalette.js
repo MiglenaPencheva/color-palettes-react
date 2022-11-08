@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { useAuthContext } from '../../contexts/AuthContext';
 import * as colorPaletteService from '../../services/colorPaletteService';
@@ -46,14 +46,14 @@ const UploadPalette = () => {
 
         try {
             const formData = new FormData(e.currentTarget);
-            
+
             let colors = getColorGroup(formData);
             formData.append('colors', colors);
 
             for (const key of formData.keys()) {
                 console.log(key, formData.get(key));
             }
-            
+
             // let data = validate(title, category, colorGroup, imageFile);
 
             await colorPaletteService.create(formData, user.accessToken);
@@ -97,7 +97,11 @@ const UploadPalette = () => {
                     <UploadTitle />
                     <UploadCategory />
                     <UploadColors />
-                    <UploadSubmitButton />
+
+                    <section className="upload__buttons">
+                        <Link to={'/gallery'} className="details__info--back"></Link>
+                        <UploadSubmitButton />
+                    </section>
 
                 </fieldset>
             </form>
