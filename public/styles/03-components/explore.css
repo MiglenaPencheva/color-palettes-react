@@ -21,10 +21,6 @@
     background-color: var(--vermilion-white);
     border-radius: 4px;
 }
-.explore__navbar--info {
-    justify-self:start;
-    font-size: 0.9rem;
-}
 .explore__navbar a {
     padding: 0.5rem;
     cursor: pointer;

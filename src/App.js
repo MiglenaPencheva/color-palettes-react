@@ -16,13 +16,15 @@ import Details from './components/Details/Details';
 import SavePalette from './components/UploadPalette/SavePalette';
 import UploadPalette from './components/UploadPalette/UploadPalette';
 import Edit from './components/Edit/Edit';
-
 import Categories from './components/GalleryPage/Categories';
 import ColorGroups from './components/GalleryPage/ColorGroups';
 
 import ColorPickerPage from './components/ColorPickerPage/ColorPickerPage';
+
 import CombinationsPage from './components/CombinationsPage/CombinationsPage';
-import SchemesDetails from './components/CombinationsPage/SchemesDetails';
+import RybWheel from './components/CombinationsPage/RybWheel';
+import Wheels from './components/CombinationsPage/Wheels';
+import Schemes from './components/CombinationsPage/Schemes';
 
 import ExploreColorPage from './components/ExploreColorPage/ExploreColorPage';
 import Convertor from './components/ExploreColorPage/Convertor';
@@ -64,8 +66,10 @@ function App() {
                         <Route path="/color-picker" element={<ColorPickerPage />} />
                         <Route path="/save" element={<SavePalette />} />
 
-                        <Route path="/color-wheel" element={<CombinationsPage />} >
-                            <Route path="schemes" element={<SchemesDetails />} />
+                        <Route path="/combinations" element={<CombinationsPage />} >
+                            <Route path="color-wheel" element={<RybWheel />} />
+                            <Route path="wheels" element={<Wheels />} />
+                            <Route path="schemes" element={<Schemes />} />
                         </Route>
 
                         <Route path="/color-explore" element={<ExploreColorPage />} >

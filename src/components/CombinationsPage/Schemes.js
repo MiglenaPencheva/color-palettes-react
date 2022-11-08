@@ -1,17 +1,9 @@
-const SchemesDetails = () => {
+const Schemes = () => {
 
     return (
         <section id="schemeDetailsSection" className="ryb__details">
-            <h6>Color schemes details</h6>
-            <article><b><i>Color wheel</i></b> is an abstract illustration of color hues around a circle, which shows the relationship between colors. Most of the color wheels are based on three primary colors, three secondary colors and six tertiary colors, made by mixing a primary with a secondary one. </article>
-            <article > According to the additive color mixing the <b><i>RGB color wheel</i></b> uses red, green and blue as primary colors, and yellow, cyan and magenta as secondary. In the absence of light of any color, the result is black, mixing all three primaries will result in white. RGB system is used in digital and electronic systems. </article>
-            <article> Subtractive mixing is the mixing of colored physical substances (such as paint or pigments). The absence of color is white and the presence of all three primary colors red, yellow and blue makes a neutral dark gray or black. The <b><i>RYB color wheel</i></b> is based on the traditional color theory and is used by countless artists and designers. RYB is the best color wheel for finding the colors that fit well together. </article>
-            <article> The <b><i>CMY color wheel</i></b> (Cyan, Magenta, Yellow) represents the colors used for printing with inks or painting on paper.</article>
-            <div className="ryb__details--wheels">
-                <img src="/images/rgb.png" alt="rgb wheel" className="ryb__details--wheel-img" />
-                <img src="/images/ryb_.png" alt="ryb wheel" className="ryb__details--wheel-img" />
-                <img src="/images/cmy.png" alt="cmy wheel" className="ryb__details--wheel-img" />
-            </div>
+            <h5 className="explore__info">Color schemes details</h5>
+
             <article className="ryb__details--text-only"><b><i>Color scheme </i></b> is used to create style and appeal. Colors and color combinations cause <a href="/color-explore"><i>psychological effect</i></a>, evoke certain feelings and emotions. They are widely used in various artistic, styling and design contexts, marketing and branding. Basic combinations join two colors that look appealing together. More advanced schemes combine several related colors for adding contrast and accents. Color schemes are logical combinations of colors on the color wheel. Different choices of a color harmony gives a variety in terms of contrast, dynamics, elegance and influence.</article>
             <div className="ryb__details--container">
                 <img src="/images/schemes/mono.jpg" alt="monochromatic" className="ryb__details--img" />
@@ -53,4 +45,4 @@ const SchemesDetails = () => {
     );
 };
 
-export default SchemesDetails;
+export default Schemes;

@@ -1,4 +1,4 @@
-.ryb-page {
+.combinations-page {
     margin: 0 auto;
     padding: 0.5rem;
     display: flex;
@@ -7,6 +7,34 @@
     justify-content: space-around;
     max-width: 1000px;
 }
+.combinations__navbar {
+    width: 100%;
+    padding: 0.3rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--vermilion-white);
+    border-radius: 4px;
+}
+.combinations__navbar a {
+    padding: 0.5rem;
+    cursor: pointer;
+    border: none;
+}
+.combinations__navbar a:hover {
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+.ryb__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around;
+}
+
 .ryb__info {
     display: flex;
     flex-direction: column;
@@ -76,13 +104,11 @@
     align-items: center;
     gap: 0.5rem;
 }
-
 #schemeCanvas {
     position: absolute;
     top: 105px;
     z-index: 1000;
 }
-
 .ryb__scheme-p {
     margin: 0;
     padding-bottom: 0.5rem;
@@ -130,24 +156,20 @@
 
 /* ---- scheme advantages ---- */
 .ryb__advantages {
+    margin-top: 1rem;
     padding: 0.5rem;
     border-top: 1px solid var(--teal-grey);
 }
 .ryb__advantages h6 {
     font-size: 1rem;
 }
-#reedMore {
-    padding: 1rem 0;
-    font-style: italic;
-    font-weight: 600;
-    cursor: pointer;
-    border-top: 1px solid var(--teal-grey);
-}
 
+
+
+/* ---- wheels and schemes ---- */
 .ryb__details {
     display: flex;
     padding: 0.5rem;
-    border-top: 1px solid var(--teal-grey);
     flex-direction: column;
     gap: 1rem;
 }
@@ -214,6 +236,10 @@
     }
 }
 @media screen and (max-width: 480px) {
+    .combinations__navbar {
+        flex-direction: column;
+        gap: 0;
+    }
     .ryb__info p {
         padding: 0.5rem;
         font-size: 0.9rem;

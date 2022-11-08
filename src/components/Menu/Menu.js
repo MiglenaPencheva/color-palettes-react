@@ -31,9 +31,10 @@ const Menu = () => {
                 <Link className="menu__sub" to="/gallery/mine">My palettes</Link>
                 <Link className="menu__main" to="/color-picker">Palette-maker</Link>
                 <Link className="menu__sub" to="/color-picker">Color picker</Link>
-                <Link className="menu__main" to="/color-wheel">Combinations</Link>
-                <Link className="menu__sub" to="/color-wheel">Color wheel</Link>
-                <Link className="menu__sub" to="/color-wheel/schemes" >Color schemes</Link>
+                <Link className="menu__main" to="/combinations">Combinations</Link>
+                <Link className="menu__sub" to="/combinations/color-wheel">Color wheel</Link>
+                <Link className="menu__sub" to="/combinations/wheels" >Color wheels</Link>
+                <Link className="menu__sub" to="/combinations/schemes" >Color schemes</Link>
                 <Link className="menu__main" to="/color-explore">Explore color</Link>
                 <Link className="menu__sub" to="/color-explore/convertor">Convertor</Link>
                 <Link className="menu__sub" to="/color-explore/rgb-mixer">RGB mixer</Link>
