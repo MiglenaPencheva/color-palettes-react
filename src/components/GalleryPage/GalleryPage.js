@@ -33,23 +33,11 @@ const Gallery = () => {
                 <h6 className="diffHeading"> Enjoy the variety of color combinations. </h6>
             </section>
 
-            <section className="gallery__search-panel">
-                <div className="gallery__search">
-                    <input className="gallery__search--input" type="text" name="" placeholder="search..." />
-                    <button className="gallery__search--button" href="#">
-                        <span className="gallery__search--circle"></span>
-                        <span className="gallery__search--rectangle"></span>
-                    </button>
-                </div>
-            </section>
-
             <section className="gallery__filters">
-                <nav className="gallery__filters-left">
+                <nav>
                     <NavLink to="all" className={({ isActive }) => isActive ? 'active' : ''}>All images</NavLink>
                     <NavLink to="categories" className={({ isActive }) => isActive ? 'active' : ''}>Categories</NavLink>
                     <NavLink to="groups" className={({ isActive }) => isActive ? 'active' : ''}>Color groups</NavLink>
-                    {/* </nav>
-                <nav className="gallery__filters-user" > */}
                     <NavLink to="favorites" className={({ isActive }) => isActive ? 'active' : ''}>My favorites</NavLink>
                     <NavLink to="mine" className={({ isActive }) => isActive ? 'active' : ''}>My palettes</NavLink>
                     <NavLink to="upload" className={({ isActive }) => isActive ? 'active' : ''}>Upload</NavLink>
@@ -62,6 +50,18 @@ const Gallery = () => {
                     </select>
                 </section>
             </section>
+
+            <section className="gallery__search-panel">
+                <div className="gallery__search">
+                    <input className="gallery__search--input" type="text" name="" placeholder="search..." />
+                    <button className="gallery__search--button" href="#">
+                        <span className="gallery__search--circle"></span>
+                        <span className="gallery__search--rectangle"></span>
+                    </button>
+                </div>
+            </section>
+
+
 
             <Routes>
                 <Route path="" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />

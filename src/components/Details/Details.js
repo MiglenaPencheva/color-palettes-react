@@ -25,17 +25,6 @@ const Details = () => {
             });
     }, [colorPaletteId]);
 
-    const onCategoryClick = async (e) => {
-        try {
-            let res = await colorPaletteService.getAll();
-            let filtered = await res.filter(x => x.category === e.target.textContent);
-            hideError();
-            navigate('/gallery/category', { colorPalettes: filtered });
-        } catch (error) {
-            showError(error.message);
-        }
-    };
-
     const deleteHandler = (e) => {
         e.preventDefault();
 

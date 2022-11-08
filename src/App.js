@@ -23,9 +23,13 @@ import ColorGroups from './components/GalleryPage/ColorGroups';
 import ColorPickerPage from './components/ColorPickerPage/ColorPickerPage';
 import CombinationsPage from './components/CombinationsPage/CombinationsPage';
 import SchemesDetails from './components/CombinationsPage/SchemesDetails';
+
 import ExploreColorPage from './components/ExploreColorPage/ExploreColorPage';
+import Convertor from './components/ExploreColorPage/Convertor';
 import RgbMixer from './components/ExploreColorPage/RgbMixer';
 import HslMixer from './components/ExploreColorPage/HslMixer';
+import Neutrals from './components/ExploreColorPage/Neutrals';
+import Temperature from './components/ExploreColorPage/Temperature';
 
 function App() {
 
@@ -65,8 +69,11 @@ function App() {
                         </Route>
 
                         <Route path="/color-explore" element={<ExploreColorPage />} >
+                            <Route path="convertor" element={<Convertor />} />
                             <Route path="rgb-mixer" element={<RgbMixer />} />
                             <Route path="hsl-mixer" element={<HslMixer />} />
+                            <Route path="neutrals" element={<Neutrals />} />
+                            <Route path="temperature" element={<Temperature />} />
                         </Route>
                     </Routes>
                 </main>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const HslMixer = ({ h, s, l }) => {
+const HslMixer = () => {
     const [hue, setHue] = useState(197);
     const [saturation, setSaturation] = useState(50);
     const [lightness, setLightness] = useState(72);
@@ -9,12 +9,6 @@ const HslMixer = ({ h, s, l }) => {
         let hslMix = document.getElementById('hslMix');
         hslMix.style['background-color'] = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
     }, [hue, saturation, lightness]);
-
-    useEffect(() => {
-        setHue(h);
-        setSaturation(s);
-        setLightness(l);
-    }, [h, s, l]);
 
     return (
         <section className="explore__rgb-mixer">

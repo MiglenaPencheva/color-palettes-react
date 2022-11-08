@@ -1,15 +1,9 @@
 import { useState, useEffect } from 'react';
 
-const RgbMixer = ({ r, g, b }) => {
+const RgbMixer = () => {
     const [red, setRed] = useState(148);
     const [green, setGreen] = useState(199);
     const [blue, setBlue] = useState(219);
-
-    useEffect(() => {
-        setRed(r);
-        setGreen(g);
-        setBlue(b);
-    }, [r, g, b]);
 
     useEffect((e) => {
         let rgbMix = document.getElementById('rgbMix');
@@ -17,11 +11,14 @@ const RgbMixer = ({ r, g, b }) => {
     }, [red, green, blue]);
 
     return (
-        <section className="explore__rgb-mixer">
+        <section className="explore__rgb-mixer" id="rgbMixer">
+
             <h5 className="explore__info">RGB mixer</h5>
-            <p className="explore__rgb-mixer--info">The RGB color model is an additive color model in which the red, green, and blue are the primary colors of light. 
-                When added together in different amounts, they reproduce a wide range of colors.
-                The main purpose of the RGB color model is for representation and display of images in digital and electronic systems.</p>
+            
+            <p className="explore__rgb-mixer--info">
+                The RGB color model is an additive color model in which the red, green, and blue are the primary colors of light.
+            </p>
+            
             <section className="explore__red-blue-green">
                 <span id="red">red: {red}
                     <label htmlFor="redRange" className="slider-label">
@@ -45,7 +42,14 @@ const RgbMixer = ({ r, g, b }) => {
                     </label>
                 </span>
             </section>
+
             <span id="rgbMix">{`rgb(${red}, ${green}, ${blue})`}</span>
+
+            <p className="explore__rgb-mixer--info">
+                When added together in different amounts, they reproduce a wide range of colors.
+                The main purpose of the RGB color model is for representation and display of images in digital and electronic systems.
+            </p>
+
         </section>
     );
 };

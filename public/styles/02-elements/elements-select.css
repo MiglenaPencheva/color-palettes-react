@@ -10,7 +10,7 @@
 }
 
 select {
-    padding: 0.4rem;
+    padding: 0.5rem;
     color: inherit;
     background-color: white;
     border: 1px solid var(--teal-grey);
@@ -37,6 +37,6 @@ select:hover {
     .select-container {
         margin-top: 0.5rem;
         padding-top: 0.5rem;
-        border-top: 1px solid var(--teal-grey);
+        /* border-top: 1px solid var(--teal-grey); */
     }
 }
