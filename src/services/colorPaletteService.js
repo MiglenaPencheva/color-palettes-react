@@ -10,35 +10,35 @@ export const getAll = async () => {
     }
 };
 
-export const getMine = async (token) => {
-    try {
-        // let query = encodeURIComponent(`creator="${userId}"`);
-        // let response = await fetch(`${baseUrl}/color-palettes?where=${query}`);
-        let response = await fetch(`${baseUrl}/color-palettes/my`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'x-authorization': token
-            }
-        });
-        return await response.json();
-    } catch (error) {
-        return { msg: error };
-    }
-};
+// export const getMine = async (token) => {
+//     try {
+//         // let query = encodeURIComponent(`creator="${userId}"`);
+//         // let response = await fetch(`${baseUrl}/color-palettes?where=${query}`);
+//         let response = await fetch(`${baseUrl}/color-palettes/my`, {
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'x-authorization': token
+//             }
+//         });
+//         return await response.json();
+//     } catch (error) {
+//         return { msg: error };
+//     }
+// };
 
-export const getFavorites = async (token) => {
-    try {
-        let response = await fetch(`${baseUrl}/color-palettes/favorites`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'x-authorization': token
-            }
-        });
-        return await response.json();
-    } catch (error) {
-        return { msg: error };
-    }
-};
+// export const getFavorites = async (token) => {
+//     try {
+//         let response = await fetch(`${baseUrl}/color-palettes/favorites`, {
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'x-authorization': token
+//             }
+//         });
+//         return await response.json();
+//     } catch (error) {
+//         return { msg: error };
+//     }
+// };
 
 export const create = async (data, token) => {
     for (const key of data.keys()) {
@@ -50,6 +50,25 @@ export const create = async (data, token) => {
             'x-authorization': token
         },
         body: data
+    });
+
+    let result = await response.json();
+
+    if (response.ok) {
+        return result;
+    } else {
+        throw result;
+    }
+};
+
+export const save = async (data, token) => {
+    let response = await fetch(`${baseUrl}/color-palettes`, {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            'x-authorization': token
+        },
+        body: JSON.stringify(data)
     });
 
     let result = await response.json();

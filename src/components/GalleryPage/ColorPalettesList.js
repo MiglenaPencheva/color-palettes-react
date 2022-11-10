@@ -1,5 +1,4 @@
 import ColorPaletteCard from './ColorPaletteCard';
-import Pagination from './Pagination';
 
 const ColorPaletteList = ({
     colorPalettes,
@@ -11,7 +10,6 @@ const ColorPaletteList = ({
             <section className="gallery__info" >
                 <span>Gallery {'>'} {title}</span>
                 {colorPalettes.length > 0 && <span>{colorPalettes.length} color palettes</span>}
-                {/* {colorPalettes.length > 0 && <Pagination />} */}
             </section>
 
             {colorPalettes.length > 0
@@ -23,7 +21,6 @@ const ColorPaletteList = ({
                     </ul>
                 )
                 : <p className="no-palettes"><b> No color palettes to show!</b>
-                    {/* <br /> Or no connection to database.  */}
                 </p>
             }
         </section>

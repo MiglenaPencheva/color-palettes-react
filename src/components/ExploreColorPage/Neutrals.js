@@ -5,7 +5,7 @@ const Neutrals = () => {
         <section className="explore__neutrals">
             <h5 className="explore__info">Neutral colors</h5>
         
-            <article>To do...</article>
+            <p>To do...</p>
             <article>Neutral colors are muted hues that seem to be without color.
                 Can be created by mixing two complementary colors
                 or combining a pure color with white, black, or gray.

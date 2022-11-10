@@ -109,7 +109,7 @@ const RybWheel = () => {
         setInfo(text);
         setReedMore(false);
 
-        document.getElementById('rybSchemeSection').scrollIntoView({
+        document.getElementById('rybContainer').scrollIntoView({
             behavior: 'smooth',
             block: 'start',
             inline: 'nearest'
@@ -180,7 +180,7 @@ const RybWheel = () => {
 
 
             <section className="ryb__container">                  
-                <section className="ryb__wheel">
+                <section className="ryb__wheel" id="rybContainer">
                     <h6>RYB color wheel</h6>
                     <img id="primaryImage" src="/images/primary.png" alt="primary" />
                     <img id="secondaryImage" src="/images/secondary.png" alt="secondary" />
