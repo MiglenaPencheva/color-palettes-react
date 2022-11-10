@@ -1,39 +1,32 @@
 .picker-section {
     margin: 0 auto;
+    max-width: 1000px;
 }
 
-.picker__file-input {
-    margin: 1rem auto;
-    display: flex;
-    justify-content: center;
-}
-.picker__file-input:hover {
-    cursor: pointer;
-}
-input[type="file"] {
-    display: none;
-}
 
 #image {
     display: none;
 }
 
-#pickerContainer {
+.picker__container {
     margin: 0 auto;
+    max-width: 1000px;
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    width: 90vw;
+    gap: 0.5rem;
 }
 
-#canvasSection {
-    max-width: 830px;
+.picker__canvas-section {
+    margin: 1rem 0 0.5rem 0;
+    max-width: 780px;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     gap: 3px;
 }
-
-#myCanvas {
+.picker__image-canvas {
+    max-width: 780px;
     border-radius: 10px;
     border: 1px solid var(--teal-black);
 }
@@ -41,11 +34,11 @@ input[type="file"] {
     object-fit: cover;
 }
 
-#colors {
+.picker__colors {
     margin: 0;
     padding: 0;
     display: flex;
-    max-width: 830px;
+    max-width: 780px;
     gap: 3px;
 }
 .draggable {
@@ -109,34 +102,72 @@ input[type="file"] {
     font-size: 1rem;
 }
 
-.aside {
-    padding: 5px 10px;
-    min-width: 250px;
+
+/*    ---- aside ----    */
+.picker-aside {
+    /* margin: 1rem; */
+    width: 180px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    gap: 0.2rem;
+    gap: 1.5rem;
 }
-.instructions {
-    width: 90%;
-    max-width: 200px;
-    margin: 0 auto;
+
+.picker__file-input label {
+    width: 150px;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+.picker__file-input:hover {
+    cursor: pointer;
+}
+input[type="file"] {
+    display: none;
+}
+
+hr {
+    width: 100%;
+    line-height: 1px;
+    color: var(--teal-grey);
+}
+
+.picker__instructions {
+    width: 100%;
+    padding-top: 1rem;
     font-style: italic;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--teal-grey);
 }
-.preview-box {
-    margin: 0 auto;
+.picker__preview-box {
+    /* margin: 0 auto; */
     padding: 2px;
     width: 150px;
     height: 150px;
     border-radius: 10px;
     font-size: 0.5rem;
 }
-.buttons {
+.picker__buttons {
     margin: 0;
+    padding-top: 1rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
-    font:inherit;
+    align-items: center;
+    gap: 0.5rem;
+    border-top: 1px solid var(--teal-grey);
+}
+.picker__buttons button {
+    padding: 0.5rem;
+    width: 150px;
+}
+
+
+@media (max-width: 830px) {
+    .picker__container {
+        flex-direction: column;
+        align-items: center;
+    }
 }

@@ -1,13 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import html2canvas from 'html2canvas';
 import { exportResult } from '../../helpers/exportResult';
 import { getPixel } from '../../helpers/getPixel';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
-// import { useAuthContext } from '../../contexts/AuthContext';
-import * as pickerService from '../../services/pickerService';
-import { hideError, showError } from '../../helpers/notifications';
 import { getRgbFromString, rgbToHex } from '../ExploreColorPage/exploreHelpers';
 
 const initialHexState = {
@@ -16,19 +11,16 @@ const initialHexState = {
 };
 
 const ColorPickerPage = (e) => {
-    const navigate = useNavigate();
-    // const { user } = useAuthContext();
     const [src, setSrc] = useState('');
     const [data, setData] = useState([]);
-    const [pickedColor, setPickedColor] = useState('#608d9e');
+    const [pickedColor, setPickedColor] = useState('#ffefe6');
     const [hex, setHex] = useState('#608d9e');
     const [direction, setDirection] = useState('horizontal');
     const [hexToExplore, setHexToExplore] = useLocalStorage('hex', initialHexState);
 
     const onFileUpload = (e) => {
-        // alert -> Do you want to save your work?
-        //          New upload will delete any changes.
-        // save color palette / upload new file  
+        // alert -> New uploading will delete your current work.
+        // cancel / upload new file  
 
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);  // set src to blob url
@@ -36,27 +28,30 @@ const ColorPickerPage = (e) => {
 
         const img = document.getElementById('image');
         img.onload = (e) => {
+            const canvasSection = document.getElementById('canvasSection');
             const canvas = document.getElementById('myCanvas');
             const colors = document.getElementById('colors');
 
             canvas.style.border = 'none';
             canvas.style['border-radius'] = 0;
+
             let ratio = img.naturalWidth / img.naturalHeight;
 
             if (ratio > 1) {
                 setDirection('horizontal');
-                canvas.width = 830;
-                canvas.height = 830 / ratio;
-                colors.width = 830;
-                colors.height = 130;
+                canvas.height = window.innerHeight - 130;
+                canvas.width = canvas.height * ratio;
+                canvasSection.style['flex-direction'] = 'column';
                 colors.style['flex-direction'] = 'row';
-                colors.style['flex-grow'] = 1;
             } else {
                 setDirection('vertical');
-                canvas.width = 650 * ratio;
-                canvas.height = 650;
-                colors.width = 130;
-                colors.height = 650;
+                canvas.height = window.innerHeight;
+                canvas.width = canvas.height * ratio;
+                if ((canvas.width + 130) > 800) {
+                    canvas.width = 780 - 130;
+                    canvas.height = canvas.width / ratio;
+                }
+                canvasSection.style['flex-direction'] = 'row';
                 colors.style['flex-direction'] = 'column';
             }
 
@@ -100,9 +95,9 @@ const ColorPickerPage = (e) => {
         info.className = 'info';
         info.textContent = `#${hex}`;
         let valuesToExplore = { hex, rgb: pickedColor };
-        info.addEventListener('click', () => { 
+        info.addEventListener('click', () => {
             setHexToExplore(valuesToExplore);
-            window.open('/color-explore', '_blank'); 
+            window.open('/color-explore', '_blank');
         });
 
         // drag and drop
@@ -135,34 +130,34 @@ const ColorPickerPage = (e) => {
         }
     };
 
-    const savePalette = async () => {
-        document.getElementById('canvasImage').style.display = 'none';
+    // const savePalette = async () => {
+    //     document.getElementById('canvasImage').style.display = 'none';
 
-        const el = document.getElementById('canvasSection');
-        const canvas = await html2canvas(el);
-        const png = canvas.toDataURL('image/png', 1.0);
-        // console.log(png); // data:image/png;base64,iVBORw0KGgoAAA.....
+    //     const el = document.getElementById('canvasSection');
+    //     const canvas = await html2canvas(el);
+    //     const png = canvas.toDataURL('image/png', 1.0);
+    //     // console.log(png); // data:image/png;base64,iVBORw0KGgoAAA.....
 
-        navigate('/save', { replace: true, state: { png } });
+    //     navigate('/save', { replace: true, state: { png } });
 
-        // let image = new Image();
-        // image.src = src;
-        // const imageFileName = 'creation_' + (Math.random() * 9999 | 0);
-        // image.download = imageFileName;
-        // const fakeLink = document.createElement('a');
-        // document.body.appendChild(fakeLink);
+    //     // let image = new Image();
+    //     // image.src = src;
+    //     // const imageFileName = 'creation_' + (Math.random() * 9999 | 0);
+    //     // image.download = imageFileName;
+    //     // const fakeLink = document.createElement('a');
+    //     // document.body.appendChild(fakeLink);
 
-        // fetch(png)
-        //     .then(res => res.blob())
-        //     .then(blob => {
-        //         let src = URL.createObjectURL(blob);
-        //         console.log(src);
-        //         navigate('/save', {
-        //             replace: true,
-        //             state: { src }
-        //         });
-        //     });
-    };
+    //     // fetch(png)
+    //     //     .then(res => res.blob())
+    //     //     .then(blob => {
+    //     //         let src = URL.createObjectURL(blob);
+    //     //         console.log(src);
+    //     //         navigate('/save', {
+    //     //             replace: true,
+    //     //             state: { src }
+    //     //         });
+    //     //     });
+    // };
 
     const exportPalette = async () => {
         document.getElementById('canvasImage').style.display = 'none';
@@ -186,48 +181,49 @@ const ColorPickerPage = (e) => {
                 </h6>
             </section>
 
-            <section className="picker__file-input">
-                <label className="button ">
-                    <input
-                        type="file"
-                        onChange={onFileUpload}
-                        accept="image/jpeg, image/png, image/jpg"
-                    />
-                    Upload file
-                </label>
-                <img id="image" src={src} alt="" />
-            </section>
+            <section id="pickerContainer" className="picker__container">
 
-
-            <section id="pickerContainer">
-
-                <section className="canvas-section" id="canvasSection">
-                    <canvas className="image-canvas" id="myCanvas"
+                <section className="picker__canvas-section" id="canvasSection">
+                    <canvas className="picker__image-canvas" id="myCanvas"
                         onMouseMove={definePixel}
                         onClick={addColorBox}>
                         <img id="canvasImage" src={src} alt="" />
                     </canvas>
 
-                    <ul className="colors" id="colors"
+                    <ul className="picker__colors" id="colors"
                         onDrop={dropHandler}
                         onDragOver={(e) => e.preventDefault()}>
                     </ul>
                 </section>
 
-                <aside className="aside">
-                    <span className="instructions">
+                <aside className="picker-aside">
+                    <section className="picker__file-input">
+                        <label className="button ">
+                            <input
+                                type="file"
+                                onChange={onFileUpload}
+                                accept="image/jpeg, image/png, image/jpg"
+                            />
+                            Upload file
+                        </label>
+                        <img id="image" src={src} alt="" />
+                    </section>
+
+                    <span className="picker__instructions">
                         Move the mouse
                         <br /> over the image.
                         <br /> Click to pick sample.
                     </span>
-                    <span className="preview-box"
+
+                    <span className="picker__preview-box"
                         id="pixelColor"
                         style={{ backgroundColor: `${pickedColor}` }}>
                     </span>
-                    <section className="buttons">
+
+                    <section className="picker__buttons">
                         <button className="button" onClick={exportPalette}>Export palette</button>
                         <button className="button" onClick={exportScheme}>Export scheme</button>
-                        <button className="button" onClick={savePalette}>Save to gallery</button>
+                        {/* <button className="button" onClick={savePalette}>Save to gallery</button> */}
                     </section>
                 </aside>
 
