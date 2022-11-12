@@ -255,6 +255,50 @@
 }
 
 
+/* ----- color names ----- */
+/* .explore__color-names article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} */
+.explore__color-names article {
+    margin-top: 1rem;
+    padding: 0.5rem;
+}
+.explore__names {
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around;
+}
+#colorArticle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+#colorArticle:hover {
+    font-weight: 600;
+}
+#colorArticle div {
+    padding: 0.7rem;
+    width: 200px;
+    height: 60px;
+    text-align: center;
+    border-radius: 12px 12px 0 0;
+}
+#colorArticle span {
+    width: 200px;
+    height: 120px;
+    border-radius: 0 0 12px 12px;
+}
+
+
+
+
 /* ----- hueResult ----- */
 /* .explore__chart {
     display: flex;

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import * as helpers from '../ExploreColorPage/exploreHelpers';
 import { getPixel } from '../../helpers/getPixel';
@@ -258,7 +259,7 @@ const Convertor = () => {
             <section className="explore__values">
                 <h5 className="explore__info">Color values</h5>
                 <li>{name ? name : 'no name'}</li>
-                <span>Browsers support 140 color names.</span>
+                <span>Browsers support 140 <Link target="_blank" to="/color-explore/color-names"><i>color names.</i></Link></span>
                 <li>{rgb}</li>
                 <span>RGB value indicates how much of red, green and blue is included.
                     <br /> Each component of the triplet can vary from 0 to 255.</span>
