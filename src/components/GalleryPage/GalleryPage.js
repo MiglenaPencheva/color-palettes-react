@@ -13,6 +13,7 @@ const Gallery = () => {
     const { user } = useAuthContext();
 
     const [colorPalettes, setColorPalettes] = useState([]);
+    const [sort, setSort] = useState('fresh');
 
     useEffect(() => {
         colorPaletteService.getAll()
@@ -20,6 +21,22 @@ const Gallery = () => {
                 setColorPalettes(result);
             });
     }, []);
+
+    useEffect(() => {
+        if (sort === 'liked') {
+            colorPaletteService.getAll()
+            .then(result => {
+                result.sort((a, b) => b.likedBy.length - a.likedBy.length);
+                setColorPalettes(result);
+            });
+        } else if (sort === 'fresh') {
+            colorPaletteService.getAll()
+            .then(result => {
+                result.sort((a, b) => b.created_at - a.created_at);
+                setColorPalettes(result);
+            });
+        }
+    }, [sort]);
 
     return (
 
@@ -44,7 +61,7 @@ const Gallery = () => {
                 </nav>
                 <section className="gallery__sort">
                     <label htmlFor="type">Sort by</label>
-                    <select id="type" name="sort" className="">
+                    <select id="type" name="sort" onChange={(e) => setSort(e.target.value)}>
                         <option value="fresh">Fresh content</option>
                         <option value="liked">Most liked</option>
                     </select>
@@ -60,8 +77,6 @@ const Gallery = () => {
                     </button>
                 </div>
             </section>
-
-
 
             <Routes>
                 <Route path="" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
