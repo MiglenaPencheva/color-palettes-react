@@ -29,6 +29,7 @@
     width: 35vw;
     justify-content: center;
 }
+
 .details__info--back {
     margin: 1rem;
     align-self: center;
@@ -42,6 +43,7 @@
     cursor: pointer;
     animation: rotationArrow 1s;
 }
+
 .details__info--back:hover {
     opacity: 1;
     animation: rotate;
@@ -83,8 +85,9 @@
     align-items: center;
     /* gap: 0.3rem; */
 }
-.heart {
-    /* background-color: var(--vermilion-light); */
+
+/* .heart {
+    background-color: var(--vermilion-extra-light);
     background-color: rgb(254, 97, 81);
     display: inline-block;
     height: 12px;
@@ -97,7 +100,7 @@
 .heart:before,
 .heart:after {
     content: "";
-    /* background-color: var(--vermilion-light); */
+    background-color: var(--vermilion-extra-light);
     background-color: rgb(254, 97, 81);
     border-radius: 50%;
     height: 12px;
@@ -111,9 +114,40 @@
 .heart:after {
     left: 7px;
     top: 0;
+} */
+
+/*    ---- star ----    */
+.star {
+    position: relative;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .9em;
+    margin-right: .9em;
+    margin-bottom: 1.2em;
+    border-right: .3em solid transparent;
+    border-bottom: .7em solid var(--vermilion-extra-light);
+    border-left: .3em solid transparent;
+    /* Controlls the size of the stars. */
+    font-size: 0.6rem;
 }
-
-
+.star:before,
+.star:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: .6em;
+    left: -1em;
+    border-right: 1em solid transparent;
+    border-bottom: .7em solid var(--vermilion-extra-light);
+    border-left: 1em solid transparent;
+    transform: rotate(-35deg);
+}
+.star:after {
+    transform: rotate(35deg);
+}
 
 
 
@@ -146,13 +180,20 @@
         font-size: 1.1rem;
     }
 
-    .details__info--buttons {
-        padding: 0;
+    .details__info--like {
+        margin-top: 0;
+        justify-content: center;
     }
 
-    .details__info--buttons-delete {
-        margin: 1rem 0 0 0;
+    .details__info--buttons {
+        padding: 1rem;
     }
+    .details__info--buttons-delete {
+        margin: 0;
+    }
+    /* .details__info--buttons p {
+        margin: 0;
+    } */
 }
 
 @media (max-width: 480px) {

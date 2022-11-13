@@ -110,7 +110,7 @@ const Details = () => {
                             ? (user._id === colorPalette._ownerId
                                 ? ownerButtons
                                 : (alreadyLiked
-                                    ? <p><i>You like this palette</i></p>
+                                    ? <p><i>You liked this palette</i></p>
                                     : <button className="button details__info--buttons-edit" onClick={onLikeClick}>Like</button>
                                 )
                             )
@@ -119,7 +119,7 @@ const Details = () => {
 
                         <div className="details__info--like">
                             <span id="total-likes">{likes}</span>
-                            <span className="heart"></span>
+                            <span className="star"></span>
                         </div>
                     </div>
 

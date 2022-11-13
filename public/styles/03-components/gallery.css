@@ -246,6 +246,12 @@
     padding-top: 1rem;
     border-top: 1px solid var(--teal);
 }
+.color-palette-card__likes {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
 
 
 @media (max-width: 768px) {

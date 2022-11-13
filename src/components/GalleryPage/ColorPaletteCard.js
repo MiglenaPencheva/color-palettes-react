@@ -16,6 +16,10 @@ const ColorPaletteCard = ({
 
             <p className="color-palette-card__category">Category: {colorPalette.category}</p>
 
+            <div className="color-palette-card__likes">
+                <span id="total-likes">{colorPalette.likedBy.length}</span>
+                <span className="star"></span>
+            </div>
         </li >
     );
 };
