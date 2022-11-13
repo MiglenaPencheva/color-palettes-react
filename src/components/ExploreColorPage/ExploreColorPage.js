@@ -26,7 +26,7 @@ const ExploreColor = () => {
                 <NavLink to="hsl-mixer" className={({ isActive }) => isActive ? 'active' : ''}>HSL mixer</NavLink>
                 <NavLink to="color-names" className={({ isActive }) => isActive ? 'active' : ''}>Color names</NavLink>
                 <NavLink to="neutrals" className={({ isActive }) => isActive ? 'active' : ''}>Neutrals</NavLink>
-                <NavLink to="temperature" className={({ isActive }) => isActive ? 'active' : ''}>Temperature</NavLink>
+                {/* <NavLink to="temperature" className={({ isActive }) => isActive ? 'active' : ''}>Temperature</NavLink> */}
             </nav>
 
             <Routes>
@@ -36,7 +36,7 @@ const ExploreColor = () => {
                 <Route path="hsl-mixer" element={<HslMixer  />} />
                 <Route path="color-names" element={<ColorNames  />} />
                 <Route path="neutrals" element={<Neutrals />} />
-                <Route path="temperature" element={<Temperature />} />
+                {/* <Route path="temperature" element={<Temperature />} /> */}
             </Routes>
 
         </section>

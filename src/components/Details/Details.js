@@ -91,7 +91,7 @@ const Details = () => {
 
                 <div className="details__info">
 
-                    <Link to={'/gallery'} className="details__info--back"></Link>
+                    <span onClick={() => navigate(-1)} className="details__info--back"></span>
 
                     <h5 className="details__info--title">{colorPalette.title}</h5>
 

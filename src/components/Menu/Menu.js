@@ -41,7 +41,7 @@ const Menu = () => {
                 <Link className="menu__sub" to="/color-explore/hsl-mixer">HSL mixer</Link>
                 <Link className="menu__sub" to="/color-explore/color-names">Color names</Link>
                 <Link className="menu__sub" to="/color-explore/neutrals">Neutrals</Link>
-                <Link className="menu__sub" to="/color-explore/temperature">Temperature</Link>
+                {/* <Link className="menu__sub" to="/color-explore/temperature">Temperature</Link> */}
             </div>
 
         </section>
