@@ -81,6 +81,8 @@ export const save = async (data, token) => {
 };
 
 export const update = async (colorPaletteId, data, token) => {
+    console.log(data);
+
     let response = await fetch(`${baseUrl}/color-palettes/${colorPaletteId}`, {
         method: 'PUT',
         headers: {
@@ -110,14 +112,14 @@ export const getOne = async (colorPaletteId) => {
     }
 };
 
-export const like = async (colorPaletteId, token) => {
+export const like = async (colorPaletteId, data, token) => {
     let response = await fetch(`${baseUrl}/color-palettes/${colorPaletteId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'x-authorization': token
         },
-        body: JSON.stringify()
+        body: JSON.stringify(data)
     });
     let result = await response.json();
 

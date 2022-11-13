@@ -42,13 +42,24 @@ const Details = () => {
 
     const onLikeClick = async () => {
         try {
+            console.log(colorPalette.creator);
             if (user._id === colorPalette.creator) { return; }
-            if (colorPalette.likedBy.includes(user._id)) { return; }
+            console.log(colorPalette.likedBy);
+            if (colorPalette.likedBy.includes(user._id)) {
+                console.log('Already liked');
+                showInfo('Already liked');
+                return;
+            }
 
-            await colorPaletteService.like(colorPaletteId, user.accessToken);
+            let data = {
+                title: colorPalette.title,
+                category: colorPalette.category,
+                colors: colorPalette.colors,
+            };
+            await colorPaletteService.like(colorPaletteId, data, user.accessToken);
 
             hideError();
-            navigate('/gallery');
+            navigate('/gallery/');
             showInfo('Successfully liked palette');
         } catch (error) {
             showError(error.message);
@@ -66,8 +77,7 @@ const Details = () => {
         </>
     );
 
-    const userButtons = <button onClick={onLikeClick}
-        disabled={colorPalette.likedBy?.includes(user._id)}>Like</button>;
+    const alreadyLiked = colorPalette.likedBy?.includes(user._id);
 
     return (
         <>
@@ -96,14 +106,20 @@ const Details = () => {
                     </span>
 
                     <div className="details__info--buttons">
-                        {user._id &&
-                            (user._id === colorPalette._ownerId
+                        {user._id
+                            ? (user._id === colorPalette._ownerId
                                 ? ownerButtons
-                                : userButtons
-                            )}
+                                : (alreadyLiked
+                                    ? <p><i>You like this palette</i></p>
+                                    : <button className="button details__info--buttons-edit" onClick={onLikeClick}>Like</button>
+                                )
+                            )
+                            : <p><Link to='/login'><i>Sign in</i></Link> or <Link to='/register'><i>subscribe</i></Link> to like</p>
+                        }
 
                         <div className="details__info--like">
-                            <span id="total-likes">Likes: {likes}</span>
+                            <span id="total-likes">{likes}</span>
+                            <span className="heart"></span>
                         </div>
                     </div>
 

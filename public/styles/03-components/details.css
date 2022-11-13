@@ -14,6 +14,7 @@
     max-width: 65vw;
     height: 100vh;
 }
+
 .details__image--file {
     padding: 0.5rem;
     object-fit: cover;
@@ -28,13 +29,6 @@
     width: 35vw;
     justify-content: center;
 }
-
-/* .details__info--back {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-} */
 .details__info--back {
     margin: 1rem;
     align-self: center;
@@ -52,11 +46,6 @@
     opacity: 1;
     animation: rotate;
 }
-/* .details__info--back span {
-    margin-bottom: 1rem;
-    text-align: center;
-    font-size: 0.9rem;
-} */
 
 .details__info--title {
     margin: 2rem 0 0 0;
@@ -64,9 +53,11 @@
     font-size: 1.5rem;
     border-top: 1px solid var(--teal);
 }
+
 .details__info--category {
     margin: 1rem 0 0.2rem 0;
 }
+
 .details__info--colors {
     margin: 1rem 0 0 0;
 }
@@ -76,11 +67,50 @@
     padding: 1.5rem 0;
     border-top: 1px solid var(--teal);
 }
+
 .details__info--buttons-edit {
     margin: 0 1rem 1rem 0;
 }
+
 .details__info--buttons-delete {
     margin: 0;
+}
+
+/*    ---- likes ----    */
+.details__info--like {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    /* gap: 0.3rem; */
+}
+.heart {
+    /* background-color: var(--vermilion-light); */
+    background-color: rgb(254, 97, 81);
+    display: inline-block;
+    height: 12px;
+    margin: 0 10px;
+    position: relative;
+    top: 0;
+    transform: rotate(-45deg);
+    width: 12px;
+}
+.heart:before,
+.heart:after {
+    content: "";
+    /* background-color: var(--vermilion-light); */
+    background-color: rgb(254, 97, 81);
+    border-radius: 50%;
+    height: 12px;
+    position: absolute;
+    width: 12px;
+}
+.heart:before {
+    top: -7px;
+    left: 0;
+}
+.heart:after {
+    left: 7px;
+    top: 0;
 }
 
 
@@ -99,6 +129,7 @@
         max-width: 100%;
         height: auto;
     }
+
     .details__image--file {
         padding: 1rem 1rem 0 1rem;
         max-width: 96vw;
@@ -109,13 +140,16 @@
         width: 100%;
         text-align: center;
     }
+
     .details__info--title {
         margin: 0;
         font-size: 1.1rem;
     }
+
     .details__info--buttons {
         padding: 0;
     }
+
     .details__info--buttons-delete {
         margin: 1rem 0 0 0;
     }
@@ -125,6 +159,7 @@
     .details__image--file {
         max-width: 100vw;
     }
+
     .details__info--back {
         margin: 0.5rem;
         position: fixed;
