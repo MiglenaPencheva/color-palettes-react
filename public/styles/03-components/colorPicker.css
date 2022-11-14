@@ -3,13 +3,12 @@
     max-width: 1000px;
 }
 
-
 #image {
     display: none;
 }
 
 .picker__container {
-    margin: 0 auto;
+    margin: 1rem auto 0.5rem;
     max-width: 1000px;
     position: relative;
     display: flex;
@@ -19,20 +18,20 @@
 }
 
 .picker__canvas-section {
-    margin: 1rem 0 0.5rem 0;
     max-width: 780px;
+    /* height: 470px; */
     display: flex;
     /* flex-wrap: wrap; */
     gap: 3px;
+    
 }
 .picker__image-canvas {
-    max-width: 780px;
-    border-radius: 10px;
     border: 1px solid var(--teal-black);
+    border-radius: 10px;
 }
-#canvasImage {
+/* #canvasImage {
     object-fit: cover;
-}
+} */
 
 .picker__colors {
     margin: 0;
@@ -105,19 +104,18 @@
 
 /*    ---- aside ----    */
 .picker-aside {
-    /* margin: 1rem; */
     width: 180px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .picker__file-input label {
     width: 150px;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     display: flex;
     justify-content: center;
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { exportResult } from '../../helpers/exportResult';
 import { getPixel } from '../../helpers/getPixel';
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -11,11 +11,9 @@ const initialHexState = {
 };
 
 const ColorPickerPage = (e) => {
-    const [src, setSrc] = useState('');
     const [data, setData] = useState([]);
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     const [hex, setHex] = useState('#608d9e');
-    const [direction, setDirection] = useState('horizontal');
     const [hexToExplore, setHexToExplore] = useLocalStorage('hex', initialHexState);
 
     const onFileUpload = (e) => {
@@ -24,9 +22,10 @@ const ColorPickerPage = (e) => {
 
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);  // set src to blob url
-        setSrc(src);
 
         const img = document.getElementById('image');
+        img.src = src;
+
         img.onload = (e) => {
             const canvasSection = document.getElementById('canvasSection');
             const canvas = document.getElementById('myCanvas');
@@ -37,17 +36,20 @@ const ColorPickerPage = (e) => {
 
             let ratio = img.naturalWidth / img.naturalHeight;
 
+            // calculate dimensions of the canvas
             if (ratio > 1) {
-                setDirection('horizontal');
                 canvas.height = window.innerHeight - 130;
                 canvas.width = canvas.height * ratio;
+                if (canvas.width > 780) {
+                    canvas.width = 780;
+                    canvas.height = canvas.width / ratio;
+                }
                 canvasSection.style['flex-direction'] = 'column';
                 colors.style['flex-direction'] = 'row';
             } else {
-                setDirection('vertical');
                 canvas.height = window.innerHeight;
                 canvas.width = canvas.height * ratio;
-                if ((canvas.width + 130) > 800) {
+                if ((canvas.width + 130) > 780) {
                     canvas.width = 780 - 130;
                     canvas.height = canvas.width / ratio;
                 }
@@ -59,9 +61,9 @@ const ColorPickerPage = (e) => {
                 colors.removeChild(colors.firstChild);
             }
 
+            // get imageData of the canvas
             const ctx = canvas.getContext('2d');
-            const canvasImage = document.getElementById('canvasImage');
-            ctx.drawImage(canvasImage, 0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             setData(imageData.data);
         };
@@ -76,7 +78,7 @@ const ColorPickerPage = (e) => {
     };
 
     const addColorBox = (e) => {
-        if (e.target.childNodes[0].src === 'http://localhost:3000/color-picker') {
+        if (e.target.src === 'http://localhost:3000/color-picker') {
             return;
         }
 
@@ -160,12 +162,11 @@ const ColorPickerPage = (e) => {
     // };
 
     const exportPalette = async () => {
-        document.getElementById('canvasImage').style.display = 'none';
         const element = document.getElementById('canvasSection');
         exportResult(element);
     };
 
-    const exportScheme = async (e) => {
+    const exportScheme = async () => {
         const element = document.getElementById('colors');
         exportResult(element);
     };
@@ -187,7 +188,6 @@ const ColorPickerPage = (e) => {
                     <canvas className="picker__image-canvas" id="myCanvas"
                         onMouseMove={definePixel}
                         onClick={addColorBox}>
-                        <img id="canvasImage" src={src} alt="" />
                     </canvas>
 
                     <ul className="picker__colors" id="colors"
@@ -206,7 +206,7 @@ const ColorPickerPage = (e) => {
                             />
                             Upload file
                         </label>
-                        <img id="image" src={src} alt="" />
+                        <img id="image" alt="" />
                     </section>
 
                     <span className="picker__instructions">
