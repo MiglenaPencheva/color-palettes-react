@@ -15,6 +15,8 @@
 @import './03-components/menu.css';
 @import './03-components/header.css';
 @import './03-components/gallery.css';
+@import './03-components/search.css';
+@import './03-components/colorPalette.css';
 @import './03-components/details.css';
 @import './03-components/confirmDialog.css';
 @import './03-components/upload.css';

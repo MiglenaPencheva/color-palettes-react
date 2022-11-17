@@ -3,6 +3,7 @@ import { Routes, Route, NavLink, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 import * as colorPaletteService from '../../services/colorPaletteService';
 
+
 import ColorPaletteList from './ColorPalettesList';
 import Categories from './Categories';
 import ColorGroups from './ColorGroups';
@@ -13,7 +14,6 @@ const Gallery = () => {
     const { user } = useAuthContext();
 
     const [colorPalettes, setColorPalettes] = useState([]);
-    const [sort, setSort] = useState('fresh');
 
     useEffect(() => {
         colorPaletteService.getAll()
@@ -21,22 +21,6 @@ const Gallery = () => {
                 setColorPalettes(result);
             });
     }, []);
-
-    useEffect(() => {
-        if (sort === 'liked') {
-            colorPaletteService.getAll()
-            .then(result => {
-                result.sort((a, b) => b.likedBy.length - a.likedBy.length);
-                setColorPalettes(result);
-            });
-        } else if (sort === 'fresh') {
-            colorPaletteService.getAll()
-            .then(result => {
-                result.sort((a, b) => b.created_at - a.created_at);
-                setColorPalettes(result);
-            });
-        }
-    }, [sort]);
 
     return (
 
@@ -50,33 +34,14 @@ const Gallery = () => {
                 <h6 className="diffHeading"> Enjoy the variety of color combinations. </h6>
             </section>
 
-            <section className="gallery__filters">
-                <nav>
-                    <NavLink to="all" className={({ isActive }) => isActive ? 'active' : ''}>All images</NavLink>
-                    <NavLink to="categories" className={({ isActive }) => isActive ? 'active' : ''}>Categories</NavLink>
-                    <NavLink to="groups" className={({ isActive }) => isActive ? 'active' : ''}>Color groups</NavLink>
-                    <NavLink to="favorites" className={({ isActive }) => isActive ? 'active' : ''}>My favorites</NavLink>
-                    <NavLink to="mine" className={({ isActive }) => isActive ? 'active' : ''}>My palettes</NavLink>
-                    <NavLink to="upload" className={({ isActive }) => isActive ? 'active' : ''}>Upload</NavLink>
-                </nav>
-                <section className="gallery__sort">
-                    <label htmlFor="type">Sort by</label>
-                    <select id="type" name="sort" onChange={(e) => setSort(e.target.value)}>
-                        <option value="fresh">Fresh content</option>
-                        <option value="liked">Most liked</option>
-                    </select>
-                </section>
-            </section>
-
-            <section className="gallery__search-panel">
-                <div className="gallery__search">
-                    <input className="gallery__search--input" type="text" name="" placeholder="search..." />
-                    <button className="gallery__search--button" href="#">
-                        <span className="gallery__search--circle"></span>
-                        <span className="gallery__search--rectangle"></span>
-                    </button>
-                </div>
-            </section>
+            <nav className="gallery__nav">
+                <NavLink to="all" className={({ isActive }) => isActive ? 'active' : ''}>All images</NavLink>
+                <NavLink to="categories" className={({ isActive }) => isActive ? 'active' : ''}>Categories</NavLink>
+                <NavLink to="groups" className={({ isActive }) => isActive ? 'active' : ''}>Color groups</NavLink>
+                <NavLink to="favorites" className={({ isActive }) => isActive ? 'active' : ''}>My favorites</NavLink>
+                <NavLink to="mine" className={({ isActive }) => isActive ? 'active' : ''}>My palettes</NavLink>
+                <NavLink to="upload" className={({ isActive }) => isActive ? 'active' : ''}>Upload</NavLink>
+            </nav>
 
             <Routes>
                 <Route path="" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
