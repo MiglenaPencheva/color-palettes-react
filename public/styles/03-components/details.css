@@ -191,14 +191,14 @@
     .details__info--buttons-delete {
         margin: 0;
     }
-    /* .details__info--buttons p {
-        margin: 0;
-    } */
 }
 
 @media (max-width: 480px) {
     .details__image--file {
         max-width: 100vw;
+    }
+    .details__info--title {
+        border-top: none;
     }
 
     .details__info--back {

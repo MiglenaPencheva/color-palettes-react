@@ -34,7 +34,6 @@
 .gallery__info {
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: center; */
 }
 
 /*    ---- color palette list ----    */
