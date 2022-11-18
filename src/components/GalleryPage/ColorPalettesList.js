@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import ColorPaletteCard from './ColorPaletteCard';
 
@@ -7,52 +7,20 @@ const ColorPaletteList = ({
     title
 }) => {
 
+    const [sort, setSort] = useState(colorPalettes);
+    const [sortedPalettes, setSortedPalettes] = useState(colorPalettes);
     const [query, setQuery] = useState('');
 
-    // let likedPalettes = '';
-    // let newestPalettes = '';
+    useEffect(() => {
+        const sorted = [...colorPalettes];
+        sorted.sort((a, b) => {
+            return sort === 'liked'
+            ? b.likedBy.length - a.likedBy.length
+            : b.created_at - a.created_at;
+        });
+        setSortedPalettes(sorted);
+    }, [sort, colorPalettes]);
 
-    // const onSortChange = (e) => {
-    //     let sort = e.target.value;
-    //     if (sort === 'liked') {
-    //         const liked = colorPalettes.sort((a, b) => b.likedBy.length - a.likedBy.length);
-    //         likedPalettes = (
-    //             <ul className="color-palette-list" >
-    //                 {
-    //                     liked.map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
-    //                 }
-    //             </ul>
-    //         );
-    //     } else if (sort === 'fresh') {
-    //         newestPalettes = (
-    //             <ul className="color-palette-list" >
-    //                 {
-    //                     colorPalettes.map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
-    //                 }
-    //             </ul>
-    //         );
-    //     }
-    // };
-
-
-    // const sortHandler = (e) => {
-    //     let sort = e.target.value;
-    //     if (sort === 'liked') {
-    //         setSortedPalettes(sorted);
-    //     } else if (sort === 'fresh') {
-    //         const sorted = colorPalettes.sort((a, b) => b.created_at - a.created_at);
-    //         setSortedPalettes(sorted);
-    //     }
-    //     setSort(e.target.value);
-    // };
-
-    // const searchHandler = (e) => {
-    //     e.preventDefault();
-    //     if (search !== '') {
-    //         const filtered = colorPalettes.filter(x => x.title.toLowerCase().includes(search.toLowerCase()));
-    //         setFilteredPalettes(filtered);
-    //     }
-    // };
 
     return (
         <section>
@@ -65,7 +33,6 @@ const ColorPaletteList = ({
                             ? colorPalettes.length > 0 && <span>{colorPalettes.length} color palettes</span>
                             : <span>Search results</span>
                         }
-
                     </span>
                 </span>
 
@@ -82,25 +49,23 @@ const ColorPaletteList = ({
                     }
                 </section>
 
-                {/* <section className="gallery__sort">
+                <section className="gallery__sort">
                     <label htmlFor="type">Sort by</label>
-                    <select id="type" name="sort"
-                        onChange={onSortChange} >
-                        onChange={sortHandler}>
-                        <option value="fresh">Fresh content</option>
-                        <option value="liked">Most liked</option>
+                    <select id="type" name="sort" onChange={(e) => setSort(e.target.value)}>
+                        <option value="fresh" >Fresh content</option>
+                        <option value="liked" >Most liked</option>
                     </select>
-                </section> */}
+                </section>
 
             </section>
 
             {colorPalettes.length > 0
                 ? <ul className="color-palette-list" >
-                    { query
-                        ? colorPalettes
+                    {query
+                        ? sortedPalettes
                             .filter(x => x.title.toLowerCase().includes(query.toLowerCase()))
                             .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
-                        : colorPalettes
+                        : sortedPalettes
                             .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
                     }
                 </ul>
