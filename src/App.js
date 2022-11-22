@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
+
 import Logo from './components/Logo/Logo';
 import Menu from './components/Menu/Menu';
 import GoToTop from './components/GoToTop/GoToTop';
@@ -13,11 +14,13 @@ import Register from './components/Register/Register';
 import Gallery from './components/GalleryPage/GalleryPage';
 import ColorPaletteList from './components/GalleryPage/ColorPalettesList';
 import Details from './components/Details/Details';
-import SavePalette from './components/UploadPalette/SavePalette';
-import UploadPalette from './components/UploadPalette/UploadPalette';
-import Edit from './components/Edit/Edit';
 import Categories from './components/GalleryPage/Categories';
 import ColorGroups from './components/GalleryPage/ColorGroups';
+
+import GuardedRoute from './components/GuardedRoute/GuardedRoute';
+import UploadPalette from './components/UploadPalette/UploadPalette';
+import Edit from './components/Edit/Edit';
+import SavePalette from './components/UploadPalette/SavePalette';
 
 import ColorPickerPage from './components/ColorPickerPage/ColorPickerPage';
 
@@ -32,7 +35,7 @@ import RgbMixer from './components/ExploreColorPage/RgbMixer';
 import HslMixer from './components/ExploreColorPage/HslMixer';
 import ColorNames from './components/ExploreColorPage/ColorNames';
 import Neutrals from './components/ExploreColorPage/Neutrals';
-import Temperature from './components/ExploreColorPage/Temperature';
+// import Temperature from './components/ExploreColorPage/Temperature';
 
 function App() {
 
@@ -58,12 +61,14 @@ function App() {
                             <Route path="groups" element={<ColorGroups />} />
                             <Route path="favorites" element={<ColorPaletteList />} />
                             <Route path="mine" element={<ColorPaletteList />} />
-                            <Route path="upload" element={<UploadPalette />} />
+                        </Route>
+                        <Route element={<GuardedRoute />}>
+                            <Route path="/gallery/upload" element={<UploadPalette />} />
+                            <Route path="edit/:colorPaletteId" element={<Edit />} />
                         </Route>
 
                         <Route path="details/:colorPaletteId" element={<Details />} />
-                        <Route path="edit/:colorPaletteId" element={<Edit />} />
-
+                        
                         <Route path="/color-picker" element={<ColorPickerPage />} />
                         <Route path="/save" element={<SavePalette />} />
 
@@ -79,7 +84,7 @@ function App() {
                             <Route path="hsl-mixer" element={<HslMixer />} />
                             <Route path="color-names" element={<ColorNames />} />
                             <Route path="neutrals" element={<Neutrals />} />
-                            <Route path="temperature" element={<Temperature />} />
+                            {/* <Route path="temperature" element={<Temperature />} /> */}
                         </Route>
                     </Routes>
                 </main>

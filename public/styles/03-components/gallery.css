@@ -32,6 +32,15 @@
     border-bottom: 2px solid var(--teal-grey);
     border-radius: 0;
 }
+.gallery__nav-no-user {
+    display: flex;
+    align-items: center;
+}
+.gallery__nav-no-user span {
+    padding: 0.5rem;
+    border: none;
+    color: lightgray;
+}
 
 
 /*    ---- categories ----    */

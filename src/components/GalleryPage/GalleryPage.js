@@ -38,9 +38,19 @@ const Gallery = () => {
                 <NavLink to="all" className={({ isActive }) => isActive ? 'active' : ''}>All images</NavLink>
                 <NavLink to="categories" className={({ isActive }) => isActive ? 'active' : ''}>Categories</NavLink>
                 <NavLink to="groups" className={({ isActive }) => isActive ? 'active' : ''}>Color groups</NavLink>
-                <NavLink to="favorites" className={({ isActive }) => isActive ? 'active' : ''}>My favorites</NavLink>
-                <NavLink to="mine" className={({ isActive }) => isActive ? 'active' : ''}>My palettes</NavLink>
-                <NavLink to="upload" className={({ isActive }) => isActive ? 'active' : ''}>Upload</NavLink>
+                {user._id
+                    ? <section>
+                        <NavLink to="favorites" className={({ isActive }) => isActive ? 'active' : ''}>My favorites</NavLink>
+                        <NavLink to="mine" className={({ isActive }) => isActive ? 'active' : ''}>My palettes</NavLink>
+                        <NavLink to="upload" className={({ isActive }) => isActive ? 'active' : ''}>Upload</NavLink>
+                    </section>
+                    : <section className="gallery__nav-no-user">
+                        <span>My favorites</span>
+                        <span>My palettes</span>
+                        <span>Upload</span>
+                    </section>
+                }
+
             </nav>
 
             <Routes>
@@ -48,9 +58,10 @@ const Gallery = () => {
                 <Route path="all" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
                 <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'} />} />
                 <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Color groups'} />} />
-                <Route path="favorites" element={user ? <ColorPaletteList colorPalettes={colorPalettes.filter(x => x.likedBy.includes(user._id))} title={'My favorites'} /> : navigate('/login')} />
-                <Route path="mine" element={user ? <ColorPaletteList colorPalettes={colorPalettes.filter(x => x.creator === user._id)} title={'My color palettes'} /> : navigate('/login')} />
-                <Route path="upload" element={user ? <UploadPalette /> : navigate('/login')} />
+                <Route path="favorites" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.likedBy.includes(user._id))} title={'My favorites'} />} />
+                <Route path="mine" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.creator === user._id)} title={'My color palettes'} />} />
+                <Route path="upload" element={<UploadPalette />} />
+                {/* <Route path="upload" element={user._id ? <UploadPalette /> : navigate('/login')} /> */}
             </Routes>
         </section>
 

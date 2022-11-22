@@ -14,9 +14,11 @@
 
 .home__heading {
     margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    width: max-content;
     height: 50%;
     color: white;
     text-transform: uppercase;
@@ -49,8 +51,7 @@
         background-position: left;
     }
     .home__heading {
-        padding: 1rem;
-        width: fit-content;
+        /* width: fit-content; */
         font-size: 1.8rem;
         letter-spacing: 0.5rem;
         max-height: 40%;

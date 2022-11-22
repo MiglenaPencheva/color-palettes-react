@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 import * as colorPaletteService from '../../services/colorPaletteService';
@@ -14,6 +14,7 @@ const Edit = () => {
     const { colorPaletteId } = useParams();
     const { user } = useAuthContext();
     const [colorPalette, setColorPalette] = useState({});
+    const [owner, setOwner] = useState(false);
     const [src, setSrc] = useState('');
 
     useEffect(() => {
@@ -24,10 +25,20 @@ const Edit = () => {
             });
     }, [colorPaletteId]);
 
+    useEffect(() => {
+        setOwner(user._id === colorPalette.creator);
+    }, [colorPalette, user._id]);
+
+
     const onUpdateSubmit = async (e) => {
         e.preventDefault();
 
         try {
+            if (user._id !== colorPalette.creator) {
+                navigate(`/details/${colorPalette._id}`);
+                throw new Error('You can not modify this record');
+            }
+
             let formData = new FormData(e.currentTarget);
 
             let title = formData.get('title');
@@ -60,7 +71,7 @@ const Edit = () => {
                         </span>
                     </section>
 
-                    <UploadTitle colorPalette={colorPalette}/>
+                    <UploadTitle colorPalette={colorPalette} />
                     <UploadCategory />
                     <UploadColors />
 
