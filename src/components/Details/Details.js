@@ -91,7 +91,7 @@ const Details = () => {
 
                 <div className="details__info">
 
-                    <span onClick={() => navigate(-1)} className="details__info--back"></span>
+                    <span onClick={() => navigate(-1)} id="backArrow"></span>
 
                     <h5 className="details__info--title">{colorPalette.title}</h5>
 

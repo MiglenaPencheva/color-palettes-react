@@ -30,24 +30,6 @@
     justify-content: center;
 }
 
-.details__info--back {
-    margin: 1rem;
-    align-self: center;
-    width: 20px;
-    height: 20px;
-    rotate: 135deg;
-    opacity: 44%;
-    border: 3px solid var(--teal-grey);
-    border-width: 0 5px 5px 0;
-    border-radius: 3px;
-    cursor: pointer;
-    animation: rotationArrow 1s;
-}
-
-.details__info--back:hover {
-    opacity: 1;
-    animation: rotate;
-}
 
 .details__info--title {
     margin: 2rem 0 0 0;
@@ -199,12 +181,5 @@
     }
     .details__info--title {
         border-top: none;
-    }
-
-    .details__info--back {
-        margin: 0.5rem;
-        position: fixed;
-        bottom: 1rem;
-        left: 1rem;
     }
 }

@@ -76,7 +76,7 @@ const Edit = () => {
                     <UploadColors />
 
                     <section className="upload__buttons">
-                        <Link to={`/details/${colorPaletteId}`} className="details__info--back"></Link>
+                        <Link to={`/details/${colorPaletteId}`} className="#backArrow"></Link>
                         <input className="button upload__submit-btn"
                             type="submit" value="Save" />
                     </section>

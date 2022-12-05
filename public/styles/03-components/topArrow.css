@@ -12,7 +12,7 @@
     border-radius: 3px;
     cursor: pointer;
     z-index: 1001;
-    animation: rotationArrow 1s;
+    animation: rotationTopArrow 1s;
 }
 
 #topArrow:hover {
@@ -20,7 +20,7 @@
     animation: rotate;
 }
 
-@keyframes rotationArrow {
+@keyframes rotationTopArrow {
     100% {
         transform: rotate(-360deg);  
     }

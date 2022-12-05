@@ -35,6 +35,8 @@ const Gallery = () => {
             </section>
 
             <nav className="gallery__nav">
+                <span onClick={() => navigate(-1)} id="backArrow" style={{'marginRight': 'auto'}}></span>
+
                 <NavLink to="all" className={({ isActive }) => isActive ? 'active' : ''}>All images</NavLink>
                 <NavLink to="categories" className={({ isActive }) => isActive ? 'active' : ''}>Categories</NavLink>
                 <NavLink to="groups" className={({ isActive }) => isActive ? 'active' : ''}>Color groups</NavLink>

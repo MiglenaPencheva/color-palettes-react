@@ -15,10 +15,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
+    align-items: center;
     /* gap: 1rem; */
     background-color: var(--vermilion-white);
     border-radius: 5px;
 }
+
 .gallery__nav a {
     padding: 0.5rem;
     cursor: pointer;
