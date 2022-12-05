@@ -1,7 +1,6 @@
 /*    ---- nav ----    */
 .palettes__nav {
     padding: 0.5rem;
-    width: 100%;
     display: flex;
     gap: 1rem;
     justify-content: space-between;

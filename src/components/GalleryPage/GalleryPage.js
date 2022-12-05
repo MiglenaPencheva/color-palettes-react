@@ -39,7 +39,7 @@ const Gallery = () => {
                 <NavLink to="categories" className={({ isActive }) => isActive ? 'active' : ''}>Categories</NavLink>
                 <NavLink to="groups" className={({ isActive }) => isActive ? 'active' : ''}>Color groups</NavLink>
                 {user._id
-                    ? <section>
+                    ? <section className="gallery__nav-user">
                         <NavLink to="favorites" className={({ isActive }) => isActive ? 'active' : ''}>My favorites</NavLink>
                         <NavLink to="mine" className={({ isActive }) => isActive ? 'active' : ''}>My palettes</NavLink>
                         <NavLink to="upload" className={({ isActive }) => isActive ? 'active' : ''}>Upload</NavLink>
