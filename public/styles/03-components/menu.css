@@ -126,12 +126,35 @@
     color: lightgray;
 }
 
+
+
 @media (max-width: 768px) {
     .menu__main {
-        padding: 1rem 0 0.3rem 0;
         font-size: 1rem;
     }
     .menu__sub {
         font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 1360px) {
+    #dropdownContent {
+        left: 0;
+        width: 21%;
+        display: flex;
+        padding-top: 75px;
+        /* padding-left: 1rem; */
+        box-shadow: none;
+    }
+    .menu__sub {
+        margin-left: 4rem;
+    }
+    #site-content {
+        margin-left: 20%;
+    }
+    #menuButton, 
+    #closeButton,
+    #homeLink {
+        display: none;
     }
 }

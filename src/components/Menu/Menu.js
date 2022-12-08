@@ -9,7 +9,9 @@ const Menu = () => {
         document.getElementById('dropdownContent').style.width = '240px';
     };
     const closeMenu = (e) => {
-        document.getElementById('dropdownContent').style.width = 0;
+        if (window.innerWidth < 1360) {
+            document.getElementById('dropdownContent').style.width = 0;
+        }
     };
 
     return (
@@ -26,7 +28,7 @@ const Menu = () => {
                     <span id="closeButton__left"></span>
                     <span id="closeButton__right"></span>
                 </div>
-                <Link className="menu__main" to="/">Home</Link>
+                <Link id="homeLink" className="menu__main" to="/">Home</Link>
                 {user._id
                     ? <section className="menu__user">
                         <span>Signed in as <b><i>{user.username}</i></b></span>
@@ -69,10 +71,7 @@ const Menu = () => {
                 <Link className="menu__sub" to="/color-explore/neutrals">Neutrals</Link>
                 {/* <Link className="menu__sub" to="/color-explore/temperature">Temperature</Link> */}
 
-
-
             </div >
-
         </section >
     );
 };

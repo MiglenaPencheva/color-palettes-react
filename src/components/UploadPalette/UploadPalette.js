@@ -99,7 +99,7 @@ const UploadPalette = () => {
                     <UploadColors />
 
                     <section className="upload__buttons">
-                        <Link to={'/gallery'} className="details__info--back"></Link>
+                        <Link to={'/gallery'} className="#backArrow"></Link>
                         <UploadSubmitButton />
                     </section>
 

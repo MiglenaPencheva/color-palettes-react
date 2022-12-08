@@ -26,7 +26,7 @@ const Register = () => {
             let authData = await authService.register(username, password);
             login(authData);
             hideError();
-            navigate('/');
+            navigate(-1);
 
         } catch (error) {
             showError(error.message);

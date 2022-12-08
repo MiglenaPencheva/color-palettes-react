@@ -21,7 +21,7 @@ body {
     padding: 20px;
 }
 
-main {
+#site-content {
     /* flex: 75%; */
     position: relative;
     margin: 0 auto;

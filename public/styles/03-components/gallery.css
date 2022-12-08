@@ -10,7 +10,7 @@
 
 /*    ---- nav ----    */
 .gallery__nav {
-    padding: 0.3rem;
+    padding: 0 0.5rem;
     width: 100%;
     display: flex;
     flex-wrap: wrap;

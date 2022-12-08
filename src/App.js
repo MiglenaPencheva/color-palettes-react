@@ -3,8 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 
 import Logo from './components/Logo/Logo';
-import Menu from './components/Menu/Menu';
 import GoToTop from './components/GoToTop/GoToTop';
+import Menu from './components/Menu/Menu';
 
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
@@ -68,7 +68,7 @@ function App() {
                         </Route>
 
                         <Route path="details/:colorPaletteId" element={<Details />} />
-                        
+
                         <Route path="/color-picker" element={<ColorPickerPage />} />
                         <Route path="/save" element={<SavePalette />} />
 
