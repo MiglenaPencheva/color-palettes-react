@@ -90,7 +90,7 @@
 
 .menu__main {
     margin: 0 1.5rem 0.2rem 1.5rem;
-    padding: 1rem 0 0.3rem 0;
+    padding: 0.7rem 0 0.3rem 0;
     width: 100%;
     align-self: start;
     font-size: 1.3rem;
@@ -130,10 +130,19 @@
 
 @media (max-width: 768px) {
     .menu__main {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
-    .menu__sub {
+}
+@media (max-width: 480px) {
+    .menu__main {
+        padding: 0.3rem 0 0.3rem 0;
+        font-size: 1.1rem;
+    }
+    .menu__sub,
+    .menu__user,
+    .menu__no-user span  {
         font-size: 0.9rem;
+        margin-left: 4rem;
     }
 }
 
@@ -145,9 +154,6 @@
         padding-top: 75px;
         /* padding-left: 1rem; */
         box-shadow: none;
-    }
-    .menu__sub {
-        margin-left: 4rem;
     }
     #site-content {
         margin-left: 20%;

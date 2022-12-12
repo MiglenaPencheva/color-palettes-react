@@ -4,8 +4,8 @@ import RgbMixer from './RgbMixer';
 import HslMixer from './HslMixer';
 import Neutrals from './Neutrals';
 import Convertor from './Convertor';
-import Temperature from './Temperature';
 import ColorNames from './ColorNames';
+import ExploreGroups from './ExploreGroups';
 
 const ExploreColor = () => {
 
@@ -25,8 +25,8 @@ const ExploreColor = () => {
                 <NavLink to="rgb-mixer" className={({ isActive }) => isActive ? 'active' : ''}>RGB mixer</NavLink>
                 <NavLink to="hsl-mixer" className={({ isActive }) => isActive ? 'active' : ''}>HSL mixer</NavLink>
                 <NavLink to="color-names" className={({ isActive }) => isActive ? 'active' : ''}>Color names</NavLink>
+                <NavLink to="groups" className={({ isActive }) => isActive ? 'active' : ''}>Color groups</NavLink>
                 <NavLink to="neutrals" className={({ isActive }) => isActive ? 'active' : ''}>Neutrals</NavLink>
-                {/* <NavLink to="temperature" className={({ isActive }) => isActive ? 'active' : ''}>Temperature</NavLink> */}
             </nav>
 
             <Routes>
@@ -35,8 +35,8 @@ const ExploreColor = () => {
                 <Route path="rgb-mixer" element={<RgbMixer  />} />
                 <Route path="hsl-mixer" element={<HslMixer  />} />
                 <Route path="color-names" element={<ColorNames  />} />
+                <Route path="groups" element={<ExploreGroups  />} />
                 <Route path="neutrals" element={<Neutrals />} />
-                {/* <Route path="temperature" element={<Temperature />} /> */}
             </Routes>
 
         </section>
