@@ -165,17 +165,17 @@ const RybWheel = () => {
 
     return (
         <section>
-            <section className="ryb__info">
-                <p> The traditional color theory is based on subtractive primary colors and the RYB color model.</p>
-                <p> Red, Yellow and Blue are the
+            <section className="ryb__details">
+                <article> The traditional color theory is based on subtractive primary colors and the <b>RYB color model</b>.</article>
+                <article> Red, Yellow and Blue are the
                     <strong id="primary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> primary colors</strong>.
                     The <strong id="secondary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> secondary colors </strong >
                     Orange, Green and Purple are created by mixing primary colors.
                     Red-Orange, Yellow-Orange, Yellow-Green, Blue-Green, Blue-Purple, Red-Purple are the
                     <strong id="tertiary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> tertiary colors</strong>,
-                    made by mixing two secondary colors.</p>
-                <p> RYB color model is used by artists, fashion stylists,
-                    interior, graphic and web designers.</p>
+                    made by mixing two secondary colors.</article>
+                <article> RYB color model is used by artists, fashion stylists,
+                    interior, graphic and web designers.</article>
             </section>
 
 

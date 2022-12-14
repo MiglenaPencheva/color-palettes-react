@@ -36,13 +36,16 @@
 }
 
 .ryb__info {
+    margin: 0;
+    padding-bottom: 0.4rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: 0.2rem;
-}
-.ryb__info p {
-    margin: 0;
-    padding: 0.5rem 0;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-bottom: 1px solid var(--teal-grey);
 }
 .strong:hover {
     font-style: italic;
@@ -210,6 +213,17 @@
 .ryb__details--others-img {
     width: 35%;
 }
+.ryb__details article {
+    line-height: 1.5rem;
+}
+
+
+/* ----- neutrals ----- */
+.combinations__neutrals {
+
+}
+
+/* ----- pastels ----- */
 
 
 
@@ -240,10 +254,7 @@
         flex-direction: column;
         gap: 0;
     }
-    .ryb__info p {
-        padding: 0.5rem;
-        font-size: 0.9rem;
-    }
+    
     .ryb__scheme {
         width: 270px;
     }
@@ -255,9 +266,6 @@
         font-size: 0.9rem;
     }
     #reedMore {
-        font-size: 0.9rem;
-    }
-    .ryb__details {
         font-size: 0.9rem;
     }
     .ryb__details--wheel-img {

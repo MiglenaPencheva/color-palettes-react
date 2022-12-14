@@ -2,7 +2,7 @@ const Schemes = () => {
 
     return (
         <section id="schemeDetailsSection" className="ryb__details">
-            <h5 className="explore__info">Color schemes</h5>
+            <h5 className="ryb__info">Color schemes</h5>
 
             <article className="ryb__details--text-only"><b><i>Color scheme </i></b> is used to create style and appeal. Colors and color combinations cause psychological effect, evoke certain feelings and emotions. They are widely used in various artistic, styling and design contexts, marketing and branding. Basic combinations join two colors that look appealing together. More advanced schemes combine several related colors for adding contrast and accents. Color schemes are logical combinations of colors on the color wheel. Different choices of a color harmony gives a variety in terms of contrast, dynamics, elegance and influence.</article>
             <div className="ryb__details--container">

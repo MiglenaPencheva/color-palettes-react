@@ -2,7 +2,7 @@ const Wheels = () => {
 
     return (
         <section id="schemeDetailsSection" className="ryb__details">
-            <h5 className="explore__info">Color wheels</h5>
+            <h5 className="ryb__info">Color wheels</h5>
 
             <article><b><i>Color wheel</i></b> is an abstract illustration of color hues around a circle, which shows the relationship between colors. Most of the color wheels are based on three primary colors, three secondary colors and six tertiary colors, made by mixing a primary with a secondary one. </article>
             

@@ -92,7 +92,9 @@ const WhiteBlackGreySettings = ({ scheme }) => {
                             onChange={onWhiteChange} value={whiteValue} />
                         <span>{whiteValue}%</span>
                     </label>
-                    <div>Add white to lighten the color. Tints are pastel, pale, cool versions of the hue.</div>
+                    <div>Add white to lighten the color. Tints are 
+                        <span className="link-on-hover" onClick={() => window.open('/combinations/pastels', '_blank')}> pastel, </span>
+                        pale, cool versions of the hue.</div>
                     {/* </section>
                 <section> */}
                     <label htmlFor="blackRange" className="slider-label">

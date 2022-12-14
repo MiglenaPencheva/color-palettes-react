@@ -55,7 +55,7 @@
 
 .explore__info {
     margin: 0;
-    padding: 0.4rem;
+    padding: 0 0 0.4rem 0.4rem;
     width: 100%;
     font-style: italic;
     font-weight: 600;
@@ -325,6 +325,8 @@
 }
 
 
+
+
 @media (max-width: 768px) {
     .explore__navbar {
         flex-direction: column;
@@ -377,3 +379,4 @@
         width: 100%;
     }
 }
+
