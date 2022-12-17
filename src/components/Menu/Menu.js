@@ -62,6 +62,8 @@ const Menu = () => {
                 <Link className="menu__sub" to="/combinations/color-wheel">Color wheel</Link>
                 <Link className="menu__sub" to="/combinations/wheels" >Color wheels</Link>
                 <Link className="menu__sub" to="/combinations/schemes" >Color schemes</Link>
+                <Link className="menu__sub" to="/combinations/neutrals">Neutrals</Link>
+                <Link className="menu__sub" to="/combinations/pastels">Pastels</Link>
 
                 <Link className="menu__main" to="/color-explore">Explore color</Link>
                 <Link className="menu__sub" to="/color-explore/convertor">Convertor</Link>
@@ -69,8 +71,6 @@ const Menu = () => {
                 <Link className="menu__sub" to="/color-explore/hsl-mixer">HSL mixer</Link>
                 <Link className="menu__sub" to="/color-explore/color-names">Color names</Link>
                 <Link className="menu__sub" to="/color-explore/groups">Color groups</Link>
-                <Link className="menu__sub" to="/color-explore/neutrals">Neutrals</Link>
-                {/* <Link className="menu__sub" to="/color-explore/temperature">Temperature</Link> */}
 
             </div >
         </section >

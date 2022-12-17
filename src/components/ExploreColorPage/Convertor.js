@@ -240,7 +240,7 @@ const Convertor = () => {
                     <canvas id="rgbCanvas" width="270" height="40" onClick={selectColor}></canvas>
                     <div>Quantity of white, black or grey changes the lightness, darkness or saturation of pure colors</div>
                     <canvas id="whiteCanvas" width="270" height="40" onClick={modifyColor}></canvas>
-                    <div>White lightens the color. Tints are pastel, pale, cool versions of the hue.</div>
+                    <div>White lightens the color. Tints are <Link  to="/combinations/pastels" target="_blank"><i>pastel</i></Link>, pale, cool versions of the hue.</div>
                     <canvas id="blackCanvas" width="270" height="40" onClick={modifyColor}></canvas>
                     <div>Black darkens the color. Shades are deep, warm and more intensive.</div>
                     <canvas id="greyCanvas" width="270" height="40" onClick={modifyColor}></canvas>

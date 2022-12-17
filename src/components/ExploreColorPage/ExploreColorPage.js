@@ -2,7 +2,6 @@ import { Routes, Route, NavLink } from 'react-router-dom';
 
 import RgbMixer from './RgbMixer';
 import HslMixer from './HslMixer';
-import Neutrals from './Neutrals';
 import Convertor from './Convertor';
 import ColorNames from './ColorNames';
 import ExploreGroups from './ExploreGroups';
@@ -26,7 +25,6 @@ const ExploreColor = () => {
                 <NavLink to="hsl-mixer" className={({ isActive }) => isActive ? 'active' : ''}>HSL mixer</NavLink>
                 <NavLink to="color-names" className={({ isActive }) => isActive ? 'active' : ''}>Color names</NavLink>
                 <NavLink to="groups" className={({ isActive }) => isActive ? 'active' : ''}>Color groups</NavLink>
-                <NavLink to="neutrals" className={({ isActive }) => isActive ? 'active' : ''}>Neutrals</NavLink>
             </nav>
 
             <Routes>
@@ -36,7 +34,6 @@ const ExploreColor = () => {
                 <Route path="hsl-mixer" element={<HslMixer  />} />
                 <Route path="color-names" element={<ColorNames  />} />
                 <Route path="groups" element={<ExploreGroups  />} />
-                <Route path="neutrals" element={<Neutrals />} />
             </Routes>
 
         </section>

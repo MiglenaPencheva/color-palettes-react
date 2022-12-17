@@ -28,6 +28,8 @@ import CombinationsPage from './components/CombinationsPage/CombinationsPage';
 import RybWheel from './components/CombinationsPage/RybWheel';
 import Wheels from './components/CombinationsPage/Wheels';
 import Schemes from './components/CombinationsPage/Schemes';
+import Neutrals from './components/CombinationsPage/Neutrals';
+import Pastels from './components/CombinationsPage/Pastels';
 
 import ExploreColorPage from './components/ExploreColorPage/ExploreColorPage';
 import Convertor from './components/ExploreColorPage/Convertor';
@@ -35,7 +37,6 @@ import RgbMixer from './components/ExploreColorPage/RgbMixer';
 import HslMixer from './components/ExploreColorPage/HslMixer';
 import ColorNames from './components/ExploreColorPage/ColorNames';
 import ExploreGroups from './components/ExploreColorPage/ExploreGroups';
-import Neutrals from './components/ExploreColorPage/Neutrals';
 
 function App() {
 
@@ -61,14 +62,15 @@ function App() {
                             <Route path="groups" element={<ColorGroups />} />
                             <Route path="favorites" element={<ColorPaletteList />} />
                             <Route path="mine" element={<ColorPaletteList />} />
-                        </Route>
-                        <Route element={<GuardedRoute />}>
-                            <Route path="/gallery/upload" element={<UploadPalette />} />
-                            <Route path="edit/:colorPaletteId" element={<Edit />} />
+                            <Route element={<GuardedRoute />}>
+                                <Route path="upload" element={<UploadPalette />} />
+                            </Route>
                         </Route>
 
                         <Route path="details/:colorPaletteId" element={<Details />} />
-
+                        <Route element={<GuardedRoute />}>
+                            <Route path="edit/:colorPaletteId" element={<Edit />} />
+                        </Route>
                         <Route path="/color-picker" element={<ColorPickerPage />} />
                         <Route path="/save" element={<SavePalette />} />
 
@@ -76,6 +78,8 @@ function App() {
                             <Route path="color-wheel" element={<RybWheel />} />
                             <Route path="wheels" element={<Wheels />} />
                             <Route path="schemes" element={<Schemes />} />
+                            <Route path="neutrals" element={<Neutrals />} />
+                            <Route path="pastels" element={<Pastels />} />
                         </Route>
 
                         <Route path="/color-explore" element={<ExploreColorPage />} >
@@ -84,7 +88,6 @@ function App() {
                             <Route path="hsl-mixer" element={<HslMixer />} />
                             <Route path="color-names" element={<ColorNames />} />
                             <Route path="groups" element={<ExploreGroups />} />
-                            <Route path="neutrals" element={<Neutrals />} />
                         </Route>
                     </Routes>
                 </main>

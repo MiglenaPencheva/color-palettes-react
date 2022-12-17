@@ -219,8 +219,14 @@
 
 
 /* ----- neutrals ----- */
-.combinations__neutrals {
-
+.neutrals__images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+.neutrals__images img {
+    max-height: 120px;
 }
 
 /* ----- pastels ----- */
