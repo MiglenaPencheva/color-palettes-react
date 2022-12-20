@@ -9,17 +9,31 @@ const Neutrals = () => {
             <h6>What are the neutral colors?</h6>
             <article>
                 Neutral colors are muted hues that seem to be without color.
-                <br />
-                Pure neutral colors are <b>white</b>, <b>black </b> 
+            </article>
+            <article>
+                Pure neutral colors are <b>white</b>, <b>black </b>
                 and all combinations of white and black - the <b>grey</b> colors.
-                <br />
+            </article>
+            <img src="/images/neutrals/greys.jpg" alt="greys" className="neutrals__greys" />
+
+            <article>
                 Neutrals include also the variations of hues
                 that are mixed with a big quantity of white, black or grey -
                 these are <Link to="/combinations/pastels" target="_blank"><b><i>pastels</i></b></Link>, <b>shades</b> and <b>tones</b>.
-                <br />
+            </article>
+            <div className="neutrals__teal">
+                <img src="/images/neutrals/teal/teal+white.jpg" alt="pastels" />
+                <img src="/images/neutrals/teal/teal+black.jpg" alt="shades" />
+                <img src="/images/neutrals/teal/teal+grey.jpg" alt="tones" />
+                <img src="/images/neutrals/teal/teal+white+grey.jpg" alt="white and grey" />
+                <img src="/images/neutrals/teal/teal+black+grey.jpg" alt="black and grey" />
+            </div>
+
+            <article>
                 Neutrals can be created as well by mixing two complementary colors,
                 such as brown, tan, grey.
             </article>
+            <span className="neutrals__gradient"></span>
 
             <article>
                 Tones that <b>naturally occur</b> in the environment are considered neutrals.
@@ -32,6 +46,15 @@ const Neutrals = () => {
                 <img src="/images/neutrals/wood/wood1.jpg" alt="wood" />
                 <img src="/images/neutrals/wood/ground.jpg" alt="ground" />
                 <img src="/images/neutrals/wood/wood2.jpg" alt="wood" />
+            </div>
+
+            <article>
+                They can be the <b>grey</b> shades of the cloudy sky.
+            </article>
+            <div className="neutrals__images">
+                <img src="/images/neutrals/clouds/clouds1.jpg" alt="clouds" />
+                <img src="/images/neutrals/clouds/clouds4.jpg" alt="clouds" />
+                <img src="/images/neutrals/clouds/clouds3.jpg" alt="clouds" />
             </div>
 
             <article>
@@ -48,14 +71,7 @@ const Neutrals = () => {
                 <img src="/images/neutrals/nature/sand.jpg" alt="sand" />
             </div>
 
-            <article>
-                They can be the <b>grey</b> shades of the cloudy sky.
-            </article>
-            <div className="neutrals__images">
-                <img src="/images/neutrals/clouds/clouds1.jpg" alt="clouds" />
-                <img src="/images/neutrals/clouds/clouds4.jpg" alt="clouds" />
-                <img src="/images/neutrals/clouds/clouds3.jpg" alt="clouds" />
-            </div>
+            
             <article>
                 Neutrals have different <b>temperature</b>, they can be warm or cold.
                 <br />
@@ -100,7 +116,7 @@ const Neutrals = () => {
             </div>
 
             <article>
-                <b>Neutrals don't get old fashioned</b> in long term 
+                <b>Neutrals don't get old fashioned</b> in long term
                 and can't get boring.
                 They fit in any modern or classical style scheme.
                 There are limitless possibilities of combining with bold contrast colors.
@@ -110,7 +126,7 @@ const Neutrals = () => {
                 Neutrals inspire.
             </article>
 
-           
+
             {/* <article>
                 Dark grays are commonly thought of dramatic, mysterious, and sophisticated.
                 lighter grays are thought of as soothing and calming.
