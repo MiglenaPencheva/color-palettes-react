@@ -250,6 +250,10 @@
 .pastels__images img {
     max-height: 150px;
 }
+.pastels__colors b {
+    padding: 0.2rem;
+    border-radius: 8px;
+}
 
 
 
