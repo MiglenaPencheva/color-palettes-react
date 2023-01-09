@@ -43,6 +43,10 @@
     border: 1px solid var(--teal-grey);
     border-radius: 10px;
 }
+.home__navbar--link:hover {
+    opacity: 1;
+    font-weight: 600;
+}
 
 @media (orientation: portrait) {
     .home__section {

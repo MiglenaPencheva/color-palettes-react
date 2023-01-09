@@ -87,7 +87,7 @@ const Neutrals = () => {
                 {/* <img src="/images/neutrals/temperature/sea.jpg" alt="sea" /> */}
             </div>
             <article>
-                The temperature also depend on the surrounding colors.
+                The temperature also depends on the surrounding colors.
             </article>
 
             {/* why */}
@@ -97,8 +97,8 @@ const Neutrals = () => {
                 That is why they can participate in any color combination without braking the harmony.
                 They are an important part of the schemes as they are universal complements of any hue.
                 <b> Neutrals are just the base</b> on which the true color stands out.
-                They are <b>perfect background</b> for attractive textures,
-                contrasting details or artistic accents in interior design.
+                They are a <b>perfect background</b> for attractive textures,
+                contrasting details or artistic accents in interior design as well.
             </article>
 
             <article>
