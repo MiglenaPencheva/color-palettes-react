@@ -59,21 +59,23 @@
     gap: 1rem;
 }
 .gallery__categories div {
-    width: 220px;
-    height: 210px;
+    width: 224px;
+    height: 190px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 7rem 1rem;
     position: relative;
     font-size: 1.5rem;
-    opacity: 0.7;
+    opacity: 0.6;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: 0.3s;
     border-radius: 10px;
     cursor: pointer;
+    color: var(--vermilion-white);
+    background-size: cover;
+    text-shadow: 2px 2px 1px var(--teal-grey-black);
 }
 .gallery__categories div:hover {
     opacity: 1;
@@ -130,8 +132,7 @@
 }
 @media screen and (max-width: 480px) {  
     .gallery__categories div {
-        width: 250px;
-        height: 80px;
+        height: 120px;
     }
     .gallery__groups li {
         width: 250px;
