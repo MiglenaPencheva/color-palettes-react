@@ -1,9 +1,24 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 
 
 const Menu = () => {
     const { user } = useAuthContext();
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.pathname === '/') {
+            document.getElementById('dropdownContent').style.width = 0;
+            document.getElementById('site-content').style['margin-left'] = 0;
+        } else {
+            if (window.innerWidth >= 1360) {
+                document.getElementById('dropdownContent').style.width = '21%';
+                document.getElementById('site-content').style['margin-left'] = '20%';
+            }
+        }
+    }, [location.pathname]);
+
 
     const openMenu = (e) => {
         document.getElementById('dropdownContent').style.width = '240px';

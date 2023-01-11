@@ -1,12 +1,10 @@
 .home__section {
-    margin: 0 auto;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: 0.3s ease;
-    background: url('../../images/75.png') center no-repeat;
+    background: url('/images/75.png') center no-repeat;
     background-size: cover;
 }
 
@@ -53,7 +51,6 @@
         background-position: left;
     }
     .home__heading {
-        /* width: fit-content; */
         font-size: 1.8rem;
         letter-spacing: 0.5rem;
         max-height: 40%;
