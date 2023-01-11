@@ -39,11 +39,14 @@ const Menu = () => {
             </div>
 
             <div id="dropdownContent" onClick={closeMenu}>
+
                 <div id="closeButton" onClick={closeMenu}>
                     <span id="closeButton__left"></span>
                     <span id="closeButton__right"></span>
                 </div>
+
                 <Link id="homeLink" className="menu__main" to="/">Home</Link>
+
                 {user._id
                     ? <section className="menu__user">
                         <span>Signed in as <b><i>{user.username}</i></b></span>
@@ -58,7 +61,7 @@ const Menu = () => {
                 <Link className="menu__main" to="/gallery">Gallery</Link>
                 <Link className="menu__sub" to="/gallery">Color palettes</Link>
                 {user._id
-                    ? <section>
+                    ? <section className="menu__yes-user">
                         <Link className="menu__sub" to="/gallery/upload">Upload palette</Link>
                         <Link className="menu__sub" to="/gallery/favorites">My favorites</Link>
                         <Link className="menu__sub" to="/gallery/mine">My palettes</Link>
@@ -86,6 +89,12 @@ const Menu = () => {
                 <Link className="menu__sub" to="/color-explore/hsl-mixer">HSL mixer</Link>
                 <Link className="menu__sub" to="/color-explore/color-names">Color names</Link>
                 <Link className="menu__sub" to="/color-explore/groups">Color groups</Link>
+
+                <div className="contacts">
+                    <div>&copy;</div>
+                    <img src="/images/git.png" alt="git" onClick={() => window.open('https://github.com/MiglenaPencheva/color-palettes-react', '_blank')} />
+                    <span>email@gmail.com</span>
+                </div>
 
             </div >
         </section >
