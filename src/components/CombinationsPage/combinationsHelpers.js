@@ -25,6 +25,9 @@ export const getColorNameFromRgb = {
     'rgb(52, 124, 152)': 'blue-green',
     'rgb(102, 176, 50)': 'green',
     'rgb(178, 215, 50)': 'yellow-green',
+
+    
+
 };
 export const getRgbFromColorName = {
     'yellow': 'rgb(254, 254, 51)',
@@ -39,6 +42,43 @@ export const getRgbFromColorName = {
     'blue-green': 'rgb(52, 124, 152)',
     'green': 'rgb(102, 176, 50)',
     'yellow-green': 'rgb(178, 215, 50)',
+
+    'll-yellow': 'rgb(254, 254, 201)',
+    'l-yellow': 'rgb(254, 254, 151)',
+    'd-yellow': 'rgb(228, 228, 1)',
+    'l-yellow-orange': 'rgb(253, 221, 104)',
+    'll-yellow-orange': 'rgb(253, 232, 155)',
+    'd-yellow-orange': 'rgb(226, 178, 3)',
+    'd-orange': 'rgb(227, 137, 2)',
+    'l-orange': 'rgb(253, 193, 104)',
+    'll-orange': 'rgb(254, 224, 179)',
+    'd-red-orange': 'rgb(202, 72, 2)',
+    'l-red-orange': 'rgb(254, 159, 109)',
+    'll-red-orange': 'rgb(254, 206, 179)',
+    'd-red': 'rgb(203, 18, 1)',
+    'l-red': 'rgb(254, 129, 118)',
+    'll-red': 'rgb(255, 185, 179)',
+    'l-red-purple': 'rgb(237, 80, 148)',
+    'd-red-purple': 'rgb(162, 17, 80)',
+    'll-red-purple': 'rgb(245, 163, 198)',
+    'd-purple': 'rgb(78, 1, 101)',
+    'l-purple': 'rgb(207, 52, 254)',
+    'll-purple': 'rgb(237, 179, 255)',
+    'd-blue-purple': 'rgb(53, 28, 166)',
+    'l-blue-purple': 'rgb(144, 124, 233)',
+    'll-blue-purple': 'rgb(200, 190, 244)',
+    'd-blue': 'rgb(1, 55, 203)',
+    'l-blue': 'rgb(103, 143, 254)',
+    'll-blue': 'rgb(179, 199, 255)',
+    'd-blue-green': 'rgb(39, 93, 114)',
+    'l-blue-green': 'rgb(103, 175, 203)',
+    'll-blue-green': 'rgb(179, 215, 229)',
+    'd-green': 'rgb(79, 135, 38)',
+    'l-green': 'rgb(155, 215, 112)',
+    'll-green': 'rgb(199, 233, 175)',
+    'd-yellow-green': 'rgb(148, 179, 35)',
+    'l-yellow-green': 'rgb(208, 230, 127)',
+    'll-yellow-green': 'rgb(231, 242, 191)',
 };
 
 export const drawScheme = {
@@ -177,7 +217,7 @@ export function drawSquare(ctx) {
 export const yellowCombinations = {
     'complementary': ['yellow', 'purple'],
     'splitComplementary': ['yellow', 'blue-purple', 'red-purple'],
-    'monochromatic': ['yellow'],
+    'monochromatic': ['d-yellow', 'yellow', 'l-yellow', 'll-yellow'],
     'analogous3': ['yellow-green', 'yellow', 'yellow-orange'],
     'analogous5': ['green', 'yellow-green', 'yellow', 'yellow-orange', 'orange'],
     'triadic': ['yellow', 'red', 'blue'],
@@ -188,7 +228,7 @@ export const yellowCombinations = {
 export const yellowOrangeCombinations = {
     'complementary': ['yellow-orange', 'blue-purple'],
     'splitComplementary': ['yellow-orange', 'purple', 'blue'],
-    'monochromatic': ['yellow-orange'],
+    'monochromatic': ['d-yellow-orange', 'yellow-orange', 'l-yellow-orange', 'll-yellow-orange'],
     'analogous3': ['yellow', 'yellow-orange', 'orange'],
     'analogous5': ['yellow-green', 'yellow', 'yellow-orange', 'orange', 'red-orange'],
     'triadic': ['yellow-orange', 'red-purple', 'blue-green'],
@@ -199,7 +239,7 @@ export const yellowOrangeCombinations = {
 export const orangeCombinations = {
     'complementary': ['orange', 'blue'],
     'splitComplementary': ['orange', 'blue-purple', 'blue-green'],
-    'monochromatic': ['orange'],
+    'monochromatic': ['d-orange', 'orange', 'l-orange', 'll-orange'],
     'analogous3': ['yellow-orange', 'orange', 'red-orange'],
     'analogous5': ['yellow', 'yellow-orange', 'orange', 'red-orange', 'red'],
     'triadic': ['orange', 'purple', 'green'],
@@ -210,7 +250,7 @@ export const orangeCombinations = {
 export const redOrangeCombinations = {
     'complementary': ['red-orange', 'blue-green'],
     'splitComplementary': ['red-orange', 'blue', 'green'],
-    'monochromatic': ['red-orange'],
+    'monochromatic': ['d-red-orange', 'red-orange', 'l-red-orange', 'll-red-orange'],
     'analogous3': ['orange', 'red-orange', 'red'],
     'analogous5': ['yellow-orange', 'orange', 'red-orange', 'red', 'red-purple'],
     'triadic': ['red-orange', 'blue-purple', 'yellow-green'],
@@ -221,7 +261,7 @@ export const redOrangeCombinations = {
 export const redCombinations = {
     'complementary': ['red', 'green'],
     'splitComplementary': ['red', 'blue-green', 'yellow-green'],
-    'monochromatic': ['red'],
+    'monochromatic': ['d-red', 'red', 'l-red', 'll-red'],
     'analogous3': ['red-orange', 'red', 'red-purple'],
     'analogous5': ['orange', 'red-orange', 'red', 'red-purple', 'purple'],
     'triadic': ['red', 'blue', 'yellow'],
@@ -232,7 +272,7 @@ export const redCombinations = {
 export const redPurpleCombinations = {
     'complementary': ['red-purple', 'yellow-green'],
     'splitComplementary': ['red-purple', 'green', 'yellow'],
-    'monochromatic': ['red-purple'],
+    'monochromatic': ['d-red-purple', 'red-purple', 'l-red-purple', 'll-red-purple'],
     'analogous3': ['red', 'red-purple', 'purple'],
     'analogous5': ['red-orange', 'red', 'red-purple', 'purple', 'blue-purple'],
     'triadic': ['red-purple', 'blue-green', 'yellow-orange'],
@@ -243,7 +283,7 @@ export const redPurpleCombinations = {
 export const purpleCombinations = {
     'complementary': ['purple', 'yellow'],
     'splitComplementary': ['purple', 'yellow-green', 'yellow-orange'],
-    'monochromatic': ['purple'],
+    'monochromatic': ['d-purple', 'purple', 'l-purple', 'll-purple'],
     'analogous3': ['red-purple', 'purple', 'blue-purple'],
     'analogous5': ['red', 'red-purple', 'purple', 'blue-purple', 'blue'],
     'triadic': ['purple', 'green', 'orange'],
@@ -254,7 +294,7 @@ export const purpleCombinations = {
 export const bluePurpleCombinations = {
     'complementary': ['blue-purple', 'yellow-orange'],
     'splitComplementary': ['blue-purple', 'yellow', 'orange'],
-    'monochromatic': ['blue-purple'],
+    'monochromatic': ['d-blue-purple', 'blue-purple', 'l-blue-purple', 'll-blue-purple'],
     'analogous3': ['purple', 'blue-purple', 'blue'],
     'analogous5': ['red-purple', 'purple', 'blue-purple', 'blue', 'blue-green'],
     'triadic': ['blue-purple', 'yellow-green', 'red-orange'],
@@ -265,7 +305,7 @@ export const bluePurpleCombinations = {
 export const blueCombinations = {
     'complementary': ['blue', 'orange'],
     'splitComplementary': ['blue', 'yellow-orange', 'red-orange'],
-    'monochromatic': ['blue'],
+    'monochromatic': ['d-blue', 'blue', 'l-blue', 'll-blue'],
     'analogous3': ['blue-purple', 'blue', 'blue-green'],
     'analogous5': ['purple', 'blue-purple', 'blue', 'blue-green', 'green'],
     'triadic': ['blue', 'yellow', 'red'],
@@ -276,7 +316,7 @@ export const blueCombinations = {
 export const blueGreenCombinations = {
     'complementary': ['blue-green', 'red-orange'],
     'splitComplementary': ['blue-green', 'orange', 'red'],
-    'monochromatic': ['blue-green'],
+    'monochromatic': ['d-blue-green', 'blue-green', 'l-blue-green', 'll-blue-green'],
     'analogous3': ['blue', 'blue-green', 'green'],
     'analogous5': ['blue-purple', 'blue', 'blue-green', 'green', 'yellow-green'],
     'triadic': ['blue-green', 'yellow-orange', 'red-purple'],
@@ -287,7 +327,7 @@ export const blueGreenCombinations = {
 export const greenCombinations = {
     'complementary': ['green', 'red'],
     'splitComplementary': ['green', 'red-orange', 'red-purple'],
-    'monochromatic': ['green'],
+    'monochromatic': ['d-green', 'green', 'l-green', 'll-green'],
     'analogous3': ['blue', 'green', 'yellow-green'],
     'analogous5': ['blue', 'blue-green', 'green', 'yellow-green', 'yellow'],
     'triadic': ['green', 'orange', 'purple'],
@@ -298,7 +338,7 @@ export const greenCombinations = {
 export const yellowGreenCombinations = {
     'complementary': ['yellow-green', 'red-purple'],
     'splitComplementary': ['yellow-green', 'red', 'purple'],
-    'monochromatic': ['yellow-green'],
+    'monochromatic': ['d-yellow-green', 'yellow-green', 'l-yellow-green', 'll-yellow-green'],
     'analogous3': ['green', 'yellow-green', 'yellow'],
     'analogous5': ['blue-green', 'green', 'yellow-green', 'yellow', 'yellow-orange'],
     'triadic': ['yellow-green', 'red-orange', 'blue-purple'],
@@ -341,7 +381,7 @@ export const getResultRgb = (scheme) => {
     const countOfScheme = {
         'complementary': 2,
         'splitComplementary': 3,
-        'monochromatic': 1,
+        'monochromatic': 4,
         'analogous3': 3,
         'analogous5': 5,
         'triadic': 3,
