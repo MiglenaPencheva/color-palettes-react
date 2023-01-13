@@ -15,7 +15,7 @@ const initialHexState = {
 const RybWheel = () => {
 
     const [data, setData] = useState([]);
-    const [selectedScheme, setSelectedScheme] = useState('complementary');
+    const [selectedScheme, setSelectedScheme] = useState('triadic');
     const [mainColor, setMainColor] = useState('yellow');
     const [info, setInfo] = useState('');
     const [hex, setHex] = useState('');
@@ -179,9 +179,12 @@ const RybWheel = () => {
             </section>
 
 
-            <section className="ryb__container">                  
+            <section className="ryb__container">
                 <section className="ryb__wheel" id="rybContainer">
-                    <h6>RYB color wheel</h6>
+                    <h6>RYB color wheel
+                        <div className="ryb__wheel--arrow">^</div>
+                    </h6>
+
                     <img id="primaryImage" src="/images/primary.png" alt="primary" />
                     <img id="secondaryImage" src="/images/secondary.png" alt="secondary" />
                     <img id="tertiaryImage" src="/images/tertiary.png" alt="tertiary" />
