@@ -81,8 +81,6 @@ export const save = async (data, token) => {
 };
 
 export const update = async (colorPaletteId, data, token) => {
-    console.log(data);
-
     let response = await fetch(`${baseUrl}/color-palettes/${colorPaletteId}`, {
         method: 'PUT',
         headers: {
