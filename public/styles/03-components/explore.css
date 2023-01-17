@@ -182,10 +182,8 @@
 
 .explore__rgb-mixer p {
     margin: 0;
-}
-
-.explore__rgb-mixer--info {
     padding: 0.5rem;
+    line-height: 1.5rem;
 }
 
 .explore__red-blue-green {
@@ -267,6 +265,7 @@
 .explore__color-names article {
     margin-top: 1rem;
     padding: 0.5rem;
+    line-height: 1.5rem;
 }
 .explore__names {
     margin: 0 auto;

@@ -11,8 +11,7 @@ const ColorNames = () => {
 
             <article>
                 There are 140 standard color names that are supported by all modern browsers and CSS.
-                Color samples, names and hex codes are listed below in an alphabetical order.
-                <br />
+                <br />Color samples, names and hex codes are listed below in an alphabetical order.
                 Click on a chosen one to view details and explore it in the color values <Link target="_blank" to="/color-explore/convertor"><i>convertor.</i></Link>
             </article>
 

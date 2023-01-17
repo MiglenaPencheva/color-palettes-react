@@ -13,10 +13,13 @@ const HslMixer = () => {
     return (
         <section className="explore__rgb-mixer">
             <h5 className="explore__info">HSL mixer</h5>
-            <p className="explore__rgb-mixer--info">In HSL representation model hue is a degree on the color wheel from 0 to 360. 
-                <br /> Saturation 0% means a shade of gray, tones are unsaturated hues with some quantity of grey, while 100% is the pure color.
-                <br /> Adding black makes hues darker, 0% lightness means black. 
-                Tints (pastels) are lighter versions of the color, 100% lightness means white.</p>
+            <p>In HSL representation model <b><i>hue</i></b> is a degree on the color wheel from 0 to 360.
+                <br/>0% <b><i>saturation</i></b> means a shade of gray. 
+                    Tones are unsaturated hues with some quantity of grey. 
+                    While 100% saturation means the pure color.
+                <br/>Adding black makes hues darker, 0% <b><i>lightness</i></b> means black. 
+                    Tints (pastels) are lighter versions of the color and 100% lightness means white.
+            </p>
             <section className="explore__red-blue-green">
                 <span id="hue">hue: {hue}
                     <label htmlFor="hueRange" className="slider-label">
