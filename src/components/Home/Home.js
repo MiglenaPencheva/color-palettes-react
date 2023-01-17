@@ -2,6 +2,19 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
 
+    const showMore = (e) => {
+        if (e.target.tagName.toLowerCase() === 'a') {
+            e.target.children[0].style.opacity = '1';
+            e.target.children[1].style.opacity = '1';
+        }
+    };
+    const hideMore = (e) => {
+        if (e.target.tagName.toLowerCase() === 'a') {
+            e.target.children[0].style.opacity = '0';
+            e.target.children[1].style.opacity = '0';
+        }
+    };
+
     return (
         <section className="home__section">
             <section className="home__headings">
@@ -59,7 +72,7 @@ const Header = () => {
                 <h3>White means 100% lightness</h3>
                 <h4>Monochromatic scheme</h4>
                 <h3>Color details</h3>
-                
+
                 <h4>Subtractive and additive color mixing</h4>
                 <h3>Compose your desired combination</h3>
                 <h4>Saturation and lightness</h4>
@@ -73,10 +86,30 @@ const Header = () => {
             </section>
 
             <nav className="home__navbar--ul">
-                <Link className="home__navbar--link" to="/gallery">Gallery</Link>
-                <Link className="home__navbar--link picker" to="/color-picker">Palette-maker</Link>
-                <Link className="home__navbar--link wheel" to="/combinations">Combinations</Link>
-                <Link className="home__navbar--link explore" to="/color-explore">Explore color</Link>
+                <Link className="home__navbar--link gallery"
+                    to="/gallery" onMouseOver={showMore} onMouseOut={hideMore}>
+                    <span>photo</span>
+                    Gallery
+                    <span>color palettes</span>
+                </Link>
+                <Link className="home__navbar--link picker"
+                    to="/color-picker" onMouseOver={showMore} onMouseOut={hideMore}>
+                    <span>image</span>
+                    Palette-maker
+                    <span>color-picker</span>
+                </Link>
+                <Link className="home__navbar--link wheel"
+                    to="/combinations" onMouseOver={showMore} onMouseOut={hideMore}>
+                    <span>color wheel</span>
+                    Combinations
+                    <span>color schemes</span>
+                </Link>
+                <Link className="home__navbar--link explore"
+                    to="/color-explore" onMouseOver={showMore} onMouseOut={hideMore}>
+                    <span>details</span>
+                    Explore color
+                    <span>convertor</span>
+                </Link>
             </nav>
         </section >
     );
