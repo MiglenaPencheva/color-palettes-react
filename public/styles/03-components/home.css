@@ -5,6 +5,8 @@
     transition: 0.3s ease;
     background: url('/images/75.png') center no-repeat;
     background-size: cover;
+    display: flex;
+    justify-content: center;
 }
 
 .home__headings {
@@ -15,6 +17,7 @@
     justify-content: space-around;
     align-items: flex-start;
     height: 100%;
+    max-width: 1600px;
 }
 
 .home__navbar--ul {

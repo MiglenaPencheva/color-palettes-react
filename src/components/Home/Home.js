@@ -28,20 +28,20 @@ const Header = () => {
                 <h3>Just color it</h3>
                 <h4>Mix with style</h4>
                 <h1>World of million colors</h1>
+                
                 <h3>Color sensation</h3>
-
                 <h4>The colors of the sun</h4>
-                <h3>Somewhere between black and white</h3>
+                <h3>Inspired by natural beauty</h3>
                 <h4>Colors cause certain emotions</h4>
                 <h1>The color tool</h1>
+
+                <h3>Somewhere between black and white</h3>
                 <h4>RGB color model</h4>
+                <h3>The world is ful of colorful examples</h3>
+                <h4>Design your colorful world</h4>
+                <h3>Colorization</h3>
 
                 <h4>The nature of colors</h4>
-                <h3>Inspired by natural beauty</h3>
-                <h4>Design your colorful world</h4>
-                <h3>The world is ful of colorful examples</h3>
-
-                <h4>Colorization</h4>
                 <h3>Your choice, your colors</h3>
                 <h4>The harmony of nature</h4>
                 <h3>The colors of light</h3>
