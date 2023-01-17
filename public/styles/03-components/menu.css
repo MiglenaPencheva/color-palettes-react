@@ -12,6 +12,7 @@
     z-index: 1001;
     animation: rotationMenu 1.5s;
 }
+
 #menuButton:hover {
     opacity: 1;
     animation: rotate;
@@ -50,10 +51,12 @@
     opacity: 44%;
     cursor: pointer;
 }
+
 #closeButton:hover {
     opacity: 1;
     animation: rotate;
 }
+
 #closeButton__left,
 #closeButton__right {
     position: absolute;
@@ -64,9 +67,11 @@
     background-color: var(--teal-grey);
     border-radius: 10px;
 }
+
 #closeButton__left {
     rotate: 40deg;
 }
+
 #closeButton__right {
     rotate: 140deg;
 }
@@ -81,7 +86,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-    justify-content:space-between;
+    justify-content: space-between;
     background-color: var(--vermilion-white);
     z-index: 1002;
     transition: 0.8s;
@@ -97,21 +102,25 @@
     font-weight: 600;
     border-bottom: 1px solid var(--teal-grey);
 }
+
 .menu__sub {
     margin-left: 3.5rem;
     width: 100%;
     /* font-size: 0.9rem; */
 }
+
 .menu__user {
     margin-left: 3.5rem;
     align-self: start;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.2rem;
+    gap: 0.5rem;
 }
+
 .menu__user span {
     width: 100%;
 }
+
 .menu__no-user,
 .menu__yes-user {
     width: 100%;
@@ -119,6 +128,7 @@
     flex-direction: column;
     gap: 0.3rem;
 }
+
 .menu__no-user span {
     margin-left: 3.5rem;
     color: lightgray;
@@ -133,13 +143,16 @@
     align-items: center;
     border-top: 1px solid var(--teal-grey);
 }
+
 .contacts div {
     font-size: 1.4rem;
 }
+
 .contacts img {
     height: 1rem;
     cursor: pointer;
 }
+
 .contacts span {
     font-size: 0.8rem;
 }
@@ -151,6 +164,7 @@
         font-size: 1.2rem;
     }
 }
+
 @media (max-width: 480px) {
     .menu__main {
         padding: 0.3rem 0 0.3rem 0;
@@ -158,9 +172,20 @@
     }
     .menu__sub,
     .menu__user,
-    .menu__no-user span  {
+    .menu__no-user span {
         font-size: 0.9rem;
         margin-left: 4rem;
+    }
+}
+
+@media (max-height: 680px) {
+    #dropdownContent {
+        overflow: auto;
+    }
+}
+@media (min-height: 1000px) {
+    #dropdownContent {
+        height: fit-content;
     }
 }
 
@@ -170,13 +195,14 @@
         width: 21%;
         display: flex;
         padding-top: 65px;
-        /* padding-left: 1rem; */
         box-shadow: none;
     }
+
     #site-content {
         margin-left: 20%;
     }
-    #menuButton, 
+
+    #menuButton,
     #closeButton,
     #homeLink {
         display: none;
