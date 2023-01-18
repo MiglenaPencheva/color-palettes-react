@@ -11,14 +11,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 65vw;
+    max-width: 850px;
     height: 100vh;
 }
 
 .details__image--file {
     padding: 0.5rem;
     object-fit: cover;
-    max-width: 65vw;
+    max-width: 850px;
     max-height: 95vh;
 }
 

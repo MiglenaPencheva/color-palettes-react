@@ -93,7 +93,7 @@ const Menu = () => {
                 <div className="contacts">
                     <div>&copy;</div>
                     <img src="/images/git.png" alt="git" onClick={() => window.open('https://github.com/MiglenaPencheva/color-palettes-react', '_blank')} />
-                    <span>email@gmail.com</span>
+                    <span>megacolormix@gmail.com</span>
                 </div>
 
             </div >

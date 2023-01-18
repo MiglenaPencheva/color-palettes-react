@@ -154,7 +154,7 @@
 }
 
 .contacts span {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
 }
 
 
@@ -175,6 +175,9 @@
     .menu__no-user span {
         font-size: 0.9rem;
         margin-left: 4rem;
+    }
+    .contacts {
+        padding-left: 0;
     }
 }
 
