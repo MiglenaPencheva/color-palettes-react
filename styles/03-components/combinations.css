@@ -1,0 +1,352 @@
+.combinations-page {
+    margin: 0 auto;
+    padding: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: space-around;
+    max-width: 1000px;
+}
+.combinations__navbar {
+    width: 100%;
+    padding: 0.3rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--vermilion-white);
+    border-radius: 4px;
+}
+.combinations__navbar a {
+    padding: 0.5rem;
+    cursor: pointer;
+    border: none;
+}
+.combinations__navbar a:hover {
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+.ryb__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around;
+}
+
+.ryb__info {
+    margin: 0;
+    padding-bottom: 0.4rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: 0.2rem;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-bottom: 1px solid var(--teal-grey);
+}
+.strong:hover {
+    font-style: italic;
+    cursor: default;
+}
+
+/* ----- canvas, wheels, layers ----- */
+.ryb__wheel {
+    padding-top: 0.4rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.ryb__wheel h6 {
+    margin-top: 0.6rem;
+    padding: 0;
+    font-size: 1rem;
+}
+.ryb__wheel--arrow {
+    margin: 0;
+    transform: rotate(180deg);
+    position: relative; 
+    bottom: -0.1rem;
+}
+#primaryImage,
+#secondaryImage,
+#tertiaryImage {
+    display: none;
+    position: absolute;
+    top: 3rem;
+    width: 275px;
+    height: 275px;
+}
+#rybCanvas {
+    cursor: pointer;
+    animation: animatedRotation 2s;
+}
+@keyframes animatedRotation {
+    100% {
+        rotate: 360deg;
+        /* transform: rotate(360deg); */
+    }
+}
+.ryb__wheel span {
+    padding: 1rem 0 0.3rem 0;
+    font-style: italic;
+}
+.reset {
+    padding: 0;
+    font-size: 0.9rem;
+    color: var(--teal-light);
+    cursor: pointer;
+}
+.reset:hover {
+    font-style: italic;
+}
+
+/* ----- scheme ----- */
+.ryb__scheme {
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+}
+#schemeCanvas {
+    position: absolute;
+    top: 105px;
+    z-index: 1000;
+}
+.ryb__scheme-p {
+    margin: 0;
+    padding-bottom: 0.5rem;
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--teal-light);
+    border-bottom: 1px solid var(--teal-grey);
+}
+.ryb__scheme-p span {
+    color: var(--teal-light);
+    cursor: pointer;
+}
+
+/* ----- result ----- */
+.ryb__result {
+    width: 100%;
+    padding-bottom: 1rem;
+    display: none;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid var(--teal-grey);
+}
+#resultCanvas {
+    position: relative;
+    cursor: pointer;
+}
+#resultHex {
+    display: none;
+    position: fixed;
+    padding: 0.5rem;
+    color: var(--teal-grey);
+    background-color: var(--vermilion-white);
+    border-radius: 5px;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.ryb__result button {
+    width: fit-content;
+}
+
+/* ---- scheme advantages ---- */
+.ryb__advantages {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-top: 1px solid var(--teal-grey);
+}
+.ryb__advantages h6 {
+    font-size: 1rem;
+}
+
+
+
+/* ---- wheels and schemes ---- */
+.ryb__details {
+    display: flex;
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 1rem;
+}
+.ryb__details--wheels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around;
+}   
+.ryb__details--wheel-img {
+    width: 200px;
+}
+.ryb__details--container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+.ryb__details--text-only {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+.ryb__details--text-with-img {
+    width: 80%;
+}
+.ryb__details--img {
+    margin: 0 1rem;
+    width: 120px;
+    height: 120px;
+}
+.ryb__details--others {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around;
+}
+.ryb__details--others-img {
+    width: 35%;
+}
+.ryb__details article {
+    line-height: 1.5rem;
+}
+
+
+/* ----- neutrals ----- */
+.neutrals__greys {
+    margin: 0 auto;
+    width: 80%;
+}
+.neutrals__teal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.neutrals__teal img {
+    margin: 0.5rem auto;
+    max-height: 124px;
+}
+.neutrals__images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+.neutrals__images img {
+    max-height: 120px;
+}
+.neutrals__gradient {
+    margin: 0 auto;
+    width: 100%;
+    height: 40px;
+    background-image: linear-gradient(to right, var(--teal-grey) , var(--vermilion-light));
+}
+.pastels__images img {
+    max-height: 150px;
+}
+.pastels__colors b {
+    padding: 0.2rem;
+    border-radius: 8px;
+}
+
+
+
+/* ----- pastels ----- */
+.pastels__boxes {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: stretch;
+    gap: 0.5rem;
+    opacity: 0.2;
+    height: 70px;
+}
+.pastels__boxes span {
+    flex: 1;
+    width: 1rem;
+}
+.pastels__images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+
+
+@media (max-width: 830px) {
+    .combinations__navbar {
+        flex-direction: column;
+        gap: 0;
+    }
+    .neutrals__greys {
+        width: 100%;
+    }
+    .neutrals__teal img {
+        max-width: 100%
+    }
+    .pastels__boxes {
+        gap: 0.3rem;
+        height: 60px;
+    }
+    .ryb__details--img {
+        margin: 0 auto;
+    }
+    .ryb__details--text-with-img {
+        width: 100%;
+    }
+    .ryb__details--others-img {
+        width: 60%;
+    }
+}
+
+@media (max-width: 560px) {
+    .ryb__result--ul {
+        gap: 0.3rem;
+    }
+    .ryb__result--li {
+        width: 80px;
+        height: 80px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .ryb__scheme {
+        width: 270px;
+    }
+    .ryb__result--li {
+        max-width: 60px;
+        max-height: 60px;
+    }
+    .ryb__advantages {
+        font-size: 0.9rem;
+    }
+    #reedMore {
+        font-size: 0.9rem;
+    }
+    .ryb__details--wheel-img {
+        width: 160px;
+    }
+    .ryb__scheme-info-section {
+        font-size: 0.9rem;
+    }
+    .ryb__details--others-img {
+        width: 100%;
+    }
+    .pastels__boxes {
+        gap: 0.2rem;
+        height: 40px;
+    }
+}

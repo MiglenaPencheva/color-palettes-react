@@ -1,0 +1,14 @@
+a {
+    color: var(--teal-grey);
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover {
+    opacity: 0.6;
+    /* font-weight: 600; */
+}
+
+a:visited {
+    color: var(--teal-grey);
+}

@@ -1,0 +1,36 @@
+.logo {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 24%;
+    animation: rotation 1.5s;
+    opacity: 60%;
+    cursor: pointer;
+    z-index: 1003;
+}
+.logo:hover {
+    opacity: 100%;
+    animation: rotate;
+}
+
+@keyframes rotation {
+    25% {
+        border-radius: 50%;
+    }
+    50% {
+        border-radius: 40%;
+    }
+    100% {
+        border-radius: 24%;
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .logo {
+        width: 36px;
+        height: 36px;
+    }
+}

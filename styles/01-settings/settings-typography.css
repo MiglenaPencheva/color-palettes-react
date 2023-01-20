@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Caveat&family=Montserrat:wght@200;300&family=Syncopate&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+
+html {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--teal-grey);
+}
+
+body,
+table,
+th,
+td,
+button,
+form,
+input,
+textarea,
+option,
+select {
+    font: inherit;
+}
+
+h1,
+h2,
+h5,
+h6 {
+    line-height: 1.2;
+}
+
+/* home page */
+h1,
+h3,
+h4 {
+    font-family: 'Caveat', sans-serif;
+    color: white;
+    display: inline-block;
+}
+h1 {
+    margin: 0;
+    padding: 0 4rem;
+    letter-spacing: 0.5rem;
+    font-weight: 500;
+    font-size: 3.5rem;
+    text-shadow: 2px 2px 4px var(--teal-grey);
+}
+h3,
+h4 {
+    margin: 0;
+    display: inline-flex;
+    line-height: 0;
+    font-weight: 400;
+    opacity: 0.6;
+}
+h3 {
+    padding: 0.8rem 3rem;
+    font-size: 2rem;
+}
+h4 {
+    padding: 2rem 2rem;
+    font-size: 1.2rem;
+}
+
+/* inner pages */
+h2 {
+    font-size: 2.0rem;
+    margin: 0;
+    letter-spacing: 0.1rem;
+}
+h6 {
+    font-size: 1.1rem;
+    margin: 0 auto;
+    padding: 0.5rem;
+    text-align: center;
+}
+h5 {
+    font-size: 1.2rem;
+}
+.section-header {
+    margin: 0 auto;
+    padding: 1rem 0.5rem 0.5rem 0.5rem;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--teal-grey);
+}
+.heading-on-two-lines {
+    display: inline;
+}
+.diffHeading {
+    padding: 0 0 0.8rem 0;
+    font-weight: 100;
+    font-style: italic;
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+    text-shadow: 2px 2px 2px var(--vermilion);
+}
+
+
+@media (max-width: 1000px) {
+    h1 {
+        font-size: 3rem;
+    }
+    h3 {
+        padding: 0.6rem 1.6rem;
+        font-size: 1.6rem;
+    }
+    h4 {
+        padding: 1.8rem 1.5rem;
+        font-size: 1.1rem;
+    }
+}
+@media (max-width: 800px) {
+    h1 {
+        font-size: 2.8rem;
+        letter-spacing: 0.3rem;
+    }
+
+    h3 {
+        padding: 0.4rem 1.4rem;
+        font-size: 1.4rem;
+    }
+
+    h4 {
+        padding: 1.2rem 1rem;
+        font-size: 1rem;
+    }
+}
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+        letter-spacing: 0.1rem;
+    }
+    h2 {
+        font-size: 1.8rem;
+    }
+    .diffHeading {
+        font-size: 1.8rem;
+    }
+}
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.3rem;
+        letter-spacing: 0;
+    }
+    h3 {
+        padding: 0.2rem 1rem;
+        font-size: 1.2rem;
+    }
+    h4 {
+        padding: 1rem 0.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    h1 {
+        padding: 0.5rem;
+        font-size: 1.8rem;
+        line-height: 2rem;
+    }
+    h3 {
+        padding: 0.7rem;
+        font-size: 1rem;
+    }
+
+    h4 {
+        padding: 0.2rem;
+        font-size: 0.8rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    .heading-on-two-lines {
+        display: block;
+    }
+
+    .diffHeading {
+        font-size: 1.6rem;
+    }
+}

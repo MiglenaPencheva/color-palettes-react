@@ -1,0 +1,30 @@
+@import './01-settings/settings-typography.css';
+@import './01-settings/settings-colors.css';
+
+@import './02-elements/elements-body.css';
+@import './02-elements/elements-button.css';
+@import './02-elements/elements-input.css';
+@import './02-elements/elements-select.css';
+@import './02-elements/elements-li.css';
+@import './02-elements/elements-links.css';
+@import './02-elements/elements-slider.css';
+
+@import './03-components/logo.css';
+@import './03-components/topArrow.css';
+@import './03-components/backArrow.css';
+@import './03-components/home.css';
+@import './03-components/menu.css';
+@import './03-components/header.css';
+@import './03-components/gallery.css';
+@import './03-components/search.css';
+@import './03-components/colorPalette.css';
+@import './03-components/details.css';
+@import './03-components/confirmDialog.css';
+@import './03-components/upload.css';
+@import './03-components/login.css';
+@import './03-components/register.css';
+@import './03-components/colorPicker.css';
+@import './03-components/combinations.css';
+@import './03-components/whiteBlackGrey.css';
+@import './03-components/explore.css';
+@import './03-components/notifications.css';

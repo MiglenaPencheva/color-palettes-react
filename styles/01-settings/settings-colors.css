@@ -1,0 +1,42 @@
+:root {
+    /* ---- prime colors ---- */
+    --teal-grey: #608d9e;
+    --teal-light-grey: #b8c3c7;
+    --vermilion-white: #ffefe6;
+    
+    /* ---- ryb colors ---- */
+    --ryb-red: rgb(254, 39, 18);
+    --ryb-red-orange: rgb(252, 96, 10);
+    --ryb-orange: rgb(251, 153, 2);
+    --ryb-yellow-orange: rgb(252, 204, 26);
+    --ryb-yellow: rgb(254, 254, 51);
+    --ryb-yellow-green: rgb(178, 215, 50);
+    --ryb-green: rgb(102, 176, 50);
+    --ryb-blue-green: rgb(52, 124, 152);
+    --ryb-blue: rgb(2, 71, 254);
+    --ryb-blue-purple: rgb(68, 36, 214);
+    --ryb-purple: rgb(134, 1, 175);
+    --ryb-red-purple: rgb(194, 20, 96);
+    
+    /* ---- teal colors ---- */
+    --teal-extra-dark: #419bbe;
+    --teal-dark: #57a7c6;
+    --teal-grey-25: #5094ae;
+    --teal-grey-75: #70868f;
+    --teal-black: #317691;
+    --teal-grey-black: #394e56;
+    
+    /* ---- pure colors ---- */
+    --teal: #6eb3ce;
+    --vermilion: #fd8645;
+
+    /* ---- light colors ---- */
+    --teal-light: #94c7db;
+    --vermilion-light: #fda676;
+
+    /* ---- extra light colors ---- */
+    --teal-extra-light: #cfe6ef;
+    --vermilion-extra-light: #fed7c2;
+    --vermilion-grey-white: #f9e3d7;
+    --yellow-white: #fffff2;
+}

@@ -1,0 +1,102 @@
+.home__section {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    transition: 0.3s ease;
+    background: url('/images/75.png') center no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+
+.home__headings {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    text-shadow: 2px 2px 4px var(--teal-grey);
+    justify-content: space-around;
+    align-items: flex-start;
+    height: 100%;
+    max-width: 1600px;
+}
+
+.home__navbar--ul {
+    position: fixed;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    width: 100%;
+    max-width: 1000px;
+    z-index: 2;
+}
+
+.home__navbar--link {
+    aspect-ratio: 1/ 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    background-color: white;
+    border: 1px solid var(--teal-grey);
+    border-radius: 10px;
+    font-size: 1.2rem;
+    opacity: 0.7;
+    font-weight: 500;
+}
+.home__navbar--link span {
+    font-weight: 400;
+    font-size: 0.9rem;
+    opacity: 0;
+}
+
+.home__navbar--link:hover {
+    opacity: 1;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .home__navbar--ul {
+        gap: 1rem
+    }
+    .home__navbar--link {
+        font-size: 1rem;
+    }
+}
+
+@media (orientation: portrait) {
+    .home__section {
+        background-position: 36%;
+    }
+    .home__navbar--ul {
+        margin: 0;
+        left: 2rem;
+        bottom: 0;
+        padding: 2rem 0;
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+        align-items: stretch;
+        justify-items: stretch;
+        width: 50%;
+        height: 70%;
+    }
+    .home__navbar--link {
+        max-width: 180px;
+        aspect-ratio: 0;
+        max-width: 400px;
+        border-radius: 15px;
+        gap: 0.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .home__headings {
+        margin-top: 3rem;
+    }
+}

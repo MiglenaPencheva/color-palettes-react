@@ -1,0 +1,28 @@
+.notification {
+    display: none;
+    padding: 1rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--teal-grey);
+    font-style: italic;
+    text-decoration: underline;
+    border-radius: 0.5rem;
+    box-shadow: 0 5px 10px rgb(204, 204, 204);
+}
+
+.loadingBox {
+    background: var(--teal-extra-light);
+}
+
+.infoBox {
+    background: var(--vermilion-white);
+}
+
+.errorBox {
+    background: var(--vermilion-extra-light);
+}
+
+@media (max-width: 768px) {}

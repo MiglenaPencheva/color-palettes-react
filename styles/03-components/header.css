@@ -1,0 +1,114 @@
+header {
+    position:relative;
+    top: 0;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    height: 65vh;
+    perspective: 1px;
+    overflow: hidden;
+    transition: 0.5s ease;
+    /* perspective: 1px; */
+    /* transform-style: preserve-3d; */
+    /* transform: translateZ(-7px) scale(8); */
+}
+.small {
+    position: sticky; 
+    top: 0;
+    height: 8vh;
+    z-index: 999;
+    /* animation: 500ms ease-in-out 0s normal none 1 running fadeInDown; */
+}
+.header-aside {
+    position: fixed;
+    width: 20vh;
+    height: 100vh;
+}
+
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('../../images/75.png') center no-repeat;
+    background-size: cover;
+    z-index: -1;
+    /* opacity: 0.3; */
+    /* transform: translateZ(-7px) scale(8); */
+    /* transform: translateZ(-1px) scale(2); */
+}
+.blurred {
+    filter: blur(2px);
+    -webkit-filter: blur(4px);
+    z-index: -1;
+}
+
+.navbar {
+    position: absolute;
+    top:0;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: var(--teal-extra-dark);
+    /* overflow: hidden; */
+    z-index: 1;
+    /* transform: translateZ(-2px) scale(3); */
+}
+.nav-aside {
+    position: fixed;
+    width: 24vh;
+    height: 100vh;
+    flex-direction: column;
+    justify-items: center;
+}
+
+.navbar__ul {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar__link {
+    margin: 0;
+    padding: 1rem 1.5rem;
+    color: var(--teal-grey);
+}
+
+.navbar__link:hover {
+    font-style: italic;
+}
+
+.logo, .user, .guest {
+    margin: 0;
+    align-self: flex-start;
+}
+
+.user__username {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+    color: var(--teal-grey);
+}
+
+.heading {
+    position: fixed;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+    width: max-content;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    text-shadow: 2px 2px 4px var(--teal-grey);
+    /* z-index: 2; */
+}
+.disappear {
+    display: none;
+    transition: 0.1s ease;
+}
