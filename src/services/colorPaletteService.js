@@ -1,4 +1,5 @@
-const baseUrl = 'http://localhost:5500';
+// const baseUrl = 'http://localhost:5500';
+const baseUrl = 'https://colorpalettes-api.onrender.com';
 
 export const getAll = async () => {
     try {
@@ -41,9 +42,9 @@ export const getAll = async () => {
 // };
 
 export const create = async (data, token) => {
-    for (const key of data.keys()) {
-        console.log(key, data.get(key));
-    }
+    // for (const key of data.keys()) {
+    //     console.log(key, data.get(key));
+    // }
     let response = await fetch(`${baseUrl}/color-palettes`, {
         method: 'POST',
         headers: { 

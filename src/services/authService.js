@@ -1,4 +1,5 @@
-const baseUrl = 'http://localhost:5500';
+// const baseUrl = 'http://localhost:5500';
+const baseUrl = 'https://colorpalettes-api.onrender.com';
 
 export const login = async (username, password) => {
     let res = await fetch(`${baseUrl}/auth/login`, {
