@@ -288,13 +288,13 @@
 #colorArticle div {
     padding: 0.3rem;
     width: 221px;
-    height: 50px;
+    height: 60px;
     text-align: center;
     border-radius: 12px 12px 0 0;
 }
 #colorArticle span {
     width: 221px;
-    height: 50px;
+    height: 55px;
     border-radius: 0 0 12px 12px;
 }
 

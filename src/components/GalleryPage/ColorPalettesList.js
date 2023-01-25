@@ -12,13 +12,15 @@ const ColorPaletteList = ({
     const [query, setQuery] = useState('');
 
     useEffect(() => {
-        const sorted = [...colorPalettes];
-        sorted.sort((a, b) => {
-            return sort === 'liked'
-            ? b.likedBy.length - a.likedBy.length
-            : b.created_at - a.created_at;
-        });
-        setSortedPalettes(sorted);
+        if (colorPalettes.length > 0) {
+            const sorted = [...colorPalettes];
+            sorted.sort((a, b) => {
+                return sort === 'liked'
+                ? b.likedBy.length - a.likedBy.length
+                : b.created_at - a.created_at;
+            });
+            setSortedPalettes(sorted);
+        }
     }, [sort, colorPalettes]);
 
 
