@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { disableReactDevTools } from '@fvilers/disable-react-devtools';
-
-if (process.env.NODE_ENV === 'production') disableReactDevTools();
-
 
 ReactDOM.render(
     <React.StrictMode>
