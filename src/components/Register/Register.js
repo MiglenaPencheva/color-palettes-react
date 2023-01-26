@@ -53,12 +53,14 @@ const Register = () => {
 
                     <fieldset className="user__fieldset">
                         <legend className="user__legend">Repeat Password</legend>
-                        <input type="password" name="rePassword" id="rePassword" 
+                        <input type="password" name="rePassword" id="rePassword"
                             className="user__input" />
                     </fieldset>
 
-                    <input className="button user__submit-btn" 
+                    <input className="button user__submit-btn"
                         type="submit" value="Register" />
+
+                    <p>Already have an account? <b><i><Link to="/login">Sign in.</Link></i></b></p> 
 
                 </fieldset>
             </form>

@@ -54,7 +54,7 @@ const Menu = () => {
                     </section>
                     : <section className="menu__user">
                         <Link to="/login">Sign in /</Link>
-                        <Link to="/register">Subscribe</Link>
+                        <Link to="/register">Sign up</Link>
                     </section>
                 }
 

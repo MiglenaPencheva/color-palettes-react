@@ -51,6 +51,8 @@ const Login = () => {
                         type="submit"
                         value="Login" />
 
+                    <p>Need an account? <b><i><Link to="/register">Sign up.</Link></i></b></p>
+
                 </fieldset>
             </form>
         </section>
