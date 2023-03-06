@@ -1,15 +1,13 @@
 // export function validate(title, category, colorGroup, imageFile) {
 export function validate(formData) {
-    console.log(formData.title, formData.category, formData.colorGroup, formData.imageFile);
     
-    // let { title, category, colorGroup, imageFile } = formData;
-    // console.log(title, category, colorGroup, imageFile);
-
-    const title = formData.get('title');
-    const category = formData.get('category');
-    const colorGroup = formData.get('colorGroup');
-    const imageFile = formData.get('imageFile');
-
+    
+    let title = formData.get('title');
+    let category = formData.get('category');
+    let colorGroup = formData.get('colorGroup');
+    let imageFile = formData.get('imageFile');
+    
+    console.log(title, category, colorGroup, imageFile);
     // for (const key of formData.keys()) {
     //     console.log(key, formData.get(key));
     // }
