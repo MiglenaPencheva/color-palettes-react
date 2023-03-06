@@ -47,32 +47,13 @@ const UploadPalette = () => {
         try {
             const formData = new FormData(e.currentTarget);
 
-            // let title = formData.get('title');
+            if (formData.get('imageFile').size === 0) { throw new Error('Image required'); }
             if (formData.get('title').trim() === '') { throw new Error('Title required'); }
-            // if (title.trim() === '') { throw new Error('Title required'); }
             if (formData.get('title').length > 100) { throw new Error('Title should be less than 100 characters'); }
-            // if (title.length > 100) { throw new Error('Title should be less than 100 characters'); }
-            
-            // let category = formData.get('category');
             if (formData.get('category') === 'Choose category' || formData.get('category') === '') { throw new Error('Category required'); }
-            // if (category === 'Choose category' || category === '') { throw new Error('Category required'); }
-            
             let colors = getColorGroup(formData);
             if (colors === '') { throw new Error('Choose color group'); }
             formData.append('colors', colors);
-            
-            // let imageFile = formData.get('imageFile');
-            if (formData.get('imageFile').size === 0) { throw new Error('Image required'); }
-            // if (imageFile.size === 0) { throw new Error('Image required'); }
-
-            for (const key of formData.keys()) {
-                console.log(key, formData.get(key));
-            }
-
-            // console.log(title, category, colors, imageFile);
-
-            // const data = { title, category, colors, imageFile };
-            // console.log(data);
 
             await colorPaletteService.create(formData, user.accessToken);
 

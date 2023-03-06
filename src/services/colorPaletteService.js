@@ -42,8 +42,6 @@ export const getAll = async () => {
 // };
 
 export const create = async (data, token) => {
-    console.log(data);
-
     let response = await fetch(`${baseUrl}/color-palettes`, {
         method: 'POST',
         headers: { 
