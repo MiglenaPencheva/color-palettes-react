@@ -21,7 +21,7 @@ const Details = () => {
                 setColorPalette(res);
                 setCategory(res.category);
                 setLikes(res.likedBy.length);
-                setColors(res.colors.split(',').join(', '));
+                setColors(res.colors);
             });
     }, [colorPaletteId]);
 

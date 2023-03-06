@@ -82,10 +82,10 @@ export const update = async (colorPaletteId, data, token) => {
     let response = await fetch(`${baseUrl}/color-palettes/${colorPaletteId}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/json',
             'x-authorization': token
         },
-        body: JSON.stringify(data)
+        body: data
     });
 
     let result = await response.json();

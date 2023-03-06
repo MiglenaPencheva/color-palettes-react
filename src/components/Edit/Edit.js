@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 import * as colorPaletteService from '../../services/colorPaletteService';
 import { hideError, showError } from '../../helpers/notifications';
-import { validate, getColorGroup } from '../../helpers/prepareData';
+import { getColorGroup } from '../../helpers/prepareData';
 import UploadColors from '../UploadPalette/common/UploadColors';
 import UploadCategory from '../UploadPalette/common/UploadCategory';
 import UploadTitle from '../UploadPalette/common/UploadTitle';
@@ -41,13 +41,14 @@ const Edit = () => {
 
             let formData = new FormData(e.currentTarget);
 
-            let title = formData.get('title');
-            let category = formData.get('category');
+            if (formData.get('title').trim() === '') { throw new Error('Title required'); }
+            if (formData.get('title').length > 100) { throw new Error('Title should be less than 100 characters'); }
+            if (formData.get('category') === 'Choose category' || formData.get('category') === '') { throw new Error('Category required'); }
             let colors = getColorGroup(formData);
+            if (colors === '') { throw new Error('Choose color group'); }
+            formData.append('colors', colors);
 
-            let data = { title, category, colors };
-
-            await colorPaletteService.update(colorPaletteId, data, user.accessToken);
+            await colorPaletteService.update(colorPaletteId, formData, user.accessToken);
 
             hideError();
             navigate(`/details/${colorPalette._id}`);
