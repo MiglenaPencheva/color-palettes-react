@@ -44,5 +44,6 @@ export function getColorGroup(formData) {
     if (grey) { colorGroup.push('grey'); }
     if (pink) { colorGroup.push('pink'); }
 
-    return colorGroup;
+    let colors = colorGroup.join(', ');
+    return colors;
 }
