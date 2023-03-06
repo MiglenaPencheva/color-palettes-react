@@ -1,6 +1,19 @@
 // export function validate(title, category, colorGroup, imageFile) {
 export function validate(formData) {
-    let { title, category, colorGroup, imageFile } = formData;
+    console.log(formData.title, formData.category, formData.colorGroup, formData.imageFile);
+    
+    // let { title, category, colorGroup, imageFile } = formData;
+    // console.log(title, category, colorGroup, imageFile);
+
+    const title = formData.get('title');
+    const category = formData.get('category');
+    const colorGroup = formData.get('colorGroup');
+    const imageFile = formData.get('imageFile');
+
+    // for (const key of formData.keys()) {
+    //     console.log(key, formData.get(key));
+    // }
+
     if (title.trim() === '') { throw new Error('Title required'); }
     if (title.length > 100) { throw new Error('Title should be less than 100 characters'); }
     if (category === 'Choose category' || category === '') { throw new Error('Category required'); }
