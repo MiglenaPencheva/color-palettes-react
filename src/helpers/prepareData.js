@@ -6,11 +6,6 @@ export function validate(formData) {
     let colors = formData.get('colors');
     let imageFile = formData.get('imageFile');
     
-    console.log(title, category, colors, imageFile);
-    // for (const key of formData.keys()) {
-    //     console.log(key, formData.get(key));
-    // }
-
     if (title.trim() === '') { throw new Error('Title required'); }
     if (title.length > 100) { throw new Error('Title should be less than 100 characters'); }
     if (category === 'Choose category' || category === '') { throw new Error('Category required'); }

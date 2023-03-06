@@ -56,6 +56,12 @@ const UploadPalette = () => {
 
             let data = validate(formData);
 
+            console.log(data);
+            console.log(data.title);
+            console.log(data.category);
+            console.log(data.colors);
+            console.log(data.imageFile);
+
             await colorPaletteService.create(data, user.accessToken);
 
             hideError();
