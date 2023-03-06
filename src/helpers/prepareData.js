@@ -3,26 +3,20 @@ export function validate(formData) {
     
     let title = formData.get('title');
     let category = formData.get('category');
-    let colors = formData.get('colors');
+    let colorString = formData.get('colorString');
     let imageFile = formData.get('imageFile');
     
     if (title.trim() === '') { throw new Error('Title required'); }
     if (title.length > 100) { throw new Error('Title should be less than 100 characters'); }
     if (category === 'Choose category' || category === '') { throw new Error('Category required'); }
-    if (colors.length === 0) { throw new Error('Choose color group'); }
+    if (colorString.length === 0) { throw new Error('Choose color group'); }
     if (imageFile.size === 0) { throw new Error('Image required'); }
     
     // if (imageUrl.trim() === '') { throw new Error('Image required'); }
     // if (imageUrl.slice(0, 7) !== 'http://' &&
     //     imageUrl.slice(0, 8) !== 'https://') { throw new Error('Invalid image URL'); }
 
-    const data = {
-        title,
-        category,
-        colors,
-        imageFile
-    };
-    return data;
+    return { title, category, colorString, imageFile };
 };
 
 export function getColorGroup(formData) {

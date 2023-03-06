@@ -47,20 +47,22 @@ const UploadPalette = () => {
         try {
             const formData = new FormData(e.currentTarget);
 
-            let colors = getColorGroup(formData);
-            formData.append('colors', colors);
+            let colorString = getColorGroup(formData);
+            formData.append('colors', colorString);
 
             for (const key of formData.keys()) {
                 console.log(key, formData.get(key));
             }
 
-            let data = validate(formData);
+            let { title, category, colors, imageFile } = validate(formData);
+
+            console.log(title, category, colors, imageFile);
+
+            let data = {
+                title, category, colors, imageFile
+            };
 
             console.log(data);
-            console.log(data.title);
-            console.log(data.category);
-            console.log(data.colors);
-            console.log(data.imageFile);
 
             await colorPaletteService.create(data, user.accessToken);
 
