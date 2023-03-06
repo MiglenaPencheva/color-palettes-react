@@ -41,14 +41,13 @@ const Edit = () => {
 
             let formData = new FormData(e.currentTarget);
 
-            if (formData.get('title').trim() === '') { throw new Error('Title required'); }
-            if (formData.get('title').length > 100) { throw new Error('Title should be less than 100 characters'); }
-            if (formData.get('category') === 'Choose category' || formData.get('category') === '') { throw new Error('Category required'); }
+            let title = formData.get('title');
+            let category = formData.get('category');
             let colors = getColorGroup(formData);
-            if (colors === '') { throw new Error('Choose color group'); }
-            formData.append('colors', colors);
 
-            await colorPaletteService.update(colorPaletteId, formData, user.accessToken);
+            let data = { title, category, colors };
+
+            await colorPaletteService.update(colorPaletteId, data, user.accessToken);
 
             hideError();
             navigate(`/details/${colorPalette._id}`);
