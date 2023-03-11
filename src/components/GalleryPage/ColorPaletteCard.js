@@ -4,8 +4,6 @@ const ColorPaletteCard = ({
     colorPalette
 }) => {
     console.log(colorPalette.imageFile);
-    console.log(colorPalette.imageFile.contentType);
-    console.log(colorPalette.imageFile.data);
 
     return (
         <li className="color-palette-card">
@@ -13,7 +11,7 @@ const ColorPaletteCard = ({
             <Link className="color-palette-card__link" to={`/details/${colorPalette._id}`}></Link>
 
             <img className="color-palette-card__image"
-                src={`data:${colorPalette.imageFile.contentType};base64,${colorPalette.imageFile.data}`}
+                src={`data:image/jpeg;base64,${colorPalette.imageFile}`}
                 alt="color palette" />
 
             <p className="color-palette-card__title">{colorPalette.title}</p>
