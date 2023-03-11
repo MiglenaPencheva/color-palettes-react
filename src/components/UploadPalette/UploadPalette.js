@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { useAuthContext } from '../../contexts/AuthContext';
 import * as colorPaletteService from '../../services/colorPaletteService';
 import { hideError, showError } from '../../helpers/notifications';
-import { validate, getColorGroup } from '../../helpers/prepareData';
+import { getColorGroup } from '../../helpers/prepareData';
 
 import UploadTitle from './common/UploadTitle';
 import UploadCategory from './common/UploadCategory';

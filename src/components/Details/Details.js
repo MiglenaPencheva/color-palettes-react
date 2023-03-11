@@ -86,7 +86,7 @@ const Details = () => {
             <section id="details" className="details">
 
                 <span className="details__image">
-                    <img className="details__image--file" src={colorPalette.imageFile} alt="palette" />
+                    <img className="details__image--file" src={`data:${colorPalette.imageFile.contentType};base64,${colorPalette.imageFile.buffer}`} alt="palette" />
                 </span>
 
                 <div className="details__info">
