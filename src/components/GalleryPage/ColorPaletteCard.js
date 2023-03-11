@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 const ColorPaletteCard = ({
     colorPalette
 }) => {
-    console.log(colorPalette.imageFile);
-
     return (
         <li className="color-palette-card">
 

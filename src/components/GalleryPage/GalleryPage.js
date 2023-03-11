@@ -18,7 +18,6 @@ const Gallery = () => {
     useEffect(() => {
         colorPaletteService.getAll()
             .then(result => {
-                console.log(result);
                 setColorPalettes(result);
             });
     }, []);

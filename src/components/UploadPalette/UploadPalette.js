@@ -17,7 +17,6 @@ const UploadPalette = () => {
     const onFileUpload = (e) => {
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);
-        console.log(src);
 
         let imagePreview = document.getElementById('imagePreview');
         while (imagePreview.firstChild) {

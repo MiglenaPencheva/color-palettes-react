@@ -18,7 +18,6 @@ const Details = () => {
     useEffect(() => {
         colorPaletteService.getOne(colorPaletteId)
             .then(res => {
-                console.log(res);
                 setColorPalette(res);
                 setCategory(res.category);
                 setLikes(res.likedBy.length);
@@ -43,11 +42,8 @@ const Details = () => {
 
     const onLikeClick = async () => {
         try {
-            console.log(colorPalette.creator);
             if (user._id === colorPalette.creator) { return; }
-            console.log(colorPalette.likedBy);
             if (colorPalette.likedBy.includes(user._id)) {
-                console.log('Already liked');
                 showInfo('Already liked');
                 return;
             }
