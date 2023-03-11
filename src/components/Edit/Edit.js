@@ -21,7 +21,7 @@ const Edit = () => {
         colorPaletteService.getOne(colorPaletteId)
             .then(result => {
                 setColorPalette(result);
-                setSrc(`data:${result.imageFile.contentType};base64,${result.imageFile.buffer}`);
+                setSrc(`data:${result.imageFile.contentType};base64,${result.imageFile.data}`);
             });
     }, [colorPaletteId]);
 
