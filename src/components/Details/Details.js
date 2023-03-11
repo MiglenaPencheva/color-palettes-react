@@ -18,6 +18,7 @@ const Details = () => {
     useEffect(() => {
         colorPaletteService.getOne(colorPaletteId)
             .then(res => {
+                console.log(res);
                 setColorPalette(res);
                 setCategory(res.category);
                 setLikes(res.likedBy.length);
