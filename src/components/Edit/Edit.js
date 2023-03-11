@@ -15,13 +15,11 @@ const Edit = () => {
     const { user } = useAuthContext();
     const [colorPalette, setColorPalette] = useState({});
     const [owner, setOwner] = useState(false);
-    const [src, setSrc] = useState('');
 
     useEffect(() => {
         colorPaletteService.getOne(colorPaletteId)
             .then(result => {
                 setColorPalette(result);
-                setSrc(`data:image/jpeg;base64,${result.imageFile}`);
             });
     }, [colorPaletteId]);
 
@@ -68,7 +66,7 @@ const Edit = () => {
 
                     <section className="upload__upload-file">
                         <span id="imagePreview" className="upload__upload-file--image-preview">
-                            <img src={src} alt="preview of file" />
+                            <img src={`data:image/jpeg;base64,${colorPalette.imageFile}`} alt="preview of file" />
                         </span>
                     </section>
 
