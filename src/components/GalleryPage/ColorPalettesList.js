@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { beginRequest, endRequest } from '../../helpers/notifications';
 
 import ColorPaletteCard from './ColorPaletteCard';
 
@@ -11,7 +10,6 @@ const ColorPaletteList = ({
     const [sort, setSort] = useState(colorPalettes);
     const [sortedPalettes, setSortedPalettes] = useState(colorPalettes);
     const [query, setQuery] = useState('');
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (colorPalettes.length > 0) {
@@ -22,8 +20,6 @@ const ColorPaletteList = ({
                     : b.created_at - a.created_at;
             });
             setSortedPalettes(sorted);
-            setLoading(false);
-            endRequest();
         }
     }, [sort, colorPalettes]);
 
@@ -65,20 +61,17 @@ const ColorPaletteList = ({
 
             </section>
 
-            {loading
-                ? beginRequest()
-
-                : colorPalettes.length > 0
-                    ? <ul className="color-palette-list" >
-                        {query
-                            ? sortedPalettes
-                                .filter(x => x.title.toLowerCase().includes(query.toLowerCase()))
-                                .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
-                            : sortedPalettes
-                                .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
-                        }
-                    </ul>
-                    : <p className="no-palettes"><b> No color palettes to show!</b></p>
+            {colorPalettes.length > 0
+                ? <ul className="color-palette-list" >
+                    {query
+                        ? sortedPalettes
+                            .filter(x => x.title.toLowerCase().includes(query.toLowerCase()))
+                            .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
+                        : sortedPalettes
+                            .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
+                    }
+                </ul>
+                : <p className="no-palettes"><b> No color palettes to show!</b></p>
             }
         </section >
     );
