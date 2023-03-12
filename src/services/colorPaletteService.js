@@ -1,10 +1,14 @@
+import { beginRequest, endRequest } from '../helpers/notifications';
 // const baseUrl = 'http://localhost:5500';
 const baseUrl = 'https://colorpalettes-api.onrender.com';
 
 export const getAll = async () => {
     try {
+        beginRequest();
         let response = await fetch(`${baseUrl}/color-palettes`);
-        return await response.json();
+        let result = await response.json();
+        endRequest();
+        return result;
 
     } catch (error) {
         return { msg: error };
@@ -46,6 +50,8 @@ export const create = async (data, token) => {
         console.log(key, data.get(key));
     }
 
+    beginRequest();
+
     let response = await fetch(`${baseUrl}/color-palettes`, {
         method: 'POST',
         headers: { 
@@ -55,6 +61,8 @@ export const create = async (data, token) => {
     });
 
     let result = await response.json();
+
+    endRequest();
 
     if (response.ok) {
         return result;
@@ -83,6 +91,8 @@ export const save = async (data, token) => {
 };
 
 export const update = async (colorPaletteId, data, token) => {
+    beginRequest();
+
     let response = await fetch(`${baseUrl}/color-palettes/${colorPaletteId}`, {
         method: 'PUT',
         headers: {
@@ -93,6 +103,8 @@ export const update = async (colorPaletteId, data, token) => {
     });
 
     let result = await response.json();
+
+    endRequest();
 
     if (response.ok) {
         return result;
@@ -102,8 +114,12 @@ export const update = async (colorPaletteId, data, token) => {
 };
 
 export const getOne = async (colorPaletteId) => {
+    beginRequest();
+
     let response = await fetch(`${baseUrl}/color-palettes/${colorPaletteId}`);
     let result = await response.json();
+
+    beginRequest();
 
     if (response.ok) {
         return result;
@@ -113,6 +129,8 @@ export const getOne = async (colorPaletteId) => {
 };
 
 export const like = async (colorPaletteId, data, token) => {
+    beginRequest();
+
     let response = await fetch(`${baseUrl}/color-palettes/${colorPaletteId}`, {
         method: 'PUT',
         headers: {
@@ -121,7 +139,10 @@ export const like = async (colorPaletteId, data, token) => {
         },
         body: JSON.stringify(data)
     });
+
     let result = await response.json();
+
+    endRequest();
 
     if (response.ok) {
         return result;
@@ -132,11 +153,16 @@ export const like = async (colorPaletteId, data, token) => {
 
 export const remove = async (id, token) => {
     try {
+        beginRequest();
+
         let response = await fetch(`${baseUrl}/color-palettes/${id}`, {
             method: 'DELETE',
             headers: { 'X-Authorization': token }
         });
         let result = await response;
+
+        endRequest();
+
         return result;
     } catch (error) {
         console.log(error);
