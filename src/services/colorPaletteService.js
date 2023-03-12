@@ -119,7 +119,7 @@ export const getOne = async (colorPaletteId) => {
     let response = await fetch(`${baseUrl}/color-palettes/${colorPaletteId}`);
     let result = await response.json();
 
-    beginRequest();
+    endRequest();
 
     if (response.ok) {
         return result;
