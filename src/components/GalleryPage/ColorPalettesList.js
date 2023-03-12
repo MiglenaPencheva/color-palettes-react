@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { beginRequest, endRequest } from '../../helpers/notifications';
 
 import ColorPaletteCard from './ColorPaletteCard';
 
@@ -10,16 +11,19 @@ const ColorPaletteList = ({
     const [sort, setSort] = useState(colorPalettes);
     const [sortedPalettes, setSortedPalettes] = useState(colorPalettes);
     const [query, setQuery] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (colorPalettes.length > 0) {
             const sorted = [...colorPalettes];
             sorted.sort((a, b) => {
                 return sort === 'liked'
-                ? b.likedBy.length - a.likedBy.length
-                : b.created_at - a.created_at;
+                    ? b.likedBy.length - a.likedBy.length
+                    : b.created_at - a.created_at;
             });
             setSortedPalettes(sorted);
+            setLoading(false);
+            endRequest();
         }
     }, [sort, colorPalettes]);
 
@@ -61,19 +65,21 @@ const ColorPaletteList = ({
 
             </section>
 
-            {colorPalettes.length > 0
-                ? <ul className="color-palette-list" >
-                    {query
-                        ? sortedPalettes
-                            .filter(x => x.title.toLowerCase().includes(query.toLowerCase()))
-                            .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
-                        : sortedPalettes
-                            .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
-                    }
-                </ul>
-                : <p className="no-palettes"><b> No color palettes to show!</b></p>
-            }
+            {loading
+                ? beginRequest()
 
+                : colorPalettes.length > 0
+                    ? <ul className="color-palette-list" >
+                        {query
+                            ? sortedPalettes
+                                .filter(x => x.title.toLowerCase().includes(query.toLowerCase()))
+                                .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
+                            : sortedPalettes
+                                .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
+                        }
+                    </ul>
+                    : <p className="no-palettes"><b> No color palettes to show!</b></p>
+            }
         </section >
     );
 };
