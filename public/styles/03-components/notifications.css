@@ -23,17 +23,21 @@
     transform: translate(-50%, -50%);
     border-radius: 50%;
     opacity: 60%;
+    border-radius: 24%;
     /* background: linear-gradient(to right, red 0%, #FF8000, yellow, #80FF00, #00FF00, #00FF80, cyan, #0080FF, blue, #8000FF, magenta, #FF0080 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent; */
-    animation: loading 1.5s linear infinite;
+    animation: rotate 1.5s linear;
 }
-@keyframes loading {
+@keyframes rotate {
     0% {
         transform: rotate(0);
     }
-
+    50% {
+        border-radius: 50%;
+    }
     100% {
+        border-radius: 24%;
         transform: rotate(360deg);
     }
 }
