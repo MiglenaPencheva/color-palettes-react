@@ -8,22 +8,18 @@ import ColorPaletteList from './ColorPalettesList';
 import Categories from './Categories';
 import ColorGroups from './ColorGroups';
 import UploadPalette from '../UploadPalette/UploadPalette';
-import { beginRequest, endRequest } from '../../helpers/notifications';
 
 const Gallery = () => {
     const navigate = useNavigate();
     const { user } = useAuthContext();
 
     const [colorPalettes, setColorPalettes] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        beginRequest();
-        setIsLoading(true);
         colorPaletteService.getAll()
-            .then(result => { setColorPalettes(result); })
-            .then(endRequest())
-            .then(setIsLoading(false));
+            .then(result => {
+                setColorPalettes(result);
+            });
     }, []);
 
     return (
@@ -59,7 +55,7 @@ const Gallery = () => {
 
             </nav>
 
-            {!isLoading && <Routes>
+            <Routes>
                 <Route path="" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
                 <Route path="all" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
                 <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'} />} />
@@ -69,7 +65,7 @@ const Gallery = () => {
                 <Route path="upload" element={<UploadPalette />} />
                 {/* <Route path="upload" element={user._id ? <UploadPalette /> : navigate('/login')} /> */}
             </Routes>
-            }
+
         </section >
 
     );

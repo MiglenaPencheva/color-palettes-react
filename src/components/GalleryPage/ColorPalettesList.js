@@ -71,7 +71,9 @@ const ColorPaletteList = ({
                             .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
                     }
                 </ul>
-                : <p className="no-palettes"><b> No color palettes to show!</b></p>
+                // : <p className="no-palettes"><b> No color palettes to show!</b></p>
+                : <img id="loadingBox" class="loadingBox" src="/images/logo.png" alt="logo" />
+
             }
         </section >
     );
