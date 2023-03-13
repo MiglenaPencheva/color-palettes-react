@@ -3,7 +3,6 @@ import { Routes, Route, NavLink, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 import * as colorPaletteService from '../../services/colorPaletteService';
 
-import Loader from '../Loader/Loader';
 import ColorPaletteList from './ColorPalettesList';
 import Categories from './Categories';
 import ColorGroups from './ColorGroups';
@@ -14,15 +13,12 @@ const Gallery = () => {
     const { user } = useAuthContext();
 
     const [colorPalettes, setColorPalettes] = useState([]);
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setLoading(true);
         colorPaletteService.getAll()
             .then(result => {
                 setColorPalettes(result);
             });
-        setLoading(false);
     }, []);
 
     return (
@@ -58,19 +54,17 @@ const Gallery = () => {
 
             </nav>
 
-            {loading
-                ? <Loader />
-                : <Routes>
-                    <Route path="" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
-                    <Route path="all" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
-                    <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'} />} />
-                    <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Color groups'} />} />
-                    <Route path="favorites" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.likedBy.includes(user._id))} title={'My favorites'} />} />
-                    <Route path="mine" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.creator === user._id)} title={'My color palettes'} />} />
-                    <Route path="upload" element={<UploadPalette />} />
-                    {/* <Route path="upload" element={user._id ? <UploadPalette /> : navigate('/login')} /> */}
-                </Routes>
-            }
+            <Routes>
+                <Route path="" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
+                <Route path="all" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
+                <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'} />} />
+                <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Color groups'} />} />
+                <Route path="favorites" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.likedBy.includes(user._id))} title={'My favorites'} />} />
+                <Route path="mine" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.creator === user._id)} title={'My color palettes'} />} />
+                <Route path="upload" element={<UploadPalette />} />
+                {/* <Route path="upload" element={user._id ? <UploadPalette /> : navigate('/login')} /> */}
+            </Routes>
+
         </section >
 
     );

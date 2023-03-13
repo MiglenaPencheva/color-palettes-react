@@ -20,3 +20,27 @@
 .errorBox {
     background: var(--vermilion-extra-light);
 }
+
+.loadingBox {
+    /* display: none; */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    opacity: 60%;
+    /* background: linear-gradient(to right, red 0%, #FF8000, yellow, #80FF00, #00FF00, #00FF80, cyan, #0080FF, blue, #8000FF, magenta, #FF0080 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent; */
+    animation: spinner 1.5s linear infinite;
+}
+@keyframes spinner {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
