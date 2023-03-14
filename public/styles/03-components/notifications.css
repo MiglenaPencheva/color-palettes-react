@@ -51,8 +51,9 @@
     .loadingBox {
         left: calc(21% + (79% - 44px) / 2);
     }
+
     .notification {
-        left: 50%;
+        left: calc(79% / 2 + 21%);
         transform: translate(-50%, -50%) translateX(calc((79% - 100%) / 2 + 21%));
     }
 }
