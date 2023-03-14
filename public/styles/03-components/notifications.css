@@ -50,4 +50,8 @@
     .loadingBox {
         left: calc(21% + (79% - 44px) / 2);
     }
+    .notification {
+        left: calc(21% + (100% - 21%) / 2 - 50%);
+        transform: translate(0, -50%);
+    }
 }
