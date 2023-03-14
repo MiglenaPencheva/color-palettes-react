@@ -11,6 +11,7 @@
     text-decoration: underline;
     border-radius: 0.5rem;
     box-shadow: 0 5px 10px rgb(204, 204, 204);
+    z-index: 1005;
 }
 
 .infoBox {
@@ -50,9 +51,7 @@
     .loadingBox {
         left: calc(21% + (79% - 44px) / 2);
     }
-
     .notification {
-        left: 50%;
         transform: translate(-50%, -50%) translateX(calc((79% - 100%) / 2 + 21%));
     }
 }
