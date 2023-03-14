@@ -36,11 +36,19 @@
 	-webkit-text-fill-color: transparent; */
     animation: spinner 1.5s linear infinite;
 }
+
 @keyframes spinner {
     0% {
         transform: rotate(0);
     }
+
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@media (min-width: 1360px) {
+    .loadingBox {
+        left: 60%;
     }
 }
