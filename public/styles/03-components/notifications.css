@@ -53,7 +53,6 @@
 
     .notification {
         left: 50%;
-        transform: translate(-50%, -50%);
-        margin-left: calc((79% - width-of-notification) / 2 + 21%);
+        transform: translate(-50%, -50%) translateX(calc((79% - 100%) / 2 + 21%));
     }
 }
