@@ -1,7 +1,10 @@
+import { beginRequest, endRequest } from '../helpers/notifications';
 // const baseUrl = 'http://localhost:5500';
 const baseUrl = 'https://colorpalettes-api.onrender.com';
 
 export const login = async (username, password) => {
+    beginRequest();
+
     let res = await fetch(`${baseUrl}/auth/login`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
@@ -9,6 +12,8 @@ export const login = async (username, password) => {
     });
 
     let resJson = await res.json();
+
+    endRequest();
 
     if (res.ok) {
         return resJson;
@@ -18,6 +23,7 @@ export const login = async (username, password) => {
 };
 
 export const register = async (username, password) => {
+    beginRequest();
     let res = await fetch(`${baseUrl}/auth/register`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
@@ -25,6 +31,8 @@ export const register = async (username, password) => {
     });
 
     let resJson = await res.json();
+
+    endRequest();
 
     if (res.ok) {
         return resJson;
