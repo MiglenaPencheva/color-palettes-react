@@ -10,7 +10,6 @@ const ColorPaletteList = ({
     const [sort, setSort] = useState(colorPalettes);
     const [sortedPalettes, setSortedPalettes] = useState(colorPalettes);
     const [query, setQuery] = useState('');
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (colorPalettes.length > 0) {
@@ -23,19 +22,6 @@ const ColorPaletteList = ({
             setSortedPalettes(sorted);
         }
     }, [sort, colorPalettes]);
-
-    const loader = document.getElementById('loadingBox');
-    console.log(loader);
-    console.log(loading);
-    if (loader.style.display === 'block') {
-        setLoading(true);
-        console.log(loader);
-        console.log(loading);
-    } else if (loader.style.display === 'none') {
-        setLoading(false);
-        console.log(loader);
-        console.log(loading);
-    }
 
     return (
         <section>
@@ -74,19 +60,17 @@ const ColorPaletteList = ({
 
             </section>
 
-            {loading
-                ? ''
-                : colorPalettes.length > 0
-                    ? <ul className="color-palette-list" >
-                        {query
-                            ? sortedPalettes
-                                .filter(x => x.title.toLowerCase().includes(query.toLowerCase()))
-                                .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
-                            : sortedPalettes
-                                .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
-                        }
-                    </ul>
-                    : <p className="no-palettes"><b> No color palettes to show!</b></p>
+            {colorPalettes && colorPalettes.length > 0
+                ? <ul className="color-palette-list" >
+                    {query
+                        ? sortedPalettes
+                            .filter(x => x.title.toLowerCase().includes(query.toLowerCase()))
+                            .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
+                        : sortedPalettes
+                            .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
+                    }
+                </ul>
+                : <p className="no-palettes"><b> No color palettes to show!</b></p>
             }
 
         </section >
