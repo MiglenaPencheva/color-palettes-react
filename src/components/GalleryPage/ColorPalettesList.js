@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import ColorPaletteCard from './ColorPaletteCard';
+import { beginRequest, endRequest } from '../../helpers/notifications';
 
 const ColorPaletteList = ({
     colorPalettes,
@@ -10,6 +11,12 @@ const ColorPaletteList = ({
     const [sort, setSort] = useState(colorPalettes);
     const [sortedPalettes, setSortedPalettes] = useState(colorPalettes);
     const [query, setQuery] = useState('');
+    const [notLoading, setNotLoading] = useState(true);
+
+    useEffect(() => {
+        if (beginRequest()) { setNotLoading(false); } 
+        else if (endRequest()) { setNotLoading(true); }
+    }, []);
 
     useEffect(() => {
         if (colorPalettes.length > 0) {
@@ -71,7 +78,7 @@ const ColorPaletteList = ({
                             .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
                     }
                 </ul>
-                : <p className="no-palettes"><b> No color palettes to show!</b></p>
+                : notLoading && <p className="no-palettes"><b> No color palettes to show!</b></p>
             }
 
         </section >
