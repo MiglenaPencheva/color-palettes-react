@@ -32,7 +32,7 @@ const ColorPaletteList = ({
             setLoading(false);
         }
     }, [loader]);
-    
+
     return (
         <section>
 
@@ -70,7 +70,8 @@ const ColorPaletteList = ({
 
             </section>
 
-            {colorPalettes.length > 0
+            {!loading &&
+                colorPalettes.length > 0
                 ? <ul className="color-palette-list" >
                     {query
                         ? sortedPalettes
@@ -80,7 +81,7 @@ const ColorPaletteList = ({
                             .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
                     }
                 </ul>
-                : !loading && <p className="no-palettes"><b> No color palettes to show!</b></p>
+                : <p className="no-palettes"><b> No color palettes to show!</b></p>
             }
 
         </section >
