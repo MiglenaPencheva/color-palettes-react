@@ -60,7 +60,7 @@ const ColorPaletteList = ({
 
             </section>
 
-            {colorPalettes && colorPalettes.length > 0
+            {colorPalettes.length > 0
                 ? <ul className="color-palette-list" >
                     {query
                         ? sortedPalettes
