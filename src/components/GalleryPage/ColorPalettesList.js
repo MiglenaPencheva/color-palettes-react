@@ -74,18 +74,19 @@ const ColorPaletteList = ({
 
             </section>
 
-            {!loading &&
-                colorPalettes.length > 0
-                ? <ul className="color-palette-list" >
-                    {query
-                        ? sortedPalettes
-                            .filter(x => x.title.toLowerCase().includes(query.toLowerCase()))
-                            .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
-                        : sortedPalettes
-                            .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
-                    }
-                </ul>
-                : <p className="no-palettes"><b> No color palettes to show!</b></p>
+            {loading
+                ? ''
+                : colorPalettes.length > 0
+                    ? <ul className="color-palette-list" >
+                        {query
+                            ? sortedPalettes
+                                .filter(x => x.title.toLowerCase().includes(query.toLowerCase()))
+                                .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
+                            : sortedPalettes
+                                .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
+                        }
+                    </ul>
+                    : <p className="no-palettes"><b> No color palettes to show!</b></p>
             }
 
         </section >
