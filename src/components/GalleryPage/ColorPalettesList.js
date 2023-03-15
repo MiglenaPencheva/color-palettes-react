@@ -11,9 +11,6 @@ const ColorPaletteList = ({
     const [sortedPalettes, setSortedPalettes] = useState(colorPalettes);
     const [query, setQuery] = useState('');
     const [loading, setLoading] = useState(false);
-    const loader = document.getElementById('loadingBox');
-    console.log(loader);
-    console.log(loading);
 
     useEffect(() => {
         if (colorPalettes.length > 0) {
@@ -27,16 +24,18 @@ const ColorPaletteList = ({
         }
     }, [sort, colorPalettes]);
 
-    useEffect(() => {
-        if (loader.style.display === 'block') {
-            setLoading(true);
-        } else if (loader.style.display === 'none') {
-            setLoading(false);
-        }
-    }, [loader]);
-
+    const loader = document.getElementById('loadingBox');
     console.log(loader);
     console.log(loading);
+    if (loader.style.display === 'block') {
+        setLoading(true);
+        console.log(loader);
+        console.log(loading);
+    } else if (loader.style.display === 'none') {
+        setLoading(false);
+        console.log(loader);
+        console.log(loading);
+    }
 
     return (
         <section>
