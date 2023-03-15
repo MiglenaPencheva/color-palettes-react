@@ -12,6 +12,8 @@ const ColorPaletteList = ({
     const [query, setQuery] = useState('');
     const [loading, setLoading] = useState(false);
     const loader = document.getElementById('loadingBox');
+    console.log(loader);
+    console.log(loading);
 
     useEffect(() => {
         if (colorPalettes.length > 0) {
@@ -32,6 +34,9 @@ const ColorPaletteList = ({
             setLoading(false);
         }
     }, [loader]);
+
+    console.log(loader);
+    console.log(loading);
 
     return (
         <section>
