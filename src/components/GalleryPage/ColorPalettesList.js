@@ -10,7 +10,8 @@ const ColorPaletteList = ({
     const [sort, setSort] = useState(colorPalettes);
     const [sortedPalettes, setSortedPalettes] = useState(colorPalettes);
     const [query, setQuery] = useState('');
-    const [loaded, setLoaded] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const loader = document.getElementById('loadingBox');
 
     useEffect(() => {
         if (colorPalettes.length > 0) {
@@ -24,13 +25,14 @@ const ColorPaletteList = ({
         }
     }, [sort, colorPalettes]);
 
-    let loader = document.getElementById('loadingBox');
-    if (loader.style.display === 'block') {
-        setLoaded(false);
-    } else if (loader.style.display === 'none') {
-        setLoaded(true);
-    }
-
+    useEffect(() => {
+        if (loader.style.display === 'block') {
+            setLoading(true);
+        } else if (loader.style.display === 'none') {
+            setLoading(false);
+        }
+    }, [loader]);
+    
     return (
         <section>
 
@@ -78,7 +80,7 @@ const ColorPaletteList = ({
                             .map(x => <ColorPaletteCard key={x._id} colorPalette={x} />)
                     }
                 </ul>
-                : loaded && <p className="no-palettes"><b> No color palettes to show!</b></p>
+                : !loading && <p className="no-palettes"><b> No color palettes to show!</b></p>
             }
 
         </section >
