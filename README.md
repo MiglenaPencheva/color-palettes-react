@@ -1,4 +1,4 @@
-www.megacolormix.com is a web application for *color combinations*.
+[**megacolormix**](www.megacolormix.com) is a web application for *color combinations*.
 
 Four sections are separated: Image gallery, Palette generator, Color wheel tool for combinations and Converter of color values.
 
