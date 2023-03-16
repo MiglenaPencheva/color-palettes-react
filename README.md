@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+www.megacolormix.com is a web application for color combinations.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Four sections are separated: Image gallery, Palette generator, Color wheel tool for combinations and Converter of color values.
 
-## Available Scripts
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/home page.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/gallery page.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/color picker.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/combinations page.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/explor page.jpg?raw=true) 
 
-In the project directory, you can run:
+The Gallery page gives many photo examples, showing the variety of color combinations in the world around us. 
+Images are separated by categories and color groups, can be sorted by likes or chronologically.
+The visitor have the opportunity to upload an image of his own after registration/login.
 
-### `npm start`
+The Color picker is a tool that generates a color palette from uploaded file by selecting color samples from the image.
+The new color palette or just the color scheme could be downloaded on visitor's device. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The Combinations page has a tool with RYB color wheel, that gives variations of combinations 
+and shows interactive relations between main colors and standard color schemes.
+Theoretical articles for color wheels, schemes, neutrals and pastels give a basic information for the color theory with simple explanations and various examples.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The Convertor tool calculates hex code, hsl, rgb and cmyk values, gives preview example, modifies the colors in lightness and saturation.  
+RGB Mixer and HSL Mixer are another tools, representing different color models. 
+The 140 standard color names are listed alphabetically and by color groups.
 
-### `npm test`
+More screenshots:
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/gallery details.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/gallery upload.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/combinations page_.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/combinations schemes_.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/combinations pastels_.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/explore rgb mixer.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/explore hsl mixer.jpg?raw=true) 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/home page mobile.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/gallery mobile.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/gallery details mobile.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/combinations mobile.jpg?raw=true) 
+![alt text](https://github.com/Miglenaencheva/color-palettes-react/blob/main/combinations mobile_.jpg?raw=true) 
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The application is served by RESTful API, that communicates with MongoDB.
+https://github.com/MiglenaPencheva/color-palettes-api
