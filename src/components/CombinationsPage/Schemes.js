@@ -39,7 +39,7 @@ const Schemes = () => {
             </div>
             <article className="ryb__details--text-only">
                 <b><i> Sequential schemes</i></b> are use to order data from low to high. Commonly its a monochrome scheme and the darkest shade intuitively represents the largest value.
-                <br /> <b><i> Divergent (diverging) schemes</i></b> uses two sequential schemes and share a common (usually the lightest) color in the center as the darkest stands at both of the ends. This combination emphasizes the extreme values at the ends and the mid-range critical values. Usually this schemes are asymmetrical when there is a middle value.
+                <br /> <b><i> Divergent (diverging) schemes</i></b> use two sequential schemes and share a common (usually the lightest) color in the center as the darkest stands at both of the ends. This combination emphasizes the extreme values at the ends and the mid-range critical values. Usually this schemes are asymmetrical when there is a middle value.
             </article>
         </section>
     );

@@ -16,4 +16,4 @@ Theoretical articles for color wheels, schemes, neutrals and pastels give a basi
 The **Convertor tool** calculates hex code, hsl, rgb and cmyk values, gives preview example, modifies the colors in lightness and saturation. RGB Mixer and HSL Mixer are another tools, representing different color models. 
 The 140 standard color names are listed alphabetically and by color groups.
 
-The application is served by [RESTful API](https://github.com/MiglenaPencheva/color-palettes-api), that communicates with MongoDB:
+The application is served by [RESTful API](https://github.com/MiglenaPencheva/color-palettes-api), that communicates with MongoDB.
