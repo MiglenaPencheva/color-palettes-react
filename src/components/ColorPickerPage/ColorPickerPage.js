@@ -78,7 +78,7 @@ const ColorPickerPage = (e) => {
     };
 
     const addColorBox = (e) => {
-        if (e.target.src === 'http://localhost:3000/color-picker') {
+        if (data.length === 0) {
             return;
         }
 
@@ -162,11 +162,17 @@ const ColorPickerPage = (e) => {
     // };
 
     const exportPalette = async () => {
+        if (data.length === 0) {
+            return;
+        }
         const element = document.getElementById('canvasSection');
         exportResult(element);
     };
 
     const exportScheme = async () => {
+        if (data.length === 0) {
+            return;
+        }
         const element = document.getElementById('colors');
         exportResult(element);
     };
