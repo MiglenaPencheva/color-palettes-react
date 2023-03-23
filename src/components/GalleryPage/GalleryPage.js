@@ -14,15 +14,20 @@ const Gallery = () => {
 
     const [colorPalettes, setColorPalettes] = useState([]);
     const [pages, setPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const limit = 10;
+
 
     useEffect(() => {
-        colorPaletteService.getAll()
-        .then(res => {
-            console.log(res);
-            setColorPalettes(res.data);
-            setPages(res.totalPages);
-        });        
-    }, []);
+        colorPaletteService.getAll(currentPage, limit)
+            .then(({ data, totalPages }) => {
+                setColorPalettes(data);
+                setPages(totalPages);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, [currentPage, limit]);
 
     return (
 

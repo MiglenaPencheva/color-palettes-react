@@ -2,10 +2,10 @@ import { beginRequest, endRequest } from '../helpers/notifications';
 // const baseUrl = 'http://localhost:5500';
 const baseUrl = 'https://colorpalettes-api.onrender.com';
 
-export const getAll = async () => {
+export const getAll = async (page = 1, limit = 10) => {
     try {
         beginRequest();
-        let response = await fetch(`${baseUrl}/color-palettes`);
+        let response = await fetch(`${baseUrl}/color-palettes?page=${page}&limit=${limit}`);
         let { data, totalPages } = await response.json();
         endRequest();
         return { data, totalPages };
