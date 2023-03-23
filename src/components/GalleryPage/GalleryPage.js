@@ -20,7 +20,7 @@ const Gallery = () => {
         .then(res => {
             console.log(res);
             setColorPalettes(res.data);
-            setPages(res.pages);
+            setPages(res.totalPages);
         });        
     }, []);
 
