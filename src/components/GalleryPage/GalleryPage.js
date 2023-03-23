@@ -13,13 +13,18 @@ const Gallery = () => {
     const { user } = useAuthContext();
 
     const [colorPalettes, setColorPalettes] = useState([]);
+    const [pages, setPages] = useState(0);
 
     useEffect(() => {
         colorPaletteService.getAll()
-            .then(result => {
-                setColorPalettes(result);
-            });
+        .then(result => {
+            console.log(result);
+            setColorPalettes(result.data);
+            setPages(result.totalPages);
+        });
     }, []);
+
+    console.log(pages);
 
     return (
 
