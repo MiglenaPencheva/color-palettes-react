@@ -20,12 +20,9 @@ const Gallery = () => {
         .then(res => {
             console.log(res);
             setColorPalettes(res.data);
-            setPages(res.totalPages);
-        })
-        .catch(err => console.log(err));
+            setColorPalettes(res.pages);
+        });        
     }, []);
-
-    console.log(pages);
 
     return (
 

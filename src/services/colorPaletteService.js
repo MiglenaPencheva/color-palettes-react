@@ -6,9 +6,9 @@ export const getAll = async () => {
     try {
         beginRequest();
         let response = await fetch(`${baseUrl}/color-palettes`);
-        let result = await response.json();
+        let { data, totalPages } = await response.json();
         endRequest();
-        return result;
+        return { data, totalPages };
 
     } catch (error) {
         return { msg: error };
