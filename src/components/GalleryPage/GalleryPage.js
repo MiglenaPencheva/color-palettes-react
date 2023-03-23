@@ -17,11 +17,12 @@ const Gallery = () => {
 
     useEffect(() => {
         colorPaletteService.getAll()
-        .then(result => {
-            console.log(result);
-            setColorPalettes(result.data);
-            setPages(result.totalPages);
-        });
+        .then(res => {
+            console.log(res);
+            setColorPalettes(res.data);
+            setPages(res.totalPages);
+        })
+        .catch(err => console.log(err));
     }, []);
 
     console.log(pages);
