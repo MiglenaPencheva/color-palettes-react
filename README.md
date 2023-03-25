@@ -1,6 +1,6 @@
 **www.megacolormix.com** is a web application for *color combinations*.
 
-Four sections are separated: Image gallery, Palette generator, Color wheel tool for combinations and Converter of color values.
+Four sections are separated: Image gallery, Palette generator, Color wheel tool for combinations and Convertor of color values.
 
 The **Gallery page** gives many photo examples, showing the variety of color combinations in the world around us. 
 Images are separated by categories and color groups, can be sorted by likes or chronologically.
