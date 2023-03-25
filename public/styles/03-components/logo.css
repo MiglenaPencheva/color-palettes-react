@@ -6,7 +6,7 @@
     height: 44px;
     border-radius: 24%;
     animation: rotation 1.5s;
-    opacity: 82%;
+    opacity: 60%;
     cursor: pointer;
     z-index: 1003;
 }
