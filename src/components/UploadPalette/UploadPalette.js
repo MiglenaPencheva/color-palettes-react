@@ -2,7 +2,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import { useAuthContext } from '../../contexts/AuthContext';
 import * as colorPaletteService from '../../services/colorPaletteService';
-import { hideError, showError } from '../../helpers/notifications';
+import { hideError, showError, showInfo } from '../../helpers/notifications';
 import { getColorGroup } from '../../helpers/prepareData';
 
 import UploadTitle from './common/UploadTitle';
@@ -57,6 +57,7 @@ const UploadPalette = () => {
 
             hideError();
             navigate('/gallery');
+            showInfo('Successfully uploaded palette');
 
         } catch (error) {
             showError(error.message);
