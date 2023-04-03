@@ -29,7 +29,10 @@ const Details = () => {
         e.preventDefault();
 
         colorPaletteService.remove(colorPaletteId, user.accessToken)
-            .then(() => navigate('/gallery'))
+            .then(() => {
+                navigate('/gallery');
+                showInfo('Successfully deleted palette');
+            })
             .finally(() => {
                 setShowDeleteDialog(false);
             });
