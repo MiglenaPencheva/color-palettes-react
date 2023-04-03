@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { useAuthContext } from '../../contexts/AuthContext';
@@ -11,7 +12,8 @@ import UploadColors from './common/UploadColors';
 import UploadSubmitButton from './common/UploadSubmitButton';
 
 const UploadPalette = () => {
-    const navigate = useNavigate();
+    const formRef = useRef(null);
+    // const navigate = useNavigate();
     const { user } = useAuthContext();
 
     const onFileUpload = (e) => {
@@ -56,7 +58,8 @@ const UploadPalette = () => {
             await colorPaletteService.create(formData, user.accessToken);
 
             hideError();
-            navigate('/upload');
+            // navigate('/gallery');
+            formRef.current.reset();
             showInfo('Successfully uploaded palette');
 
         } catch (error) {
@@ -67,6 +70,7 @@ const UploadPalette = () => {
     return (
         <section id="upload-page" className="upload-page">
             <form id="upload-form"
+                ref={formRef}
                 onSubmit={onUploadSubmit}
                 encType="multipart/form-data"
                 method="POST">
