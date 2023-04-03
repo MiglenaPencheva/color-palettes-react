@@ -56,7 +56,7 @@ const UploadPalette = () => {
             await colorPaletteService.create(formData, user.accessToken);
 
             hideError();
-            navigate('/gallery');
+            navigate('/upload');
             showInfo('Successfully uploaded palette');
 
         } catch (error) {
