@@ -26,7 +26,7 @@ const ColorPaletteList = ({
     return (
         <section>
 
-            {/* <section className="palettes__nav">
+            <section className="palettes__nav">
                 <span className="palettes__nav--info">
                     <span>Gallery {'>'} {title}</span>
                     <span className="gallery__info" >
@@ -58,7 +58,7 @@ const ColorPaletteList = ({
                     </select>
                 </section>
 
-            </section> */}
+            </section>
 
             {colorPalettes.length > 0
                 ? <ul className="color-palette-list" >

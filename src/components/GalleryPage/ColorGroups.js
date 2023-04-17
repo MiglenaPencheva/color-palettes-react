@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import ColorPaletteList from './ColorPalettesList';
 
-const ColorGroups = ({ allColorPalettes }) => {
+const ColorGroups = ({ colorPalettes }) => {
 
     const [filter, setFilter] = useState('');
     const [filteredPalettes, setFilteredPalettes] = useState([]);
@@ -13,7 +13,7 @@ const ColorGroups = ({ allColorPalettes }) => {
         setFilter(group);
 
         let filtered = [];
-        for (const x of allColorPalettes) {
+        for (const x of colorPalettes) {
             let arr = x.colors.split(',');
             let trimmed = arr.map(x => x.trim());
             if (trimmed.includes(group)) { filtered.push(x); }

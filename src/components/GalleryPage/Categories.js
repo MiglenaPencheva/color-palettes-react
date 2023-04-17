@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import ColorPaletteList from './ColorPalettesList';
 
-const Categories = ({ allColorPalettes }) => {
+const Categories = ({ colorPalettes }) => {
 
     const [filter, setFilter] = useState('');
     const [filteredPalettes, setFilteredPalettes] = useState([]);
@@ -13,7 +13,7 @@ const Categories = ({ allColorPalettes }) => {
         if (category === 'food & drinks') { category = 'foodAndDrinks'; }
         setFilter(category);
 
-        let filtered = allColorPalettes.filter(x => x.category === category);
+        let filtered = colorPalettes.filter(x => x.category === category);
         setFilteredPalettes(filtered);
 
         let newTitle = `Categories > ${category}`;
