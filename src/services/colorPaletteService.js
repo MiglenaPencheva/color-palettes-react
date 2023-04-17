@@ -2,10 +2,10 @@ import { beginRequest, endRequest } from '../helpers/notifications';
 // const baseUrl = 'http://localhost:5500';
 const baseUrl = 'https://colorpalettes-api.onrender.com';
 
-export const getAll = async () => {
+export const getAll = async (query, page) => {
     try {
         beginRequest();
-        let response = await fetch(`${baseUrl}/color-palettes`);
+        let response = await fetch(`${baseUrl}/color-palettes?query=${query}&page=${page}`);
         let result = await response.json();
         endRequest();
         return result;
@@ -14,36 +14,6 @@ export const getAll = async () => {
         return { msg: error };
     }
 };
-
-// export const getMine = async (token) => {
-//     try {
-//         // let query = encodeURIComponent(`creator="${userId}"`);
-//         // let response = await fetch(`${baseUrl}/color-palettes?where=${query}`);
-//         let response = await fetch(`${baseUrl}/color-palettes/my`, {
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'x-authorization': token
-//             }
-//         });
-//         return await response.json();
-//     } catch (error) {
-//         return { msg: error };
-//     }
-// };
-
-// export const getFavorites = async (token) => {
-//     try {
-//         let response = await fetch(`${baseUrl}/color-palettes/favorites`, {
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'x-authorization': token
-//             }
-//         });
-//         return await response.json();
-//     } catch (error) {
-//         return { msg: error };
-//     }
-// };
 
 export const create = async (data, token) => {
     for (const key of data.keys()) {

@@ -13,15 +13,27 @@ const Gallery = () => {
     const { user } = useAuthContext();
 
     const [colorPalettes, setColorPalettes] = useState([]);
+    const [page, setPage] = useState(1);
     
     useEffect(() => {
-        colorPaletteService.getAll()
+        colorPaletteService.getPage(page)
             .then(result => {
                 setColorPalettes(result);
             })
             .catch(error => {
                 console.log(error);
             });
+    }, [page]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+            if (scrollTop + clientHeight >= scrollHeight) {
+                setPage(prevPage => prevPage + 1);
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
