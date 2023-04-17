@@ -16,7 +16,7 @@ const Gallery = () => {
     const [page, setPage] = useState(1);
     
     useEffect(() => {
-        colorPaletteService.getPage(page)
+        colorPaletteService.getAll(page)
             .then(result => {
                 setColorPalettes(result);
             })
