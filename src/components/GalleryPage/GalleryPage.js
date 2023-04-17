@@ -13,10 +13,21 @@ const Gallery = () => {
     const { user } = useAuthContext();
 
     const [colorPalettes, setColorPalettes] = useState([]);
+    const [allColorPalettes, setAllColorPalettes] = useState([]);
     const [page, setPage] = useState(1);
-    
+
     useEffect(() => {
-        colorPaletteService.getAll(page)
+        colorPaletteService.getAll()
+            .then(result => {
+                setAllColorPalettes(result);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        colorPaletteService.getAllByPages(page)
             .then(result => {
                 setColorPalettes(result);
             })
@@ -72,10 +83,10 @@ const Gallery = () => {
             <Routes>
                 <Route path="" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
                 <Route path="all" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
-                <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'} />} />
-                <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Color groups'} />} />
-                <Route path="favorites" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.likedBy.includes(user._id))} title={'My favorites'} />} />
-                <Route path="mine" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.creator === user._id)} title={'My color palettes'} />} />
+                <Route path="categories" element={<Categories colorPalettes={allColorPalettes} title={'Categories'} />} />
+                <Route path="groups" element={<ColorGroups colorPalettes={allColorPalettes} title={'Color groups'} />} />
+                <Route path="favorites" element={<ColorPaletteList colorPalettes={allColorPalettes.filter(x => x.likedBy.includes(user._id))} title={'My favorites'} />} />
+                <Route path="mine" element={<ColorPaletteList colorPalettes={allColorPalettes.filter(x => x.creator === user._id)} title={'My color palettes'} />} />
                 <Route path="upload" element={<UploadPalette />} />
                 {/* <Route path="upload" element={user._id ? <UploadPalette /> : navigate('/login')} /> */}
             </Routes>
