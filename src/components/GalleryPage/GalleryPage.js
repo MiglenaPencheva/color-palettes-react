@@ -85,8 +85,8 @@ const Gallery = () => {
                 <Route path="all" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
                 <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'} />} />
                 <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Color groups'} />} />
-                <Route path="favorites" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.likedBy.includes(user._id))} title={'My favorites'} />} />
-                <Route path="mine" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.creator === user._id)} title={'My color palettes'} />} />
+                {/* <Route path="favorites" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.likedBy.includes(user._id))} title={'My favorites'} />} /> */}
+                {/* <Route path="mine" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.creator === user._id)} title={'My color palettes'} />} /> */}
                 <Route path="upload" element={<UploadPalette />} />
                 {/* <Route path="upload" element={user._id ? <UploadPalette /> : navigate('/login')} /> */}
             </Routes>
