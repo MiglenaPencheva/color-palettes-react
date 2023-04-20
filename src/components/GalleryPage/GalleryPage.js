@@ -18,7 +18,9 @@ const Gallery = () => {
             title: 'Brown frappe drink on beige sandy beach and blue sea background.',
             category: 'foodAndDrinks',
             src: '/images/initial/1',
-            likes: 44
+            likes: 44,
+            likedBy: [],
+            creator: ''
         }
     ]);
 
