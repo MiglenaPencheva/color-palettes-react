@@ -1,14 +1,17 @@
 import InitialPaletteCard from './InitialPaletteCard';
+import { initialPalettes } from './helpers';
 
-const initialPalettes = [
-    {
-        _id: '64108390da01c31a11d22d63',
-        title: 'Brown frappe drink on beige sandy beach and blue sea background.',
-        category: 'foodAndDrinks',
-        src: '/images/initial/1',
-        likes: 44
-    }
-];
+// const initialPalettes = [
+//     {
+//         _id: '64108390da01c31a11d22d63',
+//         title: 'Brown frappe drink on beige sandy beach and blue sea background.',
+//         category: 'foodAndDrinks',
+//         src: '/images/initial/1',
+//         likes: 44,
+//         likedBy: [],
+//         creator: ''
+//     }
+// ];
 
 const InitialPaletteList = () => {
 
