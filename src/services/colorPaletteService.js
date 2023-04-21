@@ -4,10 +4,8 @@ const baseUrl = 'https://colorpalettes-api.onrender.com';
 
 export const getAll = async () => {
     try {
-        beginRequest();
         let response = await fetch(`${baseUrl}/color-palettes`);
         let result = await response.json();
-        endRequest();
         return result;
 
     } catch (error) {

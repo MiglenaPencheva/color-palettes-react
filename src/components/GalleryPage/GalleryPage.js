@@ -61,6 +61,8 @@ const Gallery = () => {
 
             </nav>
 
+            {loading && <img class="loadingBox" src="/images/Spinner.jpg" alt="loading" /> }
+
             {loading
                 ? <Routes>
                     <Route path="" element={<InitialPalettesList initialPalettes={initialPalettes} title={'Color palettes'} />} />
