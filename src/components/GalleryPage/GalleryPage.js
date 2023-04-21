@@ -65,6 +65,8 @@ const Gallery = () => {
                 ? <Routes>
                     <Route path="" element={<InitialPalettesList initialPalettes={initialPalettes} title={'Color palettes'} />} />
                     <Route path="all" element={<InitialPalettesList initialPalettes={initialPalettes} title={'Color palettes'} />} />
+                    <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'} />} />
+                    <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Color groups'} />} />
                 </Routes>
                 : <Routes>
                     <Route path="" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
