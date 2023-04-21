@@ -23,6 +23,7 @@
     border-radius: 50%;
     opacity: 50%;
     animation: spinner 1.5s linear infinite;
+    z-index: 1003;
 }
 
 @keyframes spinner {
