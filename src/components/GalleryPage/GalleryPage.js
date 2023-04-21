@@ -17,16 +17,19 @@ const Gallery = () => {
     const [colorPalettes, setColorPalettes] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const loader = document.getElementById('loader');
+
     useEffect(() => {
         colorPaletteService.getAll()
             .then(result => {
                 setColorPalettes(result);
+                loader.style.display = 'none';
                 setLoading(false);
             })
             .catch(error => {
                 console.log(error);
             });
-    }, []);
+    }, [loader]);
 
     return (
 
@@ -61,7 +64,7 @@ const Gallery = () => {
 
             </nav>
 
-            {loading && <img class="loadingBox" src="/images/Spinner.jpg" alt="loading" /> }
+            <img id="loader" class="loadingBox" src="/images/Spinner.jpg" alt="loading" />
 
             {loading
                 ? <Routes>
