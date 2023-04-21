@@ -29,6 +29,8 @@ const ColorGroups = ({ colorPalettes }) => {
     return (
         <section id="groupsList">
 
+            {colorPalettes.length = 0 && <img className="loader" src="/images/Spinner.jpg" alt="loading..." /> }
+
             {!filter
                 ? <>
                     <span id="catInfo" className="gallery__info">Gallery {'>'} Color groups</span>

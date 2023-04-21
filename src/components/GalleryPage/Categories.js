@@ -25,6 +25,8 @@ const Categories = ({ colorPalettes }) => {
     return (
         <section id="categoriesList">
 
+            {colorPalettes.length = 0 && <img className="loader" src="/images/Spinner.jpg" alt="loading..." /> }
+
             {!filter
                 ? <>
                     <span id="catInfo" className="gallery__info">Gallery {'>'} Categories</span>
