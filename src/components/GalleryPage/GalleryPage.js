@@ -32,10 +32,6 @@ const Gallery = () => {
 
         <section id="gallery" className="gallery-page">
 
-            <div>
-                <img id="loadingBox" class="loadingBox" src="/images/Spinner.jpg" alt="loading" />
-            </div>
-
             <section className="section-header">
                 <h2 className="heading-on-two-lines">Color</h2>
                 <h2 className="heading-on-two-lines"> palettes</h2>
