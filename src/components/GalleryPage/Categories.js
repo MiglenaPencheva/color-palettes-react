@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ColorPaletteList from './ColorPalettesList';
 
@@ -7,6 +7,15 @@ const Categories = ({ colorPalettes }) => {
     const [filter, setFilter] = useState('');
     const [filteredPalettes, setFilteredPalettes] = useState([]);
     const [title, setTitle] = useState('');
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (colorPalettes.length > 0) {
+            setLoading(false);
+        } else {
+            setLoading(true);
+        }
+    }, [colorPalettes]);
 
     const onClickHandler = (e) => {
         if (colorPalettes.length === 0) { return; }
@@ -25,7 +34,7 @@ const Categories = ({ colorPalettes }) => {
     return (
         <section id="categoriesList">
 
-            {colorPalettes.length = 0 && <img className="loader" src="/images/Spinner.jpg" alt="loading..." /> }
+            {loading && <img className="loader" src="/images/Spinner.jpg" alt="loading..." /> }
 
             {!filter
                 ? <>
