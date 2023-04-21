@@ -10,9 +10,9 @@ const InitialPaletteList = () => {
                 <span className="palettes__nav--info">
                     <span>Gallery {'>'} Color palettes</span>
                 </span>
-                <img className="loader" src="/images/Spinner.jpg" alt="loading..." />
             </section>
             
+            <img className="loadingBox" src="/images/Spinner.jpg" alt="loading..." />
             
             <ul className="color-palette-list" >
                 {initialPalettes.map(x => <InitialPaletteCard key={x._id} initialPalette={x} />)}
