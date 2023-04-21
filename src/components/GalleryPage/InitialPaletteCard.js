@@ -13,7 +13,7 @@ const InitialPaletteCard = ({
             <p className="color-palette-card__category">Category: {initialPalette.category}</p>
 
             <div className="color-palette-card__likes">
-                <span id="total-likes">{initialPalette.likes}</span>
+                {/* <span id="total-likes">{initialPalette.likes}</span> */}
                 <span className="star"></span>
             </div>
             

@@ -12,7 +12,7 @@ const InitialPaletteList = () => {
                 </span>
             </section>
             
-            <img id="loader" class="loadingBox" src="/images/Spinner.jpg" alt="loading" />
+            <img className="loader" src="/images/Spinner.jpg" alt="loading..." />
             
             <ul className="color-palette-list" >
                 {initialPalettes.map(x => <InitialPaletteCard key={x._id} initialPalette={x} />)}
