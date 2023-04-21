@@ -17,19 +17,16 @@ const Gallery = () => {
     const [colorPalettes, setColorPalettes] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const loader = document.getElementById('loader');
-
     useEffect(() => {
         colorPaletteService.getAll()
             .then(result => {
                 setColorPalettes(result);
-                loader.style.display = 'none';
                 setLoading(false);
             })
             .catch(error => {
                 console.log(error);
             });
-    }, [loader]);
+    }, []);
 
     return (
 
@@ -64,14 +61,13 @@ const Gallery = () => {
 
             </nav>
 
-            <img id="loader" class="loadingBox" src="/images/Spinner.jpg" alt="loading" />
-
             {loading
                 ? <Routes>
-                    <Route path="" element={<InitialPalettesList initialPalettes={initialPalettes} title={'Color palettes'} />} />
-                    <Route path="all" element={<InitialPalettesList initialPalettes={initialPalettes} title={'Color palettes'} />} />
+                    <Route path="" element={<InitialPalettesList />} />
+                    <Route path="all" element={<InitialPalettesList />} />
                     <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'} />} />
                     <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Color groups'} />} />
+                    <Route path="upload" element={<UploadPalette />} />
                 </Routes>
                 : <Routes>
                     <Route path="" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
