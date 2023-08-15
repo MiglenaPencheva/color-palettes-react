@@ -2,17 +2,20 @@ import { useState } from 'react';
 import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelpers';
 
 const SwatchesCard = () => {
-    const [data, setData] = useState([]);
+    // const [data, setData] = useState([]);
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     let [r, setR] = useState(148);
     let [g, setG] = useState(199);
     let [b, setB] = useState(219);
 
+    const img = document.getElementById('img');
+    const canvas = document.getElementById('pixelatedImageCanvas');
+    const context = canvas.getContext('2d');
+
     const onFileUpload = (e) => {
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);
 
-        const img = document.getElementById('img');
         img.src = src;
         img.style.display = 'block';
 
@@ -20,8 +23,7 @@ const SwatchesCard = () => {
 
         img.onLoad = () => {
             const ratio = img.naturalWidth / img.naturalHeight;
-            
-            const canvas = document.getElementById('pixelatedImageCanvas');
+
             if (ratio > 1) {
                 canvas.width = 600;
                 canvas.height = canvas.width / ratio;
@@ -29,20 +31,19 @@ const SwatchesCard = () => {
                 canvas.height = 400;
                 canvas.width = canvas.height * ratio;
             }
-            
-            let context = canvas.getContext('2d');
-            context.drawImage(img, 0, 0, canvas.width, canvas.height);
-            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-            setData(imageData.data);
         };
     };
 
     function pixelateImage(e) {
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+        // setData(imageData.data);
+
         const range = document.getElementById('pixelRangeSlider');
         const blockSize = Number(range.value);
-        
+
         // calculate average color for every square
-        const canvas = document.getElementById('pixelatedImageCanvas');
         if (blockSize > 0) {
             for (let y = 0; y < canvas.height; y += blockSize) {
                 for (let x = 0; x < canvas.width; x += blockSize) {
@@ -89,8 +90,7 @@ const SwatchesCard = () => {
         }
 
         // draw pixelated image in canvas
-        let ctx = canvas.getContext('2d');
-        ctx.putImageData(data, 0, 0);
+        context.putImageData(imageData, 0, 0);
     };
 
     function definePixel(e) {
@@ -192,7 +192,7 @@ const SwatchesCard = () => {
                 <label className="button">
                     <input type="file"
                         onChange={onFileUpload}
-                        accept="image/jpeg, image/png, image/jpg" 
+                        accept="image/jpeg, image/png, image/jpg"
                     />
                     Upload image
                 </label>
