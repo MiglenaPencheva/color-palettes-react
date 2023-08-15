@@ -3,7 +3,6 @@ import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelper
 
 const SwatchesCard = () => {
     const [data, setData] = useState([]);
-    const [context, setContext] = (null);
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     let [r, setR] = useState(148);
     let [g, setG] = useState(199);
@@ -39,11 +38,10 @@ const SwatchesCard = () => {
             canvas.width = canvas.height * ratio;
         }
 
-        let ctx = canvas.getContext('2d');
-        ctx.drawImage(imagePreview, 0, 0, canvas.width, canvas.height);
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let context = canvas.getContext('2d');
+        context.drawImage(imagePreview, 0, 0, canvas.width, canvas.height);
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         setData(imageData.data);
-        setContext(imageData.data);
     };
 
     function pixelateImage() {
@@ -95,10 +93,11 @@ const SwatchesCard = () => {
         }
 
         // draw pixelated image in canvas
-        if (context) {
-            context.putImageData(data, 0, 0);
-        }
-    }
+        let ctx = canvas.getContext('2d');
+        ctx.putImageData(data, 0, 0);
+    };
+
+
 
     function definePixel(e) {
         const bounding = canvas.getBoundingClientRect();
