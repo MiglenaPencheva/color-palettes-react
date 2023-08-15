@@ -16,15 +16,11 @@ const SwatchesCard = () => {
         img.src = src;
         img.style.display = 'block';
 
-        const resultSection = document.getElementById('resultSection');
-        resultSection.style.display = 'none';
+        document.getElementById('pixelRangeSection').style.display = 'flex';
 
         img.onLoad = () => {
-            const rangeSection = document.getElementById('pixelRangeSection');
-            rangeSection.style.display = 'flex';
-
             const ratio = img.naturalWidth / img.naturalHeight;
-
+            
             const canvas = document.getElementById('pixelatedImageCanvas');
             if (ratio > 1) {
                 canvas.width = 600;
@@ -33,10 +29,7 @@ const SwatchesCard = () => {
                 canvas.height = 400;
                 canvas.width = canvas.height * ratio;
             }
-
-            const colors = document.getElementById('colors');
-            while (colors.firstChild) { colors.removeChild(colors.firstChild); };
-
+            
             let context = canvas.getContext('2d');
             context.drawImage(img, 0, 0, canvas.width, canvas.height);
             const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
@@ -45,11 +38,11 @@ const SwatchesCard = () => {
     };
 
     function pixelateImage(e) {
-        const canvas = document.getElementById('pixelatedImageCanvas');
         const range = document.getElementById('pixelRangeSlider');
         const blockSize = Number(range.value);
-
+        
         // calculate average color for every square
+        const canvas = document.getElementById('pixelatedImageCanvas');
         if (blockSize > 0) {
             for (let y = 0; y < canvas.height; y += blockSize) {
                 for (let x = 0; x < canvas.width; x += blockSize) {
