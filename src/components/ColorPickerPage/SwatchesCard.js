@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelpers';
 
 const SwatchesCard = () => {
-    // const [data, setData] = useState([]);
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     let [r, setR] = useState(148);
     let [g, setG] = useState(199);
@@ -10,15 +9,12 @@ const SwatchesCard = () => {
 
     const img = document.getElementById('img');
     const canvas = document.getElementById('pixelatedImageCanvas');
-    const context = canvas.getContext('2d');
 
     const onFileUpload = (e) => {
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);
-
         img.src = src;
         img.style.display = 'block';
-
         document.getElementById('pixelRangeSection').style.display = 'flex';
 
         img.onLoad = () => {
@@ -35,10 +31,10 @@ const SwatchesCard = () => {
     };
 
     function pixelateImage(e) {
+        const context = canvas.getContext('2d');
         context.drawImage(img, 0, 0, canvas.width, canvas.height);
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData.data;
-        // setData(imageData.data);
 
         const range = document.getElementById('pixelRangeSlider');
         const blockSize = Number(range.value);
@@ -94,12 +90,11 @@ const SwatchesCard = () => {
     };
 
     function definePixel(e) {
-        const canvas = document.getElementById('pixelatedImageCanvas');
         const bounding = canvas.getBoundingClientRect();
         const x = e.clientX - bounding.left;
         const y = e.clientY - bounding.top;
-        const context = canvas.getContext('2d');
-        const pixelData = context.getImageData(x, y, 1, 1).data;
+        const pixelCtx = canvas.getContext('2d');
+        const pixelData = pixelCtx.getImageData(x, y, 1, 1).data;
         const rgbArr = Array.from(pixelData);
         let pixelRgb = `rgb(${rgbArr[0]}, ${rgbArr[1]}, ${rgbArr[2]})`;
         const pixelColorPreview = document.getElementById('pixelColor');
