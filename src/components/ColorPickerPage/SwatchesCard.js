@@ -103,6 +103,7 @@ const SwatchesCard = () => {
         const bounding = canvas.getBoundingClientRect();
         const x = e.clientX - bounding.left;
         const y = e.clientY - bounding.top;
+        const context = canvas.getContext('2d');
         const pixelData = context.getImageData(x, y, 1, 1).data;
         const rgbArr = Array.from(pixelData);
         let pixelRgb = `rgb(${rgbArr[0]}, ${rgbArr[1]}, ${rgbArr[2]})`;

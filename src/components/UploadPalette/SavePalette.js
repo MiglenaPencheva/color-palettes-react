@@ -11,14 +11,28 @@ import UploadCategory from './common/UploadCategory';
 import UploadColors from './common/UploadColors';
 import UploadSubmitButton from './common/UploadSubmitButton';
 
-
 const SavePalette = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { user } = useAuthContext();
 
-    const { src } = location.state;
-    console.log(src);
+    const { png } = location.state;
+    // console.log(png); // data:image/png;base64,iVBORw0KGgoAAA.....
+
+    
+    // const blob = png.replace('data:image/png;base64,', '');
+    // const name = 'creation_' + (Math.random() * 9999 | 0) + '.png';
+    // const pngFile = new File([blob], name, { type: 'image/png' });
+    // console.log(pngFile); //File { name: "creation_8778", lastModified: 1661064874891, webkitRelativePath: "", size: 1555242, type: "image/png" }
+
+    // fetch(png)
+    //     .then(res => res.blob())
+    //     .then(blob => {
+    //         let src = URL.createObjectURL(blob);
+    //         console.log(src);
+    //         const preview = document.getElementById('preview');
+    //         preview.src = src;
+    //     });
 
     const onSaveSubmit = async (e) => {
         e.preventDefault();
@@ -26,23 +40,25 @@ const SavePalette = () => {
         try {
             const formData = new FormData(e.currentTarget);
 
-            // let title = formData.get('title');
-            // let category = formData.get('category');
-            // let colors = getColorGroup(formData).join(', ');
-            // let data = { url, title, category, colors };
+            let title = formData.get('title');
+            let category = formData.get('category');
+            let colors = getColorGroup(formData).join(', ');
+            const blob = png.replace('data:image/png;base64,', '');
 
-            // console.log(data);
+            let data = { blob, title, category, colors };
 
-            // await colorPaletteService.save(data, user.accessToken);
+            console.log(data);
 
-            let colors = getColorGroup(formData);
-            formData.append('colors', colors);
-            // formData.append('imageFile', file);
+            await colorPaletteService.save(data, user.accessToken);
+
+            // let colors = getColorGroup(formData);
+            // formData.append('colors', colors);
+            // formData.append('imageFile', pngFile);
 
             // await colorPaletteService.create(formData, user.accessToken);
 
             hideError();
-            // navigate('/gallery');
+            navigate('/gallery');
 
         } catch (error) {
             showError(error.message);
@@ -70,7 +86,7 @@ const SavePalette = () => {
                         </label> */}
 
                         <span className="upload__upload-file--image-preview">
-                            <img src={src} alt=""/>
+                            <img id="preview" src={png} alt="" />
                         </span>
                     </section>
 
