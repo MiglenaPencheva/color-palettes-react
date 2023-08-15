@@ -20,11 +20,10 @@ import ColorGroups from './components/GalleryPage/ColorGroups';
 import GuardedRoute from './components/GuardedRoute/GuardedRoute';
 import UploadPalette from './components/UploadPalette/UploadPalette';
 import Edit from './components/Edit/Edit';
-// import SavePalette from './components/UploadPalette/SavePalette';
 
-import PickerPage from './components/ColorPickerPage/PickerPage';
 import ColorPickerPage from './components/ColorPickerPage/ColorPickerPage';
-import ColorCardPage from './components/ColorPickerPage/ColorCardPage';
+import PaletteMaker from './components/ColorPickerPage/PaletteMaker';
+import SwatchesCard from './components/ColorPickerPage/SwatchesCard';
 
 import CombinationsPage from './components/CombinationsPage/CombinationsPage';
 import RybWheel from './components/CombinationsPage/RybWheel';
@@ -74,11 +73,10 @@ function App() {
                             <Route path="edit/:colorPaletteId" element={<Edit />} />
                         </Route>
 
-                        <Route path="/color-picker" element={<PickerPage />}>
-                            <Route path="palette-maker" element={<ColorPickerPage />} />
-                            <Route path="swatches" element={<ColorCardPage />} />
+                        <Route path="/color-picker" element={<ColorPickerPage />}>
+                            <Route path="palette-maker" element={<PaletteMaker />} />
+                            <Route path="swatches" element={<SwatchesCard />} />
                         </Route>
-                        {/* <Route path="/save" element={<SavePalette />} /> */}
 
                         <Route path="/combinations" element={<CombinationsPage />} >
                             <Route path="color-wheel" element={<RybWheel />} />

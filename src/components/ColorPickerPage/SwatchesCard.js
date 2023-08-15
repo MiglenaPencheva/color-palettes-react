@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelpers';
 
-const ColorCardPage = (e) => {
+const SwatchesCard = (e) => {
     const [data, setData] = useState([]);
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     let [r, setR] = useState(148);
@@ -223,6 +223,6 @@ const ColorCardPage = (e) => {
     );
 };
 
-export default ColorCardPage;
+export default SwatchesCard;
 
 

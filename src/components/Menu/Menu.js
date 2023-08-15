@@ -73,7 +73,7 @@ const Menu = () => {
                     </section>
                 }
 
-                <Link className="menu__main" to="/color-picker">Palette maker</Link>
+                <Link className="menu__main" to="/color-picker">Color picker</Link>
                 <Link className="menu__sub" to="/color-picker/palette-maker">Palette maker</Link>
                 <Link className="menu__sub" to="/color-picker/swatches">Swatches card</Link>
 
