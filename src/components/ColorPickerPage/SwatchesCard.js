@@ -7,12 +7,12 @@ const SwatchesCard = () => {
     let [g, setG] = useState(199);
     let [b, setB] = useState(219);
 
-    const img = document.getElementById('img');
     const canvas = document.getElementById('pixelatedImageCanvas');
-
+    
     const onFileUpload = (e) => {
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);
+        const img = document.getElementById('img');
         img.src = src;
         img.style.display = 'block';
         document.getElementById('pixelRangeSection').style.display = 'flex';
@@ -32,6 +32,7 @@ const SwatchesCard = () => {
 
     function pixelateImage(e) {
         const context = canvas.getContext('2d');
+        const img = document.getElementById('img');
         context.drawImage(img, 0, 0, canvas.width, canvas.height);
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData.data;
