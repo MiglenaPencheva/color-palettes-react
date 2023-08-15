@@ -178,62 +178,52 @@ const ColorPickerPage = (e) => {
     };
 
     return (
-        <section className="picker-section">
-            <section className="section-header">
-                <h2>Color picker</h2>
-                <h6>Upload an image file. Pick the colors you like
-                    and compose your desired combination.</h6>
-                <h6 className="diffHeading">
-                    Be the creator of your unique color palette.
-                </h6>
+
+        <section id="pickerContainer" className="picker__container">
+
+            <section className="picker__canvas-section" id="canvasSection">
+                <canvas className="picker__image-canvas" id="myCanvas"
+                    onMouseMove={definePixel}
+                    onClick={addColorBox}>
+                </canvas>
+
+                <ul className="picker__colors" id="colors"
+                    onDrop={dropHandler}
+                    onDragOver={(e) => e.preventDefault()}>
+                </ul>
             </section>
 
-            <section id="pickerContainer" className="picker__container">
-
-                <section className="picker__canvas-section" id="canvasSection">
-                    <canvas className="picker__image-canvas" id="myCanvas"
-                        onMouseMove={definePixel}
-                        onClick={addColorBox}>
-                    </canvas>
-
-                    <ul className="picker__colors" id="colors"
-                        onDrop={dropHandler}
-                        onDragOver={(e) => e.preventDefault()}>
-                    </ul>
+            <aside className="picker-aside">
+                <section className="picker__file-input">
+                    <label className="button ">
+                        <input
+                            type="file"
+                            onChange={onFileUpload}
+                            accept="image/jpeg, image/png, image/jpg"
+                        />
+                        Upload file
+                    </label>
+                    <img id="image" alt="" />
                 </section>
 
-                <aside className="picker-aside">
-                    <section className="picker__file-input">
-                        <label className="button ">
-                            <input
-                                type="file"
-                                onChange={onFileUpload}
-                                accept="image/jpeg, image/png, image/jpg"
-                            />
-                            Upload file
-                        </label>
-                        <img id="image" alt="" />
-                    </section>
+                <span className="picker__instructions">
+                    Move the mouse
+                    <br /> over the image.
+                    <br /> Click to pick sample.
+                </span>
 
-                    <span className="picker__instructions">
-                        Move the mouse
-                        <br /> over the image.
-                        <br /> Click to pick sample.
-                    </span>
+                <span className="picker__preview-box"
+                    id="pixelColor"
+                    style={{ backgroundColor: `${pickedColor}` }}>
+                </span>
 
-                    <span className="picker__preview-box"
-                        id="pixelColor"
-                        style={{ backgroundColor: `${pickedColor}` }}>
-                    </span>
+                <section className="picker__buttons">
+                    <button className="button" onClick={exportPalette}>Export palette</button>
+                    <button className="button" onClick={exportScheme}>Export scheme</button>
+                    {/* <button className="button" onClick={savePalette}>Save to gallery</button> */}
+                </section>
+            </aside>
 
-                    <section className="picker__buttons">
-                        <button className="button" onClick={exportPalette}>Export palette</button>
-                        <button className="button" onClick={exportScheme}>Export scheme</button>
-                        {/* <button className="button" onClick={savePalette}>Save to gallery</button> */}
-                    </section>
-                </aside>
-
-            </section>
         </section>
     );
 };

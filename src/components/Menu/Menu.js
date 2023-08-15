@@ -74,7 +74,8 @@ const Menu = () => {
                 }
 
                 <Link className="menu__main" to="/color-picker">Palette maker</Link>
-                <Link className="menu__sub" to="/color-picker">Color picker</Link>
+                <Link className="menu__sub" to="/color-picker/palette-maker">Palette maker</Link>
+                <Link className="menu__sub" to="/color-picker/swatches">Swatches card</Link>
 
                 <Link className="menu__main" to="/combinations">Combinations</Link>
                 <Link className="menu__sub" to="/combinations/color-wheel">Color wheel</Link>
