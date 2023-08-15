@@ -8,43 +8,42 @@ const SwatchesCard = () => {
     let [g, setG] = useState(199);
     let [b, setB] = useState(219);
 
-    const resultSection = document.getElementById('resultSection');
-    const imagePreview = document.getElementById('imagePreview ');
-    const colors = document.getElementById('colors');
-    const canvas = document.getElementById('pixelatedImageCanvas');
-    const rangeSection = document.getElementById('pixelRangeSection');
-    const range = document.getElementById('pixelRangeSlider');
-    const pixelColorPreview = document.getElementById('pixelColor');
-
     const onFileUpload = (e) => {
-        resultSection.style.display = 'none';
-        while (colors.firstChild) { colors.removeChild(colors.firstChild); };
-
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);
+        const imagePreview = document.getElementById('imagePreview ');
         imagePreview.src = src;
         imagePreview.style.display = 'block';
+        const rangeSection = document.getElementById('pixelRangeSection');
         rangeSection.style.display = 'flex';
+
+        imagePreview.onLoad = () => {
+            const ratio = imagePreview.naturalWidth / imagePreview.naturalHeight;
+            
+            const canvas = document.getElementById('pixelatedImageCanvas');
+            if (ratio > 1) {
+                canvas.width = 600;
+                canvas.height = canvas.width / ratio;
+            } else {
+                canvas.height = 400;
+                canvas.width = canvas.height * ratio;
+            }
+            
+            const resultSection = document.getElementById('resultSection');
+            resultSection.style.display = 'none';
+            const colors = document.getElementById('colors');
+            while (colors.firstChild) { colors.removeChild(colors.firstChild); };
+
+            let context = canvas.getContext('2d');
+            context.drawImage(imagePreview, 0, 0, canvas.width, canvas.height);
+            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+            setData(imageData.data);
+        };
     };
 
-    function onImageLoad() {
-        const ratio = imagePreview.naturalWidth / imagePreview.naturalHeight;
-
-        if (ratio > 1) {
-            canvas.width = 600;
-            canvas.height = canvas.width / ratio;
-        } else {
-            canvas.height = 400;
-            canvas.width = canvas.height * ratio;
-        }
-
-        let context = canvas.getContext('2d');
-        context.drawImage(imagePreview, 0, 0, canvas.width, canvas.height);
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        setData(imageData.data);
-    };
-
-    function pixelateImage() {
+    function pixelateImage(e) {
+        const canvas = document.getElementById('pixelatedImageCanvas');
+        const range = document.getElementById('pixelRangeSlider');
         const blockSize = Number(range.value);
 
         // calculate average color for every square
@@ -56,6 +55,7 @@ const SwatchesCard = () => {
                     fillBlock(data, pixel, baseIndex, canvas.width, blockSize);
                 }
             }
+            const resultSection = document.getElementById('resultSection');
             resultSection.style.display = 'flex';
         }
 
@@ -97,9 +97,8 @@ const SwatchesCard = () => {
         ctx.putImageData(data, 0, 0);
     };
 
-
-
     function definePixel(e) {
+        const canvas = document.getElementById('pixelatedImageCanvas');
         const bounding = canvas.getBoundingClientRect();
         const x = e.clientX - bounding.left;
         const y = e.clientY - bounding.top;
@@ -107,6 +106,7 @@ const SwatchesCard = () => {
         const pixelData = context.getImageData(x, y, 1, 1).data;
         const rgbArr = Array.from(pixelData);
         let pixelRgb = `rgb(${rgbArr[0]}, ${rgbArr[1]}, ${rgbArr[2]})`;
+        const pixelColorPreview = document.getElementById('pixelColor');
         pixelColorPreview.style['background-color'] = pixelRgb;
         setPickedColor(pixelRgb);
         setR(rgbArr[0]);
@@ -115,6 +115,8 @@ const SwatchesCard = () => {
     };
 
     function addColors() {
+        const colors = document.getElementById('colors');
+
         // color
         let colorLi = document.createElement('li');
         colorLi.className = 'color-box';
@@ -149,6 +151,7 @@ const SwatchesCard = () => {
     };
 
     function exportColorCard() {
+        const colors = document.getElementById('colors');
         if (!colors.firstChild) { return; }
 
         const cnv = document.createElement('canvas');
@@ -196,7 +199,7 @@ const SwatchesCard = () => {
                         accept="image/jpeg, image/png, image/jpg" />
                     Upload image
                 </label>
-                <img id="imagePreview" onLoad={onImageLoad} alt="imagePreview"></img>
+                <img id="imagePreview" alt="imagePreview"></img>
                 <section id="pixelRangeSection">
                     <span>set pixelation</span>
                     <input type="range" id="pixelRangeSlider" name="pixelRange"
