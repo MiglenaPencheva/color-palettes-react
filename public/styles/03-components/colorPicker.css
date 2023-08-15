@@ -220,7 +220,7 @@ hr {
     align-items: center;
 }
 
-.swatches__fileInputLabel {
+/* .swatches__fileInputLabel {
     margin: 1rem;
     padding: 0.6rem 1rem;
     border-radius: 0.4rem;
@@ -238,7 +238,7 @@ hr {
     background: var(--vermilion-white);
     color: var(--teal-grey);
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
+} */
 
 #fileInput {
     display: none;

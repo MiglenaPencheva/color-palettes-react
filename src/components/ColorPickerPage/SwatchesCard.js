@@ -12,7 +12,7 @@ const SwatchesCard = () => {
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);
 
-        const img = document.getElementById('img ');
+        const img = document.getElementById('img');
         img.src = src;
         img.style.display = 'block';
 
@@ -196,10 +196,11 @@ const SwatchesCard = () => {
         <section className="swatches__container">
 
             <section id="uploadSection">
-                <label className="swatches__fileInputLabel">
-                    <input type="file" name="imageFile" id="fileInput"
+                <label className="button">
+                    <input type="file"
                         onChange={onFileUpload}
-                        accept="image/jpeg, image/png, image/jpg" />
+                        accept="image/jpeg, image/png, image/jpg" 
+                    />
                     Upload image
                 </label>
                 <img id="img" alt="imagePreview" />
