@@ -132,35 +132,6 @@ const PaletteMaker = (e) => {
         }
     };
 
-    // const savePalette = async () => {
-    //     document.getElementById('canvasImage').style.display = 'none';
-
-    //     const el = document.getElementById('canvasSection');
-    //     const canvas = await html2canvas(el);
-    //     const png = canvas.toDataURL('image/png', 1.0);
-    //     // console.log(png); // data:image/png;base64,iVBORw0KGgoAAA.....
-
-    //     navigate('/save', { replace: true, state: { png } });
-
-    //     // let image = new Image();
-    //     // image.src = src;
-    //     // const imageFileName = 'creation_' + (Math.random() * 9999 | 0);
-    //     // image.download = imageFileName;
-    //     // const fakeLink = document.createElement('a');
-    //     // document.body.appendChild(fakeLink);
-
-    //     // fetch(png)
-    //     //     .then(res => res.blob())
-    //     //     .then(blob => {
-    //     //         let src = URL.createObjectURL(blob);
-    //     //         console.log(src);
-    //     //         navigate('/save', {
-    //     //             replace: true,
-    //     //             state: { src }
-    //     //         });
-    //     //     });
-    // };
-
     const exportPalette = async () => {
         if (data.length === 0) {
             return;
@@ -220,7 +191,6 @@ const PaletteMaker = (e) => {
                 <section className="picker__buttons">
                     <button className="button" onClick={exportPalette}>Export palette</button>
                     <button className="button" onClick={exportScheme}>Export scheme</button>
-                    {/* <button className="button" onClick={savePalette}>Save to gallery</button> */}
                 </section>
             </aside>
 

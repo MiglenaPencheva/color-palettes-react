@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelpers';
 
-const SwatchesCard = (e) => {
+const SwatchesCard = () => {
     const [data, setData] = useState([]);
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     let [r, setR] = useState(148);
@@ -12,7 +12,6 @@ const SwatchesCard = (e) => {
     const imagePreview = document.getElementById('imagePreview ');
     const colors = document.getElementById('colors');
     const canvas = document.getElementById('pixelatedImageCanvas');
-    const context = canvas.getContext('2d');
     const rangeSection = document.getElementById('pixelRangeSection');
     const range = document.getElementById('pixelRangeSlider');
     const pixelColorPreview = document.getElementById('pixelColor');
@@ -38,7 +37,8 @@ const SwatchesCard = (e) => {
             canvas.height = 400;
             canvas.width = canvas.height * ratio;
         }
-
+        
+        const context = canvas.getContext('2d');
         context.drawImage(imagePreview, 0, 0, canvas.width, canvas.height);
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         setData(imageData.data);
@@ -186,7 +186,7 @@ const SwatchesCard = (e) => {
         <section className="swatches__container">
             
             <section id="uploadSection">
-                <label className="fileInputLabel">
+                <label className="swatches__fileInputLabel">
                     <input type="file" name="imageFile" id="fileInput"
                         onChange={onFileUpload}
                         accept="image/jpeg, image/png, image/jpg" />
