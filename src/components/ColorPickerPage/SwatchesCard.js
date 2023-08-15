@@ -199,7 +199,7 @@ const SwatchesCard = () => {
                         accept="image/jpeg, image/png, image/jpg" />
                     Upload image
                 </label>
-                <img id="imagePreview" alt="imagePreview"></img>
+                <img id="imagePreview" alt="imagePreview"/>
                 <section id="pixelRangeSection">
                     <span>set pixelation</span>
                     <input type="range" id="pixelRangeSlider" name="pixelRange"
