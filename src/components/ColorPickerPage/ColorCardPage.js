@@ -93,7 +93,7 @@ const ColorCardPage = (e) => {
         }
 
         // draw pixelated image in canvas
-        context.putImageData(imageData, 0, 0);
+        context.putImageData(data, 0, 0);
     }
 
     function definePixel(e) {
