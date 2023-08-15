@@ -3,7 +3,7 @@ import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelper
 
 const SwatchesCard = () => {
     const [data, setData] = useState([]);
-    const [context, setContext] = ({});
+    const [context, setContext] = (null);
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     let [r, setR] = useState(148);
     let [g, setG] = useState(199);
@@ -38,7 +38,7 @@ const SwatchesCard = () => {
             canvas.height = 400;
             canvas.width = canvas.height * ratio;
         }
-        
+
         let ctx = canvas.getContext('2d');
         ctx.drawImage(imagePreview, 0, 0, canvas.width, canvas.height);
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -95,7 +95,9 @@ const SwatchesCard = () => {
         }
 
         // draw pixelated image in canvas
-        context.putImageData(data, 0, 0);
+        if (context) {
+            context.putImageData(data, 0, 0);
+        }
     }
 
     function definePixel(e) {
@@ -186,7 +188,7 @@ const SwatchesCard = () => {
 
     return (
         <section className="swatches__container">
-            
+
             <section id="uploadSection">
                 <label className="swatches__fileInputLabel">
                     <input type="file" name="imageFile" id="fileInput"
@@ -204,7 +206,7 @@ const SwatchesCard = () => {
             </section>
 
             <section id="resultSection">
-                <canvas id="pixelatedImageCanvas" width="600" height="400" 
+                <canvas id="pixelatedImageCanvas" width="600" height="400"
                     onMouseOver={(e) => definePixel(e)} onClick={addColors}>
                 </canvas>
 
