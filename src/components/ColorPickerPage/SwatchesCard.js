@@ -11,15 +11,20 @@ const SwatchesCard = () => {
     const onFileUpload = (e) => {
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);
-        const imagePreview = document.getElementById('imagePreview ');
-        imagePreview.src = src;
-        imagePreview.style.display = 'block';
-        const rangeSection = document.getElementById('pixelRangeSection');
-        rangeSection.style.display = 'flex';
 
-        imagePreview.onLoad = () => {
-            const ratio = imagePreview.naturalWidth / imagePreview.naturalHeight;
-            
+        const img = document.getElementById('img ');
+        img.src = src;
+        img.style.display = 'block';
+
+        const resultSection = document.getElementById('resultSection');
+        resultSection.style.display = 'none';
+
+        img.onLoad = () => {
+            const rangeSection = document.getElementById('pixelRangeSection');
+            rangeSection.style.display = 'flex';
+
+            const ratio = img.naturalWidth / img.naturalHeight;
+
             const canvas = document.getElementById('pixelatedImageCanvas');
             if (ratio > 1) {
                 canvas.width = 600;
@@ -28,14 +33,12 @@ const SwatchesCard = () => {
                 canvas.height = 400;
                 canvas.width = canvas.height * ratio;
             }
-            
-            const resultSection = document.getElementById('resultSection');
-            resultSection.style.display = 'none';
+
             const colors = document.getElementById('colors');
             while (colors.firstChild) { colors.removeChild(colors.firstChild); };
 
             let context = canvas.getContext('2d');
-            context.drawImage(imagePreview, 0, 0, canvas.width, canvas.height);
+            context.drawImage(img, 0, 0, canvas.width, canvas.height);
             const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
             setData(imageData.data);
         };
@@ -199,7 +202,7 @@ const SwatchesCard = () => {
                         accept="image/jpeg, image/png, image/jpg" />
                     Upload image
                 </label>
-                <img id="imagePreview" alt="imagePreview"/>
+                <img id="img" alt="imagePreview" />
                 <section id="pixelRangeSection">
                     <span>set pixelation</span>
                     <input type="range" id="pixelRangeSlider" name="pixelRange"
