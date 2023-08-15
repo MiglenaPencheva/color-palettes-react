@@ -3,7 +3,7 @@ import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelper
 
 const SwatchesCard = () => {
     const [data, setData] = useState([]);
-    const [context, setContext] = (null);
+    const [context, setContext] = ({});
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     let [r, setR] = useState(148);
     let [g, setG] = useState(199);
