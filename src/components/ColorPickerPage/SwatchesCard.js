@@ -32,8 +32,8 @@ const SwatchesCard = () => {
     };
 
     function pixelateImage(e) {
-        const resultSection = document.getElementById('resultSection');
-        resultSection.style.display = 'flex';
+        // const resultSection = document.getElementById('resultSection');
+        // resultSection.style.display = 'flex';
 
         const canvas = document.getElementById('pixelatedImageCanvas');
         const context = canvas.getContext('2d');
