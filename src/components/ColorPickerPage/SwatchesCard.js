@@ -32,16 +32,15 @@ const SwatchesCard = () => {
             const context = canvas.getContext('2d');
             context.drawImage(img, 0, 0, canvas.width, canvas.height);
             const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
 
-            pixelateImage(canvas, context, imageData);
+            pixelateImage(canvas, context, imageData, data);
         };
     };
 
-    function pixelateImage(canvas, context, imageData) {
+    function pixelateImage(canvas, context, imageData, data) {
         const range = document.getElementById('pixelRangeSlider');
         const blockSize = Number(range.value);
-
-        const data = imageData.data;
 
         // calculate average color for every square
         if (blockSize > 0) {
