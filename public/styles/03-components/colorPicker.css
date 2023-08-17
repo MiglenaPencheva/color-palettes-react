@@ -270,11 +270,15 @@ hr {
 /******* result section **********************************************/
 
 #resultSection {
-    display: flex;
+    display: none;
     width: 100%;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+#pixelatedImageCanvas {
+    display: none;
 }
 
 .swatches__asideResult {

@@ -28,19 +28,21 @@ const SwatchesCard = () => {
             }
             const context = canvas.getContext('2d');
             context.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            const resultSection = document.getElementById('resultSection');
+            resultSection.style.display = 'flex';
         };
     };
 
     function pixelateImage(e) {
-        // const resultSection = document.getElementById('resultSection');
-        // resultSection.style.display = 'flex';
-
         const canvas = document.getElementById('pixelatedImageCanvas');
         const context = canvas.getContext('2d');
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData.data;
 
-        // const pixelation = document.getElementById('pixelRangeSlider');
+        if (data.length === 0) { return; }
+
+        canvas.style.display = 'block';
         const blockSize = Number(e.target.value);
 
         // calculate average color for every square
@@ -203,7 +205,7 @@ const SwatchesCard = () => {
             </section>
 
             <section id="resultSection">
-                <canvas id="pixelatedImageCanvas" width="600" height="400"
+                <canvas id="pixelatedImageCanvas" width="200" height="300"
                     onMouseMove={(e) => definePixel(e)} onClick={addColors}>
                 </canvas>
 
