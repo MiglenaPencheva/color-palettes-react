@@ -7,12 +7,11 @@ const SwatchesCard = () => {
     let [g, setG] = useState(199);
     let [b, setB] = useState(219);
 
-    
-    const onFileUpload = (e) => {
+    const uploadImage = (e) => {
         const canvas = document.getElementById('pixelatedImageCanvas');
         const img = document.getElementById('img');
         document.getElementById('pixelRangeSection').style.display = 'flex';
-        
+
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);
         img.src = src;
@@ -20,7 +19,6 @@ const SwatchesCard = () => {
 
         img.onLoad = () => {
             const ratio = img.naturalWidth / img.naturalHeight;
-
             if (ratio > 1) {
                 canvas.width = 600;
                 canvas.height = canvas.width / ratio;
@@ -28,19 +26,19 @@ const SwatchesCard = () => {
                 canvas.height = 400;
                 canvas.width = canvas.height * ratio;
             }
-            
             const context = canvas.getContext('2d');
             context.drawImage(img, 0, 0, canvas.width, canvas.height);
-            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-            const data = imageData.data;
-
-            pixelateImage(canvas, context, imageData, data);
         };
     };
 
-    function pixelateImage(canvas, context, imageData, data) {
-        const range = document.getElementById('pixelRangeSlider');
-        const blockSize = Number(range.value);
+    function pixelateImage(e) {
+        const canvas = document.getElementById('pixelatedImageCanvas');
+        const context = canvas.getContext('2d');
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+
+        // const pixelation = document.getElementById('pixelRangeSlider');
+        const blockSize = Number(e.target.value);
 
         // calculate average color for every square
         if (blockSize > 0) {
@@ -51,8 +49,6 @@ const SwatchesCard = () => {
                     fillBlock(data, pixel, baseIndex, canvas.width, blockSize);
                 }
             }
-            const resultSection = document.getElementById('resultSection');
-            resultSection.style.display = 'flex';
         }
 
         function getAverageColor(data, baseIndex, width, blockSize) {
@@ -109,11 +105,13 @@ const SwatchesCard = () => {
     };
 
     function addColors() {
+        const resultSection = document.getElementById('resultSection');
+        resultSection.style.display = 'flex';
         const colors = document.getElementById('colors');
 
         // color
         let colorLi = document.createElement('li');
-        colorLi.className = 'color-box';
+        colorLi.className = 'colorLi';
         colorLi.style.backgroundColor = pickedColor;
 
         let closeBtn = document.createElement('button');
@@ -189,7 +187,7 @@ const SwatchesCard = () => {
             <section id="uploadSection">
                 <label className="button">
                     <input type="file"
-                        onChange={onFileUpload}
+                        onChange={uploadImage}
                         accept="image/jpeg, image/png, image/jpg"
                     />
                     Upload image
@@ -199,7 +197,7 @@ const SwatchesCard = () => {
                     <span>set pixelation</span>
                     <input type="range" id="pixelRangeSlider" name="pixelRange"
                         min="0" step="5" max="100" defaultValue="24"
-                        onMouseMove={pixelateImage} />
+                        onChange={pixelateImage} />
                 </section>
             </section>
 
