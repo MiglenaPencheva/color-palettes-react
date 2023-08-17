@@ -7,15 +7,16 @@ const SwatchesCard = () => {
     let [g, setG] = useState(199);
     let [b, setB] = useState(219);
 
-    const canvas = document.getElementById('pixelatedImageCanvas');
     
     const onFileUpload = (e) => {
+        const canvas = document.getElementById('pixelatedImageCanvas');
+        const img = document.getElementById('img');
+        document.getElementById('pixelRangeSection').style.display = 'flex';
+        
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);
-        const img = document.getElementById('img');
         img.src = src;
         img.style.display = 'block';
-        document.getElementById('pixelRangeSection').style.display = 'flex';
 
         img.onLoad = () => {
             const ratio = img.naturalWidth / img.naturalHeight;
@@ -27,18 +28,20 @@ const SwatchesCard = () => {
                 canvas.height = 400;
                 canvas.width = canvas.height * ratio;
             }
+            
+            const context = canvas.getContext('2d');
+            context.drawImage(img, 0, 0, canvas.width, canvas.height);
+            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+            pixelateImage(canvas, imageData);
         };
     };
 
-    function pixelateImage(e) {
-        const context = canvas.getContext('2d');
-        const img = document.getElementById('img');
-        context.drawImage(img, 0, 0, canvas.width, canvas.height);
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imageData.data;
-
+    function pixelateImage(canvas, imageData) {
         const range = document.getElementById('pixelRangeSlider');
         const blockSize = Number(range.value);
+
+        const data = imageData.data;
 
         // calculate average color for every square
         if (blockSize > 0) {
@@ -91,10 +94,10 @@ const SwatchesCard = () => {
     };
 
     function definePixel(e) {
-        const bounding = canvas.getBoundingClientRect();
+        const bounding = e.target.getBoundingClientRect();
         const x = e.clientX - bounding.left;
         const y = e.clientY - bounding.top;
-        const pixelCtx = canvas.getContext('2d');
+        const pixelCtx = e.target.getContext('2d');
         const pixelData = pixelCtx.getImageData(x, y, 1, 1).data;
         const rgbArr = Array.from(pixelData);
         let pixelRgb = `rgb(${rgbArr[0]}, ${rgbArr[1]}, ${rgbArr[2]})`;
@@ -203,7 +206,7 @@ const SwatchesCard = () => {
 
             <section id="resultSection">
                 <canvas id="pixelatedImageCanvas" width="600" height="400"
-                    onMouseOver={(e) => definePixel(e)} onClick={addColors}>
+                    onMouseMove={(e) => definePixel(e)} onClick={addColors}>
                 </canvas>
 
                 <div className="swatches__asideResult">
