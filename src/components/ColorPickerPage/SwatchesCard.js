@@ -33,11 +33,11 @@ const SwatchesCard = () => {
             context.drawImage(img, 0, 0, canvas.width, canvas.height);
             const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-            pixelateImage(canvas, imageData);
+            pixelateImage(canvas, context, imageData);
         };
     };
 
-    function pixelateImage(canvas, imageData) {
+    function pixelateImage(canvas, context, imageData) {
         const range = document.getElementById('pixelRangeSlider');
         const blockSize = Number(range.value);
 
