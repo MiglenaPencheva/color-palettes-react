@@ -277,7 +277,7 @@ hr {
     align-items: center;
 }
 
-#asideResult {
+#asideSection {
     display: none;
     padding: 0.5rem;
     display: flex;
