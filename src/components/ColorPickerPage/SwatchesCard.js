@@ -42,14 +42,12 @@ const SwatchesCard = () => {
 
     function pixelateImage(e) {
         const canvas = document.getElementById('pixelatedImageCanvas');
-        const context = canvas.getContext('2d');
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-
+        
         if (data.length === 0) { return; }
 
         let blockSize = Number(e.target.value);
         setPixelation(blockSize);
-
+        
         // calculate average color for every square
         if (blockSize > 0) {
             for (let y = 0; y < canvas.height; y += blockSize) {
@@ -60,12 +58,12 @@ const SwatchesCard = () => {
                 }
             }
         }
-
+        
         function getAverageColor(data, baseIndex, width, blockSize) {
             let totalR = 0;
             let totalG = 0;
             let totalB = 0;
-
+            
             for (let y = 0; y < blockSize; y++) {
                 for (let x = 0; x < blockSize; x++) {
                     const index = baseIndex + (y * width + x) * 4;
@@ -74,7 +72,7 @@ const SwatchesCard = () => {
                     totalB += data[index + 2];
                 }
             }
-
+            
             const pixelCount = blockSize * blockSize;
             return [
                 Math.floor(totalR / pixelCount),
@@ -82,7 +80,7 @@ const SwatchesCard = () => {
                 Math.floor(totalB / pixelCount),
             ];
         }
-
+        
         function fillBlock(data, pixel, baseIndex, width, blockSize) {
             for (let y = 0; y < blockSize; y++) {
                 for (let x = 0; x < blockSize; x++) {
@@ -95,6 +93,8 @@ const SwatchesCard = () => {
         }
 
         // draw pixelated image in canvas
+        const context = canvas.getContext('2d');
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         context.putImageData(imageData, 0, 0);
     };
 
