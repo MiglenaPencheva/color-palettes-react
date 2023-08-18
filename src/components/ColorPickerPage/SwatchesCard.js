@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelpers';
 
 const SwatchesCard = () => {
@@ -7,6 +7,7 @@ const SwatchesCard = () => {
     const [r, setR] = useState(148);
     const [g, setG] = useState(199);
     const [b, setB] = useState(219);
+    const canvasRef = useRef(null);
 
     const uploadImage = (e) => {
         const img = document.getElementById('img');
@@ -23,7 +24,7 @@ const SwatchesCard = () => {
         img.style.display = 'block';
 
         img.onload = () => {
-            const canvas = document.getElementById('pixelatedImageCanvas');
+            const canvas = canvasRef.current;
             const ratio = img.naturalWidth / img.naturalHeight;
             if (ratio > 1) {
                 canvas.width = 600;
@@ -32,56 +33,66 @@ const SwatchesCard = () => {
                 canvas.height = 400;
                 canvas.width = canvas.height * ratio;
             }
-            const context = canvas.getContext('2d');
-            context.drawImage(img, 0, 0, canvas.width, canvas.height);
-            //get original data
-            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-            const data = imageData.data;
-
-            let blockSize = Number(pixelation);
-            if (blockSize > 0) {
-                for (let y = 0; y < canvas.height; y += blockSize) {
-                    for (let x = 0; x < canvas.width; x += blockSize) {
-                        const baseIndex = (y * canvas.width + x) * 4;
-                        const pixel = getAverageColor(data, baseIndex, canvas.width, blockSize);
-                        fillBlock(data, pixel, baseIndex, canvas.width, blockSize);
-                    }
-                }
-            }
-            function getAverageColor(data, baseIndex, width, blockSize) {
-                let totalR = 0;
-                let totalG = 0;
-                let totalB = 0;
-
-                for (let y = 0; y < blockSize; y++) {
-                    for (let x = 0; x < blockSize; x++) {
-                        const index = baseIndex + (y * width + x) * 4;
-                        totalR += data[index];
-                        totalG += data[index + 1];
-                        totalB += data[index + 2];
-                    }
-                }
-
-                const pixelCount = blockSize * blockSize;
-                return [
-                    Math.floor(totalR / pixelCount),
-                    Math.floor(totalG / pixelCount),
-                    Math.floor(totalB / pixelCount),
-                ];
-            }
-            function fillBlock(data, pixel, baseIndex, width, blockSize) {
-                for (let y = 0; y < blockSize; y++) {
-                    for (let x = 0; x < blockSize; x++) {
-                        const index = baseIndex + (y * width + x) * 4;
-                        data[index] = pixel[0];
-                        data[index + 1] = pixel[1];
-                        data[index + 2] = pixel[2];
-                    }
-                }
-            }
-            // draw pixelated image in canvas
-            context.putImageData(imageData, 0, 0);
+            applyPixelation(pixelation);
         };
+    };
+
+    const redrawPixelatedImage = () => {
+        applyPixelation(pixelation);
+    };
+
+    const applyPixelation = (pixelation) => {
+        const canvas = canvasRef.current;
+        if (!canvas) { return; } 
+        const context = canvas.getContext('2d');
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+
+        let blockSize = Number(pixelation);
+        if (blockSize > 0) {
+            for (let y = 0; y < canvas.height; y += blockSize) {
+                for (let x = 0; x < canvas.width; x += blockSize) {
+                    const baseIndex = (y * canvas.width + x) * 4;
+                    const pixel = getAverageColor(data, baseIndex, canvas.width, blockSize);
+                    fillBlock(data, pixel, baseIndex, canvas.width, blockSize);
+                }
+            }
+        }
+
+        function getAverageColor(data, baseIndex, width, blockSize) {
+            let totalR = 0;
+            let totalG = 0;
+            let totalB = 0;
+
+            for (let y = 0; y < blockSize; y++) {
+                for (let x = 0; x < blockSize; x++) {
+                    const index = baseIndex + (y * width + x) * 4;
+                    totalR += data[index];
+                    totalG += data[index + 1];
+                    totalB += data[index + 2];
+                }
+            }
+
+            const pixelCount = blockSize * blockSize;
+            return [
+                Math.floor(totalR / pixelCount),
+                Math.floor(totalG / pixelCount),
+                Math.floor(totalB / pixelCount),
+            ];
+        }
+        function fillBlock(data, pixel, baseIndex, width, blockSize) {
+            for (let y = 0; y < blockSize; y++) {
+                for (let x = 0; x < blockSize; x++) {
+                    const index = baseIndex + (y * width + x) * 4;
+                    data[index] = pixel[0];
+                    data[index + 1] = pixel[1];
+                    data[index + 2] = pixel[2];
+                }
+            }
+        }
+
+        // draw pixelated image in canvas
+        context.putImageData(imageData, 0, 0);
     };
 
     function definePixel(e) {
@@ -191,7 +202,11 @@ const SwatchesCard = () => {
                     <span>set pixelation</span>
                     <input type="range" id="pixelRangeSlider" name="pixelRange"
                         min="0" step="5" max="100" value={pixelation}
-                        onChange={(e) => setPixelation(e.target.value)} />
+                        onChange={(e) => {
+                            setPixelation(e.target.value);
+                            redrawPixelatedImage(e.target.value);
+                        }}
+                    />
                 </section>
             </section>
 
