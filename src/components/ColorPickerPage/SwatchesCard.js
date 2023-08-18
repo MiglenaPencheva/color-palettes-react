@@ -216,12 +216,12 @@ const SwatchesCard = () => {
                     onMouseMove={(e) => definePixel(e)} onClick={addColors}>
                 </canvas>
 
-                <div id="asideResult">
-                    <span>Move the mouse <br /> over the image.</span>
+                <section id="asideResult">
+                    <span className="asideSpan">Move the mouse <br /> over the image.</span>
                     <span id="pixelColor"></span>
-                    <span>Click <br /> to pick sample.</span>
+                    <span className="asideSpan">Click <br /> to pick sample.</span>
                     <button id="exportButton" onClick={exportColorCard}>Export color card</button>
-                </div>
+                </section>
 
                 <section id="cardSection">
                     <p className="swatches__h1">COLOR SWATCHES</p>
