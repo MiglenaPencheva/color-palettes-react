@@ -120,6 +120,7 @@ const SwatchesCard = () => {
         const y = e.clientY - bounding.top;
         const pixelCtx = e.target.getContext('2d');
         const pixelData = pixelCtx.getImageData(x, y, 1, 1).data;
+        if(pixelData.length === 0) { return; }
         const rgbArr = Array.from(pixelData);
         let pixelRgb = `rgb(${rgbArr[0]}, ${rgbArr[1]}, ${rgbArr[2]})`;
         const pixelColorPreview = document.getElementById('pixelColor');
