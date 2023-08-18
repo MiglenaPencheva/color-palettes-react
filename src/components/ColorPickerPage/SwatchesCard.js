@@ -2,56 +2,61 @@ import { useState } from 'react';
 import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelpers';
 
 const SwatchesCard = () => {
+    const [pixelation, setPixelation] = useState(0);
+    const [imageSrc, setImageSrc] = useState('');
+    // const [data, setData] = useState([]);
+    const [canvasWidth, setCanvasWidth] = useState(200);
+    const [canvasHeight, setCanvasHeight] = useState(300);
     const [pickedColor, setPickedColor] = useState('#ffefe6');
-    let [r, setR] = useState(148);
-    let [g, setG] = useState(199);
-    let [b, setB] = useState(219);
+    const [r, setR] = useState(148);
+    const [g, setG] = useState(199);
+    const [b, setB] = useState(219);
 
     const uploadImage = (e) => {
-        const canvas = document.getElementById('pixelatedImageCanvas');
         const img = document.getElementById('img');
         document.getElementById('pixelRangeSection').style.display = 'flex';
 
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);
         img.src = src;
+        setImageSrc(img.src);
         img.style.display = 'block';
 
         img.onLoad = () => {
             const ratio = img.naturalWidth / img.naturalHeight;
             if (ratio > 1) {
-                canvas.width = 600;
-                canvas.height = canvas.width / ratio;
+                setCanvasWidth(600);
+                setCanvasHeight(canvasWidth / ratio);
             } else {
-                canvas.height = 400;
-                canvas.width = canvas.height * ratio;
+                setCanvasHeight(400);
+                setCanvasWidth(canvasHeight * ratio);
             }
-            const context = canvas.getContext('2d');
-            context.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-            const resultSection = document.getElementById('resultSection');
-            resultSection.style.display = 'flex';
+            document.getElementById('resultSection').style.display = 'flex';
         };
     };
 
     function pixelateImage(e) {
         const canvas = document.getElementById('pixelatedImageCanvas');
         const context = canvas.getContext('2d');
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        console.log(imageSrc);
+        context.drawImage(imageSrc, 0, 0, canvasWidth, canvasHeight);
+        const imageData = context.getImageData(0, 0, canvasWidth, canvasHeight);
         const data = imageData.data;
+        console.log(data);
 
         if (data.length === 0) { return; }
 
-        canvas.style.display = 'block';
-        const blockSize = Number(e.target.value);
+        let blockSize = Number(e.target.value);
+        setPixelation(blockSize);
+        console.log(blockSize);
 
         // calculate average color for every square
         if (blockSize > 0) {
-            for (let y = 0; y < canvas.height; y += blockSize) {
-                for (let x = 0; x < canvas.width; x += blockSize) {
-                    const baseIndex = (y * canvas.width + x) * 4;
-                    const pixel = getAverageColor(data, baseIndex, canvas.width, blockSize);
-                    fillBlock(data, pixel, baseIndex, canvas.width, blockSize);
+            for (let y = 0; y < canvasHeight; y += blockSize) {
+                for (let x = 0; x < canvasWidth; x += blockSize) {
+                    const baseIndex = (y * canvasWidth + x) * 4;
+                    const pixel = getAverageColor(data, baseIndex, canvasWidth, blockSize);
+                    fillBlock(data, pixel, baseIndex, canvasWidth, blockSize);
                 }
             }
         }
@@ -199,8 +204,8 @@ const SwatchesCard = () => {
                 <section id="pixelRangeSection">
                     <span>set pixelation</span>
                     <input type="range" id="pixelRangeSlider" name="pixelRange"
-                        min="0" step="5" max="100" defaultValue="24"
-                        onChange={(e) => pixelateImage(e)} />
+                        min="0" step="5" max="100" value={pixelation}
+                        onChange={pixelateImage} />
                 </section>
             </section>
 
