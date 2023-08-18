@@ -2,13 +2,12 @@ import { useState, useEffect, useCallback } from 'react';
 import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelpers';
 
 const SwatchesCard = () => {
+    const [originalImageData, setOriginalImageData] = useState(null);
     const [pixelation, setPixelation] = useState(24);
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     const [r, setR] = useState(148);
     const [g, setG] = useState(199);
     const [b, setB] = useState(219);
-
-    const [originalImageData, setOriginalImageData] = useState(null);
 
     const applyPixelation = useCallback((canvas, pixelation) => {
         canvas = document.getElementById('pixelatedImageCanvas');
@@ -80,6 +79,8 @@ const SwatchesCard = () => {
 
         img.onload = () => {
             const canvas = document.getElementById('pixelatedImageCanvas');
+            canvas.style.border = 'none';
+            canvas.style['border-radius'] = 0;
             const ratio = img.naturalWidth / img.naturalHeight;
             if (ratio > 1) {
                 canvas.width = 600;
@@ -100,13 +101,9 @@ const SwatchesCard = () => {
     const redrawPixelatedImage = useCallback((newPixelation, imageData) => {
         const canvas = document.getElementById('pixelatedImageCanvas');
         const context = canvas.getContext('2d');
-
         if (imageData) {
-            // Clear the canvas and restore the original image
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.putImageData(imageData, 0, 0);
-
-            // Apply pixelation
             applyPixelation(canvas, newPixelation);
         }
     }, [applyPixelation]);
