@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelpers';
 
 const SwatchesCard = () => {
@@ -10,7 +10,7 @@ const SwatchesCard = () => {
 
     const [originalImageData, setOriginalImageData] = useState(null);
 
-    const applyPixelation = (canvas, pixelation) => {
+    const applyPixelation = useCallback((canvas, pixelation) => {
         canvas = document.getElementById('pixelatedImageCanvas');
         if (!canvas) { return; }
         const context = canvas.getContext('2d');
@@ -59,11 +59,9 @@ const SwatchesCard = () => {
                 }
             }
         }
-
-
         // draw pixelated image in canvas
         context.putImageData(imageData, 0, 0);
-    };
+    }, []);
 
     const uploadImage = (e) => {
         const img = document.getElementById('img');
@@ -99,15 +97,25 @@ const SwatchesCard = () => {
         };
     };
 
-    const redrawPixelatedImage = () => {
+    const redrawPixelatedImage = useCallback((newPixelation, imageData) => {
         const canvas = document.getElementById('pixelatedImageCanvas');
         const context = canvas.getContext('2d');
-        if (originalImageData) {
+
+        if (imageData) {
+            // Clear the canvas and restore the original image
             context.clearRect(0, 0, canvas.width, canvas.height);
-            context.putImageData(originalImageData, 0, 0);
-            applyPixelation(canvas, pixelation);
+            context.putImageData(imageData, 0, 0);
+
+            // Apply pixelation
+            applyPixelation(canvas, newPixelation);
         }
-    };
+    }, [applyPixelation]);
+
+    useEffect(() => {
+        if (originalImageData !== null) {
+            redrawPixelatedImage(pixelation, originalImageData);
+        }
+    }, [originalImageData, pixelation, redrawPixelatedImage]);
 
     function definePixel(e) {
         const bounding = e.target.getBoundingClientRect();
