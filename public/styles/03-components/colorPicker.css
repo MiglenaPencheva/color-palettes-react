@@ -277,10 +277,6 @@ hr {
     align-items: center;
 }
 
-#pixelatedImageCanvas {
-    display: none;
-}
-
 .swatches__asideResult {
     padding: 0.5rem;
     display: flex;

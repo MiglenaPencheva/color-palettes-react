@@ -43,7 +43,6 @@ const SwatchesCard = () => {
 
         let blockSize = Number(e.target.value);
         setPixelation(blockSize);
-        console.log(blockSize);
 
         // calculate average color for every square
         if (blockSize > 0) {
