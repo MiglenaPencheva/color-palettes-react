@@ -10,7 +10,7 @@ const SwatchesCard = () => {
 
     const applyPixelation = (canvas, pixelation) => {
         canvas = document.getElementById('pixelatedImageCanvas');
-        if (!canvas) { return; } 
+        if (!canvas) { return; }
         const context = canvas.getContext('2d');
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData.data;
@@ -58,6 +58,7 @@ const SwatchesCard = () => {
             }
         }
 
+
         // draw pixelated image in canvas
         context.putImageData(imageData, 0, 0);
     };
@@ -87,6 +88,8 @@ const SwatchesCard = () => {
                 canvas.height = 400;
                 canvas.width = canvas.height * ratio;
             }
+            const context = canvas.getContext('2d');
+            context.drawImage(img, 0, 0, canvas.width, canvas.height); // Draw the image
             applyPixelation(canvas, pixelation);
         };
     };
