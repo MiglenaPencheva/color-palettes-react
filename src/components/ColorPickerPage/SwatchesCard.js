@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelpers';
 
 const SwatchesCard = () => {
+    const [data, setData] = useState([]);
     const [pixelation, setPixelation] = useState(0);
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     const [r, setR] = useState(148);
@@ -12,12 +13,16 @@ const SwatchesCard = () => {
         const img = document.getElementById('img');
         document.getElementById('pixelRangeSection').style.display = 'flex';
         document.getElementById('resultSection').style.display = 'flex';
+        const colors = document.getElementById('colors');
+        while (colors.firstChild) {
+            colors.removeChild(colors.firstChild);
+        }
 
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);
         img.src = src;
         img.style.display = 'block';
-        
+
         img.onload = () => {
             const canvas = document.getElementById('pixelatedImageCanvas');
             const ratio = img.naturalWidth / img.naturalHeight;
@@ -30,6 +35,8 @@ const SwatchesCard = () => {
             }
             const context = canvas.getContext('2d');
             context.drawImage(img, 0, 0, canvas.width, canvas.height);
+            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+            setData(imageData.data);
         };
     };
 
@@ -37,7 +44,6 @@ const SwatchesCard = () => {
         const canvas = document.getElementById('pixelatedImageCanvas');
         const context = canvas.getContext('2d');
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        const data = imageData.data;
 
         if (data.length === 0) { return; }
 
