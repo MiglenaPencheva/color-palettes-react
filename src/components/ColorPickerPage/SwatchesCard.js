@@ -8,6 +8,8 @@ const SwatchesCard = () => {
     const [g, setG] = useState(199);
     const [b, setB] = useState(219);
 
+    let originalImageData;
+
     const applyPixelation = (canvas, pixelation) => {
         canvas = document.getElementById('pixelatedImageCanvas');
         if (!canvas) { return; }
@@ -89,13 +91,17 @@ const SwatchesCard = () => {
                 canvas.width = canvas.height * ratio;
             }
             const context = canvas.getContext('2d');
-            context.drawImage(img, 0, 0, canvas.width, canvas.height); // Draw the image
+            context.drawImage(img, 0, 0, canvas.width, canvas.height);
+            originalImageData = context.getImageData(0, 0, canvas.width, canvas.height);
             applyPixelation(canvas, pixelation);
         };
     };
 
     const redrawPixelatedImage = () => {
         const canvas = document.getElementById('pixelatedImageCanvas');
+        const context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.putImageData(originalImageData, 0, 0);
         applyPixelation(canvas, pixelation);
     };
 
