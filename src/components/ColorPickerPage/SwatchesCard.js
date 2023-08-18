@@ -65,7 +65,8 @@ const SwatchesCard = () => {
     const uploadImage = (e) => {
         const img = document.getElementById('img');
         document.getElementById('pixelRangeSection').style.display = 'flex';
-        document.getElementById('resultSection').style.display = 'flex';
+        document.querySelector('.swatches__asideResult').style.display = 'flex';
+        document.getElementById('cardSection').style.display = 'flex';
         const colors = document.getElementById('colors');
         while (colors.firstChild) {
             colors.removeChild(colors.firstChild);
