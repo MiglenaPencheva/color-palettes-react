@@ -200,7 +200,7 @@ const SwatchesCard = () => {
                     <span>set pixelation</span>
                     <input type="range" id="pixelRangeSlider" name="pixelRange"
                         min="0" step="5" max="100" defaultValue="24"
-                        onChange={pixelateImage} />
+                        onChange={(e) => pixelateImage(e)} />
                 </section>
             </section>
 
