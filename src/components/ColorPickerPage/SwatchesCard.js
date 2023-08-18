@@ -33,20 +33,22 @@ const SwatchesCard = () => {
                 canvas.height = 400;
                 canvas.width = canvas.height * ratio;
             }
-            const context = canvas.getContext('2d');
-            context.drawImage(img, 0, 0, canvas.width, canvas.height);
-            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             setData(imageData.data);
         };
     };
 
     function pixelateImage(e) {
+        setPixelation(0);
+
         const canvas = document.getElementById('pixelatedImageCanvas');
+        const context = canvas.getContext('2d');
         
         if (data.length === 0) { return; }
 
         let blockSize = Number(e.target.value);
-        setPixelation(blockSize);
         
         // calculate average color for every square
         if (blockSize > 0) {
@@ -93,9 +95,10 @@ const SwatchesCard = () => {
         }
 
         // draw pixelated image in canvas
-        const context = canvas.getContext('2d');
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        context.putImageData(imageData, 0, 0);
+        const pixelatedImageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        context.putImageData(pixelatedImageData, 0, 0);
+        
+        setPixelation(blockSize);
     };
 
     function definePixel(e) {
