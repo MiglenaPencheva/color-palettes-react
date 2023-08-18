@@ -8,7 +8,7 @@ const SwatchesCard = () => {
     const [g, setG] = useState(199);
     const [b, setB] = useState(219);
 
-    let originalImageData;
+    const [originalImageData, setOriginalImageData] = useState(null);
 
     const applyPixelation = (canvas, pixelation) => {
         canvas = document.getElementById('pixelatedImageCanvas');
@@ -92,7 +92,9 @@ const SwatchesCard = () => {
             }
             const context = canvas.getContext('2d');
             context.drawImage(img, 0, 0, canvas.width, canvas.height);
-            originalImageData = context.getImageData(0, 0, canvas.width, canvas.height);
+            const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+            setOriginalImageData(imageData);
+
             applyPixelation(canvas, pixelation);
         };
     };
@@ -100,9 +102,11 @@ const SwatchesCard = () => {
     const redrawPixelatedImage = () => {
         const canvas = document.getElementById('pixelatedImageCanvas');
         const context = canvas.getContext('2d');
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.putImageData(originalImageData, 0, 0);
-        applyPixelation(canvas, pixelation);
+        if (originalImageData) {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.putImageData(originalImageData, 0, 0);
+            applyPixelation(canvas, pixelation);
+        }
     };
 
     function definePixel(e) {
