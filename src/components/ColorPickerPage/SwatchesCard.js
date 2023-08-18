@@ -8,34 +8,6 @@ const SwatchesCard = () => {
     const [g, setG] = useState(199);
     const [b, setB] = useState(219);
 
-    const uploadImage = (e) => {
-        const img = document.getElementById('img');
-        document.getElementById('pixelRangeSection').style.display = 'flex';
-        document.getElementById('resultSection').style.display = 'flex';
-        const colors = document.getElementById('colors');
-        while (colors.firstChild) {
-            colors.removeChild(colors.firstChild);
-        }
-
-        const file = e.target.files[0];
-        const src = URL.createObjectURL(file);
-        img.src = src;
-        img.style.display = 'block';
-
-        img.onload = () => {
-            const canvas = document.getElementById('pixelatedImageCanvas');
-            const ratio = img.naturalWidth / img.naturalHeight;
-            if (ratio > 1) {
-                canvas.width = 600;
-                canvas.height = canvas.width / ratio;
-            } else {
-                canvas.height = 400;
-                canvas.width = canvas.height * ratio;
-            }
-            applyPixelation(canvas, pixelation);
-        };
-    };
-
     const applyPixelation = (canvas, pixelation) => {
         canvas = document.getElementById('pixelatedImageCanvas');
         if (!canvas) { return; } 
@@ -88,6 +60,34 @@ const SwatchesCard = () => {
 
         // draw pixelated image in canvas
         context.putImageData(imageData, 0, 0);
+    };
+
+    const uploadImage = (e) => {
+        const img = document.getElementById('img');
+        document.getElementById('pixelRangeSection').style.display = 'flex';
+        document.getElementById('resultSection').style.display = 'flex';
+        const colors = document.getElementById('colors');
+        while (colors.firstChild) {
+            colors.removeChild(colors.firstChild);
+        }
+
+        const file = e.target.files[0];
+        const src = URL.createObjectURL(file);
+        img.src = src;
+        img.style.display = 'block';
+
+        img.onload = () => {
+            const canvas = document.getElementById('pixelatedImageCanvas');
+            const ratio = img.naturalWidth / img.naturalHeight;
+            if (ratio > 1) {
+                canvas.width = 600;
+                canvas.height = canvas.width / ratio;
+            } else {
+                canvas.height = 400;
+                canvas.width = canvas.height * ratio;
+            }
+            applyPixelation(canvas, pixelation);
+        };
     };
 
     const redrawPixelatedImage = () => {
