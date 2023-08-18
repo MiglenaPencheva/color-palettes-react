@@ -65,7 +65,7 @@ const SwatchesCard = () => {
     const uploadImage = (e) => {
         const img = document.getElementById('img');
         document.getElementById('pixelRangeSection').style.display = 'flex';
-        document.querySelector('.swatches__asideResult').style.display = 'flex';
+        document.getElementById('asideResult').style.display = 'flex';
         document.getElementById('cardSection').style.display = 'flex';
         const colors = document.getElementById('colors');
         while (colors.firstChild) {
@@ -216,7 +216,7 @@ const SwatchesCard = () => {
                     onMouseMove={(e) => definePixel(e)} onClick={addColors}>
                 </canvas>
 
-                <div className="swatches__asideResult">
+                <div id="asideResult">
                     <span>Move the mouse <br /> over the image.</span>
                     <span id="pixelColor"></span>
                     <span>Click <br /> to pick sample.</span>
