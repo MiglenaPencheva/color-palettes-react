@@ -18,7 +18,7 @@ const SwatchesCard = () => {
         img.src = src;
         img.style.display = 'block';
         
-        img.onLoad = () => {
+        img.onload = () => {
             const canvas = document.getElementById('pixelatedImageCanvas');
             const ratio = img.naturalWidth / img.naturalHeight;
             if (ratio > 1) {
