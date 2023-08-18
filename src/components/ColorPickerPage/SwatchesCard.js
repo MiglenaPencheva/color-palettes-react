@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelpers';
 
 const SwatchesCard = () => {
@@ -7,7 +7,6 @@ const SwatchesCard = () => {
     const [r, setR] = useState(148);
     const [g, setG] = useState(199);
     const [b, setB] = useState(219);
-    const canvasRef = useRef(null);
 
     const uploadImage = (e) => {
         const img = document.getElementById('img');
@@ -24,7 +23,7 @@ const SwatchesCard = () => {
         img.style.display = 'block';
 
         img.onload = () => {
-            const canvas = canvasRef.current;
+            const canvas = document.getElementById('pixelatedImageCanvas');
             const ratio = img.naturalWidth / img.naturalHeight;
             if (ratio > 1) {
                 canvas.width = 600;
@@ -33,16 +32,12 @@ const SwatchesCard = () => {
                 canvas.height = 400;
                 canvas.width = canvas.height * ratio;
             }
-            applyPixelation(pixelation);
+            applyPixelation(canvas, pixelation);
         };
     };
 
-    const redrawPixelatedImage = () => {
-        applyPixelation(pixelation);
-    };
-
-    const applyPixelation = (pixelation) => {
-        const canvas = canvasRef.current;
+    const applyPixelation = (canvas, pixelation) => {
+        canvas = document.getElementById('pixelatedImageCanvas');
         if (!canvas) { return; } 
         const context = canvas.getContext('2d');
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
@@ -93,6 +88,11 @@ const SwatchesCard = () => {
 
         // draw pixelated image in canvas
         context.putImageData(imageData, 0, 0);
+    };
+
+    const redrawPixelatedImage = () => {
+        const canvas = document.getElementById('pixelatedImageCanvas');
+        applyPixelation(canvas, pixelation);
     };
 
     function definePixel(e) {
