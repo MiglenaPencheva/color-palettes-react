@@ -3,10 +3,6 @@ import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelper
 
 const SwatchesCard = () => {
     const [pixelation, setPixelation] = useState(0);
-    const [imageSrc, setImageSrc] = useState('');
-    // const [data, setData] = useState([]);
-    const [canvasWidth, setCanvasWidth] = useState(200);
-    const [canvasHeight, setCanvasHeight] = useState(300);
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     const [r, setR] = useState(148);
     const [g, setG] = useState(199);
@@ -15,34 +11,33 @@ const SwatchesCard = () => {
     const uploadImage = (e) => {
         const img = document.getElementById('img');
         document.getElementById('pixelRangeSection').style.display = 'flex';
+        document.getElementById('resultSection').style.display = 'flex';
 
         const file = e.target.files[0];
         const src = URL.createObjectURL(file);
         img.src = src;
-        setImageSrc(img.src);
         img.style.display = 'block';
-
+        
         img.onLoad = () => {
+            const canvas = document.getElementById('pixelatedImageCanvas');
             const ratio = img.naturalWidth / img.naturalHeight;
             if (ratio > 1) {
-                setCanvasWidth(600);
-                setCanvasHeight(canvasWidth / ratio);
+                canvas.width = 600;
+                canvas.height = canvas.width / ratio;
             } else {
-                setCanvasHeight(400);
-                setCanvasWidth(canvasHeight * ratio);
+                canvas.height = 400;
+                canvas.width = canvas.height * ratio;
             }
-            document.getElementById('resultSection').style.display = 'flex';
+            const context = canvas.getContext('2d');
+            context.drawImage(img, 0, 0, canvas.width, canvas.height);
         };
     };
 
     function pixelateImage(e) {
         const canvas = document.getElementById('pixelatedImageCanvas');
         const context = canvas.getContext('2d');
-        console.log(imageSrc);
-        context.drawImage(imageSrc, 0, 0, canvasWidth, canvasHeight);
-        const imageData = context.getImageData(0, 0, canvasWidth, canvasHeight);
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData.data;
-        console.log(data);
 
         if (data.length === 0) { return; }
 
@@ -52,11 +47,11 @@ const SwatchesCard = () => {
 
         // calculate average color for every square
         if (blockSize > 0) {
-            for (let y = 0; y < canvasHeight; y += blockSize) {
-                for (let x = 0; x < canvasWidth; x += blockSize) {
-                    const baseIndex = (y * canvasWidth + x) * 4;
-                    const pixel = getAverageColor(data, baseIndex, canvasWidth, blockSize);
-                    fillBlock(data, pixel, baseIndex, canvasWidth, blockSize);
+            for (let y = 0; y < canvas.height; y += blockSize) {
+                for (let x = 0; x < canvas.width; x += blockSize) {
+                    const baseIndex = (y * canvas.width + x) * 4;
+                    const pixel = getAverageColor(data, baseIndex, canvas.width, blockSize);
+                    fillBlock(data, pixel, baseIndex, canvas.width, blockSize);
                 }
             }
         }
