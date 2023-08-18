@@ -80,8 +80,7 @@ const SwatchesCard = () => {
                 }
             }
             // draw pixelated image in canvas
-            const pixelatedImageData = context.getImageData(0, 0, canvas.width, canvas.height);
-            context.putImageData(pixelatedImageData, 0, 0);
+            context.putImageData(imageData, 0, 0);
         };
     };
 
