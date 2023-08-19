@@ -66,6 +66,7 @@ const SwatchesCard = () => {
 
     const uploadImage = (e) => {
         const img = document.getElementById('img');
+        document.getElementById('pixelRangeSection').style.display = 'flex';
         document.getElementById('cardSection').style.display = 'flex';
         const colors = document.getElementById('colors');
         while (colors.firstChild) {
@@ -116,14 +117,18 @@ const SwatchesCard = () => {
 
     function definePixel(e) {
         let data = originalImageData.data;
-        if (data.length === 0) { return; }
-        const picked = getPixel(e, data);
-        document.getElementById('pixelColor').style['background-color'] = picked;
-        setPickedColor(picked);
-        let rbgValues = getRgbFromString(picked);
-        setR(rbgValues[0]);
-        setG(rbgValues[1]);
-        setB(rbgValues[2]);
+        console.log(data);
+        if (data.length !== 0) {
+            const picked = getPixel(e, data);
+            console.log(picked);
+            document.getElementById('pixelColor').style['background-color'] = picked;
+            setPickedColor(picked);
+            let rbgValues = getRgbFromString(picked);
+            console.log(rbgValues);
+            setR(rbgValues[0]);
+            setG(rbgValues[1]);
+            setB(rbgValues[2]);
+        }
     };
 
     function addColors() {
