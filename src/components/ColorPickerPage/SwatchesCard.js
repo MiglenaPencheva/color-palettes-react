@@ -209,7 +209,7 @@ const SwatchesCard = () => {
     return (
         <section className="swatches__container">
 
-            <section id="swatchesUploadSection">
+            <section className="picker__file-input">
                 <label className="button">
                     <input type="file"
                         onChange={uploadImage}
@@ -234,7 +234,7 @@ const SwatchesCard = () => {
                 onMouseMove={(e) => definePixel(e)} onClick={addColors}>
             </canvas>
 
-            <section id="picker-aside">
+            <section className="picker-aside">
                 <span className="picker__instructions">
                     Move the mouse
                     <br /> over the image.
