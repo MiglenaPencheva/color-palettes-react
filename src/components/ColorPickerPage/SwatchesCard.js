@@ -4,6 +4,7 @@ import { getPixel } from '../../helpers/getPixel';
 
 const SwatchesCard = () => {
     const [originalImageData, setOriginalImageData] = useState(null);
+    const [pixelatedImageData, setPixelatedImageData] = useState(null);
     const [pixelation, setPixelation] = useState(24);
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     const [r, setR] = useState(148);
@@ -62,6 +63,7 @@ const SwatchesCard = () => {
         }
         // draw pixelated image in canvas
         context.putImageData(imageData, 0, 0);
+        setPixelatedImageData(imageData);
     }, []);
 
     const uploadImage = (e) => {
@@ -116,8 +118,8 @@ const SwatchesCard = () => {
     }, [originalImageData, pixelation, redrawPixelatedImage]);
 
     function definePixel(e) {
-        if (originalImageData === null) { return; }
-        let data = originalImageData.data;
+        if (pixelatedImageData === null) { return; }
+        let data = pixelatedImageData.data;
         if (data.length !== 0) {
             const picked = getPixel(e, data);
             document.getElementById('pixelColor').style['background-color'] = picked;
