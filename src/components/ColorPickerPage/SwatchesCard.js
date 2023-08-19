@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelpers';
+import { getRgbFromString, rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelpers';
+import { getPixel } from '../../helpers/getPixel';
 
 const SwatchesCard = () => {
     const [originalImageData, setOriginalImageData] = useState(null);
@@ -11,10 +12,11 @@ const SwatchesCard = () => {
 
     const applyPixelation = useCallback((canvas, pixelation) => {
         canvas = document.getElementById('pixelatedImageCanvas');
-        if (!canvas) { return; }
         const context = canvas.getContext('2d');
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData.data;
+
+        if (data.length === 0) { return; }
 
         let blockSize = Number(pixelation);
         if (blockSize > 0) {
@@ -64,8 +66,6 @@ const SwatchesCard = () => {
 
     const uploadImage = (e) => {
         const img = document.getElementById('img');
-        document.getElementById('pixelRangeSection').style.display = 'flex';
-        document.getElementById('asideSection').style.display = 'flex';
         document.getElementById('cardSection').style.display = 'flex';
         const colors = document.getElementById('colors');
         while (colors.firstChild) {
@@ -115,20 +115,15 @@ const SwatchesCard = () => {
     }, [originalImageData, pixelation, redrawPixelatedImage]);
 
     function definePixel(e) {
-        const bounding = e.target.getBoundingClientRect();
-        const x = e.clientX - bounding.left;
-        const y = e.clientY - bounding.top;
-        const pixelCtx = e.target.getContext('2d');
-        const pixelData = pixelCtx.getImageData(x, y, 1, 1).data;
-        if(pixelData.length === 0) { return; }
-        const rgbArr = Array.from(pixelData);
-        let pixelRgb = `rgb(${rgbArr[0]}, ${rgbArr[1]}, ${rgbArr[2]})`;
-        const pixelColorPreview = document.getElementById('pixelColor');
-        pixelColorPreview.style['background-color'] = pixelRgb;
-        setPickedColor(pixelRgb);
-        setR(rgbArr[0]);
-        setG(rgbArr[1]);
-        setB(rgbArr[2]);
+        let data = originalImageData.data;
+        if (data.length === 0) { return; }
+        const picked = getPixel(e, data);
+        document.getElementById('pixelColor').style['background-color'] = picked;
+        setPickedColor(picked);
+        let rbgValues = getRgbFromString(picked);
+        setR(rbgValues[0]);
+        setG(rbgValues[1]);
+        setB(rbgValues[2]);
     };
 
     function addColors() {
@@ -231,7 +226,7 @@ const SwatchesCard = () => {
             </section>
 
             <section id="resultSection">
-                <canvas id="pixelatedImageCanvas" width="200" height="300"
+                <canvas id="pixelatedImageCanvas" width="300" height="300"
                     onMouseMove={(e) => definePixel(e)} onClick={addColors}>
                 </canvas>
 
