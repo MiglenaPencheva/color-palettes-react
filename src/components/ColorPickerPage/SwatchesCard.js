@@ -122,7 +122,7 @@ const SwatchesCard = () => {
         let data = pixelatedImageData.data;
         if (data.length !== 0) {
             const picked = getPixel(e, data);
-            document.getElementById('pixelColor').style['background-color'] = picked;
+            // document.getElementById('pixelColor').style['background-color'] = picked;
             setPickedColor(picked);
             let rbgValues = getRgbFromString(picked);
             setR(rbgValues.r);
@@ -209,13 +209,13 @@ const SwatchesCard = () => {
     return (
         <section className="swatches__container">
 
-            <section id="uploadSection">
+            <section id="swatchesUploadSection">
                 <label className="button">
                     <input type="file"
                         onChange={uploadImage}
                         accept="image/jpeg, image/png, image/jpg"
                     />
-                    Upload image
+                    Upload file
                 </label>
                 <img id="img" alt="imagePreview" />
                 <section id="pixelRangeSection">
@@ -230,24 +230,33 @@ const SwatchesCard = () => {
                 </section>
             </section>
 
-            <section id="swatchesResultSection">
-                <canvas id="pixelatedImageCanvas" width="240" height="300"
-                    onMouseMove={(e) => definePixel(e)} onClick={addColors}>
-                </canvas>
+            <canvas id="pixelatedImageCanvas" width="240" height="300"
+                onMouseMove={(e) => definePixel(e)} onClick={addColors}>
+            </canvas>
 
-                <section id="asideSection">
-                    <span className="asideSpan">Move the mouse <br /> over the image.</span>
-                    <span id="pixelColor"></span>
-                    <span className="asideSpan">Click <br /> to pick sample.</span>
-                    <button id="exportButton" onClick={exportColorCard}>Export color card</button>
-                </section>
+            <section id="picker-aside">
+                <span className="picker__instructions">
+                    Move the mouse
+                    <br /> over the image.
+                    <br /> Click to pick sample.
+                </span>
+                
+                <span className="picker__preview-box"
+                    id="pixelColor"
+                    style={{ backgroundColor: `${pickedColor}` }}>
+                </span>
 
-                <section id="cardSection">
-                    <p className="swatches__h1">COLOR SWATCHES</p>
-                    <p className="swatches__h2">Card of color samples with values</p>
-                    <ul id="colors"></ul>
+                <section className="picker__buttons">
+                    <button className="button" onClick={exportColorCard}>Export color card</button>
                 </section>
             </section>
+
+            <section id="cardSection">
+                <p className="swatches__h1">COLOR SWATCHES</p>
+                <p className="swatches__h2">Card of color samples with values</p>
+                <ul id="colors"></ul>
+            </section>
+
         </section>
     );
 };

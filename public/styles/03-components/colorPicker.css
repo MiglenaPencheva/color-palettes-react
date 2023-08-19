@@ -220,28 +220,26 @@ hr {
     padding: 0;
     max-width: 1000px;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
+    gap: 1rem;
 }
 
-#uploadSection {
-    /* width: 100%; */
-    margin: 1rem 0;
+#swatchesUploadSection {
+    padding-left: 0.5rem;
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 2rem;
     justify-content: center;
     align-items: center;
 }
-
 #fileInput {
     display: none;
 }
-
 #img {
     display: none;
     max-width: 150px;
-    max-height: 100px;
+    max-height: 150px;
 }
 
 /********* range ***********/
@@ -253,27 +251,23 @@ hr {
     justify-content: center;
     gap: 1rem;
 }
-
 #pixelRangeSlider {
-    margin: 0 1rem;
+    width: 150px;
     height: 10px;
     border-radius: 5px;
     background: var(--vermilion-white);
     -webkit-transition: .2s;
     transition: opacity .2s;
 }
-
 #pixelRangeSlider:hover {
     opacity: 0.7;
 }
-
 #pixelRangeSlider::-webkit-slider-thumb {
     width: 20px;
     height: 20px;
     background: var(--teal-grey);
     cursor: pointer;
 }
-
 #pixelRangeSlider::-moz-range-thumb {
     width: 20px;
     height: 20px;
@@ -281,68 +275,16 @@ hr {
     cursor: pointer;
 }
 
-/******* result section **********************************************/
-
-#swatchesResultSection {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-
 #pixelatedImageCanvas {
     border: 1px solid var(--teal-black);
     border-radius: 10px;
-}
-
-#asideSection {
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-}
-
-.asideSpan {
-    font-size: 0.8rem;
-    text-align: center;
-}
-
-#pixelColor {
-    width: 100px;
-    height: 100px;
-    background-color: var(--vermilion-white);
-    border-radius: 4px;
-}
-
-#exportButton {
-    margin: 0;
-    padding: 0.6rem 0.5rem;
-    width: 100px;
-    border-radius: 0.4rem;
-    text-decoration: none;
-    color: var(--vermilion-white);
-    background: var(--teal-grey);
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
-    text-align: center;
-    transition-duration: 0.5s;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-#exportButton:hover {
-    background: var(--vermilion-white);
-    color: var(--teal-grey);
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 /*********** cardSection **********************************/
 
 #cardSection {
     display: none;
+    width: 90%;
     flex-direction: column;
     justify-content: start;
     align-items: center;
@@ -382,7 +324,7 @@ hr {
     border-bottom: 1px solid var(--teal-grey);
 }
 
-.textLi button {
+.colorLi button {
     align-self: flex-start;
 }
 
