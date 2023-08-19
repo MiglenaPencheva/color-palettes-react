@@ -116,6 +116,7 @@ const SwatchesCard = () => {
     }, [originalImageData, pixelation, redrawPixelatedImage]);
 
     function definePixel(e) {
+        if (originalImageData === null) { return; }
         let data = originalImageData.data;
         console.log(data);
         if (data.length !== 0) {
