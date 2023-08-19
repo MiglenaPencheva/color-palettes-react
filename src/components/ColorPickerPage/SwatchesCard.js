@@ -126,13 +126,14 @@ const SwatchesCard = () => {
             setPickedColor(picked);
             let rbgValues = getRgbFromString(picked);
             console.log(rbgValues);
-            setR(rbgValues[0]);
-            setG(rbgValues[1]);
-            setB(rbgValues[2]);
+            setR(rbgValues.r);
+            setG(rbgValues.g);
+            setB(rbgValues.b);
         }
     };
 
     function addColors() {
+        console.log(pickedColor);
         const colors = document.getElementById('colors');
 
         // color
@@ -232,7 +233,7 @@ const SwatchesCard = () => {
             </section>
 
             <section id="resultSection">
-                <canvas id="pixelatedImageCanvas" width="300" height="300"
+                <canvas id="pixelatedImageCanvas" width="240" height="300"
                     onMouseMove={(e) => definePixel(e)} onClick={addColors}>
                 </canvas>
 
