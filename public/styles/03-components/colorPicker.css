@@ -283,7 +283,7 @@ hr {
 
 /******* result section **********************************************/
 
-#resultSection {
+#swatchesResultSection {
     display: flex;
     width: 100%;
     flex-wrap: wrap;

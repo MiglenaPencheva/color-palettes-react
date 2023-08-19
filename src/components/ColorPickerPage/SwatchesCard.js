@@ -230,7 +230,7 @@ const SwatchesCard = () => {
                 </section>
             </section>
 
-            <section id="resultSection">
+            <section id="swatchesResultSection">
                 <canvas id="pixelatedImageCanvas" width="240" height="300"
                     onMouseMove={(e) => definePixel(e)} onClick={addColors}>
                 </canvas>
