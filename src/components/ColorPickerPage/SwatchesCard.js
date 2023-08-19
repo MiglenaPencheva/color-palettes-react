@@ -118,14 +118,11 @@ const SwatchesCard = () => {
     function definePixel(e) {
         if (originalImageData === null) { return; }
         let data = originalImageData.data;
-        console.log(data);
         if (data.length !== 0) {
             const picked = getPixel(e, data);
-            console.log(picked);
             document.getElementById('pixelColor').style['background-color'] = picked;
             setPickedColor(picked);
             let rbgValues = getRgbFromString(picked);
-            console.log(rbgValues);
             setR(rbgValues.r);
             setG(rbgValues.g);
             setB(rbgValues.b);
@@ -133,7 +130,6 @@ const SwatchesCard = () => {
     };
 
     function addColors() {
-        console.log(pickedColor);
         const colors = document.getElementById('colors');
 
         // color
@@ -161,7 +157,7 @@ const SwatchesCard = () => {
         let hex = rgbToHex(r, g, b);
         let hsl = rgbToHsl(r, g, b).hslString;
         let cmyk = rgbToCmyk(r, g, b).cmykString;
-        textLi.textContent = `${hex} || ${pickedColor} || ${hsl} || ${cmyk}`;
+        textLi.textContent = `#${hex} || ${pickedColor} || hsl(${hsl}) || cmyk(${cmyk})`;
         textLi.classList.add('textLi');
 
         colorLi.appendChild(closeBtn);
