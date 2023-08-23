@@ -69,7 +69,7 @@ const SwatchesCard = () => {
     const uploadImage = (e) => {
         const img = document.getElementById('img');
         document.getElementById('cardSection').style.display = 'flex';
-        const colors = document.getElementById('colors');
+        const colors = document.getElementById('swatchesColors');
         while (colors.firstChild) {
             colors.removeChild(colors.firstChild);
         }
@@ -121,7 +121,6 @@ const SwatchesCard = () => {
         let data = pixelatedImageData.data;
         if (data.length !== 0) {
             const picked = getPixel(e, data);
-            // document.getElementById('pixelColor').style['background-color'] = picked;
             setPickedColor(picked);
             let rbgValues = getRgbFromString(picked);
             setR(rbgValues.r);
@@ -131,7 +130,7 @@ const SwatchesCard = () => {
     };
 
     function addColors() {
-        const colors = document.getElementById('colors');
+        const colors = document.getElementById('swatchesColors');
 
         // color
         let colorLi = document.createElement('li');
@@ -167,7 +166,7 @@ const SwatchesCard = () => {
     };
 
     function exportColorCard() {
-        const colors = document.getElementById('colors');
+        const colors = document.getElementById('swatchesColors');
         if (!colors.firstChild) { return; }
 
         const cnv = document.createElement('canvas');
@@ -253,7 +252,7 @@ const SwatchesCard = () => {
             <section id="cardSection">
                 <p className="swatches__h1">COLOR SWATCHES</p>
                 <p className="swatches__h2">Card of color samples with values</p>
-                <ul id="colors"></ul>
+                <ul id="swatchesColors"></ul>
             </section>
 
         </section>
