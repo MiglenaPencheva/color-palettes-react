@@ -94,7 +94,7 @@ const Header = () => {
                 </Link>
                 <Link className="home__navbar--link picker"
                     to="/color-picker" onMouseOver={showMore} onMouseOut={hideMore}>
-                    <span>Palette maker</span>
+                    <span>palette maker</span>
                     Color picker
                     <span>swatches card</span>
                 </Link>
