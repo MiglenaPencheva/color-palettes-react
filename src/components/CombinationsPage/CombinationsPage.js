@@ -1,5 +1,6 @@
 import { Routes, Route, NavLink } from 'react-router-dom';
 
+import Language from './../Language/Language';
 import RybWheel from './RybWheel';
 import Wheels from './Wheels';
 import Schemes from './Schemes';
@@ -19,11 +20,15 @@ const Combinations = () => {
             </section>
 
             <nav className="combinations__navbar">
-                <NavLink to="color-wheel" className={({ isActive }) => isActive ? 'active' : ''}>Color Wheel</NavLink>
-                <NavLink to="wheels" className={({ isActive }) => isActive ? 'active' : ''}>Wheels</NavLink>
-                <NavLink to="schemes" className={({ isActive }) => isActive ? 'active' : ''}>Schemes</NavLink>
-                <NavLink to="neutrals" className={({ isActive }) => isActive ? 'active' : ''}>Neutrals</NavLink>
-                <NavLink to="pastels" className={({ isActive }) => isActive ? 'active' : ''}>Pastels</NavLink>
+                <Language />
+
+                <section className="combinations__navbar--links">
+                    <NavLink to="color-wheel" className={({ isActive }) => isActive ? 'active' : ''}>Color Wheel</NavLink>
+                    <NavLink to="wheels" className={({ isActive }) => isActive ? 'active' : ''}>Wheels</NavLink>
+                    <NavLink to="schemes" className={({ isActive }) => isActive ? 'active' : ''}>Schemes</NavLink>
+                    <NavLink to="neutrals" className={({ isActive }) => isActive ? 'active' : ''}>Neutrals</NavLink>
+                    <NavLink to="pastels" className={({ isActive }) => isActive ? 'active' : ''}>Pastels</NavLink>
+                </section>
             </nav>
 
             <Routes>

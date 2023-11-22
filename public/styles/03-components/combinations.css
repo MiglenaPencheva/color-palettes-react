@@ -12,18 +12,25 @@
     padding: 0.3rem 1rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     gap: 1rem;
     background-color: var(--vermilion-white);
     border-radius: 4px;
 }
-.combinations__navbar a {
+.combinations__navbar--links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+.combinations__navbar--links a {
     padding: 0.5rem;
     cursor: pointer;
     border: none;
 }
-.combinations__navbar a:hover {
+.combinations__navbar--links a:hover {
     font-weight: 400;
     opacity: 0.6;
 }
