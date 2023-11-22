@@ -9,11 +9,15 @@ export const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
     const [language, setLanguage] = useLocalStorage('language', initialLanguageState);
-    console.log(language);
-    console.log(language.lang);
-
+    
     const toggleLanguage = () => {
-        setLanguage((prevLanguage) => ({lang: prevLanguage.lang === 'en' ? 'bg' : 'en' }));
+        if (language.lang === 'en') {
+            setLanguage({ lang: 'bg' });
+        } else if (language.lang === 'bg') {
+            setLanguage({ lang: 'en' });
+        }
+
+        // setLanguage((prevLanguage) => ({lang: prevLanguage.lang === 'en' ? 'bg' : 'en' }));
     };
 
     return (
