@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
-import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
+import { LanguageProvider, useLanguageContext } from './contexts/LanguageContext';
 
 import Logo from './components/Logo/Logo';
 import GoToTop from './components/GoToTop/GoToTop';
@@ -42,7 +42,7 @@ import ColorNames from './components/ExploreColorPage/ColorNames';
 import ExploreGroups from './components/ExploreColorPage/ExploreGroups';
 
 function App() {
-    const { language } = useLanguage();
+    const { language } = useLanguageContext();
 
     return (
         <LanguageProvider>
