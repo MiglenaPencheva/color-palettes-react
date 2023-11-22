@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './contexts/AuthContext';
-import { LanguageProvider, useLanguageContext } from './contexts/LanguageContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 import Logo from './components/Logo/Logo';
 import GoToTop from './components/GoToTop/GoToTop';
@@ -32,7 +32,6 @@ import Wheels from './components/CombinationsPage/Wheels';
 import Schemes from './components/CombinationsPage/Schemes';
 import Neutrals from './components/CombinationsPage/Neutrals';
 import Pastels from './components/CombinationsPage/Pastels';
-import PastelsBG from './components/CombinationsPage/PastelsBG';
 
 import ExploreColorPage from './components/ExploreColorPage/ExploreColorPage';
 import Convertor from './components/ExploreColorPage/Convertor';
@@ -42,7 +41,6 @@ import ColorNames from './components/ExploreColorPage/ColorNames';
 import ExploreGroups from './components/ExploreColorPage/ExploreGroups';
 
 function App() {
-    const { language } = useLanguageContext();
 
     return (
         <LanguageProvider>
@@ -87,10 +85,7 @@ function App() {
                                 <Route path="wheels" element={<Wheels />} />
                                 <Route path="schemes" element={<Schemes />} />
                                 <Route path="neutrals" element={<Neutrals />} />
-                                {language === 'en'
-                                    ? <Route path="pastels" element={<Pastels />} />
-                                    : <Route path="pastels" element={<PastelsBG />} />
-                                }
+                                <Route path="pastels" element={<Pastels />} />
                             </Route>
 
                             <Route path="/color-explore" element={<ExploreColorPage />} >
