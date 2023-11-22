@@ -1,4 +1,4 @@
-import { useLanguageContext } from './contexts/LanguageContext';
+import { useLanguageContext } from '../../contexts/LanguageContext';
 
 const Language = () => {
     const { language, toggleLanguage } = useLanguageContext();
