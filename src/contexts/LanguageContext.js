@@ -1,7 +1,9 @@
 import { createContext, useContext } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
 
-const initialLanguageState = 'en';
+const initialLanguageState = {
+    language: 'en'
+};
 
 export const LanguageContext = createContext();
 
@@ -9,7 +11,7 @@ export const LanguageProvider = ({ children }) => {
     const [language, setLanguage] = useLocalStorage('language', initialLanguageState);
 
     const toggleLanguage = () => {
-        setLanguage((prevLanguage) => (prevLanguage === 'en' ? 'bg' : 'en'));
+        setLanguage((prevLanguage) => (prevLanguage.language === 'en' ? 'bg' : 'en'));
     };
 
     return (

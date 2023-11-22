@@ -5,7 +5,7 @@ const Language = () => {
 
     return (
         <section id="toggleLanguage" onClick={toggleLanguage}>
-            { language === 'en' 
+            { language.language === 'en' 
                 ? <span id="activeEn">
                     <span className="activeLanguage">en</span>
                     <span className="notActiveLanguage">bg</span>
