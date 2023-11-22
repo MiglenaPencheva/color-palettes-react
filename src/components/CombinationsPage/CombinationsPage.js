@@ -40,7 +40,7 @@ const Combinations = () => {
                 <Route path="wheels" element={<Wheels />} />
                 <Route path="schemes" element={<Schemes />} />
                 <Route path="neutrals" element={<Neutrals />} />
-                {language.value === 'en'
+                {language === 'en'
                     ? <Route path="pastels" element={<Pastels />} />
                     : <Route path="pastels" element={<PastelsBG />} />
                 }

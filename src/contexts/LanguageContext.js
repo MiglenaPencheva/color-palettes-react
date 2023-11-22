@@ -4,10 +4,10 @@ import useLocalStorage from '../hooks/useLocalStorage';
 export const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-    const [language, setLanguage] = useLocalStorage('language', { value: 'en' });
+    const [language, setLanguage] = useLocalStorage('language', 'en');
 
     const toggleLanguage = () => {
-        setLanguage((prevLanguage) => ({ value: prevLanguage.value === 'en' ? 'bg' : 'en' }));
+        setLanguage((prevLanguage) => (prevLanguage === 'en' ? 'bg' : 'en' ));
     };
 
     return (
