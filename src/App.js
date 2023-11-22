@@ -43,7 +43,7 @@ import ExploreGroups from './components/ExploreColorPage/ExploreGroups';
 function App() {
 
     return (
-        <LanguageProvider>
+        <LanguageProvider >
             <AuthProvider >
                 <div id="app-container">
 

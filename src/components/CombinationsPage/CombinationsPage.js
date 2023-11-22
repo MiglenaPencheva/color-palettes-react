@@ -1,4 +1,5 @@
 import { Routes, Route, NavLink } from 'react-router-dom';
+import { useLanguageContext } from '../../contexts/LanguageContext';
 
 import Language from './../Language/Language';
 import RybWheel from './RybWheel';
@@ -6,8 +7,10 @@ import Wheels from './Wheels';
 import Schemes from './Schemes';
 import Neutrals from './Neutrals';
 import Pastels from './Pastels';
+import PastelsBG from './PastelsBG';
 
 const Combinations = () => {
+    const { language } = useLanguageContext();
 
     return (
         <section className="combinations-page" >
@@ -37,7 +40,10 @@ const Combinations = () => {
                 <Route path="wheels" element={<Wheels />} />
                 <Route path="schemes" element={<Schemes />} />
                 <Route path="neutrals" element={<Neutrals />} />
-                <Route path="pastels" element={<Pastels />} />
+                {language === 'en'
+                    ? <Route path="pastels" element={<Pastels />} />
+                    : <Route path="pastels" element={<PastelsBG />} />
+                }
             </Routes>
 
         </section>
