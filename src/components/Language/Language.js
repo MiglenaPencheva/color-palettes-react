@@ -3,10 +3,11 @@ import { useLanguageContext } from '../../contexts/LanguageContext';
 const Language = () => {
     const { language, toggleLanguage } = useLanguageContext();
     console.log(language);
+    console.log(language.value);
 
     return (
         <section id="toggleLanguage" onClick={toggleLanguage}>
-            { language === 'en' 
+            { language.value === 'en' 
                 ? <span id="activeEn">
                     <span className="activeLanguage">en</span>
                     <span className="notActiveBg">bg</span>
