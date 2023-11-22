@@ -21,7 +21,11 @@
     background-color: white;
     border-radius: 44px;
 }
-.notActiveLanguage {
+.notActiveBg {
     padding: 0 0 0 0.2rem;
+    color: var(--vermilion-white);
+}
+.notActiveEn {
+    padding: 0 0.2rem 0 0;
     color: var(--vermilion-white);
 }

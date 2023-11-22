@@ -9,10 +9,10 @@ const Language = () => {
             { language === 'en' 
                 ? <span id="activeEn">
                     <span className="activeLanguage">en</span>
-                    <span className="notActiveLanguage">bg</span>
+                    <span className="notActiveBg">bg</span>
                 </span>
                 : <span id="activeBg">
-                    <span className="notActiveLanguage">en</span>
+                    <span className="notActiveEn">en</span>
                     <span className="activeLanguage">bg</span>
                 </span>
             }
