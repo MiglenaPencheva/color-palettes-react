@@ -11,11 +11,9 @@
     opacity: 0.6;
 }
 #activeEn {
-    display: inline-block;
     padding: 0 0.3rem 0 0;
 }
 #activeBg {
-    display: none;
     padding: 0 0 0 0.3rem;
 }
 .activeLanguage {

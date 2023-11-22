@@ -299,6 +299,10 @@
         flex-direction: column;
         gap: 0;
     }
+    .combinations__navbar--links {
+        flex-direction: column;
+        gap: 0;
+    }
     .neutrals__greys {
         width: 100%;
     }
