@@ -297,7 +297,7 @@
 @media (max-width: 830px) {
     .combinations__navbar {
         flex-direction: column;
-        gap: 0;
+        gap: 0.5rem;
     }
     .combinations__navbar--links {
         flex-direction: column;
