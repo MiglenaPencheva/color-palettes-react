@@ -16,8 +16,6 @@ export const LanguageProvider = ({ children }) => {
         } else if (language.lang === 'bg') {
             setLanguage({ lang: 'en' });
         }
-
-        // setLanguage((prevLanguage) => ({lang: prevLanguage.lang === 'en' ? 'bg' : 'en' }));
     };
 
     return (

@@ -4,6 +4,7 @@ import { useLanguageContext } from '../../contexts/LanguageContext';
 import Language from './../Language/Language';
 import RybWheel from './RybWheel';
 import Wheels from './Wheels';
+import WheelsBG from './WheelsBG';
 import Schemes from './Schemes';
 import Neutrals from './Neutrals';
 import Pastels from './Pastels';
@@ -37,7 +38,10 @@ const Combinations = () => {
             <Routes>
                 <Route path="" element={<RybWheel />} />
                 <Route path="color-wheel" element={<RybWheel />} />
-                <Route path="wheels" element={<Wheels />} />
+                {language.lang === 'en'
+                    ? <Route path="wheels" element={<Wheels />} />
+                    : <Route path="wheels" element={<WheelsBG />} />
+                }
                 <Route path="schemes" element={<Schemes />} />
                 <Route path="neutrals" element={<Neutrals />} />
                 {language.lang === 'en'
