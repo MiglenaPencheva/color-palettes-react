@@ -6,6 +6,7 @@ import RybWheel from './RybWheel';
 import Wheels from './Wheels';
 import WheelsBG from './WheelsBG';
 import Schemes from './Schemes';
+import SchemesBG from './SchemesBG';
 import Neutrals from './Neutrals';
 import Pastels from './Pastels';
 import PastelsBG from './PastelsBG';
@@ -42,7 +43,10 @@ const Combinations = () => {
                     ? <Route path="wheels" element={<Wheels />} />
                     : <Route path="wheels" element={<WheelsBG />} />
                 }
-                <Route path="schemes" element={<Schemes />} />
+                {language.lang === 'en'
+                    ? <Route path="schemes" element={<Schemes />} />
+                    : <Route path="schemes" element={<SchemesBG />} />
+                }
                 <Route path="neutrals" element={<Neutrals />} />
                 {language.lang === 'en'
                     ? <Route path="pastels" element={<Pastels />} />
