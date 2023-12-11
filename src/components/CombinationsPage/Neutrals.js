@@ -58,7 +58,7 @@ const Neutrals = () => {
             </div>
 
             <article>
-                They can be the tones containing <b>brown</b> or <b>beige</b>, such as the color of earth, soil, clay, umber, ochre.
+                They can be the tones containing <b>brown</b> or <b>beige</b>, such as the color of earth, soil, clay, аmber, ochre.
             </article>
             <div className="neutrals__images">
                 <img src="/images/neutrals/nature/turtles.jpg" alt="turtles" />

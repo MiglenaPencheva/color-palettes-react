@@ -8,6 +8,7 @@ import WheelsBG from './WheelsBG';
 import Schemes from './Schemes';
 import SchemesBG from './SchemesBG';
 import Neutrals from './Neutrals';
+import NeutralsBG from './NeutralsBG';
 import Pastels from './Pastels';
 import PastelsBG from './PastelsBG';
 
@@ -47,7 +48,10 @@ const Combinations = () => {
                     ? <Route path="schemes" element={<Schemes />} />
                     : <Route path="schemes" element={<SchemesBG />} />
                 }
-                <Route path="neutrals" element={<Neutrals />} />
+                {language.lang === 'en'
+                    ? <Route path="neutrals" element={<Neutrals />} />
+                    : <Route path="neutrals" element={<NeutralsBG />} />
+                }
                 {language.lang === 'en'
                     ? <Route path="pastels" element={<Pastels />} />
                     : <Route path="pastels" element={<PastelsBG />} />
