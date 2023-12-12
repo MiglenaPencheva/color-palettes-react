@@ -169,7 +169,7 @@ const RybWheelBG = () => {
                 <article> Традиционната теория на цветовете използва субстрактивния цветови модел и <b>RYB колелото</b> (Red Yellow Blue).</article>
                 <article> Червено, жълто и синьо са
                     <strong id="primary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> основните цветове</strong>.
-                    <strong id="secondary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong">Второстепенните </strong >
+                    <strong id="secondary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> Второстепенните </strong >
                     (вторичните) оранжево, зелено и лилаво са образувани от смесването на основните.
                     Червено-оранжево, жълто-оранжево, жълто-зелено, синьо-зелено, сино-лилаво, червено-лилаво са
                     <strong id="tertiary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> спомагателните</strong> -
