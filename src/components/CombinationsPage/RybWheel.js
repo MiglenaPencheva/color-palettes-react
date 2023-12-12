@@ -173,7 +173,7 @@ const RybWheel = () => {
                     Orange, Green and Purple are created by mixing primary colors.
                     Red-Orange, Yellow-Orange, Yellow-Green, Blue-Green, Blue-Purple, Red-Purple are the
                     <strong id="tertiary" onMouseOver={showOnMouseOver} onMouseLeave={hideOnMouseLeave} className="strong"> tertiary colors</strong>,
-                    made by mixing two secondary colors.</article>
+                    made by mixing primary and secondary colors.</article>
                 <article> RYB color model is used by artists, fashion stylists,
                     interior, graphic and web designers.</article>
             </section>
