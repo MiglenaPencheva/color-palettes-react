@@ -30,11 +30,22 @@ const Combinations = () => {
                 <Language />
 
                 <section className="combinations__navbar--links">
-                    <NavLink to="color-wheel" className={({ isActive }) => isActive ? 'active' : ''}>Color Wheel</NavLink>
-                    <NavLink to="wheels" className={({ isActive }) => isActive ? 'active' : ''}>Wheels</NavLink>
-                    <NavLink to="schemes" className={({ isActive }) => isActive ? 'active' : ''}>Schemes</NavLink>
-                    <NavLink to="neutrals" className={({ isActive }) => isActive ? 'active' : ''}>Neutrals</NavLink>
-                    <NavLink to="pastels" className={({ isActive }) => isActive ? 'active' : ''}>Pastels</NavLink>
+                    {language.lang === 'en' ? (
+                        <>
+                            <NavLink to="color-wheel" className={({ isActive }) => isActive ? 'active' : ''}>Color Wheel</NavLink>
+                            <NavLink to="wheels" className={({ isActive }) => isActive ? 'active' : ''}>Wheels</NavLink>
+                            <NavLink to="schemes" className={({ isActive }) => isActive ? 'active' : ''}>Schemes</NavLink>
+                            <NavLink to="neutrals" className={({ isActive }) => isActive ? 'active' : ''}>Neutrals</NavLink>
+                            <NavLink to="pastels" className={({ isActive }) => isActive ? 'active' : ''}>Pastels</NavLink>
+                        </>
+                    ) : (
+                        <><NavLink to="color-wheel" className={({ isActive }) => isActive ? 'active' : ''}>Цветно колело</NavLink>
+                            <NavLink to="wheels" className={({ isActive }) => isActive ? 'active' : ''}>Колела</NavLink>
+                            <NavLink to="schemes" className={({ isActive }) => isActive ? 'active' : ''}>Схеми</NavLink>
+                            <NavLink to="neutrals" className={({ isActive }) => isActive ? 'active' : ''}>Неутрални</NavLink>
+                            <NavLink to="pastels" className={({ isActive }) => isActive ? 'active' : ''}>Пастели</NavLink>
+                        </>
+                    )}
                 </section>
             </nav>
 
