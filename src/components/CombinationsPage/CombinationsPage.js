@@ -3,6 +3,7 @@ import { useLanguageContext } from '../../contexts/LanguageContext';
 
 import Language from './../Language/Language';
 import RybWheel from './RybWheel';
+import RybWheelBG from './RybWheelBG';
 import Wheels from './Wheels';
 import WheelsBG from './WheelsBG';
 import Schemes from './Schemes';
@@ -38,8 +39,14 @@ const Combinations = () => {
             </nav>
 
             <Routes>
-                <Route path="" element={<RybWheel />} />
-                <Route path="color-wheel" element={<RybWheel />} />
+                {/* {language.lang === 'en'
+                    ? <Route path="" element={<RybWheel />} />
+                    : <Route path="" element={<RybWheelBG />} />
+                }
+                {language.lang === 'en'
+                    ? <Route path="color-wheel" element={<RybWheel />} />
+                    : <Route path="color-wheel" element={<RybWheelBG />} />
+                }
                 {language.lang === 'en'
                     ? <Route path="wheels" element={<Wheels />} />
                     : <Route path="wheels" element={<WheelsBG />} />
@@ -55,8 +62,31 @@ const Combinations = () => {
                 {language.lang === 'en'
                     ? <Route path="pastels" element={<Pastels />} />
                     : <Route path="pastels" element={<PastelsBG />} />
-                }
+                } */}
+
+                {language.lang === 'en' ? (
+                    <>
+                        <Route path="" element={<RybWheel />} />
+                        <Route path="color-wheel" element={<RybWheel />} />
+                        <Route path="wheels" element={<Wheels />} />
+                        <Route path="schemes" element={<Schemes />} />
+                        <Route path="neutrals" element={<Neutrals />} />
+                        <Route path="pastels" element={<Pastels />} />
+                    </>
+                ) : (
+                    <>
+                        <Route path="" element={<RybWheelBG />} />
+                        <Route path="color-wheel" element={<RybWheelBG />} />
+                        <Route path="wheels" element={<WheelsBG />} />
+                        <Route path="schemes" element={<SchemesBG />} />
+                        <Route path="neutrals" element={<NeutralsBG />} />
+                        <Route path="pastels" element={<PastelsBG />} />
+                    </>
+                )}
+
             </Routes>
+
+
 
         </section>
     );
