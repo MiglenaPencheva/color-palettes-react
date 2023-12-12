@@ -20,10 +20,20 @@ const Combinations = () => {
         <section className="combinations-page" >
 
             <section className="section-header">
-                <h2>Color combinations</h2>
-                <h6> Find the colors that go well together.
-                    Combine vibes in nice and accurate color schemes.</h6>
-                <h6 className="diffHeading"> Be the designer of your colorful life.</h6>
+                {language.lang === 'en' ? (
+                    <>
+                        <h2>Color combinations</h2>
+                        <h6> Find the colors that go well together.
+                            Combine vibes in nice and accurate color schemes.</h6>
+                        <h6 className="diffHeading"> Be the designer of your colorful life.</h6>
+                    </>
+                ) : (
+                    <><h2>Цветови комбинации</h2>
+                        <h6> Открий цветовете, които си подхождат.
+                            Комбинирай в хармонични и подходящи цветови схеми.</h6>
+                        <h6 className="diffHeading"> Сътвори своя цветен свят.</h6>
+                    </>
+                )}
             </section>
 
             <nav className="combinations__navbar">
@@ -42,7 +52,7 @@ const Combinations = () => {
                         <><NavLink to="color-wheel" className={({ isActive }) => isActive ? 'active' : ''}>Цветно колело</NavLink>
                             <NavLink to="wheels" className={({ isActive }) => isActive ? 'active' : ''}>Колела</NavLink>
                             <NavLink to="schemes" className={({ isActive }) => isActive ? 'active' : ''}>Схеми</NavLink>
-                            <NavLink to="neutrals" className={({ isActive }) => isActive ? 'active' : ''}>Неутрални</NavLink>
+                            <NavLink to="neutrals" className={({ isActive }) => isActive ? 'active' : ''}>Неутрали</NavLink>
                             <NavLink to="pastels" className={({ isActive }) => isActive ? 'active' : ''}>Пастели</NavLink>
                         </>
                     )}
