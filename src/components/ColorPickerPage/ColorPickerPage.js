@@ -22,7 +22,7 @@ const ColorPickerPage = () => {
                 <section className="section-header">
                     <h2>Избери цветовете</h2>
                     <h6>Подбери цветовете, които те привличат. Съчетавай по свое желание.</h6>
-                    <h6 className="diffHeading">Създай неповторимата си цветна палитра.</h6>
+                    <h6 className="diffHeading">Създай неповторима цветна палитра.</h6>
                 </section>
             )}
 
