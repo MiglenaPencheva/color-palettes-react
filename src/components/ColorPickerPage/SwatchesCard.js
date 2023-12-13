@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { getRgbFromString, rgbToHex, rgbToHsl, rgbToCmyk } from '../ExploreColorPage/exploreHelpers';
 import { getPixel } from '../../helpers/getPixel';
+import { useLanguageContext } from '../../contexts/LanguageContext';
 
 const SwatchesCard = () => {
+    const { language } = useLanguageContext();
     const [originalImageData, setOriginalImageData] = useState(null);
     const [pixelatedImageData, setPixelatedImageData] = useState(null);
     const [pixelation, setPixelation] = useState(24);
@@ -175,8 +177,13 @@ const SwatchesCard = () => {
         cnv.height = colors.offsetHeight + 20;
 
         exportCtx.fillStyle = '#608d9e';
-        exportCtx.fillText('COLOR SWATCHES', 0, 10);
-        exportCtx.fillText('Card of color samples with values', 0, 20);
+
+        language.lang === 'en'
+            ? exportCtx.fillText('COLOR SWATCHES', 0, 10)
+            : exportCtx.fillText('ЦВЕТНИ МОСТРИ', 0, 10);
+        language.lang === 'en'
+            ? exportCtx.fillText('Card of color samples with values', 0, 20)
+            : exportCtx.fillText('Карта с цветове и стойности', 0, 20);
 
         const items = colors.getElementsByTagName('li');
         let y = 30;
@@ -208,16 +215,31 @@ const SwatchesCard = () => {
         <section className="swatches__container">
 
             <section className="picker__file-input">
-                <label className="button">
-                    <input type="file"
-                        onChange={uploadImage}
-                        accept="image/jpeg, image/png, image/jpg"
-                    />
-                    Upload file
-                </label>
+                {language.lang === 'en' ? (
+                    <label className="button">
+                        <input type="file"
+                            onChange={uploadImage}
+                            accept="image/jpeg, image/png, image/jpg"
+                        />
+                        Upload file
+                    </label>
+                ) : (
+                    <label className="button">
+                        <input type="file"
+                            onChange={uploadImage}
+                            accept="image/jpeg, image/png, image/jpg"
+                        />
+                        Прикачи файл
+                    </label>
+                )}
                 <img id="img" alt="imagePreview" />
                 <section id="pixelRangeSection">
-                    <span>set pixelation</span>
+                    {language.lang === 'en' ? (
+                        <span>set pixelation</span>
+                    ) : (
+                        <span>задай ниво на пикселизация</span>
+                    )}
+
                     <input type="range" id="pixelRangeSlider" name="pixelRange"
                         min="0" step="5" max="100" value={pixelation}
                         onChange={(e) => {
@@ -233,25 +255,48 @@ const SwatchesCard = () => {
             </canvas>
 
             <section className="picker-aside">
-                <span className="picker__instructions">
-                    Move the mouse
-                    <br /> over the image.
-                    <br /> Click to pick sample.
-                </span>
-                
+                {language.lang === 'en' ? (
+                    <span className="picker__instructions">
+                        Move the mouse
+                        <br /> over the image.
+                        <br /> Click to pick sample.
+                    </span>
+                ) : (
+                    <span className="picker__instructions">
+                        Движи мишката
+                        <br /> върху изображението.
+                        <br /> Кликни за избор на цвят.
+                    </span>
+                )}
+
                 <span className="picker__preview-box"
                     id="pixelColor"
                     style={{ backgroundColor: `${pickedColor}` }}>
                 </span>
 
                 <section className="picker__buttons">
-                    <button className="button" onClick={exportColorCard}>Export color card</button>
+                    {language.lang === 'en' ? (
+                        <button className="button" onClick={exportColorCard}>Export color card</button>
+                    ) : (
+                        <button className="button" onClick={exportColorCard}>Запази цветна карта</button>
+                    )}
                 </section>
             </section>
 
             <section id="cardSection">
-                <p className="swatches__h1">COLOR SWATCHES</p>
-                <p className="swatches__h2">Card of color samples with values</p>
+
+                {language.lang === 'en' ? (
+                    <>
+                        <p className="swatches__h1">COLOR SWATCHES</p>
+                        <p className="swatches__h2">Card of color samples with values</p>
+                    </>
+                ) : (
+                    <>
+                        <p className="swatches__h1">ЦВЕТНИ МОСТРИ</p>
+                        <p className="swatches__h2">Карта с цветове и стойности</p>
+                    </>
+                )}
+
                 <ul id="swatchesColors"></ul>
             </section>
 

@@ -4,8 +4,6 @@ import { getPixel } from '../../helpers/getPixel';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useLanguageContext } from '../../contexts/LanguageContext';
 
-import Language from './../Language/Language';
-
 import { getRgbFromString, rgbToHex } from '../ExploreColorPage/exploreHelpers';
 
 const initialHexState = {
@@ -15,10 +13,10 @@ const initialHexState = {
 
 const PaletteMaker = (e) => {
     const [data, setData] = useState([]);
+    const { language } = useLanguageContext();
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     const [hex, setHex] = useState('#608d9e');
     const [hexToExplore, setHexToExplore] = useLocalStorage('hex', initialHexState);
-    const { language } = useLanguageContext();
 
     const onFileUpload = (e) => {
         // alert -> New uploading will delete your current work.
@@ -219,7 +217,7 @@ const PaletteMaker = (e) => {
                 ) : (
                     <section className="picker__buttons">
                         <button className="button" onClick={exportPalette}>Запази палитра</button>
-                        <button className="button" onClick={exportScheme}>Запази схемата</button>
+                        <button className="button" onClick={exportScheme}>Запази схема</button>
                     </section>
                 )}
 

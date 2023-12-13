@@ -1,9 +1,13 @@
 import { Routes, Route, NavLink } from 'react-router-dom';
+import { useLanguageContext } from '../../contexts/LanguageContext';
+
+import Language from './../Language/Language';
 
 import PaletteMaker from './PaletteMaker';
 import SwatchesCard from './SwatchesCard';
 
 const ColorPickerPage = () => {
+    const { language } = useLanguageContext();
 
     return (
         <section className="picker-page">
@@ -16,8 +20,20 @@ const ColorPickerPage = () => {
             </section>
 
             <nav className="picker__navbar">
-                <NavLink to="palette-maker" className={({ isActive }) => isActive ? 'active' : ''}>Palette maker</NavLink>
-                <NavLink to="swatches" className={({ isActive }) => isActive ? 'active' : ''}>Swatches card</NavLink>
+                <Language />
+
+                {language.lang === 'en' ? (
+                    <>
+                        <NavLink to="palette-maker" className={({ isActive }) => isActive ? 'active' : ''}>Palette maker</NavLink>
+                        <NavLink to="swatches" className={({ isActive }) => isActive ? 'active' : ''}>Swatches card</NavLink>
+                    </>
+                ) : (
+                    <>
+                        <NavLink to="palette-maker" className={({ isActive }) => isActive ? 'active' : ''}>Създай палитра</NavLink>
+                        <NavLink to="swatches" className={({ isActive }) => isActive ? 'active' : ''}>Цветна карта</NavLink>
+                    </>
+                )}
+
             </nav>
 
             <Routes>
