@@ -60,31 +60,6 @@ const Combinations = () => {
             </nav>
 
             <Routes>
-                {/* {language.lang === 'en'
-                    ? <Route path="" element={<RybWheel />} />
-                    : <Route path="" element={<RybWheelBG />} />
-                }
-                {language.lang === 'en'
-                    ? <Route path="color-wheel" element={<RybWheel />} />
-                    : <Route path="color-wheel" element={<RybWheelBG />} />
-                }
-                {language.lang === 'en'
-                    ? <Route path="wheels" element={<Wheels />} />
-                    : <Route path="wheels" element={<WheelsBG />} />
-                }
-                {language.lang === 'en'
-                    ? <Route path="schemes" element={<Schemes />} />
-                    : <Route path="schemes" element={<SchemesBG />} />
-                }
-                {language.lang === 'en'
-                    ? <Route path="neutrals" element={<Neutrals />} />
-                    : <Route path="neutrals" element={<NeutralsBG />} />
-                }
-                {language.lang === 'en'
-                    ? <Route path="pastels" element={<Pastels />} />
-                    : <Route path="pastels" element={<PastelsBG />} />
-                } */}
-
                 {language.lang === 'en' ? (
                     <>
                         <Route path="" element={<RybWheel />} />
@@ -104,10 +79,7 @@ const Combinations = () => {
                         <Route path="pastels" element={<PastelsBG />} />
                     </>
                 )}
-
             </Routes>
-
-
 
         </section>
     );
