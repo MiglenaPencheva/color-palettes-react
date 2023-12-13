@@ -21,19 +21,19 @@ const ColorPickerPage = () => {
 
             <nav className="picker__navbar">
                 <Language />
-
-                {language.lang === 'en' ? (
-                    <>
-                        <NavLink to="palette-maker" className={({ isActive }) => isActive ? 'active' : ''}>Palette maker</NavLink>
-                        <NavLink to="swatches" className={({ isActive }) => isActive ? 'active' : ''}>Swatches card</NavLink>
-                    </>
-                ) : (
-                    <>
-                        <NavLink to="palette-maker" className={({ isActive }) => isActive ? 'active' : ''}>Създай палитра</NavLink>
-                        <NavLink to="swatches" className={({ isActive }) => isActive ? 'active' : ''}>Цветна карта</NavLink>
-                    </>
-                )}
-
+                <section className="picker__navbar--links">
+                    {language.lang === 'en' ? (
+                        <>
+                            <NavLink to="palette-maker" className={({ isActive }) => isActive ? 'active' : ''}>Palette maker</NavLink>
+                            <NavLink to="swatches" className={({ isActive }) => isActive ? 'active' : ''}>Swatches card</NavLink>
+                        </>
+                    ) : (
+                        <>
+                            <NavLink to="palette-maker" className={({ isActive }) => isActive ? 'active' : ''}>Създай палитра</NavLink>
+                            <NavLink to="swatches" className={({ isActive }) => isActive ? 'active' : ''}>Цветна карта</NavLink>
+                        </>
+                    )}
+                </section>
             </nav>
 
             <Routes>

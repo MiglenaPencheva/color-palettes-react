@@ -13,20 +13,27 @@
     padding: 0.3rem 1rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     gap: 1rem;
     background-color: var(--vermilion-white);
     border-radius: 4px;
 }
 
-.picker__navbar a {
+.picker__navbar--links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+.picker__navbar--links a {
     padding: 0.5rem;
     cursor: pointer;
     border: none;
 }
 
-.picker__navbar a:hover {
+.picker__navbar--links a:hover {
     font-weight: 400;
     opacity: 0.6;
 }
@@ -334,6 +341,14 @@ hr {
 
 
 @media (max-width: 480px) {
+    .picker__navbar {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .picker__navbar--links {
+        flex-direction: column;
+        gap: 0;
+    }
     #colors {
         width: 90%;
     }
