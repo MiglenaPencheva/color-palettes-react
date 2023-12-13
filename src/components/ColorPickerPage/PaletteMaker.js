@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { exportResult } from '../../helpers/exportResult';
 import { getPixel } from '../../helpers/getPixel';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { useLanguageContext } from '../../contexts/LanguageContext';
+
+import Language from './../Language/Language';
 
 import { getRgbFromString, rgbToHex } from '../ExploreColorPage/exploreHelpers';
 
@@ -15,6 +18,7 @@ const PaletteMaker = (e) => {
     const [pickedColor, setPickedColor] = useState('#ffefe6');
     const [hex, setHex] = useState('#608d9e');
     const [hexToExplore, setHexToExplore] = useLocalStorage('hex', initialHexState);
+    const { language } = useLanguageContext();
 
     const onFileUpload = (e) => {
         // alert -> New uploading will delete your current work.
@@ -166,32 +170,59 @@ const PaletteMaker = (e) => {
 
             <aside className="picker-aside">
                 <section className="picker__file-input">
-                    <label className="button ">
-                        <input
-                            type="file"
-                            onChange={onFileUpload}
-                            accept="image/jpeg, image/png, image/jpg"
-                        />
-                        Upload file
-                    </label>
+                    {language.lang === 'en' ? (
+                        <label className="button ">
+                            <input
+                                type="file"
+                                onChange={onFileUpload}
+                                accept="image/jpeg, image/png, image/jpg"
+                            />
+                            Upload file
+                        </label>
+                    ) : (
+                        <label className="button ">
+                            <input
+                                type="file"
+                                onChange={onFileUpload}
+                                accept="image/jpeg, image/png, image/jpg"
+                            />
+                            Прикачи файл
+                        </label>
+                    )}
                     <img id="image" alt="" />
                 </section>
 
-                <span className="picker__instructions">
-                    Move the mouse
-                    <br /> over the image.
-                    <br /> Click to pick sample.
-                </span>
+                {language.lang === 'en' ? (
+                    <span className="picker__instructions">
+                        Move the mouse
+                        <br /> over the image.
+                        <br /> Click to pick sample.
+                    </span>
+                ) : (
+                    <span className="picker__instructions">
+                        Движи мишката
+                        <br /> върху изображението.
+                        <br /> Кликни за избор на цвят.
+                    </span>
+                )}
 
                 <span className="picker__preview-box"
                     id="pixelColor"
                     style={{ backgroundColor: `${pickedColor}` }}>
                 </span>
 
-                <section className="picker__buttons">
-                    <button className="button" onClick={exportPalette}>Export palette</button>
-                    <button className="button" onClick={exportScheme}>Export scheme</button>
-                </section>
+                {language.lang === 'en' ? (
+                    <section className="picker__buttons">
+                        <button className="button" onClick={exportPalette}>Export palette</button>
+                        <button className="button" onClick={exportScheme}>Export scheme</button>
+                    </section>
+                ) : (
+                    <section className="picker__buttons">
+                        <button className="button" onClick={exportPalette}>Запази палитра</button>
+                        <button className="button" onClick={exportScheme}>Запази схемата</button>
+                    </section>
+                )}
+
             </aside>
 
         </section>
