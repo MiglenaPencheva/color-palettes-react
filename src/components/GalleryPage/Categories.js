@@ -36,7 +36,7 @@ const Categories = ({ colorPalettes }) => {
         let filtered = colorPalettes.filter(x => x.category === category);
         setFilteredPalettes(filtered);
 
-        let newTitle = `Categories > ${category}`;
+        let newTitle = language.lang === 'en' ? `Categories > ${category}` : `Категории > ${e.target.textContent.toLowerCase()}`;;
         setTitle(newTitle);
     };
 

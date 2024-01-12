@@ -43,7 +43,8 @@ const ColorGroups = ({ colorPalettes }) => {
         };
         setFilteredPalettes(filtered);
 
-        let newTitle = `Color group > ${group}`;
+        let newTitle = language.lang === 'en' ? `Color group > ${group}` : `Цветни групи > ${e.target.textContent.toLowerCase()}`;
+         
         setTitle(newTitle);
     };
 
