@@ -96,25 +96,51 @@ const Gallery = () => {
                 )}
             </nav>
 
-            {loading
-                ? <Routes>
-                    <Route path="" element={<InitialPalettesList />} />
-                    <Route path="all" element={<InitialPalettesList />} />
-                    <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'} />} />
-                    <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Color groups'} />} />
-                    <Route path="upload" element={<UploadPalette />} />
-                </Routes>
-                : <Routes>
-                    <Route path="" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
-                    <Route path="all" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
-                    <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'} />} />
-                    <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Color groups'} />} />
-                    <Route path="favorites" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.likedBy.includes(user._id))} title={'My favorites'} />} />
-                    <Route path="mine" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.creator === user._id)} title={'My color palettes'} />} />
-                    <Route path="upload" element={<UploadPalette />} />
-                    {/* <Route path="upload" element={user._id ? <UploadPalette /> : navigate('/login')} /> */}
-                </Routes>
-            }
+            {language.lang === 'en' ? (
+                <>
+                    {loading
+                        ? <Routes>
+                            < Route path="" element={<InitialPalettesList />} />
+                            <Route path="all" element={<InitialPalettesList />} />
+                            <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'} />} />
+                            <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Color groups'} />} />
+                            <Route path="upload" element={<UploadPalette />} />
+                        </Routes>
+                        : <Routes>
+                            <Route path="" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
+                            <Route path="all" element={<ColorPaletteList colorPalettes={colorPalettes} title={'All color palettes'} />} />
+                            <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'} />} />
+                            <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Color groups'} />} />
+                            <Route path="favorites" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.likedBy.includes(user._id))} title={'My favorites'} />} />
+                            <Route path="mine" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.creator === user._id)} title={'My color palettes'} />} />
+                            <Route path="upload" element={<UploadPalette />} />
+                            {/* <Route path="upload" element={user._id ? <UploadPalette /> : navigate('/login')} /> */}
+                        </Routes>
+                    }
+                </>
+            ) : (
+                <>
+                    {loading
+                        ? <Routes>
+                            < Route path="" element={<InitialPalettesList />} />
+                            <Route path="all" element={<InitialPalettesList />} />
+                            <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Категории'} />} />
+                            <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Цветни групи'} />} />
+                            <Route path="upload" element={<UploadPalette />} />
+                        </Routes>
+                        : <Routes>
+                            <Route path="" element={<ColorPaletteList colorPalettes={colorPalettes} title={'Всички палитри'} />} />
+                            <Route path="all" element={<ColorPaletteList colorPalettes={colorPalettes} title={'Всички палитри'} />} />
+                            <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Категории'} />} />
+                            <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Цветни групи'} />} />
+                            <Route path="favorites" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.likedBy.includes(user._id))} title={'Любими'} />} />
+                            <Route path="mine" element={<ColorPaletteList colorPalettes={colorPalettes.filter(x => x.creator === user._id)} title={'Мои палитри'} />} />
+                            <Route path="upload" element={<UploadPalette />} />
+                            {/* <Route path="upload" element={user._id ? <UploadPalette /> : navigate('/login')} /> */}
+                        </Routes>
+                    }
+                </>
+            )}
         </section >
 
     );
