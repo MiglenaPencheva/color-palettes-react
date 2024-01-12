@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useLanguageContext } from '../../contexts/LanguageContext';
 
 import ColorPaletteList from './ColorPalettesList';
 
 const Categories = ({ colorPalettes }) => {
+    const { language } = useLanguageContext();
 
     const [filter, setFilter] = useState('');
     const [filteredPalettes, setFilteredPalettes] = useState([]);
@@ -34,20 +36,38 @@ const Categories = ({ colorPalettes }) => {
     return (
         <section id="categoriesList">
 
-            {loading && <img className="loader" src="/images/Spinner.jpg" alt="loading..." /> }
+            {loading && <img className="loader" src="/images/Spinner.jpg" alt="loading..." />}
 
             {!filter
                 ? <>
-                    <span id="catInfo" className="gallery__info">Gallery {'>'} Categories</span>
+                    
+                    {language.lang === 'en' 
+                        ? <span id="catInfo" className="gallery__info">Gallery {'>'} Categories</span>
+                        : <span id="catInfo" className="gallery__info">Галерия {'>'} Категории</span>
+                    }
 
                     <section className="gallery__categories" id="galleryCategories">
-                        <div onClick={onClickHandler} style={{'backgroundImage': 'url("/images/categories/sea.jpg")'}}>Sea</div>
-                        <div onClick={onClickHandler} style={{'backgroundImage': 'url("/images/categories/land.jpg")'}}>Landscapes</div>
-                        <div onClick={onClickHandler} style={{'backgroundImage': 'url("/images/categories/sky.jpg")'}}>Sky</div>
-                        <div onClick={onClickHandler} style={{'backgroundImage': 'url("/images/categories/plants.jpg")'}}>Plants</div>
-                        <div onClick={onClickHandler} style={{'backgroundImage': 'url("/images/categories/animals.jpg")'}}>Animals</div>
-                        <div onClick={onClickHandler} style={{'backgroundImage': 'url("/images/categories/food.jpg")'}}>Food & Drinks</div>
-                        <div onClick={onClickHandler} style={{'backgroundImage': 'url("/images/categories/others.jpg")'}}>Others</div>
+                        {language.lang === 'en' ? (
+                            <>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/sea.jpg")' }}>Sea</div>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/land.jpg")' }}>Landscapes</div>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/sky.jpg")' }}>Sky</div>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/plants.jpg")' }}>Plants</div>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/animals.jpg")' }}>Animals</div>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/food.jpg")' }}>Food & Drinks</div>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/others.jpg")' }}>Others</div>
+                            </>
+                        ) : (
+                            <>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/sea.jpg")' }}>Море</div>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/land.jpg")' }}>Пейзажи</div>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/sky.jpg")' }}>Небе</div>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/plants.jpg")' }}>Растения</div>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/animals.jpg")' }}>Животни</div>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/food.jpg")' }}>Храни & Напитки</div>
+                                <div onClick={onClickHandler} style={{ 'backgroundImage': 'url("/images/categories/others.jpg")' }}>Други</div>
+                            </>
+                        )}
                     </section>
                 </>
 
