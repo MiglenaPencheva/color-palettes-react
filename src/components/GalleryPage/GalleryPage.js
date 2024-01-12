@@ -54,7 +54,7 @@ const Gallery = () => {
             )}
 
             <nav className="gallery__nav">
-                <span onClick={() => navigate(-1)} id="backArrow" style={{ 'marginRight': 'auto' }}></span>
+                {/* <span onClick={() => navigate(-1)} id="backArrow" style={{ 'marginRight': 'auto' }}></span> */}
                 <Language />
 
                 {language.lang === 'en' ? (
