@@ -21,24 +21,20 @@
     border-radius: 4px;
 }
 
-.gallery__navbar {
-    padding: 0 0.5rem;
-    width: 100%;
+.gallery__navbar--links {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
     align-items: center;
-    /* gap: 1rem; */
-    background-color: var(--vermilion-white);
-    border-radius: 5px;
+    gap: 1rem;
 }
 
-.gallery__navbar a {
+.gallery__navbar--links a {
     padding: 0.5rem;
     cursor: pointer;
     border: none;
 }
-.gallery__navbar a:hover {
+.gallery__navbar--links a:hover {
     font-weight: 400;
     opacity: 0.6;
 }
@@ -135,8 +131,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0;
     }
+    .gallery__navbar--links,
     .gallery__nav-user,
     .gallery__nav-no-user {
         flex-direction: column;
