@@ -24,6 +24,13 @@ const Categories = ({ colorPalettes }) => {
 
         let category = e.target.textContent.toLowerCase();
         if (category === 'food & drinks') { category = 'foodAndDrinks'; }
+        if (category === 'море') { category = 'sea'; }
+        if (category === 'пейзажи') { category = 'landscapes'; }
+        if (category === 'небе') { category = 'sky'; }
+        if (category === 'растения') { category = 'plants'; }
+        if (category === 'животни') { category = 'animals'; }
+        if (category === 'храни & напитки') { category = 'foodAndDrinks'; }
+        if (category === 'други') { category = 'others'; }
         setFilter(category);
 
         let filtered = colorPalettes.filter(x => x.category === category);

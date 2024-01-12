@@ -124,7 +124,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .gallery__navbar {
         align-items: center;
         gap: 0.5rem;
