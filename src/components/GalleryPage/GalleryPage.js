@@ -53,7 +53,7 @@ const Gallery = () => {
                 </section>
             )}
 
-            <nav className="gallery__nav">
+            <nav className="gallery__navbar">
                 {/* <span onClick={() => navigate(-1)} id="backArrow" style={{ 'marginRight': 'auto' }}></span> */}
                 <Language />
 
@@ -87,9 +87,9 @@ const Gallery = () => {
                                 <NavLink to="upload" className={({ isActive }) => isActive ? 'active' : ''}>Прикачи</NavLink>
                             </section>
                             : <section className="gallery__nav-no-user">
-                                <span>My favorites</span>
-                                <span>My palettes</span>
-                                <span>Upload</span>
+                                <span>Любими</span>
+                                <span>Мои палитри</span>
+                                <span>Прикачи</span>
                             </section>
                         }
                     </>

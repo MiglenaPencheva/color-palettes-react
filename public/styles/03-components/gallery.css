@@ -21,7 +21,7 @@
     border-radius: 4px;
 }
 
-.gallery__navbar--links {
+.gallery__navbar {
     padding: 0 0.5rem;
     width: 100%;
     display: flex;
@@ -33,12 +33,12 @@
     border-radius: 5px;
 }
 
-.gallery__navbar--links a {
+.gallery__navbar a {
     padding: 0.5rem;
     cursor: pointer;
     border: none;
 }
-.gallery__navbar--links a:hover {
+.gallery__navbar a:hover {
     font-weight: 400;
     opacity: 0.6;
 }
@@ -129,7 +129,7 @@
 
 
 @media (max-width: 768px) {
-    .gallery__nav {
+    .gallery__navbar {
         align-items: center;
         gap: 0.5rem;
         display: flex;
@@ -140,17 +140,10 @@
     .gallery__nav-user,
     .gallery__nav-no-user {
         flex-direction: column;
+        gap: 0;
     }
 }
 @media screen and (max-width: 480px) {  
-    .gallery__navbar {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    .gallery__navbar--links {
-        flex-direction: column;
-        gap: 0;
-    }
     .gallery__categories div {
         height: 120px;
     }
