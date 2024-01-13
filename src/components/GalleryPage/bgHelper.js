@@ -7,6 +7,8 @@ export function translateCategory(category) {
     if (category === 'animals') { category = 'Животни'; }
     if (category === 'foodAndDrinks') { category = 'Храни и напитки'; }
     if (category === 'others') { category = 'Други'; }
+
+    return category;
 }
 
 export function translateColorGroup(group) {
@@ -21,6 +23,8 @@ export function translateColorGroup(group) {
     if (group === 'brown') { group = 'Кафяво'; }
     if (group === 'pink') { group = 'Розово'; }
     if (group === 'grey') { group = 'Сиво'; }
+
+    return group;
 }
 
 export function translateColorGroupArr(groupArr) {
@@ -28,4 +32,5 @@ export function translateColorGroupArr(groupArr) {
     for (let group of groupArr) {
         translateColorGroup(group);
     }
+    return groupArr;
 }
