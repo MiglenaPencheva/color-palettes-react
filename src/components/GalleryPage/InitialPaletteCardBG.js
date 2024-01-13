@@ -1,3 +1,5 @@
+import { translateCategory } from './bgHelper';
+
 const InitialPaletteCard = ({
     initialPalette
 }) => {
@@ -10,7 +12,7 @@ const InitialPaletteCard = ({
 
             <p className="color-palette-card__title">{initialPalette.title}</p>
 
-            <p className="color-palette-card__category">Category: {initialPalette.category}</p>
+            <p className="color-palette-card__category">Категория: {translateCategory(initialPalette.category)}</p>
 
             <div className="color-palette-card__likes">
                 {/* <span id="total-likes">{initialPalette.likes}</span> */}

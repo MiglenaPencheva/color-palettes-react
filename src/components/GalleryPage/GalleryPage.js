@@ -99,7 +99,7 @@ const Gallery = () => {
 
             {loading
                 ? <Routes>
-                    < Route path="" element={<InitialPalettesList />} />
+                    <Route path="" element={<InitialPalettesList />} />
                     <Route path="all" element={<InitialPalettesList />} />
                     <Route path="categories" element={<Categories colorPalettes={colorPalettes} title={'Categories'} />} />
                     <Route path="groups" element={<ColorGroups colorPalettes={colorPalettes} title={'Color groups'} />} />
