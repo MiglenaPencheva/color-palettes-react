@@ -7,7 +7,6 @@ export function translateCategory(category) {
     if (category === 'animals') { category = 'Животни'; }
     if (category === 'foodAndDrinks') { category = 'Храни и напитки'; }
     if (category === 'others') { category = 'Други'; }
-
 }
 
 export function translateColorGroup(group) {

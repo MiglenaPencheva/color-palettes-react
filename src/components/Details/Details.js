@@ -4,7 +4,7 @@ import * as colorPaletteService from '../../services/colorPaletteService';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useLanguageContext } from '../../contexts/LanguageContext';
 import { hideError, showError, showInfo } from '../../helpers/notifications';
-import { translateCategory, translateColorGroupArr } from './bgHelper';
+import { translateCategory, translateColorGroupArr } from '../GalleryPage/bgHelper';
 import DeleteConfirmDialog from '../ConfirmDialog/DeleteConfirmDialog';
 
 const Details = () => {
