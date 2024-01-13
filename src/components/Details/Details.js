@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import * as colorPaletteService from '../../services/colorPaletteService';
 import { useAuthContext } from '../../contexts/AuthContext';
+import { useLanguageContext } from '../../contexts/LanguageContext';
 import { hideError, showError, showInfo } from '../../helpers/notifications';
+import { translateCategory, translateColorGroupArr } from './bgHelper';
 import DeleteConfirmDialog from '../ConfirmDialog/DeleteConfirmDialog';
 
 const Details = () => {
     const navigate = useNavigate();
     const { user } = useAuthContext();
+    const { language } = useLanguageContext();
     const { colorPaletteId } = useParams();
     const [colorPalette, setColorPalette] = useState({ colorPaletteId });
     const [colors, setColors] = useState('');
@@ -60,7 +63,8 @@ const Details = () => {
 
             hideError();
             navigate('/gallery/');
-            showInfo('Successfully liked palette');
+            language.lang === 'en' ? showInfo('Successfully liked palette') : showInfo('Харесахте палитрата');
+
         } catch (error) {
             showError(error.message);
         }
@@ -69,15 +73,65 @@ const Details = () => {
     const ownerButtons = (
         <>
             <Link to={`/edit/${colorPalette._id}`}>
-                <button className="button details__info--buttons-edit">Edit</button>
+                {language.lang === 'en'
+                    ? <button className="button details__info--buttons-edit">Edit</button>
+                    : <button className="button details__info--buttons-edit">Промени</button>}
             </Link>
-            <button className="button details__info--buttons-delete"
-                onClick={deleteClickHandler}>Delete
-            </button>
+            {language.lang === 'en'
+                ? <button className="button details__info--buttons-delete" onClick={deleteClickHandler}>Delete</button>
+                : <button className="button details__info--buttons-delete" onClick={deleteClickHandler}>Изтрий</button>}
         </>
     );
 
+    let categorySpan = '';
+    if (language.lang === 'en') {
+        categorySpan = <span>
+            <Link to={'/gallery/categories'} className="details__info--category">Category:</Link>
+            <span><i> {colorPalette.category}</i></span>
+        </span>;
+    } else {
+        categorySpan = <span>
+            <Link to={'/gallery/categories'} className="details__info--category">Категория:</Link>
+            <span><i> {translateCategory(colorPalette.category)}</i></span>
+        </span>;
+    }
+
+    let colorGroupSpan = '';
+    if (language.lang === 'en') {
+        colorGroupSpan = <span>
+            <Link to={'/gallery/groups'} className="details__info--colors">Colors:</Link>
+            <span><i> {colors}</i> </span>
+        </span>;
+    } else {
+        colorGroupSpan = <span>
+            <Link to={'/gallery/groups'} className="details__info--colors">Цветове:</Link>
+            <span><i> {translateColorGroupArr(colors)}</i> </span>
+        </span>;
+    }
+
+    let likeParagraph = '';
+    if (language.lang === 'en') {
+        likeParagraph = <p><i>You liked this palette</i></p>;
+    } else {
+        likeParagraph = <p><i>Вече харесваш палитрата</i></p>;
+    }
+
+    let likeButton = '';
+    if (language.lang === 'en') {
+        likeButton = <button className="button details__info--buttons-edit" onClick={onLikeClick}>Like</button>;
+    } else {
+        likeButton = <button className="button details__info--buttons-edit" onClick={onLikeClick}>Харесай</button>;
+    }
+
+    let signParagraph = '';
+    if (language.lang === 'en') {
+        signParagraph = <p><Link to='/login'><i>Sign in</i></Link> or <Link to='/register'><i>subscribe</i></Link> to like</p>;
+    } else {
+        signParagraph = <p><Link to='/login'><i>Влез</i></Link> или <Link to='/register'><i>се регистрирай</i></Link>, за да харесаш</p>;
+    }
+
     const alreadyLiked = colorPalette.likedBy?.includes(user._id);
+
 
     return (
         <>
@@ -95,26 +149,20 @@ const Details = () => {
 
                     <h5 className="details__info--title">{colorPalette.title}</h5>
 
-                    <span>
-                        <Link to={'/gallery/categories'} className="details__info--category">Category:</Link>
-                        <span><i> {colorPalette.category}</i></span>
-                    </span>
+                    {categorySpan}
 
-                    <span>
-                        <Link to={'/gallery/groups'} className="details__info--colors">Colors:</Link>
-                        <span><i> {colors}</i> </span>
-                    </span>
+                    {colorGroupSpan}
 
                     <div className="details__info--buttons">
                         {user._id
                             ? (user._id === colorPalette._ownerId
                                 ? ownerButtons
                                 : (alreadyLiked
-                                    ? <p><i>You liked this palette</i></p>
-                                    : <button className="button details__info--buttons-edit" onClick={onLikeClick}>Like</button>
+                                    ? likeParagraph
+                                    : likeButton
                                 )
                             )
-                            : <p><Link to='/login'><i>Sign in</i></Link> or <Link to='/register'><i>subscribe</i></Link> to like</p>
+                            : signParagraph
                         }
 
                         <div className="details__info--like">
@@ -124,7 +172,7 @@ const Details = () => {
                     </div>
 
                 </div>
-            </section>
+            </section >
         </>
     );
 };

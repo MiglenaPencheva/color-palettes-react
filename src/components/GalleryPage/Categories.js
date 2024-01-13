@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLanguageContext } from '../../contexts/LanguageContext';
+import { translateCategory } from './bgHelper';
 
 import ColorPaletteList from './ColorPalettesList';
 
@@ -23,14 +24,9 @@ const Categories = ({ colorPalettes }) => {
         if (colorPalettes.length === 0) { return; }
 
         let category = e.target.textContent.toLowerCase();
-        if (category === 'food & drinks') { category = 'foodAndDrinks'; }
-        if (category === 'море') { category = 'sea'; }
-        if (category === 'пейзажи') { category = 'landscapes'; }
-        if (category === 'небе') { category = 'sky'; }
-        if (category === 'растения') { category = 'plants'; }
-        if (category === 'животни') { category = 'animals'; }
-        if (category === 'храни & напитки') { category = 'foodAndDrinks'; }
-        if (category === 'други') { category = 'others'; }
+        if (language.lang !== 'en') {
+            translateCategory(category);
+        }
         setFilter(category);
 
         let filtered = colorPalettes.filter(x => x.category === category);
@@ -47,8 +43,8 @@ const Categories = ({ colorPalettes }) => {
 
             {!filter
                 ? <>
-                    
-                    {language.lang === 'en' 
+
+                    {language.lang === 'en'
                         ? <span id="catInfo" className="gallery__info">Gallery {'>'} Categories</span>
                         : <span id="catInfo" className="gallery__info">Галерия {'>'} Категории</span>
                     }

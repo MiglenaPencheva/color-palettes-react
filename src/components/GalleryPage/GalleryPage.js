@@ -49,7 +49,7 @@ const Gallery = () => {
                     <h2 className="heading-on-two-lines"> цветни</h2>
                     <h2 className="heading-on-two-lines"> палитри</h2>
                     <h6> Светът е пълен с примери. Магията на светлината е навсякъде край нас.</h6>
-                    <h6 className="diffHeading"> Наслади се на разнообразието от цветни комбинации.</h6>
+                    <h6 className="diffHeading"> Наслади се на многообразието от съчетания.</h6> 
                 </section>
             )}
 

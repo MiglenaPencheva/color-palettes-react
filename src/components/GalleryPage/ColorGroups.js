@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguageContext } from '../../contexts/LanguageContext';
+import { translateColorGroup } from './bgHelper';
 
 import ColorPaletteList from './ColorPalettesList';
 
@@ -23,16 +24,9 @@ const ColorGroups = ({ colorPalettes }) => {
         if (colorPalettes.length === 0) { return; }
 
         let group = e.target.textContent.toLowerCase();
-        if (group === 'жълто') { group = 'yellow'; }
-        if (group === 'червено') { group = 'red'; }
-        if (group === 'синьо') { group = 'blue'; }
-        if (group === 'оранжево') { group = 'orange'; }
-        if (group === 'лилаво') { group = 'purple'; }
-        if (group === 'зелено') { group = 'green'; }
-        if (group === 'бежово') { group = 'beige'; }
-        if (group === 'кафяво') { group = 'brown'; }
-        if (group === 'розово') { group = 'pink'; }
-        if (group === 'сиво') { group = 'grey'; }
+        if (language.lang !== 'en') {
+            translateColorGroup(group);
+        }
         setFilter(group);
 
         let filtered = [];

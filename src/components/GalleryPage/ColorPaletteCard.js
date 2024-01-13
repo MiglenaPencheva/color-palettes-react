@@ -1,8 +1,21 @@
 import { Link } from 'react-router-dom';
+import { useLanguageContext } from '../../contexts/LanguageContext';
+import { translateCategory } from './bgHelper';
 
 const ColorPaletteCard = ({
     colorPalette
 }) => {
+
+    const { language } = useLanguageContext();
+
+    let categoryParagraph = '';
+    if (language.lang === 'en') {
+        categoryParagraph = <p className="color-palette-card__category">Category: {colorPalette.category}</p>;
+    } else {
+        translateCategory(colorPalette.category);
+        categoryParagraph = <p className="color-palette-card__category">Категория: {translateCategory(colorPalette.category)}</p>;
+    }
+
     return (
         <li className="color-palette-card">
 
@@ -14,7 +27,7 @@ const ColorPaletteCard = ({
 
             <p className="color-palette-card__title">{colorPalette.title}</p>
 
-            <p className="color-palette-card__category">Category: {colorPalette.category}</p>
+            {categoryParagraph}
 
             <div className="color-palette-card__likes">
                 <span id="total-likes">{colorPalette.likedBy.length}</span>
