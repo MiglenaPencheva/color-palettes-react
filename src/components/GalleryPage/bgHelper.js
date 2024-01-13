@@ -11,9 +11,20 @@ export function translateCategory(category) {
     return category;
 }
 
-export function translateColorGroup(group) {
+export function translateCategoryBack(category) {
 
-    console.log(group);
+    if (category === 'Море') { category = 'sea'; }
+    if (category === 'Пейзажи') { category = 'landscapes'; }
+    if (category === 'Небе') { category = 'sky'; }
+    if (category === 'Растения') { category = 'plants'; }
+    if (category === 'Животни') { category = 'animals'; }
+    if (category === 'Храни и напитки') { category = 'foodAndDrinks'; }
+    if (category === 'Други') { category = 'others'; }
+
+    return category;
+}
+
+export function translateColorGroup(group) {
 
     if (group === 'yellow') { group = 'Жълто'; }
     if (group === 'red') { group = 'Червено'; }
@@ -26,21 +37,44 @@ export function translateColorGroup(group) {
     if (group === 'pink') { group = 'Розово'; }
     if (group === 'grey') { group = 'Сиво'; }
 
+    console.log(group);
+
+    return group;
+}
+
+export function translateColorGroupBack(group) {
+
+    if (group === 'Жълто') { group = 'yellow'; }
+    if (group === 'Червено') { group = 'red'; }
+    if (group === 'Синьо') { group = 'blue'; }
+    if (group === 'Оранжево') { group = 'orange'; }
+    if (group === 'Лилаво') { group = 'purple'; }
+    if (group === 'Зелено') { group = 'green'; }
+    if (group === 'Бежово') { group = 'beige'; }
+    if (group === 'Кафяво') { group = 'brown'; }
+    if (group === 'Розово') { group = 'pink'; }
+    if (group === 'Сиво') { group = 'grey'; }
+
+    console.log(group);
+
     return group;
 }
 
 export function translateColorGroupStr(groupStr) {
 
-    console.log(groupStr);
+    let bgArr = [];
 
     let colorsARR = groupStr.split(', ');
     for (let color of colorsARR) {
-        console.log(color);
-        translateColorGroup(color);
+        let bgColor = translateColorGroup(color);
+
+        console.log(bgColor);
+
+        bgArr.push(bgColor);
     }
     
-    let result = colorsARR.join(', ');
-    console.log(result);
+    let translated = bgArr.join(', ');
+    console.log(translated);
 
-    return result;
+    return translated;
 }
