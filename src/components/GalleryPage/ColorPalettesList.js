@@ -27,12 +27,24 @@ const ColorPaletteList = ({
     }, [sort, colorPalettes]);
 
     let bgTitle = '';
+
+    console.log(title);
+
     let [type, subType] = title.split(' > ');
+
+    console.log(type, subType);
+
     if (type === 'Categories') {
         subType = translateCategory(subType);
+
+        console.log(subType);
+
         bgTitle = `Категории > ${subType}`;
     } else if (type === 'Color group') {
         subType = translateColorGroup(subType);
+
+        console.log(subType);
+
         bgTitle = `Цветни групи > ${subType}`;
     }
 

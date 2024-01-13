@@ -13,6 +13,8 @@ export function translateCategory(category) {
 
 export function translateColorGroup(group) {
 
+    console.log(group);
+
     if (group === 'yellow') { group = 'Жълто'; }
     if (group === 'red') { group = 'Червено'; }
     if (group === 'blue') { group = 'Синьо'; }
@@ -29,10 +31,16 @@ export function translateColorGroup(group) {
 
 export function translateColorGroupStr(groupStr) {
 
+    console.log(groupStr);
+
     let colorsARR = groupStr.split(', ');
     for (let color of colorsARR) {
+        console.log(color);
         translateColorGroup(color);
     }
     
-    return colorsARR.join(', ');
+    let result = colorsARR.join(', ');
+    console.log(result);
+
+    return result;
 }

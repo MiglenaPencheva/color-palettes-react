@@ -21,16 +21,15 @@ const Categories = ({ colorPalettes }) => {
 
     const onClickHandler = (e) => {
         if (colorPalettes.length === 0) { return; }
-
+        
         let category = e.target.textContent.toLowerCase();
-
+        
         setFilter(category);
+
+        setTitle(`Categories > ${category}`);
 
         let filtered = colorPalettes.filter(x => x.category === category);
         setFilteredPalettes(filtered);
-
-        let newTitle = `Categories > ${category}`;
-        setTitle(newTitle);
     };
 
     return (
