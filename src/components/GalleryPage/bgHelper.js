@@ -67,14 +67,9 @@ export function translateColorGroupStr(groupStr) {
     let colorsARR = groupStr.split(', ');
     for (let color of colorsARR) {
         let bgColor = translateColorGroup(color);
-
-        console.log(bgColor);
-
         bgArr.push(bgColor);
     }
     
     let translated = bgArr.join(', ');
-    console.log(translated);
-
     return translated;
 }
