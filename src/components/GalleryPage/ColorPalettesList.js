@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguageContext } from '../../contexts/LanguageContext';
+import { translateCategory, translateColorGroup } from './bgHelper';
 
 import ColorPaletteCard from './ColorPaletteCard';
 
@@ -25,6 +26,16 @@ const ColorPaletteList = ({
         }
     }, [sort, colorPalettes]);
 
+    let bgTitle = '';
+    let [type, subType] = title.split(' > ');
+    if (type === 'Categories') {
+        subType = translateCategory(subType);
+        bgTitle = `Категории > ${subType}`;
+    } else if (type === 'Color group') {
+        subType = translateColorGroup(subType);
+        bgTitle = `Цветни групи > ${subType}`;
+    }
+
     return (
         <section>
 
@@ -42,7 +53,7 @@ const ColorPaletteList = ({
                     </span>
                 ) : (
                     <span className="palettes__nav--info">
-                        <span>Галерия {'>'} {title}</span>
+                        <span>Галерия {'>'} {bgTitle}</span>
                         <span className="gallery__info" >
                             {!query
                                 ? colorPalettes.length > 0 && <span>{colorPalettes.length} палитри</span>

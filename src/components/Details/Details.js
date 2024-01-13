@@ -4,7 +4,7 @@ import * as colorPaletteService from '../../services/colorPaletteService';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useLanguageContext } from '../../contexts/LanguageContext';
 import { hideError, showError, showInfo } from '../../helpers/notifications';
-import { translateCategory, translateColorGroupArr } from '../GalleryPage/bgHelper';
+import { translateCategory, translateColorGroupStr } from '../GalleryPage/bgHelper';
 import DeleteConfirmDialog from '../ConfirmDialog/DeleteConfirmDialog';
 
 const Details = () => {
@@ -105,7 +105,7 @@ const Details = () => {
     } else {
         colorGroupSpan = <span>
             <Link to={'/gallery/groups'} className="details__info--colors">Цветове:</Link>
-            <span><i> {translateColorGroupArr(colors)}</i> </span>
+            <span><i> {translateColorGroupStr(colors)}</i> </span>
         </span>;
     }
 

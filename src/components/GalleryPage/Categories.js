@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useLanguageContext } from '../../contexts/LanguageContext';
-import { translateCategory } from './bgHelper';
 
 import ColorPaletteList from './ColorPalettesList';
 
@@ -24,15 +23,13 @@ const Categories = ({ colorPalettes }) => {
         if (colorPalettes.length === 0) { return; }
 
         let category = e.target.textContent.toLowerCase();
-        if (language.lang !== 'en') {
-            translateCategory(category);
-        }
+
         setFilter(category);
 
         let filtered = colorPalettes.filter(x => x.category === category);
         setFilteredPalettes(filtered);
 
-        let newTitle = language.lang === 'en' ? `Categories > ${category}` : `Категории > ${e.target.textContent.toLowerCase()}`;;
+        let newTitle = `Categories > ${category}`;
         setTitle(newTitle);
     };
 

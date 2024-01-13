@@ -27,10 +27,12 @@ export function translateColorGroup(group) {
     return group;
 }
 
-export function translateColorGroupArr(groupArr) {
+export function translateColorGroupStr(groupStr) {
 
-    for (let group of groupArr) {
-        translateColorGroup(group);
+    let colorsARR = groupStr.split(', ');
+    for (let color of colorsARR) {
+        translateColorGroup(color);
     }
-    return groupArr;
+
+    return groupStr;
 }

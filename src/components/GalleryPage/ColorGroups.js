@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useLanguageContext } from '../../contexts/LanguageContext';
-import { translateColorGroup } from './bgHelper';
 
 import ColorPaletteList from './ColorPalettesList';
 
@@ -24,9 +23,7 @@ const ColorGroups = ({ colorPalettes }) => {
         if (colorPalettes.length === 0) { return; }
 
         let group = e.target.textContent.toLowerCase();
-        if (language.lang !== 'en') {
-            translateColorGroup(group);
-        }
+        
         setFilter(group);
 
         let filtered = [];
@@ -37,8 +34,7 @@ const ColorGroups = ({ colorPalettes }) => {
         };
         setFilteredPalettes(filtered);
 
-        let newTitle = language.lang === 'en' ? `Color group > ${group}` : `Цветни групи > ${e.target.textContent.toLowerCase()}`;
-         
+        let newTitle = `Color group > ${group}`;
         setTitle(newTitle);
     };
 
