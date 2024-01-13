@@ -33,6 +33,6 @@ export function translateColorGroupStr(groupStr) {
     for (let color of colorsARR) {
         translateColorGroup(color);
     }
-
-    return groupStr;
+    
+    return colorsARR.join(', ');
 }
