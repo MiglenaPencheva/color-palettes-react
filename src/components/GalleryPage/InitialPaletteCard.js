@@ -1,6 +1,12 @@
+import { useLanguageContext } from '../../contexts/LanguageContext';
+import { translateCategory } from './bgHelper'; 
+
 const InitialPaletteCard = ({
     initialPalette
 }) => {
+
+    const { language } = useLanguageContext();
+
     return (
         <li className="color-palette-card">
 
@@ -10,13 +16,15 @@ const InitialPaletteCard = ({
 
             <p className="color-palette-card__title">{initialPalette.title}</p>
 
-            <p className="color-palette-card__category">Category: {initialPalette.category}</p>
-
+            {language.lang === 'en'
+                ? <p className="color-palette-card__category">Category: {initialPalette.category}</p>
+                : <p className="color-palette-card__category">Категория: {translateCategory(initialPalette.category)}</p>
+            }
             <div className="color-palette-card__likes">
                 {/* <span id="total-likes">{initialPalette.likes}</span> */}
                 <span className="star"></span>
             </div>
-            
+
         </li >
     );
 };
