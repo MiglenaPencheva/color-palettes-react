@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLanguageContext } from '../../contexts/LanguageContext';
 
 import ColorPaletteList from './ColorPalettesList';
-import { translateColorGroupBack } from './bgHelper';
+import { translateColorGroupStrBack } from './bgHelper';
 
 const ColorGroups = ({ colorPalettes }) => {
     const { language } = useLanguageContext();
@@ -25,7 +25,7 @@ const ColorGroups = ({ colorPalettes }) => {
 
         let group = e.target.textContent.toLowerCase();
         if (language.lang !== 'en') {
-            group = translateColorGroupBack(group);
+            group = translateColorGroupStrBack(group);
         }
         setFilter(group);
 

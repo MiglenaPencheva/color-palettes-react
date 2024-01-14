@@ -13,13 +13,13 @@ export function translateCategory(category) {
 
 export function translateCategoryBack(category) {
 
-    if (category === 'Море') { category = 'sea'; }
-    if (category === 'Пейзажи') { category = 'landscapes'; }
-    if (category === 'Небе') { category = 'sky'; }
-    if (category === 'Растения') { category = 'plants'; }
-    if (category === 'Животни') { category = 'animals'; }
-    if (category === 'Храни и напитки') { category = 'foodAndDrinks'; }
-    if (category === 'Други') { category = 'others'; }
+    if (category === 'море') { category = 'sea'; }
+    if (category === 'пейзажи') { category = 'landscapes'; }
+    if (category === 'небе') { category = 'sky'; }
+    if (category === 'растения') { category = 'plants'; }
+    if (category === 'животни') { category = 'animals'; }
+    if (category === 'храни и напитки') { category = 'foodAndDrinks'; }
+    if (category === 'други') { category = 'others'; }
 
     return category;
 }
@@ -44,16 +44,16 @@ export function translateColorGroup(group) {
 
 export function translateColorGroupBack(group) {
 
-    if (group === 'Жълто') { group = 'yellow'; }
-    if (group === 'Червено') { group = 'red'; }
-    if (group === 'Синьо') { group = 'blue'; }
-    if (group === 'Оранжево') { group = 'orange'; }
-    if (group === 'Лилаво') { group = 'purple'; }
-    if (group === 'Зелено') { group = 'green'; }
-    if (group === 'Бежово') { group = 'beige'; }
-    if (group === 'Кафяво') { group = 'brown'; }
-    if (group === 'Розово') { group = 'pink'; }
-    if (group === 'Сиво') { group = 'grey'; }
+    if (group === 'жълто') { group = 'yellow'; }
+    if (group === 'червено') { group = 'red'; }
+    if (group === 'синьо') { group = 'blue'; }
+    if (group === 'оранжево') { group = 'orange'; }
+    if (group === 'лилаво') { group = 'purple'; }
+    if (group === 'зелено') { group = 'green'; }
+    if (group === 'бежово') { group = 'beige'; }
+    if (group === 'кафяво') { group = 'brown'; }
+    if (group === 'розово') { group = 'pink'; }
+    if (group === 'сиво') { group = 'grey'; }
 
     console.log(group);
 
@@ -71,5 +71,22 @@ export function translateColorGroupStr(groupStr) {
     }
     
     let translated = bgArr.join(', ');
+    return translated;
+}
+
+export function translateColorGroupStrBack(groupStr) {
+
+    let enArr = [];
+
+    let colorsARR = groupStr.split(', ');
+    for (let color of colorsARR) {
+        console.log(color);
+        let enColor = translateColorGroupBack(color);
+        console.log(enColor);
+        enArr.push(enColor);
+    }
+    
+    let translated = enArr.join(', ');
+    console.log(translated);
     return translated;
 }
