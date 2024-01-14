@@ -18,7 +18,7 @@ export function translateCategoryBack(category) {
     if (category === 'небе') { category = 'sky'; }
     if (category === 'растения') { category = 'plants'; }
     if (category === 'животни') { category = 'animals'; }
-    if (category === 'храни и напитки') { category = 'foodAndDrinks'; }
+    if (category === 'храни & напитки') { category = 'foodAndDrinks'; }
     if (category === 'други') { category = 'others'; }
 
     return category;
