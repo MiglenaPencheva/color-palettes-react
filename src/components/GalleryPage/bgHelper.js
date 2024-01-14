@@ -37,8 +37,6 @@ export function translateColorGroup(group) {
     if (group === 'pink') { group = 'Розово'; }
     if (group === 'grey') { group = 'Сиво'; }
 
-    console.log(group);
-
     return group;
 }
 
@@ -54,8 +52,6 @@ export function translateColorGroupBack(group) {
     if (group === 'кафяво') { group = 'brown'; }
     if (group === 'розово') { group = 'pink'; }
     if (group === 'сиво') { group = 'grey'; }
-
-    console.log(group);
 
     return group;
 }
@@ -80,13 +76,10 @@ export function translateColorGroupStrBack(groupStr) {
 
     let colorsARR = groupStr.split(', ');
     for (let color of colorsARR) {
-        console.log(color);
         let enColor = translateColorGroupBack(color);
-        console.log(enColor);
         enArr.push(enColor);
     }
     
     let translated = enArr.join(', ');
-    console.log(translated);
     return translated;
 }
