@@ -25,7 +25,7 @@ const ExploreGroups = () => {
 
             <article>{language.lang === 'en'
                 ? 'There are 140 standard color names that are supported by all modern browsers and CSS. Color samples, names and hex codes are listed below, separated in color groups.'
-                : 'Съвременните браузъри поддържат 140 стандартни имена. Цветовете с имената им и техните Хекс стойности (шеснайсетични кодове) са изброени по-надолу по групи.'}
+                : 'Съвременните браузъри поддържат 140 стандартни имена на цветовете. Мостри с имената им и техните хекс стойности (шеснайсетични кодове) са изброени по-надолу по групи.'}
             </article>
 
             <section className="explore__groups" id="exploreGroups">
