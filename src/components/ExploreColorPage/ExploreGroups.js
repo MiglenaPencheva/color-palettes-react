@@ -43,7 +43,7 @@ const ExploreGroups = () => {
                 {green && <ColorNamesList list={getGroup['green']} />}
                 <li onClick={() => setCyan(!cyan)} style={{ 'backgroundColor': '#c1ffff' }}>{language.lang === 'en' ? 'Cyan colors' : 'Цианови цветове'}</li>
                 {cyan && <ColorNamesList list={getGroup['cyan']} />}
-                <li onClick={() => setBrown(!brown)} style={{ 'backgroundColor': '#d8bdbd' }}>{language.lang === 'en' ? 'Brown colors' : 'Оранжеви цветове'}</li>
+                <li onClick={() => setBrown(!brown)} style={{ 'backgroundColor': '#d8bdbd' }}>{language.lang === 'en' ? 'Brown colors' : 'Кафяви цветове'}</li>
                 {brown && <ColorNamesList list={getGroup['brown']} />}
                 <li onClick={() => setPink(!pink)} style={{ 'backgroundColor': '#ffdfe5' }}>{language.lang === 'en' ? 'Pink colors' : 'Розови цветове'}</li>
                 {pink && <ColorNamesList list={getGroup['pink']} />}
