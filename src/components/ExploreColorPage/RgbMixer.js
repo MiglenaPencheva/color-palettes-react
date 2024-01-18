@@ -16,7 +16,7 @@ const RgbMixer = () => {
     return (
         <section className="explore__rgb-mixer" id="rgbMixer">
 
-            <h5 className="explore__info">{language.lang === 'en' ? 'RGB mixer' : 'RGB миксер'}</h5>
+            <h5 className="explore__info">{language.lang === 'en' ? 'RGB mixer' : 'RGB модел'}</h5>
 
             {language.lang === 'en'
                 ? <p>The RGB color model is an additive color model in which
