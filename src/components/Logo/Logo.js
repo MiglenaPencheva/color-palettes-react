@@ -18,9 +18,12 @@ const Logo = () => {
     };
 
     return (
-        <img src="/images/logo.png" alt="logo" 
-            onClick={goHome}
-            className="logo" />
+        <div className="logoDiv">
+            <img src="/images/logo.png" alt="logo"
+                onClick={goHome}
+                className="logo" />
+            <span className="logoName">MegaColorMix</span>
+        </div>
     );
 };
 

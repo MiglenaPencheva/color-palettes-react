@@ -1,17 +1,24 @@
-.logo {
+.logoDiv {
     position: fixed;
     top: 1rem;
     left: 1rem;
+    display: flex;
+    align-items: center;
+    opacity: 60%;
+    z-index: 1003;
+    cursor: pointer;
+}
+.logoDiv:hover {
+    opacity: 100%;
+}
+
+.logo {
     width: 44px;
     height: 44px;
     border-radius: 24%;
     animation: rotation 1.5s;
-    opacity: 60%;
-    cursor: pointer;
-    z-index: 1003;
 }
 .logo:hover {
-    opacity: 100%;
     animation: rotate;
 }
 
@@ -28,9 +35,12 @@
     }
 }
 
-/* @media (max-width: 768px) {
-    .logo {
-        width: 36px;
-        height: 36px;
-    }
-} */
+.logoName {
+    font-family: 'Caveat', sans-serif;
+    color: transparent;
+    background-clip: text;
+    background-image: linear-gradient(to right, var(--ryb-red), var(--ryb-red-orange), var(--ryb-orange), var(--ryb-yellow-orange), var(--ryb-yellow), var(--ryb-yellow-green), var(--ryb-green), var(--ryb-blue-green), var(--ryb-blue), var(--ryb-blue-purple), var(--ryb-purple), var(--ryb-red-purple));
+    margin-left: 0.5rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
