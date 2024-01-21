@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
@@ -7,6 +8,17 @@ const initialHexState = {
 };
 
 const Logo = () => {
+    useEffect(() => {
+        window.addEventListener('scroll', () => {
+            let logoName = document.getElementById('logoName');
+            if (window.scrollY > 20) {
+                logoName.style.display = 'none';
+            } else {
+                logoName.style.display = 'block';
+            }
+        });
+    }, []);
+
     const navigate = useNavigate();
 
     const [hexToExplore, setHexToExplore] = useLocalStorage('hex', initialHexState);
@@ -22,7 +34,7 @@ const Logo = () => {
             <img src="/images/logo.png" alt="logo"
                 onClick={goHome}
                 className="logo" />
-            <span className="logoName">MegaColorMix</span>
+            <span id="logoName" className="logoName">MegaColorMix</span>
         </div>
     );
 };
