@@ -14,7 +14,7 @@ const Logo = () => {
             if (window.scrollY > 20) {
                 logoName.style.opacity = 0;
             } else {
-                logoName.style.opacity = 0.7;
+                logoName.style.opacity = 1;
             }
         });
     }, []);
