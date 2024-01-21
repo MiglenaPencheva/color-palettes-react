@@ -10,7 +10,7 @@
 }
 
 .home__headings {
-    margin-top: 1rem;
+    margin-top: 2.5rem;
     display: flex;
     flex-wrap: wrap;
     text-shadow: 2px 2px 4px var(--teal-grey);
