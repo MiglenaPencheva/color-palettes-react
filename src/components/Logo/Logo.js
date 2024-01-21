@@ -12,9 +12,9 @@ const Logo = () => {
         window.addEventListener('scroll', () => {
             let logoName = document.getElementById('logoName');
             if (window.scrollY > 20) {
-                logoName.style.display = 'none';
+                logoName.style.opacity = 0;
             } else {
-                logoName.style.display = 'block';
+                logoName.style.opacity = 0.7;
             }
         });
     }, []);
