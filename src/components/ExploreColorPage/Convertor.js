@@ -282,7 +282,7 @@ const Convertor = () => {
                     <section className="convertor__input-section">
                         <form id="color-form" className="convertor__input--form" onSubmit={submitColorHandler}>
                             <h5 className="explore__info">Въведи стойност</h5>
-                            <p className="convertor__input--info">Въведи име, rgb, hex или hsl стойност</p>
+                            <p className="convertor__input--info">Име, rgb, hex или hsl стойност</p>
                             <section className="convertor__input--container">
                                 <input type="text" name="colorValue" id="colorValue" className="convertor__input--input" placeholder="стойност" />
                                 <input className="button convertor__input--submit" type="submit" value="ок" />
