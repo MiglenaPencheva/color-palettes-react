@@ -285,7 +285,7 @@ const Convertor = () => {
                             <p className="convertor__input--info">Въведи име, rgb, hex или hsl стойност</p>
                             <section className="convertor__input--container">
                                 <input type="text" name="colorValue" id="colorValue" className="convertor__input--input" placeholder="стойност" />
-                                <input className="button convertor__input--submit" type="submit" value="въведи" />
+                                <input className="button convertor__input--submit" type="submit" value="ок" />
                             </section>
                         </form>
                         <section className="convertor__pick-color">
@@ -312,12 +312,12 @@ const Convertor = () => {
                     <section className="explore__values">
                         <h5 className="explore__info">Цветни стойности</h5>
                         <li>{name ? name : 'няма име'}</li>
-                        <span>Браузърите поддържат 140 <Link target="_blank" to="/color-explore/color-names"><i>стандартни имена.</i></Link></span>
+                        <span>Браузърите поддържат 140 <Link target="_blank" to="/color-explore/color-names"><i>стандартни имена на цветовете.</i></Link></span>
                         <li>{rgb}</li>
-                        <span>RGB стойностите показват какво количество червено, зелено и синьо се съдържа в цвета.
-                            <br /> Всеки един от тройката цветове може да бъде от 0 до 255.</span>
+                        <span>RGB стойностите показват какво количество червено, зелено и синьо се съдържа в цвета. 
+                            Всеки един от тройката цветове може да е от 0 до 255.</span>
                         <li>#{hex}</li>
-                        <span>Нex кодът е шест-цифрено шестнадесетично число и определя интензитета на червеното, зеленото и синьото.</span>
+                        <span>Хекс кодът е шест-цифрено шестнадесетично число и определя интензитета на червеното, зеленото и синьото.</span>
                         <li>hsl({hsl})</li>
                         <span>HSL стойността се представя с параметрите цвят, наситеност и яркост.</span>
                         <li>cmyk({cmyk})</li>
