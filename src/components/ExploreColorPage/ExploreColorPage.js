@@ -37,11 +37,11 @@ const ExploreColor = () => {
             ) : (
                 <>
                     <section className="section-header">
-                        <h2 className="heading-on-two-lines">Цветът </h2>
-                        <h2 className="heading-on-two-lines">в детайли</h2>
+                        <h2 className="heading-on-two-lines">Опознай </h2>
+                        <h2 className="heading-on-two-lines">цвета</h2>
                         <h6> Открий подробна информация.
                             Конвертирай в различни цветови стойности.</h6>
-                        <h6 className="diffHeading">Опознай цвета в дълбочина.</h6>
+                        <h6 className="diffHeading">Надълбоко в цветните детайли.</h6>
                     </section>
 
                     <nav className="explore__navbar">
