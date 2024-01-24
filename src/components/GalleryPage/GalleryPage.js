@@ -37,17 +37,15 @@ const Gallery = () => {
 
             {language.lang === 'en' ? (
                 <section className="section-header">
-                    <h2 className="heading-on-two-lines">Color</h2>
-                    <h2 className="heading-on-two-lines"> palettes</h2>
-                    <h2 className="heading-on-two-lines"> gallery </h2>
+                    <h2 className="heading-on-two-lines">Color palettes </h2>
+                    <h2 className="heading-on-two-lines">gallery</h2>
                     <h6> World is full of examples. The magic of light is all around. </h6>
                     <h6 className="diffHeading"> Enjoy the variety of color combinations. </h6>
                 </section>
             ) : (
                 <section className="section-header">
-                    <h2 className="heading-on-two-lines">Галерия</h2>
-                    <h2 className="heading-on-two-lines"> цветни</h2>
-                    <h2 className="heading-on-two-lines"> палитри</h2>
+                    <h2 className="heading-on-two-lines">Галерия </h2>
+                    <h2 className="heading-on-two-lines">цветни палитри</h2>
                     <h6> Светът е пълен с примери. Магията на светлината е навсякъде край нас.</h6>
                     <h6 className="diffHeading"> Наслади се на многообразието от съчетания.</h6>
                 </section>

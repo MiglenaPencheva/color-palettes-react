@@ -16,10 +16,8 @@ const ExploreColor = () => {
             {language.lang === 'en' ? (
                 <>
                     <section className="section-header">
-                        <h2 className="heading-on-two-lines">Explore</h2>
-                        <h2 className="heading-on-two-lines"> color</h2>
-                        <h6> Find the information you need.
-                            Convert between hex code, hsl, rgb and cmyk values.</h6>
+                        <h2 className="heading-on-two-lines">Explore color</h2>
+                        <h6>Find the information you need. Convert between hex code, hsl, rgb and cmyk values.</h6>
                         <h6 className="diffHeading">Go deep into the color details.</h6>
                     </section>
 
@@ -37,10 +35,8 @@ const ExploreColor = () => {
             ) : (
                 <>
                     <section className="section-header">
-                        <h2 className="heading-on-two-lines">Опознай </h2>
-                        <h2 className="heading-on-two-lines">цвета</h2>
-                        <h6> Открий подробна информация.
-                            Конвертирай в различни цветови стойности.</h6>
+                        <h2>Опознай цвета</h2>
+                        <h6>Открий подробна информация. Конвертирай в различни цветови стойности.</h6>
                         <h6 className="diffHeading">Надълбоко в цветните детайли.</h6>
                     </section>
 
