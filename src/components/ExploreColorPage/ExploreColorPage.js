@@ -1,6 +1,7 @@
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { useLanguageContext } from '../../contexts/LanguageContext';
 
+import Language from './../Language/Language';
 import RgbMixer from './RgbMixer';
 import HslMixer from './HslMixer';
 import Convertor from './Convertor';
@@ -23,11 +24,14 @@ const ExploreColor = () => {
                     </section>
 
                     <nav className="explore__navbar">
-                        <NavLink to="convertor" className={({ isActive }) => isActive ? 'active' : ''}>Convertor</NavLink>
-                        <NavLink to="rgb-mixer" className={({ isActive }) => isActive ? 'active' : ''}>RGB mixer</NavLink>
-                        <NavLink to="hsl-mixer" className={({ isActive }) => isActive ? 'active' : ''}>HSL mixer</NavLink>
-                        <NavLink to="color-names" className={({ isActive }) => isActive ? 'active' : ''}>Color names</NavLink>
-                        <NavLink to="groups" className={({ isActive }) => isActive ? 'active' : ''}>Color groups</NavLink>
+                        <Language />
+                        <section className="explore__navbar--links">
+                            <NavLink to="convertor" className={({ isActive }) => isActive ? 'active' : ''}>Convertor</NavLink>
+                            <NavLink to="rgb-mixer" className={({ isActive }) => isActive ? 'active' : ''}>RGB mixer</NavLink>
+                            <NavLink to="hsl-mixer" className={({ isActive }) => isActive ? 'active' : ''}>HSL mixer</NavLink>
+                            <NavLink to="color-names" className={({ isActive }) => isActive ? 'active' : ''}>Color names</NavLink>
+                            <NavLink to="groups" className={({ isActive }) => isActive ? 'active' : ''}>Color groups</NavLink>
+                        </section>
                     </nav>
                 </>
             ) : (
@@ -41,11 +45,14 @@ const ExploreColor = () => {
                     </section>
 
                     <nav className="explore__navbar">
-                        <NavLink to="convertor" className={({ isActive }) => isActive ? 'active' : ''}>Конвертор</NavLink>
-                        <NavLink to="rgb-mixer" className={({ isActive }) => isActive ? 'active' : ''}>RGB модел</NavLink>
-                        <NavLink to="hsl-mixer" className={({ isActive }) => isActive ? 'active' : ''}>HSL модел</NavLink>
-                        <NavLink to="color-names" className={({ isActive }) => isActive ? 'active' : ''}>Имена на цветовете</NavLink>
-                        <NavLink to="groups" className={({ isActive }) => isActive ? 'active' : ''}>Цветни групи</NavLink>
+                        <Language />
+                        <section className="explore__navbar--links">
+                            <NavLink to="convertor" className={({ isActive }) => isActive ? 'active' : ''}>Конвертор</NavLink>
+                            <NavLink to="rgb-mixer" className={({ isActive }) => isActive ? 'active' : ''}>RGB модел</NavLink>
+                            <NavLink to="hsl-mixer" className={({ isActive }) => isActive ? 'active' : ''}>HSL модел</NavLink>
+                            <NavLink to="color-names" className={({ isActive }) => isActive ? 'active' : ''}>Имена на цветовете</NavLink>
+                            <NavLink to="groups" className={({ isActive }) => isActive ? 'active' : ''}>Цветни групи</NavLink>
+                        </section>
                     </nav>
                 </>
             )}
