@@ -30,10 +30,8 @@ const Logo = () => {
     };
 
     return (
-        <div className="logoDiv">
-            <img src="/images/logo.png" alt="logo"
-                onClick={goHome}
-                className="logo" />
+        <div className="logoDiv" onClick={goHome}>
+            <img src="/images/logo.png" alt="logo" className="logo" />
             <span id="logoName" className="logoName">MegaColorMix</span>
         </div>
     );
