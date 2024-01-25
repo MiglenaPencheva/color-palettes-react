@@ -11,7 +11,7 @@ const Logo = () => {
     useEffect(() => {
         window.addEventListener('scroll', () => {
             let logoName = document.getElementById('logoName');
-            if (window.scrollY > 20) {
+            if (window.scrollY > 20 && window.innerWidth < 1360) {
                 logoName.style.opacity = 0;
             } else {
                 logoName.style.opacity = 1;
