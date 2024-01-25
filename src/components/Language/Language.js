@@ -6,9 +6,7 @@ const Language = () => {
     const { pathname } = location;
     const { language, toggleLanguage } = useLanguageContext();
 
-    console.log(pathname);
-    let atHome = pathname === '/' || '';
-    console.log(atHome);
+    let atHome = pathname === '/';
 
     return (
 

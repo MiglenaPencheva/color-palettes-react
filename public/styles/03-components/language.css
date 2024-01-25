@@ -39,9 +39,18 @@
     opacity: 0.6;
     cursor: pointer;
     border-radius: 44px;
+    background-color: var(--teal-grey);
     transition: 0.4s;
     z-index: 1001;
 }
 .home__language:hover {
     opacity: 1;
+}
+
+@media (min-width: 1360px) {
+    .home__language {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+    }
 }
