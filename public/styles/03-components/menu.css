@@ -136,7 +136,7 @@
 
 .contacts {
     margin: 0.5rem 0 0 1rem;
-    padding: 0.3rem 0.2rem 0.3rem 1rem;
+    padding: 0.3rem 0.2rem 0.3rem 0;
     width: 90%;
     display: flex;
     gap: 0.5rem;
