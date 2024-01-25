@@ -6,12 +6,13 @@ const Language = () => {
     const { pathname } = location;
     const { language, toggleLanguage } = useLanguageContext();
 
-    let atHome = pathname === '';
+    console.log(pathname);
+    let atHome = pathname === '/' || '';
     console.log(atHome);
 
     return (
 
-        <section className={atHome && 'home__language'} id="toggleLanguage" 
+        <section className={atHome ? 'home__language' : 'toggleLanguage'} 
             onClick={toggleLanguage}>
             {language.lang === 'en'
                 ? <span id="activeEn">
