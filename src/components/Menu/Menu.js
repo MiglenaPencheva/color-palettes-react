@@ -3,8 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useLanguageContext } from '../../contexts/LanguageContext';
 
-import Language from './../Language/Language';
-
 const Menu = () => {
     const { user } = useAuthContext();
     const { language } = useLanguageContext();

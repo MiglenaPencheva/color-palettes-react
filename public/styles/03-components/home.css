@@ -61,6 +61,12 @@
     font-weight: 600;
 }
 
+.home__language {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
 @media (max-width: 768px) {
     .home__navbar--ul {
         gap: 1rem
