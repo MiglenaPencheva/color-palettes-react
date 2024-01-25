@@ -19,10 +19,19 @@ const Header = () => {
         }
     };
 
+    const customStyle = {
+        margin: 0,
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
+        opacity: 0.6,
+        'z-index': 1001,
+    };
+
     return (
         <section className="home__section">
 
-            <Language className={'home__language'} />
+            <Language customStyle={customStyle} />
 
             {language.lang === 'en' ? (
                 <section className="home__headings">
