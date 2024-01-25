@@ -24,7 +24,7 @@ const Menu = () => {
 
 
     const openMenu = (e) => {
-        document.getElementById('dropdownContent').style.width = '240px';
+        document.getElementById('dropdownContent').style.width = '270px';
     };
     const closeMenu = (e) => {
         if (window.innerWidth < 1360) {
