@@ -8,6 +8,7 @@
     z-index: 1003;
     cursor: pointer;
 }
+
 .logoDiv:hover {
     opacity: 100%;
 }
@@ -18,6 +19,7 @@
     border-radius: 24%;
     animation: rotation 1.5s;
 }
+
 .logo:hover {
     animation: rotate;
 }
@@ -26,9 +28,11 @@
     25% {
         border-radius: 50%;
     }
+
     50% {
         border-radius: 40%;
     }
+
     100% {
         border-radius: 24%;
         transform: rotate(360deg);
@@ -38,6 +42,8 @@
 .logoName {
     font-family: 'Caveat', sans-serif;
     color: transparent;
+    -webkit-background-clip: text; /* For Chrome and Safari */
+    -moz-background-clip: text; /* For Firefox */
     background-clip: text;
     background-image: linear-gradient(to right, var(--ryb-red), var(--ryb-red-orange), var(--ryb-orange), var(--ryb-yellow-orange), var(--ryb-yellow), var(--ryb-yellow-green), var(--ryb-green), var(--ryb-blue-green), var(--ryb-blue), var(--ryb-blue-purple), var(--ryb-purple), var(--ryb-red-purple));
     margin-left: 0.5rem;
