@@ -22,7 +22,7 @@ const Header = () => {
     return (
         <section className="home__section">
 
-            <Language className="home__language" />
+            <Language className={'home__language'} />
 
             {language.lang === 'en' ? (
                 <section className="home__headings">
