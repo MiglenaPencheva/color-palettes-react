@@ -61,18 +61,6 @@
     font-weight: 600;
 }
 
-.home__language {
-    margin: 0;
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    opacity: 0.6;
-    z-index: 1001;
-}
-.home__language:hover {
-    opacity: 1;
-}
-
 @media (max-width: 768px) {
     .home__navbar--ul {
         gap: 1rem
