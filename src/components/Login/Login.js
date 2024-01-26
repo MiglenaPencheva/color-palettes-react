@@ -25,7 +25,7 @@ const Login = () => {
             let authData = await authService.login(username, password);
             login(authData);
             hideError();
-            navigate(-1);
+            navigate('/home');
         } catch (error) {
             showError(error.message);
         }

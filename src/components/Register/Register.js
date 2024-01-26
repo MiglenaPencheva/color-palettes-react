@@ -28,7 +28,7 @@ const Register = () => {
             let authData = await authService.register(username, password);
             login(authData);
             hideError();
-            navigate(-1);
+            navigate('/home');
 
         } catch (error) {
             showError(error.message);
@@ -64,7 +64,7 @@ const Register = () => {
 
                     {language.lang === 'en'
                         ? <p>Already have an account? <b><i><Link to="/login">Sign in.</Link></i></b></p>
-                        : <p>Вече имаш профил? <b><i><Link to="/login">Влез в приложението.</Link></i></b></p>
+                        : <p>Имаш профил? <b><i><Link to="/login">Влез в приложението.</Link></i></b></p>
                     }
                 </fieldset>
             </form>
