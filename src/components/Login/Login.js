@@ -1,4 +1,5 @@
 import { useNavigate, Link } from 'react-router-dom';
+import { useLanguageContext } from '../../contexts/LanguageContext';
 
 import { useAuthContext } from '../../contexts/AuthContext';
 import * as authService from '../../services/authService';
@@ -7,6 +8,7 @@ import { hideError, showError } from '../../helpers/notifications';
 const Login = () => {
     const navigate = useNavigate();
     const { login } = useAuthContext();
+    const { language } = useLanguageContext();
 
     const onLoginHandler = async (e) => {
         e.preventDefault();
@@ -33,16 +35,16 @@ const Login = () => {
         <section id="login-page" className="login-page">
             <form id="login-form" onSubmit={onLoginHandler} method="POST">
                 <fieldset className="login-fieldset">
-                    <legend>Login Form</legend>
+                    <legend>{language.lang === 'en' ? 'Login Form' : 'Вход към приложението'}</legend>
 
                     <fieldset className="user__fieldset">
-                        <legend className="user__legend">Username</legend>
+                        <legend className="user__legend">{language.lang === 'en' ? 'Username' : 'Потребителско име'}</legend>
                         <input type="text" name="username" id="username"
                             className="user__input" />
                     </fieldset>
 
                     <fieldset className="user__fieldset">
-                        <legend className="user__legend">Password</legend>
+                        <legend className="user__legend">{language.lang === 'en' ? 'Password' : 'Парола'}</legend>
                         <input type="password" name="password" id="password"
                             className="user__input" />
                     </fieldset>
@@ -51,7 +53,11 @@ const Login = () => {
                         type="submit"
                         value="Login" />
 
-                    <p>Need an account? <b><i><Link to="/register">Sign up.</Link></i></b></p>
+                    {language.lang === 'en'
+                        ? <p>Need an account? <b><i><Link to="/register">Sign up.</Link></i></b></p>
+                        : <p>Нямаш профил? <b><i><Link to="/login">Регистрирай се.</Link></i></b></p>
+                    }
+                    
 
                 </fieldset>
             </form>
