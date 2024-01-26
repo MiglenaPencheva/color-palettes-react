@@ -1,4 +1,5 @@
 import { useNavigate, Link } from 'react-router-dom';
+import { useLanguageContext } from '../../contexts/LanguageContext';
 
 import { useAuthContext } from '../../contexts/AuthContext';
 import * as authService from '../../services/authService';
@@ -7,6 +8,7 @@ import { hideError, showError } from '../../helpers/notifications';
 const Register = () => {
     const navigate = useNavigate();
     const { login } = useAuthContext();
+    const { language } = useLanguageContext();
 
     const registerSubmitHandler = async (e) => {
         e.preventDefault();
@@ -37,22 +39,22 @@ const Register = () => {
         <section id="register-page" className="register-page">
             <form id="register-form" action="" method="POST" onSubmit={registerSubmitHandler}>
                 <fieldset className="register-fieldset">
-                    <legend>Register Form</legend>
+                    <legend>{language.lang === 'en' ? 'Register Form' : 'Регистрационна форма'}</legend>
 
                     <fieldset className="user__fieldset">
-                        <legend className="user__legend">Username</legend>
+                        <legend className="user__legend">{language.lang === 'en' ? 'Username' : 'Потребителско име'}</legend>
                         <input type="text" name="username" id="username"
                             className="user__input" />
                     </fieldset>
 
                     <fieldset className="user__fieldset">
-                        <legend className="user__legend">Password</legend>
+                        <legend className="user__legend">{language.lang === 'en' ? 'Password' : 'Парола'}</legend>
                         <input type="password" name="password" id="password"
                             className="user__input" />
                     </fieldset>
 
                     <fieldset className="user__fieldset">
-                        <legend className="user__legend">Repeat Password</legend>
+                        <legend className="user__legend">{language.lang === 'en' ? 'Repeat Password' : 'Повтори паролата'}</legend>
                         <input type="password" name="rePassword" id="rePassword"
                             className="user__input" />
                     </fieldset>
@@ -60,8 +62,10 @@ const Register = () => {
                     <input className="button user__submit-btn"
                         type="submit" value="Register" />
 
-                    <p>Already have an account? <b><i><Link to="/login">Sign in.</Link></i></b></p> 
-
+                    {language.lang === 'en'
+                        ? <p>Already have an account? <b><i><Link to="/login">Sign in.</Link></i></b></p>
+                        : <p>Вече имаш профил? <b><i><Link to="/login">Влез в приложението.</Link></i></b></p>
+                    }
                 </fieldset>
             </form>
         </section>
