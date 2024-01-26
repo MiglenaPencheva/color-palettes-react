@@ -32,7 +32,7 @@ const Login = () => {
     };
 
     return (
-        <section id="login-page" className="login-page">
+        <section className="login-page">
             <form id="login-form" onSubmit={onLoginHandler} method="POST">
                 <fieldset className="login-fieldset">
                     <legend>{language.lang === 'en' ? 'Login Form' : 'Вход към приложението'}</legend>
@@ -50,8 +50,7 @@ const Login = () => {
                     </fieldset>
 
                     <input className="button user__submit-btn"
-                        type="submit"
-                        value="Login" />
+                        type="submit" value={language.lang === 'en' ? 'Login' : 'Вход'} />
 
                     {language.lang === 'en'
                         ? <p>Need an account? <b><i><Link to="/register">Sign up.</Link></i></b></p>

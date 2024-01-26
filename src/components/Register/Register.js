@@ -36,7 +36,7 @@ const Register = () => {
     };
 
     return (
-        <section id="register-page" className="login-page">
+        <section className="login-page">
             <form id="register-form" action="" method="POST" onSubmit={registerSubmitHandler}>
                 <fieldset className="login-fieldset">
                     <legend>{language.lang === 'en' ? 'Register Form' : 'Регистрационна форма'}</legend>
@@ -60,11 +60,11 @@ const Register = () => {
                     </fieldset>
 
                     <input className="button user__submit-btn"
-                        type="submit" value="Register" />
+                        type="submit" value={language.lang === 'en' ? 'Register' : 'Регистрация'} />
 
                     {language.lang === 'en'
                         ? <p>Already have an account? <b><i><Link to="/login">Sign in.</Link></i></b></p>
-                        : <p>Вече имаш профил? <br><b><i><Link to="/login">Влез в приложението.</Link></i></b></br></p>
+                        : <p>Вече имаш профил? <b><i><Link to="/login">Влез в приложението.</Link></i></b></p>
                     }
                 </fieldset>
             </form>
