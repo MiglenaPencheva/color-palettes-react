@@ -55,7 +55,7 @@ const Login = () => {
 
                     {language.lang === 'en'
                         ? <p>Need an account? <b><i><Link to="/register">Sign up.</Link></i></b></p>
-                        : <p>Нямаш профил? <b><i><Link to="/login">Регистрирай се.</Link></i></b></p>
+                        : <p>Нямаш профил? <b><i><Link to="/register">Регистрирай се.</Link></i></b></p>
                     }
                     
 
