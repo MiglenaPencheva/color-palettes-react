@@ -62,7 +62,7 @@ const Details = () => {
             await colorPaletteService.like(colorPaletteId, data, user.accessToken);
 
             hideError();
-            navigate('/gallery/');
+            navigate('/gallery/all');
             language.lang === 'en' ? showInfo('Successfully liked palette') : showInfo('Харесахте палитрата');
 
         } catch (error) {
